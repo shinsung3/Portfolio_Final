@@ -133,6 +133,12 @@
 
 
 
+- 번역 기능 다시 재구성
+  - 사이트 전체 번역되도록
+  - js 파일 따로 분리해서 사용
+
+
+
 #### **Refernece
 
 `http://cryptogramink.com/`
