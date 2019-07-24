@@ -7,6 +7,7 @@ import "firebase/functions";
 
 const POSTS = "posts";
 const PORTFOLIOS = "portfolios";
+const USERAUTH = "userauth";
 const BACKGROUNDIMG = "background";
 
 // Setup Firebase
@@ -22,9 +23,6 @@ firebase.initializeApp(config)
 const firestore = firebase.firestore()
 const logincheck = firebase.functions().httpsCallable('logincheck');
 const logoutcheck = firebase.functions().httpsCallable('logoutcheck');
-
-
-
 
 export default {
 	getBackground() {
@@ -87,6 +85,26 @@ export default {
 			created_at: firebase.firestore.FieldValue.serverTimestamp()
 		})
 	},
+	setAuthorization(email, auth) {
+		return firestore.collection(USERAUTH).add({
+			email,
+			auth,
+			created_at: firebase.firestore.FieldValue.serverTimestamp()
+		})
+	},
+	getAuthorization() {
+		const userauthCollection = firestore.collection(USERAUTH)
+		return userauthCollection
+			.orderBy('created_at', 'desc')
+			.get()
+			.then((docSnapshots) => {
+				return docSnapshots.docs.map((doc) => {
+					let data = doc.data()
+					data.created_at = new Date(data.created_at.toDate())
+					return data
+				})
+			})
+	},
 	loginWithGoogle() {
 		let provider = new firebase.auth.GoogleAuthProvider()
 		return firebase.auth().signInWithPopup(provider).then(function(result) {
@@ -120,6 +138,8 @@ export default {
 		firebase.auth().createUserWithEmailAndPassword(email, password).then(
 			function(user) {
 				alert("회원가입 축하합니다")
+				this.setAuthorization(email, "방문자")
+				store.state.authorization = "방문자"
 			},
 			function(err) {
 			 	alert("error, " + err.message);
@@ -129,10 +149,6 @@ export default {
 	signIn(email, password) {
 		return firebase.auth().signInWithEmailAndPassword(email, password).then(
 			function(user) {
-				var splEmail = [];
-				splEmail = email.split('@');
-				store.state.accessToken = splEmail[0];
-
 				return user
 			},
 			function(err) {
