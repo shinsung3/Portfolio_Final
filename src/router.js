@@ -7,6 +7,7 @@ import LoginPage from "./views/LoginPage.vue";
 import PortfolioWriter from "./views/PortfolioWriter.vue";
 import Repository from "./views/RepositoryPage.vue";
 import Graph from "./views/GraphPage.vue";
+import PortfolioDetail from "./views/PortfolioDetailPage.vue";
 
 Vue.use(Router);
 
@@ -48,6 +49,11 @@ export default new Router({
       path: "/graph",
       name: "graph",
       component: Graph
+    },
+    {
+      path: "/poritfolioDetail",
+      name: "portfolioDetail",
+      component: PortfolioDetail
     }
   ]
 });

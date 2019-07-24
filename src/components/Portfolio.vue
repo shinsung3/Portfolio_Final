@@ -1,29 +1,38 @@
 <template>
   <v-card>
-    <v-img :src="imgSrc" height="200px">
-    </v-img>
-    <v-card-title primary-title>
-      <!-- 번역기능 컴포넌트로 분리 -->
-      <TransComponent
+    <router-link
+      to="/portfolioDetail"
       :title="title"
       :body="body"
-      >
-      </TransComponent>
-    </v-card-title>
+      :img="imgSrc"
+    >
+      <Detail :title="title" :body="body" img="imgSrc"> </Detail>
+      <v-img :src="imgSrc" height="200px" />
+      <v-card-title primary-title>
+        <div class="headline text2">
+          <strong>{{ title }}</strong>
+        </div>
+      </v-card-title>
+      <v-card-text class="grey--text text1">
+        <div class="grey-text text1">{{ body }}</div>
+      </v-card-text>
+    </router-link>
   </v-card>
+  <!-- </router-link> -->
 </template>
 
 <script src="https://kit.fontawesome.com/0815a79704.js"></script>
 <script>
-import '../CSS/ellipsis.css'
-// 번역 컴포넌트 import
-import TransComponent from './Translate.vue'
+import "../CSS/ellipsis.css";
+import TransComponent from "./Translate.vue";
+import Detail from "../views/PortfolioDetailPage.vue";
 
 export default {
-  components:{
-    TransComponent
+  components: {
+    TransComponent,
+    Detail
   },
-  name: 'Portfolio',
+  name: "Portfolio",
   props: {
     date: {
       type: String
@@ -36,13 +45,10 @@ export default {
     },
     imgSrc: {
       type: String
-    },
-  },
-  data() {
-    return {
     }
   },
-  methods: {
-  },
-}
+  data() {
+    return {};
+  }
+};
 </script>

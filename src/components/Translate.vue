@@ -1,5 +1,4 @@
 <template>
-  <!-- 번역되는 공간, 번역버튼 -->
   <div style="width:100%">
     <div class="headline text2">{{ title }}</div>
     <span class="grey--text text1">{{ body }}</span>
