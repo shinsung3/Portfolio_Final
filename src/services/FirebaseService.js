@@ -12,11 +12,15 @@ const BACKGROUNDIMG = "background";
 
 // Setup Firebase
 const config = {
-	projectId: 'halhalnolnol-9b318',
-	authDomain: 'halhalnolnol-9b318.firebaseapp.com',
-	apiKey: 'AIzaSyAzGXg4iu-1spk8IoCm-EwpqJYsNGemOFk',
-	databaseURL: 'https://halhalnolnol-9b318.firebaseio.com',
-	storageBucket: 'halhalnolnol-9b318.appspot.com'
+
+		apiKey: "AIzaSyA77w-VjE_lwaYkRViVa3X2A9Kg5vmMEjM",
+	  authDomain: "halnol.firebaseapp.com",
+	  databaseURL: "https://halnol.firebaseio.com",
+	  projectId: "halnol",
+	  storageBucket: "halnol.appspot.com",
+	  messagingSenderId: "1087391505808",
+	  appId: "1:1087391505808:web:a743bebfe6c73ee7"
+
 }
 
 firebase.initializeApp(config)
