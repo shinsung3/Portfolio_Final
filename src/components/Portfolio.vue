@@ -1,6 +1,6 @@
 <template>
   <v-card>
-    <router-link to="/pfDetail">
+    <router-link to="/pfDetail" :title="title">
       <v-img :src="imgSrc" height="200px" />
       <v-card-title primary-title>
         <div class="headline text2">
@@ -14,17 +14,11 @@
   </v-card>
 </template>
 
-<script src="https://kit.fontawesome.com/0815a79704.js"></script>
 <script>
 import "../CSS/ellipsis.css";
-import TransComponent from "./Translate.vue";
-import Detail from "../views/PortfolioDetail.vue";
 
 export default {
-  components:{
-    TransComponent
-  },
-  name: 'Portfolio',
+  name: "Portfolio",
   props: {
     date: {
       type: String
@@ -37,13 +31,10 @@ export default {
     },
     imgSrc: {
       type: String
-    },
-  },
-  data() {
-    return {
     }
   },
-  methods: {
-  },
-}
+  data() {
+    return {};
+  }
+};
 </script>
