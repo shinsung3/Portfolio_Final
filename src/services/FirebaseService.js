@@ -77,11 +77,12 @@ export default {
 					})
 				})
 	},
-	postPortfolio(title, body, img) {
+	postPortfolio(title, body, img, uk) {
 		return firestore.collection(PORTFOLIOS).add({
 			title,
 			body,
 			img,
+			uk,
 			created_at: firebase.firestore.FieldValue.serverTimestamp()
 		})
 	},
@@ -162,8 +163,6 @@ export default {
 			  if (user) {
 			    store.state.user = user;
 					store.state.accessToken = user.email;
-			  } else {
-
 			  }
 			});
 	}
