@@ -35,8 +35,11 @@
         <v-btn flat to="/Post">
           <span class="DokdoHeader2">Post</span>
         </v-btn>
-        <v-btn flat to="/Repository">
+        <v-btn flat to="/repository">
           <span class="DokdoHeader2">Project</span>
+        </v-btn>
+        <v-btn flat to="/pfDetail">
+          <span class="DokdoHeader2">Test</span>
         </v-btn>
       </v-toolbar-items>
 

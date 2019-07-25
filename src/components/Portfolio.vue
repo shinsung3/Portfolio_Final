@@ -1,12 +1,6 @@
 <template>
   <v-card>
-    <router-link
-      to="/portfolioDetail"
-      :title="title"
-      :body="body"
-      :img="imgSrc"
-    >
-      <Detail :title="title" :body="body" img="imgSrc"> </Detail>
+    <router-link to="/pfDetail">
       <v-img :src="imgSrc" height="200px" />
       <v-card-title primary-title>
         <div class="headline text2">
@@ -25,7 +19,7 @@
 <script>
 import "../CSS/ellipsis.css";
 import TransComponent from "./Translate.vue";
-import Detail from "../views/PortfolioDetailPage.vue";
+import Detail from "../views/PortfolioDetail.vue";
 
 export default {
   components: {
