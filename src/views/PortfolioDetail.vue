@@ -1,19 +1,43 @@
 <template>
-  <v-app>
-    <v-parallax
-      height="1000"
-      dark
-      src="https://cdn.vuetifyjs.com/images/parallax/material2.jpg"
-    >
-      <v-layout column justify-center>
-        <h1 class="display-2 font-weight-thin mb-4"><b>Title</b></h1>
-        <h4 class="subheading">현일오빠가 만들면 여기서 받아볼게요!</h4>
+  <div>
+    <!-- About Me -->
+    <v-container>
+      <v-layout my-5>
+        <v-flex xs12 sm8>
+          <center>
+            <p class="DokdoList">
+              <b class="font">Title</b>
+            </p>
+          </center>
+          <p class="DokdoList subfont">
+            Test
+
+            <br />
+          </p>
+        </v-flex>
+        <v-flex pt-3 mt-5 bt-5>
+          <v-img
+            src="https://cdn.vuetifyjs.com/images/parallax/material2.jpg"
+            aspect-ratio="1.0"
+          />
+        </v-flex>
       </v-layout>
-    </v-parallax>
-  </v-app>
+      <h1 class="DokdoList">
+        개발 언어 :
+      </h1>
+      <h1 class="DokdoList">
+        시간 :
+      </h1>
+      <h1 class="DokdoList">
+        인원 :
+      </h1>
+    </v-container>
+  </div>
 </template>
 
 <script>
+import "../CSS/FontColor.css";
+import "../CSS/ellipsis.css";
 import "../CSS/DokdoFont.css";
 
 export default {
@@ -23,3 +47,13 @@ export default {
   }
 };
 </script>
+
+<style>
+.font {
+  font-size: 65px;
+}
+
+.subfont {
+  font-size: 38px;
+}
+</style>
