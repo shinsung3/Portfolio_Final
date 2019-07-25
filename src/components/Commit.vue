@@ -88,7 +88,7 @@ export default {
     };
   },
   mounted: function() {
-    this.getGitlabData(6091);
+    this.getGitlabData(7556);
   },
   methods: {
     getGitlabData(id) {

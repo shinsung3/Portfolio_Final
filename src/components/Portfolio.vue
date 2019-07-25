@@ -1,12 +1,6 @@
 <template>
   <v-card>
-    <router-link
-      to="/portfolioDetail"
-      :title="title"
-      :body="body"
-      :img="imgSrc"
-    >
-      <Detail :title="title" :body="body" img="imgSrc"> </Detail>
+    <router-link to="/pfDetail" :title="title">
       <v-img :src="imgSrc" height="200px" />
       <v-card-title primary-title>
         <div class="headline text2">
@@ -18,10 +12,8 @@
       </v-card-text>
     </router-link>
   </v-card>
-  <!-- </router-link> -->
 </template>
 
-<script src="https://kit.fontawesome.com/0815a79704.js"></script>
 <script>
 import "../CSS/ellipsis.css";
 import Detail from "../views/PortfolioDetailPage.vue";

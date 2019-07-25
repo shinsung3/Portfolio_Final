@@ -23,7 +23,6 @@
     </ImgBanner>
 
     <v-container>
-      <!-- Portfolio -->
       <v-layout>
         <v-flex xs12>
           <PortfolioList :limits="8" :load-more="true"></PortfolioList>

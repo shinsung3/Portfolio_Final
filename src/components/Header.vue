@@ -29,10 +29,12 @@
             v-if="this.$store.state.user.displayName != undefined"
             class="DokdoHeader2 mt-3 mr-2"
           >
-            <b>{{ this.$store.state.user.displayName }}</b>님 반갑습니다!!
+            <b>{{ this.$store.state.user.displayName }}</b>
+            님 반갑습니다!!
           </span>
           <span v-else class="DokdoHeader2 mt-3 mr-2">
-            <b>{{ this.$store.state.accessToken }}</b>님 반갑습니다!!
+            <b>{{ this.$store.state.accessToken }}</b>
+            님 반갑습니다!!
           </span>
           <v-btn flat to="/" @click="setLogOut">
             <span class="DokdoHeader2">Logout</span>
@@ -44,8 +46,11 @@
         <v-btn flat to="/Post">
           <span class="DokdoHeader2">Post</span>
         </v-btn>
-        <v-btn flat to="/Repository">
+        <v-btn flat to="/repository">
           <span class="DokdoHeader2">Project</span>
+        </v-btn>
+        <v-btn flat to="/pfDetail">
+          <span class="DokdoHeader2">Test</span>
         </v-btn>
       </v-toolbar-items>
 

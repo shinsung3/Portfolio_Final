@@ -26,7 +26,7 @@
           src="https://image.flaticon.com/icons/svg/1865/1865689.svg"
           width="30px"
         />
-        <b>&nbsp&nbsp글 작성</b>
+        <span id="padding"><b>글쓰기</b></span>
       </v-btn>
     </v-flex>
   </v-layout>
@@ -62,9 +62,7 @@ export default {
     async getPortfolios() {
       this.portfolios = await FirebaseService.getPortfolios();
     },
-    loadMorePortfolios() {
-
-    }
+    loadMorePortfolios() {}
   }
 };
 </script>
@@ -77,5 +75,9 @@ export default {
 .button1 {
   background-color: gainsboro;
   border: 0.5px solid gray;
+}
+
+#padding {
+  padding: 3px;
 }
 </style>
