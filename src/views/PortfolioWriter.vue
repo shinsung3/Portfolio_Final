@@ -105,10 +105,14 @@ export default {
     imageUrl: '',
     imageFile: '',
     body: '',
-    imageDeleteHash: ''
+    imageDeleteHash: '',
+    portpolios: []
   }),
   components: {
     ImgBanner
+  },
+  mounted() {
+    this.getPortfolios()
   },
   methods: {
     getBody(msg) {
@@ -180,8 +184,14 @@ export default {
     },
     submit() {
       this.uploadToAlbum();
-      FirebaseService.postPortfolio(this.title, this.body, this.imageUrl);
+      if( this.portfolios.length == 0 )
+        FirebaseService.postPortfolio(this.title, this.body, this.imageUrl, 1);
+      else
+        FirebaseService.postPortfolio(this.title, this.body, this.imageUrl, this.portfolios[0].uk + 1);
       location.href="/Portfolio"
+    },
+    async getPortfolios() {
+      this.portfolios = await FirebaseService.getPortfolios()
     }
   }
 };
