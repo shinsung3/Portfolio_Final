@@ -2,11 +2,8 @@
   <v-layout py-4 h-100>
     <v-flex row>
       <div class="caption">{{formatedDate}}</div>
-      <TransComponent class="row"
-      :title="title"
-      :body="body"
-      >
-      </TransComponent>
+      <div class="headline text2">{{ subject.translate }}</div>
+      <span class="grey--text text1">{{ content.translate }}</span>
     </v-flex>
   </v-layout>
 </template>
@@ -14,6 +11,8 @@
 <script>
 import '../CSS/ellipsis.css'
 import TransComponent from './Translate.vue'
+import Translate from "@/services/Translate";
+import EventBus from "../eventBus.js"
 
 export default {
   components:{
@@ -35,6 +34,36 @@ export default {
     formatedDate() {
       return `${this.date.getFullYear()}년 ${this.date.getMonth()}월 ${this.date.getDate()}일`
     }
+  },
+  data() {
+    return {
+      subject :{
+        translate : this.title,
+        original : this.title
+      },
+      content :{
+        translate : this.body,
+        original : this.body
+      }
+    };
+  },
+  created(){
+    EventBus.$on("translate", (language)=>{
+      if (language == "original"){
+        this.subject.translate = this.subject.original
+        this.content.translate = this.content.original
+      }
+      else {
+        Translate.translate(language, this.subject.original)
+        .then((res)=>{
+          this.subject.translate = res
+        })
+        Translate.translate(language, this.content.original)
+        .then((res)=>{
+          this.content.translate = res
+        })
+      }
+    })
   }
 }
 </script>
