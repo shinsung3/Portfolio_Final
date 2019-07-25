@@ -16,14 +16,10 @@
 
 <script>
 import "../CSS/ellipsis.css";
-import Detail from "../views/PortfolioDetailPage.vue";
 import Translate from "@/services/Translate";
-import EventBus from "../eventBus.js"
+import EventBus from "../eventBus.js";
 
 export default {
-  components: {
-    Detail
-  },
   name: "Portfolio",
   props: {
     date: {
