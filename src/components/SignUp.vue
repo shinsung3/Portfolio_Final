@@ -56,6 +56,7 @@ export default {
   methods: {
     async signUp() {
       FirebaseService.signUp(this.email, this.password);
+      FirebaseService.setAuthorization(this.email, '방문자');
       this.email = "";
       this.password = "";
       this.dialogSignUp = false;

@@ -12,7 +12,6 @@
       </v-card-text>
     </router-link>
   </v-card>
-  <!-- </router-link> -->
 </template>
 
 <script src="https://kit.fontawesome.com/0815a79704.js"></script>
@@ -22,11 +21,10 @@ import TransComponent from "./Translate.vue";
 import Detail from "../views/PortfolioDetail.vue";
 
 export default {
-  components: {
-    TransComponent,
-    Detail
+  components:{
+    TransComponent
   },
-  name: "Portfolio",
+  name: 'Portfolio',
   props: {
     date: {
       type: String
@@ -39,10 +37,13 @@ export default {
     },
     imgSrc: {
       type: String
-    }
+    },
   },
   data() {
-    return {};
-  }
-};
+    return {
+    }
+  },
+  methods: {
+  },
+}
 </script>
