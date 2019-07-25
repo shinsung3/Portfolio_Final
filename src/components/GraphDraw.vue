@@ -39,7 +39,7 @@ export default {
     Repository
   },
   mounted() {
-    this.getGitlabCommits("6091");
+    this.getGitlabCommits("7556");
   },
   methods: {
     async getGitlabCommits(fullName) {
