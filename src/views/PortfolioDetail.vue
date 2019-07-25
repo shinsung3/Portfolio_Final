@@ -57,15 +57,6 @@ export default {
     imgSrc: {
       type: String
     }
-  },
-  mounted() {
-    this.getPortfolios();
-  },
-  methods: {
-    async getPortfolios() {
-      this.portfolios = await FirebaseService.getPortfolios();
-    },
-    loadMorePortfolios() {}
   }
 };
 </script>
