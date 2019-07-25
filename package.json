@@ -14,7 +14,7 @@
     "chartkick": "^3.1.0",
     "core-js": "^2.6.5",
     "detect-browser": "^4.5.1",
-    "firebase": "^5.9.3",
+    "firebase": "^5.11.1",
     "firestore": "^1.1.6",
     "gitlab": "^9.0.0",
     "hchs-vue-charts": "^1.2.8",
