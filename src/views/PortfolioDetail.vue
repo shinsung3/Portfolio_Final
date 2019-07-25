@@ -6,7 +6,7 @@
         <v-flex xs12 sm8>
           <center>
             <p class="DokdoList">
-              <b class="font">Title</b>
+              <b class="font">Title {{ title }}</b>
             </p>
           </center>
           <p class="DokdoList subfont">
@@ -40,10 +40,32 @@ import "../CSS/FontColor.css";
 import "../CSS/ellipsis.css";
 import "../CSS/DokdoFont.css";
 
+import FirebaseService from "@/services/FirebaseService";
+
 export default {
   name: "PortfolioDetail",
-  data() {
-    return {};
+  props: {
+    date: {
+      type: String
+    },
+    title: {
+      type: String
+    },
+    body: {
+      type: String
+    },
+    imgSrc: {
+      type: String
+    }
+  },
+  mounted() {
+    this.getPortfolios();
+  },
+  methods: {
+    async getPortfolios() {
+      this.portfolios = await FirebaseService.getPortfolios();
+    },
+    loadMorePortfolios() {}
   }
 };
 </script>
