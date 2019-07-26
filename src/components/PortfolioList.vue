@@ -13,6 +13,8 @@
         :title="portfolios[i - 1].title"
         :body="portfolios[i - 1].body"
         :imgSrc="portfolios[i - 1].img"
+        :uk="portfolios[i - 1].uk"
+        :id="portfolios[i - 1].id"
       >
       </Portfolio>
     </v-flex>
