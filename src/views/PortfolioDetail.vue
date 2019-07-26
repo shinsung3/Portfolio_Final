@@ -15,10 +15,7 @@
           </p>
         </v-flex>
         <v-flex pt-3 mt-5 bt-5>
-          <v-img
-            :src="portfolios.img"
-            aspect-ratio="1.0"
-          />
+          <v-img :src="portfolios.img" aspect-ratio="1.0" />
         </v-flex>
       </v-layout>
       <h1 class="DokdoList">
