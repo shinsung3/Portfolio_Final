@@ -5,20 +5,24 @@
       <v-layout my-5>
         <v-flex xs12 sm8>
           <center>
-            <p class="DokdoList">
-              <b class="font">Title {{ title }}</b>
+            <p class="DokdoList font">
+              {{ portfolios.title }}
             </p>
           </center>
           <p class="DokdoList subfont">
-            Test
+            {{ portfolios.body }}
             <br />
           </p>
         </v-flex>
         <v-flex pt-3 mt-5 bt-5>
+<<<<<<< HEAD
+          <v-img :src="portfolios.img" aspect-ratio="1.0" />
+=======
           <v-img
-            src="https://cdn.vuetifyjs.com/images/parallax/material2.jpg"
+            :src="portfolios.img"
             aspect-ratio="1.0"
           />
+>>>>>>> 8ec4246259d6641e079a55aad6a7144185298311
         </v-flex>
       </v-layout>
       <h1 class="DokdoList">
@@ -38,22 +42,26 @@
 import "../CSS/FontColor.css";
 import "../CSS/ellipsis.css";
 import "../CSS/DokdoFont.css";
+import FirebaseService from "@/services/FirebaseService";
 
 export default {
   name: "PortfolioDetail",
-  props: {
-    date: {
-      type: String
+  data() {
+    return {
+      portfolios: []
+    };
+  },
+  mounted() {
+    this.getPortfoliosByIndex();
+  },
+  methods: {
+    async getPortfoliosByIndex() {
+      this.portfolios = await FirebaseService.getPortfoliosByIndex(
+        this.$route.query.id
+      );
+      console.log(this.portfolios)
     },
-    title: {
-      type: String
-    },
-    body: {
-      type: String
-    },
-    imgSrc: {
-      type: String
-    }
+    loadMorePortfolios() {}
   }
 };
 </script>
