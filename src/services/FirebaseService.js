@@ -71,10 +71,30 @@ export default {
       .then(docSnapshots => {
         return docSnapshots.docs.map(doc => {
           let data = doc.data();
+          data.id = doc.id;
           data.created_at = new Date(data.created_at.toDate());
-          return data
+          return data;
         });
       });
+  },
+  // getPortfoliosByIndex(id, uk) {
+  //   const postsCollection = firestore
+  //     .collection(PORTFOLIOS)
+  //     .doc(id)
+  //     .field(uk);
+  //   return postsCollection.get().then(docSnapshots => {
+  //     let data = docSnapshots.data();
+  //     data.uk = docSnapshots.uk;
+  //     return data;
+  //   });
+  // },
+  getPortfoliosByIndex(id) {
+    const postsCollection = firestore.collection(PORTFOLIOS).doc(id);
+    return postsCollection.get().then(docSnapshots => {
+      let data = docSnapshots.data();
+      data.id = docSnapshots.id;
+      return data;
+    });
   },
   postPortfolio(title, body, img, uk) {
     return firestore.collection(PORTFOLIOS).add({
