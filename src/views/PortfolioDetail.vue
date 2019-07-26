@@ -11,7 +11,6 @@
           </center>
           <p class="DokdoList subfont">
             Test
-
             <br />
           </p>
         </v-flex>
@@ -39,8 +38,6 @@
 import "../CSS/FontColor.css";
 import "../CSS/ellipsis.css";
 import "../CSS/DokdoFont.css";
-
-import FirebaseService from "@/services/FirebaseService";
 
 export default {
   name: "PortfolioDetail",

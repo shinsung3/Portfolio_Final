@@ -1,9 +1,8 @@
-import firebase from 'firebase/app'
-import 'firebase/firestore'
-import 'firebase/auth'
-import store from '../store.js'
+import firebase from "firebase/app";
+import "firebase/firestore";
+import "firebase/auth";
+import store from "../store.js";
 import "firebase/functions";
-
 
 const POSTS = "posts";
 const PORTFOLIOS = "portfolios";
@@ -12,80 +11,80 @@ const BACKGROUNDIMG = "background";
 
 // Setup Firebase
 const config = {
-	projectId: 'halhalnolnol-9b318',
-	authDomain: 'halhalnolnol-9b318.firebaseapp.com',
-	apiKey: 'AIzaSyAzGXg4iu-1spk8IoCm-EwpqJYsNGemOFk',
-	databaseURL: 'https://halhalnolnol-9b318.firebaseio.com',
-	storageBucket: 'halhalnolnol-9b318.appspot.com'
-}
+  projectId: "halhalnolnol-9b318",
+  authDomain: "halhalnolnol-9b318.firebaseapp.com",
+  apiKey: "AIzaSyAzGXg4iu-1spk8IoCm-EwpqJYsNGemOFk",
+  databaseURL: "https://halhalnolnol-9b318.firebaseio.com",
+  storageBucket: "halhalnolnol-9b318.appspot.com"
+};
 
-firebase.initializeApp(config)
-const firestore = firebase.firestore()
-const logincheck = firebase.functions().httpsCallable('logincheck');
-const logoutcheck = firebase.functions().httpsCallable('logoutcheck');
+firebase.initializeApp(config);
+const firestore = firebase.firestore();
+const logincheck = firebase.functions().httpsCallable("logincheck");
+const logoutcheck = firebase.functions().httpsCallable("logoutcheck");
 
 export default {
-	getBackground() {
-		const postsCollection = firestore.collection(BACKGROUNDIMG);
-		return postsCollection
-			.orderBy("created_at", "desc")
-			.get()
-			.then(docSnapshots => {
-				return docSnapshots.docs.map(doc => {
-					let data = doc.data();
-					data.created_at = new Date(data.created_at.toDate());
-					return data;
-				});
-			});
-	},
-	postBackground(img) {
-		return firestore.collection(BACKGROUNDIMG).add({
-			img,
-			created_at: firebase.firestore.FieldValue.serverTimestamp()
-		});
-	},
-	getPosts() {
-		const postsCollection = firestore.collection(POSTS)
-		return postsCollection
-				.orderBy('created_at', 'desc')
-				.get()
-				.then((docSnapshots) => {
-					return docSnapshots.docs.map((doc) => {
-						let data = doc.data()
-						data.created_at = new Date(data.created_at.toDate())
-						return data
-					})
-				})
-	},
-	postPost(title, body) {
-		return firestore.collection(POSTS).add({
-			title,
-			body,
-			created_at: firebase.firestore.FieldValue.serverTimestamp()
-		})
-	},
-	getPortfolios() {
-		const postsCollection = firestore.collection(PORTFOLIOS)
-		return postsCollection
-				.orderBy('created_at', 'desc')
-				.get()
-				.then((docSnapshots) => {
-					return docSnapshots.docs.map((doc) => {
-						let data = doc.data()
-						data.created_at = new Date(data.created_at.toDate())
-						return data
-					})
-				})
-	},
-	postPortfolio(title, body, img, uk) {
-		return firestore.collection(PORTFOLIOS).add({
-			title,
-			body,
-			img,
-			uk,
-			created_at: firebase.firestore.FieldValue.serverTimestamp()
-		})
-	},
+  getBackground() {
+    const postsCollection = firestore.collection(BACKGROUNDIMG);
+    return postsCollection
+      .orderBy("created_at", "desc")
+      .get()
+      .then(docSnapshots => {
+        return docSnapshots.docs.map(doc => {
+          let data = doc.data();
+          data.created_at = new Date(data.created_at.toDate());
+          return data;
+        });
+      });
+  },
+  postBackground(img) {
+    return firestore.collection(BACKGROUNDIMG).add({
+      img,
+      created_at: firebase.firestore.FieldValue.serverTimestamp()
+    });
+  },
+  getPosts() {
+    const postsCollection = firestore.collection(POSTS);
+    return postsCollection
+      .orderBy("created_at", "desc")
+      .get()
+      .then(docSnapshots => {
+        return docSnapshots.docs.map(doc => {
+          let data = doc.data();
+          data.created_at = new Date(data.created_at.toDate());
+          return data;
+        });
+      });
+  },
+  postPost(title, body) {
+    return firestore.collection(POSTS).add({
+      title,
+      body,
+      created_at: firebase.firestore.FieldValue.serverTimestamp()
+    });
+  },
+  getPortfolios() {
+    const postsCollection = firestore.collection(PORTFOLIOS);
+    return postsCollection
+      .orderBy("created_at", "desc")
+      .get()
+      .then(docSnapshots => {
+        return docSnapshots.docs.map(doc => {
+          let data = doc.data();
+          data.created_at = new Date(data.created_at.toDate());
+          return data;
+        });
+      });
+  },
+  postPortfolio(title, body, img, uk) {
+    return firestore.collection(PORTFOLIOS).add({
+      title,
+      body,
+      img,
+      uk,
+      created_at: firebase.firestore.FieldValue.serverTimestamp()
+    });
+  },
 	setAuthorization(email, auth) {
 		return firestore.collection(USERAUTH).add({
 			email,
