@@ -6,27 +6,15 @@
         <v-flex xs12 sm8>
           <center>
             <p class="DokdoList font">
-              {{ portfolios.title }}
+              {{ post.title }}
             </p>
           </center>
           <p class="DokdoList subfont">
-            {{ portfolios.body }}
+            {{ post.body }}
             <br />
           </p>
         </v-flex>
-        <v-flex pt-3 mt-5 bt-5>
-          <v-img :src="portfolios.img" aspect-ratio="1.0" />
-        </v-flex>
       </v-layout>
-      <h1 class="DokdoList">
-        개발 언어 :
-      </h1>
-      <h1 class="DokdoList">
-        시간 :
-      </h1>
-      <h1 class="DokdoList">
-        인원 :
-      </h1>
     </v-container>
   </div>
 </template>
@@ -41,19 +29,17 @@ export default {
   name: "PortfolioDetail",
   data() {
     return {
-      portfolios: []
+      post: []
     };
   },
   mounted() {
-    this.getPortfoliosByIndex();
+    this.getPostByIndex();
   },
   methods: {
-    async getPortfoliosByIndex() {
-      this.portfolios = await FirebaseService.getPortfoliosByIndex(
-        this.$route.query.id
-      );
+    async getPostByIndex() {
+      this.post = await FirebaseService.getPostByIndex(this.$route.query.id);
     },
-    loadMorePortfolios() {}
+    loadMorePosts() {}
   }
 };
 </script>
