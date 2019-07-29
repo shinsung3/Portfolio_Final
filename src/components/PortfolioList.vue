@@ -64,7 +64,9 @@ export default {
     async getPortfolios() {
       this.portfolios = await FirebaseService.getPortfolios();
     },
-    loadMorePortfolios() {}
+    loadMorePortfolios() {
+      this.portfolios = FirebaseService.getPortfolios();
+    }
   }
 };
 </script>

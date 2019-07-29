@@ -12,7 +12,6 @@
         :body="posts[i - 1].body"
         :id="posts[i - 1].id"
       ></Post>
-      <v-divider></v-divider>
     </v-flex>
 
     <v-flex xs12 text-xs-center round my-5 v-if="loadMore">
