@@ -29,6 +29,15 @@ export default {
     },
     uk: {
       type: Number
+    },
+    language{
+      type: String
+    },
+    complete{
+      type: String
+    },
+    people{
+      type: String
     }
   },
   data() {
@@ -41,6 +50,15 @@ export default {
       },
       index: {
         index: this.uk
+      },
+      language{
+        language: this.language
+      },
+      complete{
+        complete: this.complete
+      },
+      people{
+        people: this.people
       }
     };
   }
