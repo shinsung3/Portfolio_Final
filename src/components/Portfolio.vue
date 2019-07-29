@@ -74,7 +74,6 @@ export default {
   methods: {
     linkToPage() {
       this.$router.push("/pfDetail?id=" + this.id);
-        console.log(this.id);
     }
   }
 };

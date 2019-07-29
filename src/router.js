@@ -8,6 +8,7 @@ import PortfolioWriter from "./views/PortfolioWriter.vue";
 import Repository from "./views/RepositoryPage.vue";
 import Graph from "./views/GraphPage.vue";
 import PFDetail from "./views/PortfolioDetail.vue";
+import PSDetail from "./views/PostDetail.vue";
 
 Vue.use(Router);
 
@@ -54,6 +55,11 @@ export default new Router({
       path: "/pfDetail",
       name: "pfDetail",
       component: PFDetail
+    },
+    {
+      path: "/psDetail",
+      name: "psDetail",
+      component: PSDetail
     }
   ]
 });
