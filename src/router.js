@@ -9,6 +9,7 @@ import Repository from "./views/RepositoryPage.vue";
 import Graph from "./views/GraphPage.vue";
 import PFDetail from "./views/PortfolioDetail.vue";
 import PSDetail from "./views/PostDetail.vue";
+import AdminPage from "./views/AdminPage.vue";
 
 Vue.use(Router);
 
@@ -60,6 +61,11 @@ export default new Router({
       path: "/psDetail",
       name: "psDetail",
       component: PSDetail
+    },
+    {
+      path: "/admin",
+      name: "admin",
+      component: AdminPage
     }
   ]
 });
