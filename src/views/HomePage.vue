@@ -40,7 +40,7 @@
             About Us
           </h2>
           <p
-            class="mr-4 DokdoList"
+            class="mr-4 transfont"
             v-model="output"
             v-resize-text="{
               ratio: 1.3,
@@ -179,6 +179,7 @@ import ImgurAPI from "../components/ImgurApi";
 import "../CSS/DokdoFont.css";
 import Translate from "@/services/Translate";
 import EventBus from "../eventBus.js"
+import "../CSS/notofont.css";
 
 export default {
   name: "HomePage",
