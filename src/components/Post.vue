@@ -91,6 +91,6 @@ export default {
 
 .paddingSize {
   padding: 15px;
-  background-color: papayawhip;
+  background-color: whitesmoke;
 }
 </style>
