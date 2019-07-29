@@ -14,6 +14,7 @@
           </p>
         </v-flex>
       </v-layout>
+      <Comments />
     </v-container>
   </div>
 </template>
@@ -23,9 +24,13 @@ import "../CSS/FontColor.css";
 import "../CSS/ellipsis.css";
 import "../CSS/DokdoFont.css";
 import FirebaseService from "@/services/FirebaseService";
+import Comments from "../components/Comments.vue";
 
 export default {
   name: "PostDetail",
+  components: {
+    Comments
+  },
   data() {
     return {
       post: []
