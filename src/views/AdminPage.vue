@@ -18,8 +18,8 @@
           &nbsp 관리자 페이지
         </h1>
       </center>
-      <v-flex xs12 text-xs-center>
-        
+      <v-flex class="hidden-sm-and-down">
+
       </v-flex>
     </v-container>
   </div>
