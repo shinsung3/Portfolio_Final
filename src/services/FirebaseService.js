@@ -88,6 +88,14 @@ export default {
   //     return data;
   //   });
   // },
+	chkDup() {
+		const usersId = firestore.collection(USERAUTH);
+		return userId
+			.get()
+			.then(docSnapshots => {
+				
+			});
+	},
   getPortfoliosByIndex(id) {
     const postsCollection = firestore.collection(PORTFOLIOS).doc(id);
     return postsCollection.get().then(docSnapshots => {
