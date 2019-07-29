@@ -23,6 +23,27 @@ const firestore = firebase.firestore();
 const logincheck = firebase.functions().httpsCallable("logincheck");
 const logoutcheck = firebase.functions().httpsCallable("logoutcheck");
 
+function chkDup(email) {
+  return firestore
+    .collection(USERAUTH)
+    .doc(email)
+    .get()
+    .then(doc => {
+      if(doc.exists) {
+        return true;
+      } else {
+        return false;
+      }
+    });
+}
+
+function setAuthorization(email, auth) {
+  return firestore.collection(USERAUTH).doc(email).set({
+    auth,
+    created_at: firebase.firestore.FieldValue.serverTimestamp()
+  })
+}
+
 export default {
   getBackground() {
     const postsCollection = firestore.collection(BACKGROUNDIMG);
@@ -96,14 +117,7 @@ export default {
   //     return data;
   //   });
   // },
-	chkDup() {
-		const usersId = firestore.collection(USERAUTH);
-		return userId
-			.get()
-			.then(docSnapshots => {
 
-			});
-	},
   getPortfoliosByIndex(id) {
     const postsCollection = firestore.collection(PORTFOLIOS).doc(id);
     return postsCollection.get().then(docSnapshots => {
@@ -124,13 +138,6 @@ export default {
       created_at: firebase.firestore.FieldValue.serverTimestamp()
     });
   },
-	setAuthorization(email, auth) {
-		return firestore.collection(USERAUTH).add({
-			email,
-			auth,
-			created_at: firebase.firestore.FieldValue.serverTimestamp()
-		})
-	},
 	getAuthorization() {
 		const userauthCollection = firestore.collection(USERAUTH)
 		return userauthCollection
@@ -145,10 +152,17 @@ export default {
 			})
 	},
 	loginWithGoogle() {
-		let provider = new firebase.auth.GoogleAuthProvider()
+    let provider = new firebase.auth.GoogleAuthProvider();
 		return firebase.auth().signInWithPopup(provider).then(function(result) {
 			let accessToken = result.credential.accessToken
 			let user = result.user
+      chkDup(user.email).then(res => {
+        if(res == false) {
+          setAuthorization(user.email, 1111);
+        }
+      }) .catch(err => {
+        console.log(err);
+      });
 			logincheck({})
 			return result
 		}).catch(function(error) {
@@ -160,6 +174,13 @@ export default {
 		return firebase.auth().signInWithPopup(provider).then(function(result) {
 			let accessToken = result.credential.accessToken
 			let user = result.user
+      chkDup(user.email).then(res => {
+        if(res == false) {
+          setAuthorization(user.email, 1111);
+        }
+      }) .catch(err => {
+        console.log(err);
+      });
 			return result
 		}).catch(function(error) {
 			console.error('[Facebook Login Error]', error)
@@ -177,8 +198,13 @@ export default {
 		firebase.auth().createUserWithEmailAndPassword(email, password).then(
 			function(user) {
 				alert("회원가입 축하합니다")
-				this.setAuthorization(email, "방문자")
-				store.state.authorization = "방문자"
+        chkDup(email).then(res => {
+          if(res == false) {
+            setAuthorization(email, 1111);
+          }
+        }) .catch(err => {
+          console.log(err);
+        });
 			},
 			function(err) {
 			 	alert("error, " + err.message);
