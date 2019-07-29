@@ -88,13 +88,13 @@ export default {
   //     return data;
   //   });
   // },
-	removeDup() {
+	chkDup() {
 		const usersId = firestore.collection(USERAUTH);
 		return userId
 			.get()
-			.then(
-
-			);
+			.then(docSnapshots => {
+				
+			});
 	},
   getPortfoliosByIndex(id) {
     const postsCollection = firestore.collection(PORTFOLIOS).doc(id);
