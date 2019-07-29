@@ -11,7 +11,6 @@
           </center>
           <p class="DokdoList subfont">
             {{ portfolios.body }}
-            {{portfolios.language}}
             <br />
           </p>
         </v-flex>
@@ -24,10 +23,10 @@
       </h1>
 
       <h1 class="DokdoList">
-        시간 : {{portfolios.complete}}
+        시간 :
       </h1>
       <h1 class="DokdoList">
-        인원 : {{portfolios.people}}
+        인원 : 
       </h1>
     </v-container>
   </div>

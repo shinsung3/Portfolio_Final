@@ -19,13 +19,13 @@
         </v-flex>
       </v-layout>
       <h1 class="DokdoList">
-        개발 언어 :
+        개발 언어 : {{portfolios.language}}
       </h1>
       <h1 class="DokdoList">
-        시간 :
+        기간 : {{portfolios.complete}}
       </h1>
       <h1 class="DokdoList">
-        인원 :
+        인원 : {{portfolios.people}}
       </h1>
     </v-container>
   </div>
