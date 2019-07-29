@@ -1,9 +1,13 @@
 <template>
   <v-layout py-4 h-100>
-    <v-flex row @click="linkToPage" hover>
-      <div class="caption">{{ formatedDate }}</div>
-      <div class="headline text2">{{ subject.translate }}</div>
-      <span class="grey--text text1">{{ content.translate }}</span>
+    <v-flex row>
+      <v-card @click="linkToPage" hover>
+        <div class="paddingSize">
+          <div class="caption">{{ formatedDate }}</div>
+          <div class="headline text2">{{ subject.translate }}</div>
+          <span class="grey--text text1">{{ content.translate }}</span>
+        </div>
+      </v-card>
     </v-flex>
   </v-layout>
 </template>
@@ -57,6 +61,11 @@ export default {
         });
       }
     });
+  },
+  methods: {
+    linkToPage() {
+      this.$router.push("/psDetail?id=" + this.id);
+    }
   }
 };
 </script>
@@ -72,5 +81,10 @@ export default {
 
 .h-100 {
   height: 100%;
+}
+
+.paddingSize {
+  padding: 15px;
+  background-color: aliceblue;
 }
 </style>

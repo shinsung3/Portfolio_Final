@@ -194,11 +194,10 @@ export default {
       introduce:'',
       original:''
     },
-    content:[{
+    content:{
       introduce: '안녕하세요. 저희는 <strong>할할놀놀</strong>이라는 팀이구요.<br>나원 Park은 Python천재입니다.<br>녹구 Kim은 새로운 팀으로 이직했구요.<br>현일 Kim은 백준 순위가 젤 높습니다.<br>훈석 Choi는 나이 is the bigger than everybody<br>신성 Jo는 Java 할 줄 알아요.',
       original :  '안녕하세요. 저희는 <strong>할할놀놀</strong>이라는 팀이구요.<br>나원 Park은 Python천재입니다.<br>녹구 Kim은 새로운 팀으로 이직했구요.<br>현일 Kim은 백준 순위가 젤 높습니다.<br>훈석 Choi는 나이 is the bigger than everybody<br>신성 Jo는 Java 할 줄 알아요.',
-      }
-    ],
+      },
     items: [
       {
         id: 1,
@@ -231,7 +230,7 @@ export default {
     ]
   }),
   mounted() {
-    this.output = this.content[0]
+    this.output = this.content
   },
   created(){
     EventBus.$on("translate",(language) => {

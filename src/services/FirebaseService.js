@@ -56,6 +56,14 @@ export default {
         });
       });
   },
+  getPostByIndex(id) {
+    const postsCollection = firestore.collection(POSTS).doc(id);
+    return postsCollection.get().then(docSnapshots => {
+      let data = docSnapshots.data();
+      data.id = docSnapshots.id;
+      return data;
+    });
+  },
   postPost(title, body) {
     return firestore.collection(POSTS).add({
       title,
@@ -88,6 +96,14 @@ export default {
   //     return data;
   //   });
   // },
+	chkDup() {
+		const usersId = firestore.collection(USERAUTH);
+		return userId
+			.get()
+			.then(docSnapshots => {
+
+			});
+	},
   getPortfoliosByIndex(id) {
     const postsCollection = firestore.collection(PORTFOLIOS).doc(id);
     return postsCollection.get().then(docSnapshots => {
@@ -96,7 +112,7 @@ export default {
       return data;
     });
   },
-  postPortfolio(title, body, img, uk, language , complete, people) {
+  postPortfolio(title, body, img, uk, language, complete, people) {
     return firestore.collection(PORTFOLIOS).add({
       title,
       body,
