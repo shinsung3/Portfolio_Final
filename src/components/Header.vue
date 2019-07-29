@@ -49,8 +49,8 @@
         <v-btn flat to="/repository">
           <span class="DokdoHeader2">Project</span>
         </v-btn>
-        <v-btn flat to="/pfDetail">
-          <span class="DokdoHeader2">Test</span>
+        <v-btn flat to="/admin">
+          <span class="DokdoHeader2">AdmingPage</span>
         </v-btn>
       </v-toolbar-items>
 

@@ -1,4 +1,4 @@
-<template>
+  <template>
   <v-layout mt-5 wrap>
     <v-flex
       v-for="(i, j) in portfolios.length > limits ? limits : portfolios.length"
