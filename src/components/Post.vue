@@ -1,7 +1,7 @@
 <template>
   <v-layout py-4 h-100>
-    <v-flex row>
-      <div class="caption">{{formatedDate}}</div>
+    <v-flex row @click="linkToPage" hover>
+      <div class="caption">{{ formatedDate }}</div>
       <div class="headline text2">{{ subject.translate }}</div>
       <span class="grey--text text1">{{ content.translate }}</span>
     </v-flex>
@@ -9,16 +9,12 @@
 </template>
 
 <script>
-import '../CSS/ellipsis.css'
-import TransComponent from './Translate.vue'
+import "../CSS/ellipsis.css";
 import Translate from "@/services/Translate";
-import EventBus from "../eventBus.js"
+import EventBus from "../eventBus.js";
 
 export default {
-  components:{
-    TransComponent
-  },
-  name: 'Post',
+  name: "Post",
   props: {
     date: {
       type: Date
@@ -32,40 +28,37 @@ export default {
   },
   computed: {
     formatedDate() {
-      return `${this.date.getFullYear()}년 ${this.date.getMonth()}월 ${this.date.getDate()}일`
+      return `${this.date.getFullYear()}년 ${this.date.getMonth()}월 ${this.date.getDate()}일`;
     }
   },
   data() {
     return {
-      subject :{
-        translate : this.title,
-        original : this.title
+      subject: {
+        translate: this.title,
+        original: this.title
       },
-      content :{
-        translate : this.body,
-        original : this.body
+      content: {
+        translate: this.body,
+        original: this.body
       }
     };
   },
-  created(){
-    EventBus.$on("translate", (language)=>{
-      if (language == "original"){
-        this.subject.translate = this.subject.original
-        this.content.translate = this.content.original
+  created() {
+    EventBus.$on("translate", language => {
+      if (language == "original") {
+        this.subject.translate = this.subject.original;
+        this.content.translate = this.content.original;
+      } else {
+        Translate.translate(language, this.subject.original).then(res => {
+          this.subject.translate = res;
+        });
+        Translate.translate(language, this.content.original).then(res => {
+          this.content.translate = res;
+        });
       }
-      else {
-        Translate.translate(language, this.subject.original)
-        .then((res)=>{
-          this.subject.translate = res
-        })
-        Translate.translate(language, this.content.original)
-        .then((res)=>{
-          this.content.translate = res
-        })
-      }
-    })
+    });
   }
-}
+};
 </script>
 
 <style>
