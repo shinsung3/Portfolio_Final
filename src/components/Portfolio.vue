@@ -39,16 +39,7 @@ export default {
     },
     id: {
       type: String
-    },
-    // language{
-    //   type: String
-    // },
-    // complete{
-    //   type: String
-    // },
-    // people{
-    //   type: String
-    // }
+    }
   },
   data() {
     return {
