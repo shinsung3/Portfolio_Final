@@ -152,6 +152,13 @@ export default {
 				})
 			})
 	},
+  modifyAuthorization(email, auth) {
+    return firestore.collection(USERAUTH).doc(email).set({
+      email,
+      auth,
+      created_at: firebase.firestore.FieldValue.serverTimestamp()
+    })
+  },
 	loginWithGoogle() {
     let provider = new firebase.auth.GoogleAuthProvider();
 		return firebase.auth().signInWithPopup(provider).then(function(result) {
