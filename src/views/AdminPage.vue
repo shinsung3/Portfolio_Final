@@ -19,7 +19,7 @@
         </h1>
       </center>
       <v-flex class="hidden-sm-and-down">
-
+        
       </v-flex>
     </v-container>
   </div>

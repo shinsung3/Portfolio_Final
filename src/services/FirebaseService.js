@@ -39,6 +39,7 @@ function chkDup(email) {
 
 function setAuthorization(email, auth) {
   return firestore.collection(USERAUTH).doc(email).set({
+    email,
     auth,
     created_at: firebase.firestore.FieldValue.serverTimestamp()
   })
