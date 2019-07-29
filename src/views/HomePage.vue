@@ -164,6 +164,9 @@
           <RepositoryList></RepositoryList>
         </v-flex>
       </v-layout>
+
+      <!-- data-init-식별키=값 으로 셋팅하면 챗플로우에 파라미터와 연동가능. 식별키는 소문자만 가능 -->
+
     </v-container>
   </div>
 </template>
@@ -265,4 +268,5 @@ export default {
     }
   }
 };
+
 </script>
