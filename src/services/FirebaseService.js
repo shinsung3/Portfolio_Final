@@ -96,12 +96,15 @@ export default {
       return data;
     });
   },
-  postPortfolio(title, body, img, uk) {
+  postPortfolio(title, body, img, uk, language , complete, people) {
     return firestore.collection(PORTFOLIOS).add({
       title,
       body,
       img,
       uk,
+      language,
+      complete,
+      people,
       created_at: firebase.firestore.FieldValue.serverTimestamp()
     });
   },

@@ -36,7 +36,39 @@
               >
               </v-text-field>
             </v-flex>
-
+            <!-- language -->
+            <v-flex px10 py10>
+              <v-text-field
+                v-model="language"
+                :counter="30"
+                :rules="titleRules"
+                label="사용언어"
+                required
+              >
+              </v-text-field>
+            </v-flex>
+            <!-- complete -->
+            <v-flex px10 py10>
+              <v-text-field
+                v-model="complete"
+                :counter="30"
+                :rules="titleRules"
+                label="기간"
+                required
+              >
+              </v-text-field>
+              <!-- people -->
+              <v-flex px10 py10>
+                <v-text-field
+                  v-model="people"
+                  :counter="30"
+                  :rules="titleRules"
+                  label="참여인원"
+                  required
+                >
+                </v-text-field>
+              </v-flex>
+            </v-flex>
             <!-- body -->
             <v-flex px10 py10>
               <markdown-editor v-model="body"></markdown-editor>
@@ -106,7 +138,10 @@ export default {
     imageFile: '',
     body: '',
     imageDeleteHash: '',
-    portpolios: []
+    portpolios: [],
+    language: '',
+    complete: '',
+    people: ''
   }),
   components: {
     ImgBanner
@@ -185,9 +220,9 @@ export default {
     submit() {
       this.uploadToAlbum();
       if( this.portfolios.length == 0 )
-        FirebaseService.postPortfolio(this.title, this.body, this.imageUrl, 1);
+        FirebaseService.postPortfolio(this.title, this.body, this.imageUrl, 1, this.complete, this.language, this.people);
       else
-        FirebaseService.postPortfolio(this.title, this.body, this.imageUrl, this.portfolios[0].uk + 1);
+        FirebaseService.postPortfolio(this.title, this.body, this.imageUrl, this.portfolios[0].uk + 1, this.complete, this.language, this.people);
       location.href="/Portfolio"
     },
     async getPortfolios() {
