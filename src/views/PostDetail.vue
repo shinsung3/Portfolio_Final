@@ -37,7 +37,6 @@ export default {
   methods: {
     async getPostByIndex() {
       this.post = await FirebaseService.getPostByIndex(this.$route.query.id);
-      console.log(this.post)
     },
     loadMorePosts() {}
   }
@@ -46,7 +45,7 @@ export default {
 
 <style>
 .font {
-  font-size: 65px;
+  font-size: 100px;
 }
 
 .subfont {
