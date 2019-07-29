@@ -1,6 +1,5 @@
 <template>
   <div>
-    <!-- About Me -->
     <v-container>
       <v-layout my-5>
         <v-flex xs12 sm8>
@@ -26,7 +25,7 @@ import "../CSS/DokdoFont.css";
 import FirebaseService from "@/services/FirebaseService";
 
 export default {
-  name: "PortfolioDetail",
+  name: "PostDetail",
   data() {
     return {
       post: []
@@ -38,6 +37,7 @@ export default {
   methods: {
     async getPostByIndex() {
       this.post = await FirebaseService.getPostByIndex(this.$route.query.id);
+      console.log(this.post)
     },
     loadMorePosts() {}
   }
