@@ -72,6 +72,7 @@ export default {
       .then(docSnapshots => {
         return docSnapshots.docs.map(doc => {
           let data = doc.data();
+          data.id = doc.id;
           data.created_at = new Date(data.created_at.toDate());
           return data;
         });

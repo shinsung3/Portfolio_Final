@@ -28,6 +28,9 @@ export default {
     },
     body: {
       type: String
+    },
+    id: {
+      type: String
     }
   },
   computed: {
@@ -44,6 +47,9 @@ export default {
       content: {
         translate: this.body,
         original: this.body
+      },
+      index: {
+        id: this.id
       }
     };
   },
@@ -85,6 +91,6 @@ export default {
 
 .paddingSize {
   padding: 15px;
-  background-color: aliceblue;
+  background-color: papayawhip;
 }
 </style>
