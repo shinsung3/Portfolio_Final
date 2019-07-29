@@ -20,9 +20,18 @@
     </v-flex>
 
     <v-flex xs12 text-xs-center round my-5 v-if="loadMore">
-      <v-btn color="info" dark v-on:click="loadMorePortfolios">
+      <v-btn v-if="loadMore" color="info" dark v-on:click="loadMorePortfolios">
         <v-icon size="25" class="mr-2">fa-plus</v-icon>더 보기
       </v-btn>
+      <v-btn
+        v-if="loadLess"
+        color="warning"
+        dark
+        v-on:click="loadLessPortfolios"
+      >
+        <v-icon size="25" class="mr-2">fa-angle-double-up</v-icon>접기
+      </v-btn>
+
       <v-btn class="button1" to="/writer">
         <img
           src="https://image.flaticon.com/icons/svg/1865/1865689.svg"
@@ -47,6 +56,10 @@ export default {
     loadMore: {
       type: Boolean,
       default: false
+    },
+    loadLess: {
+      type: Boolean,
+      default: true
     }
   },
   data() {
@@ -64,8 +77,11 @@ export default {
     async getPortfolios() {
       this.portfolios = await FirebaseService.getPortfolios();
     },
-    loadMorePortfolios() {
-      this.portfolios = FirebaseService.getPortfolios();
+    async loadMorePortfolios() {
+      this.limits = this.portfolios.length;
+    },
+    async loadLessPortfolios() {
+      this.limits = 8;
     }
   }
 };
