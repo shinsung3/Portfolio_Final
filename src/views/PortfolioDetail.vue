@@ -21,6 +21,9 @@
       <h1 class="DokdoList">개발 언어 : {{ portfolios.language }}</h1>
       <h1 class="DokdoList">기간 : {{ portfolios.complete }}</h1>
       <h1 class="DokdoList">인원 : {{ portfolios.people }}</h1>
+      <br />
+      <br />
+      <Comments />
     </v-container>
   </div>
 </template>
@@ -29,10 +32,14 @@
 import "../CSS/FontColor.css";
 import "../CSS/ellipsis.css";
 import "../CSS/DokdoFont.css";
+import Comments from "../components/Comments.vue";
 import FirebaseService from "@/services/FirebaseService";
 
 export default {
   name: "PortfolioDetail",
+  components: {
+    Comments
+  },
   data() {
     return {
       portfolios: []
@@ -51,7 +58,6 @@ export default {
   }
 };
 </script>
-
 <style>
 .font {
   font-size: 65px;
