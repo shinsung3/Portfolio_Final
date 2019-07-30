@@ -24,6 +24,7 @@ const logincheck = firebase.functions().httpsCallable("logincheck");
 const logoutcheck = firebase.functions().httpsCallable("logoutcheck");
 
 //서비스워커
+
 if ('serviceWorker' in navigator) {
   window.addEventListener('load', function() {
     navigator.serviceWorker.register('/sw.js').then(function(registration) {
@@ -53,8 +54,6 @@ self.addEventListener('install', function(event) {
       })
   );
 });
-
-
 
 
 // 오프라인저장
