@@ -152,6 +152,9 @@ export default {
 				})
 			})
 	},
+  getUserAuth(email) {
+    return firestore.collection(USERAUTH).doc(email).id;
+  },
   modifyAuthorization(email, auth) {
     return firestore.collection(USERAUTH).doc(email).update({
       email,

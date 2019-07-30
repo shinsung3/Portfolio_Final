@@ -7,7 +7,6 @@ export default new Vuex.Store({
   state: {
     accessToken: "",
     user: "",
-    authorization: "",
     BannerImgUrl: "https://source.unsplash.com/random/1600x900"
   }
 });
