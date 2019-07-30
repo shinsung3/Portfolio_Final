@@ -21,17 +21,23 @@
       <v-flex class="hidden-sm-and-down">
         <UserList></UserList>
       </v-flex>
+      <v-flex class="hidden-sm-and-down">
+        <PostsCount></PostsCount>
+      </v-flex>
     </v-container>
   </div>
 </template>
 
 <script>
   import UserList from "../components/UserList";
+  import PostsCount from "../components/PostsCount";
+
 
   export default {
     name: "Adminpage",
     components: {
-      UserList
+      UserList,
+      PostsCount
     }
   }
 </script>
