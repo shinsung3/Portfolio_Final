@@ -23,76 +23,15 @@ const firestore = firebase.firestore();
 const logincheck = firebase.functions().httpsCallable("logincheck");
 const logoutcheck = firebase.functions().httpsCallable("logoutcheck");
 
-//서비스워커
-
-if ('serviceWorker' in navigator) {
-  window.addEventListener('load', function() {
-    navigator.serviceWorker.register('/sw.js').then(function(registration) {
-      // Registration was successful
-      console.log('ServiceWorker registration successful with scope: ', registration.scope);
-    }, function(err) {
-      // registration failed :(
-      console.log('ServiceWorker registration failed: ', err);
-    });
+//offline check
+firebase.firestore().enablePersistence()
+  .catch(function(err) {
+    if (err.code == 'failed-precondition') {
+      console.log(err);
+    } else if (err.code == 'unimplemented') {
+      console.log(err);
+    }
   });
-}
-
-var CACHE_NAME = 'my-site-cache-v1';
-var urlsToCache = [
-  '/',
-  '/styles/main.css',
-  '/script/main.js'
-];
-
-self.addEventListener('install', function(event) {
-  // Perform install steps
-  event.waitUntil(
-    caches.open(CACHE_NAME)
-      .then(function(cache) {
-        console.log('Opened cache');
-        return cache.addAll(urlsToCache);
-      })
-  );
-});
-
-
-// 오프라인저장
-// firebase.firestore().enablePersistence()
-//   .catch(function(err) {
-//     if (err.code == 'failed-precondition') {
-//       // Multiple tabs open, persistence can only be enabled
-//       // in one tab at a a time.
-//       // ...
-//     } else if (err.code == 'unimplemented') {
-//       // The current browser does not support all of the
-//       // features required to enable persistence
-//       // ...
-//     }
-//   });
-// db.collection("cities").where("state", "==", "CA")
-//   .onSnapshot({
-//     includeMetadataChanges: true
-//   }, function(snapshot) {
-//     snapshot.docChanges().forEach(function(change) {
-//       if (change.type === "added") {
-//         console.log("New city: ", change.doc.data());
-//       }
-//
-//       var source = snapshot.metadata.fromCache ? "local cache" : "server";
-//       console.log("Data came from " + source);
-//     });
-//   });
-// firebase.firestore().disableNetwork()
-//   .then(function() {
-//     // Do offline actions
-//     // ...
-//   });
-// firebase.firestore().enableNetwork()
-//   .then(function() {
-//     // Do online actions
-//     // ...
-//   });
-//여기까지
 
 function chkDup(email) {
   return firestore
