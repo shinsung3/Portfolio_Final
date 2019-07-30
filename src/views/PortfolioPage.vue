@@ -1,6 +1,6 @@
 <template>
   <div>
-    <ImgBanner imgSrc="https://source.unsplash.com/random">
+    <!-- <ImgBanner imgSrc="https://source.unsplash.com/random">
       <h3
         class="DokdoFont"
         v-resize-text="{
@@ -20,7 +20,7 @@
       <div class="DokdoSubTitle" slot="text">
         Talk is cheap. Show me the code.
       </div>
-    </ImgBanner>
+    </ImgBanner> -->
 
     <v-container>
       <v-layout>
@@ -33,13 +33,13 @@
 </template>
 
 <script>
-import ImgBanner from "../components/ImgBanner";
+// import ImgBanner from "../components/ImgBanner";
 import PortfolioList from "../components/PortfolioList";
 import "../CSS/DokdoFont.css";
 export default {
   name: "PortfolioPage",
   components: {
-    ImgBanner,
+    // ImgBanner,
     PortfolioList
   }
 };

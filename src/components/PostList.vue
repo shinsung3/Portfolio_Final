@@ -1,5 +1,5 @@
 <template>
-  <v-layout row wrap mw-700>
+  <v-layout row wrap>
     <v-flex
       v-for="(i, j) in posts.length > limits ? limits : posts.length"
       :class="'xs' + 12 / column"
@@ -38,7 +38,7 @@ export default {
     },
     limits: {
       type: Number,
-      default: 4
+      default: 6
     },
     loadMore: {
       type: Boolean,
@@ -68,7 +68,7 @@ export default {
       this.limits = this.posts.length;
     },
     async loadLessPosts() {
-      this.limits = 6;
+      this.limits = 8;
     }
   }
 };
