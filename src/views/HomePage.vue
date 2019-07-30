@@ -23,7 +23,7 @@
         Talk is cheap. Show me the code.
       </div>
     </ImgBanner>
-     <ImgurAPI></ImgurAPI>
+    <ImgurAPI></ImgurAPI>
 
     <!-- About Me -->
     <v-container>
@@ -41,7 +41,6 @@
           </h2>
           <p
             class="mr-4 transfont"
-            v-model="output"
             v-resize-text="{
               ratio: 1.3,
               minFontSize: '15px',
@@ -166,7 +165,6 @@
       </v-layout>
 
       <!-- data-init-식별키=값 으로 셋팅하면 챗플로우에 파라미터와 연동가능. 식별키는 소문자만 가능 -->
-
     </v-container>
   </div>
 </template>
@@ -181,7 +179,7 @@ import "../CSS/ellipsis.css";
 import ImgurAPI from "../components/ImgurApi";
 import "../CSS/DokdoFont.css";
 import Translate from "@/services/Translate";
-import EventBus from "../eventBus.js"
+import EventBus from "../eventBus.js";
 import "../CSS/notofont.css";
 
 export default {
@@ -194,14 +192,16 @@ export default {
     RepositoryList
   },
   data: () => ({
-    output:{
-      introduce:'',
-      original:''
+    output: {
+      introduce: "",
+      original: ""
     },
-    content:{
-      introduce: '안녕하세요. 저희는 <strong>할할놀놀</strong>이라는 팀이구요.<br>나원 Park은 Python천재입니다.<br>녹구 Kim은 새로운 팀으로 이직했구요.<br>현일 Kim은 백준 순위가 젤 높습니다.<br>훈석 Choi는 나이 is the bigger than everybody<br>신성 Jo는 Java 할 줄 알아요.',
-      original :  '안녕하세요. 저희는 <strong>할할놀놀</strong>이라는 팀이구요.<br>나원 Park은 Python천재입니다.<br>녹구 Kim은 새로운 팀으로 이직했구요.<br>현일 Kim은 백준 순위가 젤 높습니다.<br>훈석 Choi는 나이 is the bigger than everybody<br>신성 Jo는 Java 할 줄 알아요.',
-      },
+    content: {
+      introduce:
+        "안녕하세요. 저희는 <strong>할할놀놀</strong>이라는 팀이구요.<br>나원 Park은 Python천재입니다.<br>녹구 Kim은 새로운 팀으로 이직했구요.<br>현일 Kim은 백준 순위가 젤 높습니다.<br>훈석 Choi는 나이 is the bigger than everybody<br>신성 Jo는 Java 할 줄 알아요.",
+      original:
+        "안녕하세요. 저희는 <strong>할할놀놀</strong>이라는 팀이구요.<br>나원 Park은 Python천재입니다.<br>녹구 Kim은 새로운 팀으로 이직했구요.<br>현일 Kim은 백준 순위가 젤 높습니다.<br>훈석 Choi는 나이 is the bigger than everybody<br>신성 Jo는 Java 할 줄 알아요."
+    },
     items: [
       {
         id: 1,
@@ -234,39 +234,25 @@ export default {
     ]
   }),
   mounted() {
-    this.output = this.content
+    this.output = this.content;
   },
-  created(){
-    EventBus.$on("translate",(language) => {
+  created() {
+    EventBus.$on("translate", language => {
       if (language == "original") {
-        this.lang = language
-        this.output.introduce = this.content.original
+        this.lang = language;
+        this.output.introduce = this.content.original;
+      } else {
+        this.lang = language;
+        Translate.translate(language, this.content.original).then(res => {
+          this.output.introduce = res;
+        });
       }
-      else {
-        this.lang = language
-        Translate.translate(language,this.content.original)
-        .then((res) => {
-          this.output.introduce = res
-        })
-      }
-    })
+    });
   },
   methods: {
-    Change(name, index){
-      if (this.lang == "original") {
-        this.output.introduce = this.original
-      }
-      else {
-        Translate.translate(this.lang,this.content.original)
-        .then((res) => {
-          this.output.introduce = res
-        })
-      }
-    },
     getImgUrl(img) {
       return require("../assets/" + img);
     }
   }
 };
-
 </script>
