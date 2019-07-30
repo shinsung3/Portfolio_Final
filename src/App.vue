@@ -9,6 +9,7 @@
       <Bookmark />
       <Chatbot />
       <Top />
+      <!-- <PlusMenu /> -->
       <Footer />
     </v-content>
   </v-app>
@@ -35,6 +36,7 @@ import Top from "./components/Top.vue";
 import Bookmark from "./components/BookMark.vue";
 import Footer from "./components/Footer.vue";
 import Chatbot from "./components/ChatBot.vue";
+import PlusMenu from "./components/PlusMenu.vue";
 
 export default {
   name: "App",
@@ -43,7 +45,8 @@ export default {
     Top,
     Bookmark,
     Footer,
-    Chatbot
+    Chatbot,
+    PlusMenu
   },
   store,
   data() {

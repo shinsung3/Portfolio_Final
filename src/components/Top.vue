@@ -1,7 +1,7 @@
 <template lang="html">
   <transition name="back-to-top-fade">
     <div
-      class="vue-back-to-top"
+      class="vue-back-to-top mr-5 pr-2"
       :style="`bottom:${this.bottom};right:${this.right};`"
       v-show="visible"
       @click="backToTop"
@@ -38,7 +38,7 @@ export default {
     },
     bottom: {
       type: String,
-      default: "40px"
+      default: "30px"
     },
     scrollFn: {
       type: Function,
@@ -101,13 +101,13 @@ export default {
 }
 
 .vue-back-to-top .default {
-  background-color: #f5c85c;
+  background-color: #ffb802;
   border-radius: 3px;
   color: #ffffff;
-  height: 40px;
-  line-height: 35px;
+  height: 35px;
+  line-height: 30px;
   text-align: center;
-  width: 40px;
+  width: 35px;
 }
 
 .vue-back-to-top .default span{
