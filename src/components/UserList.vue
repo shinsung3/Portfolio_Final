@@ -2,7 +2,17 @@
   <v-container>
     <v-flex v-for="user in users">
       <div>
-        <span>{{ user.email }}</span> &nbsp &nbsp <span v-if="user.auth == 1111">방문자</span> &nbsp &nbsp <v-btn @click="modifyAuthorization(user.email, '팀원')">변경</v-btn>
+        <span>{{ user.email }}</span> &nbsp &nbsp <span v-if="user.auth == 1111">방문자</span> &nbsp &nbsp
+        <div class="text-xs-center">
+          <v-menu offset-y>
+            <v-btn slot="activator" color="primary" dark>{{ selauth }}</v-btn>
+            <v-list>
+              <v-list-tile v-for="authority in authorities" :key="index" @click="selauth = authority">
+                <v-list-tile-title>{{ authority }}</v-list-tile-title>
+              </v-list-tile>
+            </v-list>
+          </v-menu>
+        </div>
       </div>
     </v-flex>
   </v-container>
@@ -15,7 +25,9 @@
     name: "UserList",
     data() {
       return {
-        users: []
+        users: [],
+        authorities: ["방문자", "팀원", "관리자"],
+        selauth: ''
       };
     },
     mounted() {
