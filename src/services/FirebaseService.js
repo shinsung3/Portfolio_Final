@@ -153,10 +153,9 @@ export default {
 			})
 	},
   modifyAuthorization(email, auth) {
-    return firestore.collection(USERAUTH).doc(email).set({
+    return firestore.collection(USERAUTH).doc(email).update({
       email,
-      auth,
-      created_at: firebase.firestore.FieldValue.serverTimestamp()
+      auth
     })
   },
 	loginWithGoogle() {
