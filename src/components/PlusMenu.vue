@@ -20,7 +20,13 @@
           <v-icon v-else>account_circle</v-icon>
         </v-btn>
       </template>
-      <ChatBot />
+      <v-btn
+        fab
+        dark
+        small
+      >
+        <ChatBot />
+      </v-btn>
       <v-btn
         fab
         dark
@@ -41,7 +47,7 @@
 </template>
 
 <script>
-import ChatBot from "../components/ChatBot.vue";
+import ChatBot from "./ChatBot.vue";
 export default {
   components: {
     ChatBot,

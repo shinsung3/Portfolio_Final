@@ -7,9 +7,9 @@
       <Header />
       <router-view />
       <Bookmark />
-      <!-- <Chatbot /> -->
+      <Chatbot />
       <Top />
-      <PlusMenu />
+      <!-- <PlusMenu /> -->
       <Footer />
     </v-content>
   </v-app>
