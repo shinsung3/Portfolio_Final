@@ -141,7 +141,7 @@
               Post
             </h2>
           </router-link>
-          <PostList :column="2"></PostList>
+          <PostList :column="3"></PostList>
         </v-flex>
       </v-layout>
 

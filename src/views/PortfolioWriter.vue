@@ -1,6 +1,6 @@
 <template>
   <div class="py-3">
-    <ImgBanner imgSrc="https://source.unsplash.com/random">
+    <!-- <ImgBanner imgSrc="https://source.unsplash.com/random">
       <h3
         class="DokdoFont"
         v-resize-text="{
@@ -20,7 +20,7 @@
       <div class="DokdoSubTitle" slot="text">
         Talk is cheap. Show me the code.
       </div>
-    </ImgBanner>
+    </ImgBanner> -->
     <v-layout>
       <v-flex>
         <v-form ref="form" v-model="valid" lazy-validation>
@@ -100,8 +100,11 @@
               </v-container>
             </v-flex>
             <v-flex align-center justify-end row fill-height right>
-              <v-btn color="success"@click="submit">
-                업로드<img src="https://image.flaticon.com/icons/svg/261/261868.svg" width="35px"/>
+              <v-btn color="success" @click="submit">
+                업로드<img
+                  src="https://image.flaticon.com/icons/svg/261/261868.svg"
+                  width="35px"
+                />
               </v-btn>
               <v-btn
                 @click.stop="reset()"
@@ -120,34 +123,34 @@
 
 <script>
 import FirebaseService from "@/services/FirebaseService";
-import ImgBanner from "../components/ImgBanner";
+// import ImgBanner from "../components/ImgBanner";
 import "../CSS/DokdoFont.css";
-import axios from 'axios'
+import axios from "axios";
 
 export default {
   name: "PortfolioPage",
   data: () => ({
     valid: true,
-    title: '',
+    title: "",
     titleRules: [
-      v => !!v || "제목을 입력해주세요!",
-      v => (v && v.length <= 30) || "제목은 30자 이내로 입력해주세요!"
+      v => !!v || "입력해주세요!",
+      v => (v && v.length <= 30) || "30자 이내로 입력해주세요!"
     ],
-    imageName: '',
-    imageUrl: '',
-    imageFile: '',
-    body: '',
-    imageDeleteHash: '',
+    imageName: "",
+    imageUrl: "",
+    imageFile: "",
+    body: "",
+    imageDeleteHash: "",
     portpolios: [],
-    language: '',
-    complete: '',
-    people: ''
+    language: "",
+    complete: "",
+    people: ""
   }),
   components: {
-    ImgBanner
+    // ImgBanner
   },
   mounted() {
-    this.getPortfolios()
+    this.getPortfolios();
   },
   methods: {
     getBody(msg) {
@@ -160,36 +163,34 @@ export default {
       var form = new FormData();
       form.append("image", this.imageFile);
       axios({
-       method: 'POST',
-       url: 'https://api.imgur.com/3/image',
-       data: form,
-       headers: {
-         Authorization: 'Client-ID b88c70b3b88c82d'
-       },
-       mimeType: 'multipart/form-data',
-       processData: false,
-       contentType: false
+        method: "POST",
+        url: "https://api.imgur.com/3/image",
+        data: form,
+        headers: {
+          Authorization: "Client-ID b88c70b3b88c82d"
+        },
+        mimeType: "multipart/form-data",
+        processData: false,
+        contentType: false
       }).then(response => {
         this.imageDeleteHash = response.data.data.deletehash;
-       })
+      });
     },
     uploadToAlbum() {
       var form = new FormData();
       form.append("deletehashes[]", this.imageDeleteHash);
 
       axios({
-       method: 'POST',
-       url: 'https://api.imgur.com/3/album/ZMohAFTFD1Ti1YV/add',
-       data: form,
-       headers: {
-         Authorization: 'Client-ID b88c70b3b88c82d'
-       },
-       mimeType: 'multipart/form-data',
-       processData: false,
-       contentType: false
-      }).then(response => {
-
-      })
+        method: "POST",
+        url: "https://api.imgur.com/3/album/ZMohAFTFD1Ti1YV/add",
+        data: form,
+        headers: {
+          Authorization: "Client-ID b88c70b3b88c82d"
+        },
+        mimeType: "multipart/form-data",
+        processData: false,
+        contentType: false
+      });
     },
     onFilePicked(e) {
       const files = e.target.files;
@@ -219,14 +220,30 @@ export default {
     },
     submit() {
       this.uploadToAlbum();
-      if( this.portfolios.length == 0 )
-        FirebaseService.postPortfolio(this.title, this.body, this.imageUrl, 1, this.complete, this.language, this.people);
+      if (this.portfolios.length == 0)
+        FirebaseService.postPortfolio(
+          this.title,
+          this.body,
+          this.imageUrl,
+          1,
+          this.complete,
+          this.language,
+          this.people
+        );
       else
-        FirebaseService.postPortfolio(this.title, this.body, this.imageUrl, this.portfolios[0].uk + 1, this.complete, this.language, this.people);
-      location.href="/Portfolio"
+        FirebaseService.postPortfolio(
+          this.title,
+          this.body,
+          this.imageUrl,
+          this.portfolios[0].uk + 1,
+          this.complete,
+          this.language,
+          this.people
+        );
+      location.href = "/Portfolio";
     },
     async getPortfolios() {
-      this.portfolios = await FirebaseService.getPortfolios()
+      this.portfolios = await FirebaseService.getPortfolios();
     }
   }
 };
