@@ -19,8 +19,19 @@
         </h1>
       </center>
       <v-flex class="hidden-sm-and-down">
-        
+        <UserList></UserList>
       </v-flex>
     </v-container>
   </div>
 </template>
+
+<script>
+  import UserList from "../components/UserList";
+
+  export default {
+    name: "Adminpage",
+    components: {
+      UserList
+    }
+  }
+</script>

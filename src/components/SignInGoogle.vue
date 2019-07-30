@@ -13,6 +13,7 @@ export default {
       const result = await FirebaseService.loginWithGoogle();
       this.$store.state.accessToken = result.credential.accessToken;
       this.$store.state.user = result.user;
+      FirebaseService.getUserAuth(result.user.email);
       this.$router.push("/");
     }
   }

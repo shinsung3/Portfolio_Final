@@ -165,10 +165,12 @@ export default {
     lang : 'original',
     languages:['원본','한국어','영어','일본어','중국어'],
     mini: false,
-    right: null
+    right: null,
+    userAuth: '',
   }),
   created() {
-    FirebaseService.loginPersistence();
+    FirebaseService.loginPersistence()
+    this.userAuth = FirebaseService.getUserAuth();
   },
   methods: {
     async setLogOut() {
