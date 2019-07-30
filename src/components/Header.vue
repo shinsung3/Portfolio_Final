@@ -49,7 +49,7 @@
         <v-btn flat to="/repository">
           <span class="DokdoHeader2">Project</span>
         </v-btn>
-        <v-btn flat to="/admin">
+        <v-btn flat to="/admin" v-if="this.$store.state.userauth == 3333">
           <span class="DokdoHeader2">AdmingPage</span>
         </v-btn>
       </v-toolbar-items>
@@ -165,12 +165,11 @@ export default {
     lang : 'original',
     languages:['원본','한국어','영어','일본어','중국어'],
     mini: false,
-    right: null,
-    userAuth: '',
+    right: null
   }),
   created() {
-    FirebaseService.loginPersistence()
-    this.userAuth = FirebaseService.getUserAuth();
+    FirebaseService.loginPersistence();
+    console.log(this.$store.state.userauth);
   },
   methods: {
     async setLogOut() {

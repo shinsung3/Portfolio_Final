@@ -116,6 +116,11 @@ function setAuthorization(email, auth) {
   })
 }
 
+function getUserAuth(email) {
+  console.log(firestore.collection(USERAUTH).doc(email));
+  return firestore.collection(USERAUTH).doc(email).id;
+}
+
 export default {
   getBackground() {
     const postsCollection = firestore.collection(BACKGROUNDIMG);
@@ -224,9 +229,6 @@ export default {
 				})
 			})
 	},
-  getUserAuth(email) {
-    return firestore.collection(USERAUTH).doc(email).id;
-  },
   modifyAuthorization(email, auth) {
     return firestore.collection(USERAUTH).doc(email).update({
       email,
@@ -309,6 +311,8 @@ export default {
 			  if (user) {
 			    store.state.user = user;
 					store.state.accessToken = user.email;
+          store.state.userauth = getUserAuth(user.email);
+          console.log(store.state.userauth);
 			  }
 			});
 	}
