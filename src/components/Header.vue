@@ -49,15 +49,14 @@
         <v-btn flat to="/repository">
           <span class="DokdoHeader2">Project</span>
         </v-btn>
-        <v-btn flat to="/admin">
+        <v-btn flat to="/admin" v-if="this.$store.state.userauth == 3333">
           <span class="DokdoHeader2">AdmingPage</span>
         </v-btn>
       </v-toolbar-items>
 
       <v-toolbar-side-icon
         class="hidden-md-and-up"
-        @click.stop="drawer = !drawer"
-      >
+        @click.stop="drawer = !drawer">
         <v-icon color="gray">menu</v-icon>
       </v-toolbar-side-icon>
     </v-toolbar>
@@ -69,8 +68,7 @@
       :mini-variant="mini"
       fixed
       dark
-      temporary
-    >
+      temporary>
       <v-list class="pa-1">
         <v-list-tile v-if="mini" @click.stop="mini = !mini">
           <v-list-tile-action>
@@ -135,6 +133,7 @@ import "../CSS/aTag.css";
 import FirebaseService from "../services/FirebaseService.js";
 import "../CSS/DokdoFont.css";
 import EventBus from "../eventBus.js"
+import store from "../store.js";
 
 export default {
   name: "FooterIcon",
@@ -165,12 +164,11 @@ export default {
     lang : 'original',
     languages:['원본','한국어','영어','일본어','중국어'],
     mini: false,
-    right: null,
-    userAuth: '',
+    right: null
   }),
   created() {
-    FirebaseService.loginPersistence()
-    this.userAuth = FirebaseService.getUserAuth();
+    FirebaseService.loginPersistence();
+    console.log(this.$store.state.userauth);
   },
   methods: {
     async setLogOut() {

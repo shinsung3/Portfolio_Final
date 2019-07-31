@@ -55,6 +55,31 @@ function setAuthorization(email, auth) {
   })
 }
 
+function getAllUserAuth() {
+  const userauthCollection = firestore.collection(USERAUTH)
+  return userauthCollection
+    .orderBy('created_at', 'desc')
+    .get()
+    .then((docSnapshots) => {
+      return docSnapshots.docs.map((doc) => {
+        let data = doc.data()
+        data.created_at = new Date(data.created_at.toDate())
+        return data
+      })
+    })
+}
+
+async function getUserAuth(email) {
+  var users = await getAllUserAuth();
+  var auth = '';
+  for(var i = 0; i < users.length; i++) {
+    if(users[i].email == email) {
+      auth = users[i].auth;
+    }
+  }
+  store.state.userauth = auth;
+}
+
 export default {
   getBackground() {
     const postsCollection = firestore.collection(BACKGROUNDIMG);
@@ -163,9 +188,6 @@ export default {
 				})
 			})
 	},
-  getUserAuth(email) {
-    return firestore.collection(USERAUTH).doc(email).id;
-  },
   modifyAuthorization(email, auth) {
     return firestore.collection(USERAUTH).doc(email).update({
       email,
@@ -209,6 +231,7 @@ export default {
 	},
 	Logout() {
 		firebase.auth().signOut().then(function() {
+      store.state.userauth = ''
 			alert("로그아웃 되었습니다.")
 		}).catch(function(error) {
   		alert("로그아웃 실패.")
@@ -248,6 +271,7 @@ export default {
 			  if (user) {
 			    store.state.user = user;
 					store.state.accessToken = user.email;
+          getUserAuth(user.email);
 			  }
 			});
 	}
