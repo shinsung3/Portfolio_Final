@@ -1,16 +1,36 @@
 <template>
-  <v-container>
-    <v-flex>
-      <div>
-        <span>포트폴리오 수</span>
-        <span>{{ this.portfolios.length }}</span>
-      </div>
-      <div>
-        <span>포스트 수</span>
-        <span>{{ this.posts.length }}</span>
-      </div>
-    </v-flex>
-  </v-container>
+  <v-layout id="countstyle">
+      <v-chip
+        class="ma-2"
+        color="green"
+        text-color="white"
+      >
+        <v-avatar
+          left
+          class="green darken-4"
+        >
+          {{ this.portfolios.length }}
+        </v-avatar>
+        <a href="/Portfolio"
+        style="color:white">
+        포트폴리오</a>
+      </v-chip>
+      <v-chip
+        class="ma-2"
+        color="green"
+        text-color="white"
+      >
+        <v-avatar
+          left
+          class="green darken-4"
+        >
+          {{ this.posts.length }}
+        </v-avatar>
+        <a href="/Post"
+        style="color:white">
+        포스트</a>
+      </v-chip>
+  </v-layout>
 </template>
 
 <script>
@@ -38,3 +58,10 @@
     }
   }
 </script>
+
+<style>
+  #countstyle {
+    justify-content:flex-end;
+    padding:20px
+  }
+</style>

@@ -1,8 +1,8 @@
 <template>
-  <v-container>
-    <v-flex>
-      <v-simple-table fixed-header height="300px" offset-2>
-        <thead >
+  <v-container align-center>
+    <v-flex align-center>
+      <v-simple-table fixed-header>
+        <thead>
           <tr>
             <th class="text-left">User ID</th>
             <th class="text-left">Authority</th>
@@ -11,15 +11,15 @@
         </thead>
         <tbody>
           <tr v-for="user in users" :key="user.email">
-            <td width="40%">{{ user.email }}</td>
-            <td width="40%">
+            <td class="text-xs-center" width="400px">{{ user.email }}</td>
+            <td class="text-xs-center" width="400px">
               <span v-if="user.auth == 1111">방문자</span>
               <span v-else-if="user.auth == 2222">팀원</span>
               <span v-else-if="user.auth == 3333">관리자</span>
             </td>
-            <td width="50%">
-              <v-menu offset-y>
-                <v-btn slot="activator" color="primary" dark>
+            <td class="text-xs-center" width="400px">
+              <v-menu>
+                <v-btn slot="activator" color="primary" dark mx-2>
                   <span v-if="user.auth == 1111">방문자 <i class="fas fa-caret-down"></i></span>
                   <span v-else-if="user.auth == 2222">팀원 <i class="fas fa-caret-down"></i></span>
                   <span v-else-if="user.auth == 3333">관리자 <i class="fas fa-caret-down"></i></span>
@@ -69,3 +69,17 @@
   }
 
 </script>
+
+<style media="screen">
+  v-simple-table {
+    width:100%;
+    height:300px;
+    table-layout:fixed;
+    border-collapse: collapse;
+  }
+
+  th, td {
+    border-bottom:1px dotted;
+    padding:5px;
+  }
+</style>
