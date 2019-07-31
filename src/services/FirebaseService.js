@@ -139,7 +139,6 @@ async function getUserAuth(email) {
     }
   }
   store.state.userauth = auth;
-  return auth;
 }
 
 export default {
@@ -293,6 +292,7 @@ export default {
 	},
 	Logout() {
 		firebase.auth().signOut().then(function() {
+      store.state.userauth = ''
 			alert("로그아웃 되었습니다.")
 		}).catch(function(error) {
   		alert("로그아웃 실패.")
