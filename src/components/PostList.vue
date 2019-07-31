@@ -22,6 +22,7 @@
         <v-icon size="25" class="mr-2">fa-angle-double-up</v-icon> 접기
       </v-btn>
     </v-flex>
+    
   </v-layout>
 </template>
 

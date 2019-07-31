@@ -116,9 +116,30 @@ function setAuthorization(email, auth) {
   })
 }
 
-function getUserAuth(email) {
-  console.log(firestore.collection(USERAUTH).doc(email));
-  return firestore.collection(USERAUTH).doc(email).id;
+function getAllUserAuth() {
+  const userauthCollection = firestore.collection(USERAUTH)
+  return userauthCollection
+    .orderBy('created_at', 'desc')
+    .get()
+    .then((docSnapshots) => {
+      return docSnapshots.docs.map((doc) => {
+        let data = doc.data()
+        data.created_at = new Date(data.created_at.toDate())
+        return data
+      })
+    })
+}
+
+async function getUserAuth(email) {
+  var users = await getAllUserAuth();
+  var auth = '';
+  for(var i = 0; i < users.length; i++) {
+    if(users[i].email == email) {
+      auth = users[i].auth;
+    }
+  }
+  store.state.userauth = auth;
+  return auth;
 }
 
 export default {
@@ -311,8 +332,7 @@ export default {
 			  if (user) {
 			    store.state.user = user;
 					store.state.accessToken = user.email;
-          store.state.userauth = getUserAuth(user.email);
-          console.log(store.state.userauth);
+          getUserAuth(user.email);
 			  }
 			});
 	}
