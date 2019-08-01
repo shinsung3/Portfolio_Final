@@ -269,6 +269,7 @@ comments(id,fk,text,writer) {
 			}
 		);
 	},
+  
 	signIn(email, password) {
 		return firebase.auth().signInWithEmailAndPassword(email, password).then(
 			function(user) {
