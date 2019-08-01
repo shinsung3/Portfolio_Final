@@ -19,11 +19,11 @@
             </td>
             <td class="text-xs-center" width="400px">
               <v-menu>
-                <v-btn slot="activator" color="primary" dark mx-2>
+                <v-chip slot="activator" color="green" dark mx-2>
                   <span v-if="user.auth == 1111">방문자 <i class="fas fa-caret-down"></i></span>
                   <span v-else-if="user.auth == 2222">팀원 <i class="fas fa-caret-down"></i></span>
                   <span v-else-if="user.auth == 3333">관리자 <i class="fas fa-caret-down"></i></span>
-                </v-btn>
+                </v-chip>
                 <v-list>
                   <v-list-tile v-for="authority in authorities" @click="modifyAuthorization(user.email, authority)">
                     <v-list-tile-title>{{ authority }}</v-list-tile-title>
