@@ -231,10 +231,13 @@ export default {
         name: "김녹구",
         body: "새로운 회사로 이직..."
       }
-    ]
+    ],
+    title: 'Simple Title',
+    options: { body: 'Simple piece of body text.\nSecond line of body text :)'}
   }),
   mounted() {
     this.output = this.content;
+    registration.showNotification(this.title, this.options);
   },
   created() {
     EventBus.$on("translate", language => {
