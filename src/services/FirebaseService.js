@@ -4,10 +4,13 @@ import "firebase/auth";
 import store from "../store.js";
 import "firebase/functions";
 
+
 const POSTS = "posts";
 const PORTFOLIOS = "portfolios";
 const USERAUTH = "userauth";
 const BACKGROUNDIMG = "background";
+const COMMENTS = "comments";
+
 
 // Setup Firebase
 const config = {
@@ -129,6 +132,17 @@ export default {
   //     return data;
   //   });
   // },
+//댓글기능
+comments(id,fk,text,writer) {
+  return firestore.collection(COMMENTS).add({
+    id,
+    fk,
+    text,
+    writer,
+    created_at: firebase.firestore.FieldValue.serverTimestamp()
+  });
+},
+
 
   getPortfoliosByIndex(id) {
     const postsCollection = firestore.collection(PORTFOLIOS).doc(id);

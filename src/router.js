@@ -10,6 +10,7 @@ import Graph from "./views/GraphPage.vue";
 import PFDetail from "./views/PortfolioDetail.vue";
 import PSDetail from "./views/PostDetail.vue";
 import AdminPage from "./views/AdminPage.vue";
+import Comments from "./components/Comments.vue";
 
 Vue.use(Router);
 
@@ -66,6 +67,11 @@ export default new Router({
       path: "/admin",
       name: "admin",
       component: AdminPage
+    },
+    {
+      path: "/comment",
+      name: "comment",
+      component: Comments
     }
   ]
 });
