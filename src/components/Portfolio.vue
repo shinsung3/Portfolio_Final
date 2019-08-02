@@ -1,29 +1,26 @@
 <template>
-  <v-card>
-    <v-img :src="imgSrc" height="200px">
-    </v-img>
+  <v-card @click="linkToPage" hover>
+    <v-img :src="imgSrc" height="200px" />
     <v-card-title primary-title>
-      <!-- 번역기능 컴포넌트로 분리 -->
-      <TransComponent
-      :title="title"
-      :body="body"
-      >
-      </TransComponent>
+      <div class="headline text2">
+        <strong>{{ subject.translate }}</strong>
+      </div>
     </v-card-title>
+    <v-card-text class="grey--text text1">
+      <div class="grey-text text1">
+        {{ content.translate }}
+      </div>
+    </v-card-text>
   </v-card>
 </template>
 
-<script src="https://kit.fontawesome.com/0815a79704.js"></script>
 <script>
-import '../CSS/ellipsis.css'
-// 번역 컴포넌트 import
-import TransComponent from './Translate.vue'
+import "../CSS/ellipsis.css";
+import Translate from "@/services/Translate";
+import EventBus from "../eventBus.js";
 
 export default {
-  components:{
-    TransComponent
-  },
-  name: 'Portfolio',
+  name: "Portfolio",
   props: {
     date: {
       type: String
@@ -37,12 +34,47 @@ export default {
     imgSrc: {
       type: String
     },
+    uk: {
+      type: Number
+    },
+    id: {
+      type: String
+    }
   },
   data() {
     return {
-    }
+      subject: {
+        translate: this.title,
+        original: this.title
+      },
+      content: {
+        translate: this.body,
+        original: this.body
+      },
+      index: {
+        index: this.uk
+      }
+    };
+  },
+  created() {
+    EventBus.$on("translate", language => {
+      if (language == "original") {
+        this.subject.translate = this.subject.original;
+        this.content.translate = this.content.original;
+      } else {
+        Translate.translate(language, this.subject.original).then(res => {
+          this.subject.translate = res;
+        });
+        Translate.translate(language, this.content.original).then(res => {
+          this.content.translate = res;
+        });
+      }
+    });
   },
   methods: {
-  },
-}
+    linkToPage() {
+      this.$router.push("/pfDetail?id=" + this.id);
+    }
+  }
+};
 </script>

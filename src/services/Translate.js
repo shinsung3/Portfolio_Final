@@ -1,57 +1,40 @@
-// const this.body =
-// const result = []
-const sw = "false";
-let fromLang = "ko";
-let toLang = "en";
-let list = [];
-const API_KEY = "AIzaSyA8QbUNckbHV7BIUjrhqbc40PL29VvuV6k";
-
+import axios from 'axios';
+// 구글 번역 api
+const API_KEY = 'AIzaSyA8QbUNckbHV7BIUjrhqbc40PL29VvuV6k';
 export default {
-  translateText(title, body) {
-    if ((this.sw = !sw)) {
-      fromLang = "en";
-      toLang = "ko";
-    } else {
-      fromLang = "ko";
-      toLang = "en";
-    }
+  // 번역 함수 구현
+  translate(language,text){
+    let fromLang = ""
+    let detect_url = `https://translation.googleapis.com/language/translate/v2/detect?key=${API_KEY}`;
+    detect_url += '&q=' + encodeURI(text);
+    axios.get(detect_url,{
+      headers: {
+        "Content-Type": "application/json",
+        Accept: "application/json"
+      }
+    })
+    .then((response) => {
+      fromLang = response.data.data.detections[0][0].language
+    })
 
     let url = `https://translation.googleapis.com/language/translate/v2?key=${API_KEY}`;
-    url += "&q=" + encodeURI(body);
+    url += '&q=' + encodeURI(text);
     url += `&source=${fromLang}`;
-    url += `&target=${toLang}`;
-
-    fetch(url, {
-      method: "GET",
-      headers: {
-        "Content-Type": "application/json",
-        Accept: "application/json"
-      }
-    })
-      .then(res => res.json())
-      .then(response => {
-        var jsonString = response.data.translations[0].translatedText;
-        body = jsonString.replace(/&#39;/g, "'");
-        list.push(body);
-      }),
-      (url = `https://translation.googleapis.com/language/translate/v2?key=${API_KEY}`);
-    url += "&q=" + encodeURI(title);
-    url += `&source=${fromLang}`;
-    url += `&target=${toLang}`;
-
-    fetch(url, {
-      method: "GET",
-      headers: {
-        "Content-Type": "application/json",
-        Accept: "application/json"
-      }
-    })
-      .then(res => res.json())
-      .then(response => {
-        var jsonString = response.data.translations[0].translatedText;
-        title = jsonString.replace(/&#39;/g, "'");
-        list.push(title);
-      });
-    return list;
-  }
-};
+    url += `&target=${language}`;
+    if (fromLang == language) {
+      return text
+    }
+    else {
+      return axios.get(url,{
+        headers: {
+          "Content-Type": "application/json",
+          Accept: "application/json"
+        }
+      })
+      .then((response) => {
+        // console.log(response.data.data.translations[0].translatedText)
+        return response.data.data.translations[0].translatedText.replace(/&#39;/g,"'")
+      })
+    }
+  },
+}

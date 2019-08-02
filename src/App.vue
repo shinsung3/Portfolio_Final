@@ -7,7 +7,9 @@
       <Header />
       <router-view />
       <Bookmark />
+      <Chatbot />
       <Top />
+      <!-- <PlusMenu /> -->
       <Footer />
     </v-content>
   </v-app>
@@ -33,6 +35,8 @@ import Header from "./components/Header.vue";
 import Top from "./components/Top.vue";
 import Bookmark from "./components/BookMark.vue";
 import Footer from "./components/Footer.vue";
+import Chatbot from "./components/ChatBot.vue";
+import PlusMenu from "./components/PlusMenu.vue";
 
 export default {
   name: "App",
@@ -40,7 +44,9 @@ export default {
     Header,
     Top,
     Bookmark,
-    Footer
+    Footer,
+    Chatbot,
+    PlusMenu
   },
   store,
   data() {

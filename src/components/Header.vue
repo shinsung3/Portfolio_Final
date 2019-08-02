@@ -12,6 +12,15 @@
       <v-spacer></v-spacer>
 
       <v-toolbar-items class="hidden-sm-and-down">
+        <v-menu>
+          <v-btn slot="activator" color="warning">Language ▼</v-btn>
+          <!-- <v-btn slot="activator" color="white" flat style="background:orange">Language ▼</v-btn> -->
+          <v-list>
+            <v-list-tile v-for="(language, index) in languages" :key="index" @click=''>
+              <v-list-tile-title @click="tr_click(index)">{{ language }}</v-list-tile-title>
+            </v-list-tile>
+          </v-list>
+        </v-menu>
         <v-btn v-if="this.$store.state.accessToken == ''" flat to="/Login">
           <span class="DokdoHeader2">Login</span>
         </v-btn>
@@ -20,10 +29,12 @@
             v-if="this.$store.state.user.displayName != undefined"
             class="DokdoHeader2 mt-3 mr-2"
           >
-            <b>{{ this.$store.state.user.displayName }}</b>님 반갑습니다!!
+            <b>{{ this.$store.state.user.displayName }}</b>
+            님 반갑습니다!!
           </span>
           <span v-else class="DokdoHeader2 mt-3 mr-2">
-            <b>{{ this.$store.state.accessToken }}</b>님 반갑습니다!!
+            <b>{{ this.$store.state.accessToken }}</b>
+            님 반갑습니다!!
           </span>
           <v-btn flat to="/" @click="setLogOut">
             <span class="DokdoHeader2">Logout</span>
@@ -35,15 +46,17 @@
         <v-btn flat to="/Post">
           <span class="DokdoHeader2">Post</span>
         </v-btn>
-        <v-btn flat to="/Repository">
+        <v-btn flat to="/repository">
           <span class="DokdoHeader2">Project</span>
+        </v-btn>
+        <v-btn flat to="/admin" v-if="this.$store.state.userauth == '관리자'">
+          <span class="DokdoHeader2">AdmingPage</span>
         </v-btn>
       </v-toolbar-items>
 
       <v-toolbar-side-icon
         class="hidden-md-and-up"
-        @click.stop="drawer = !drawer"
-      >
+        @click.stop="drawer = !drawer">
         <v-icon color="gray">menu</v-icon>
       </v-toolbar-side-icon>
     </v-toolbar>
@@ -55,8 +68,7 @@
       :mini-variant="mini"
       fixed
       dark
-      temporary
-    >
+      temporary>
       <v-list class="pa-1">
         <v-list-tile v-if="mini" @click.stop="mini = !mini">
           <v-list-tile-action>
@@ -120,6 +132,8 @@
 import "../CSS/aTag.css";
 import FirebaseService from "../services/FirebaseService.js";
 import "../CSS/DokdoFont.css";
+import EventBus from "../eventBus.js"
+import store from "../store.js";
 
 export default {
   name: "FooterIcon",
@@ -147,6 +161,8 @@ export default {
         href: "/Repository"
       }
     ],
+    lang : 'original',
+    languages:['원본','한국어','영어','일본어','중국어'],
     mini: false,
     right: null
   }),
@@ -158,6 +174,28 @@ export default {
       this.$store.state.user = "";
       this.$store.state.accessToken = "";
       FirebaseService.Logout();
+    },
+    tr_click(index){
+      if (index==0){
+        this.lang = "original"
+        EventBus.$emit('translate', this.lang)
+      }
+      else if (index==1){
+        this.lang = "ko"
+        EventBus.$emit('translate', this.lang)
+      }
+      else if (index==2){
+        this.lang = "en"
+        EventBus.$emit('translate', this.lang)
+      }
+      else if (index==3){
+        this.lang = "ja"
+        EventBus.$emit('translate', this.lang)
+      }
+      else if (index==4){
+        this.lang = "zh-TW"
+        EventBus.$emit('translate', this.lang)
+      }
     }
   }
 };

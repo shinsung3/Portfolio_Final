@@ -39,7 +39,7 @@ export default {
     Repository
   },
   mounted() {
-    this.getGitlabCommits("6091");
+    this.getGitlabCommits("7556");
   },
   methods: {
     async getGitlabCommits(fullName) {
@@ -49,8 +49,6 @@ export default {
       }
 
       this.commitlist = response.data;
-      console.log(this.commitlist.length);
-      console.log(this.commitlist);
       this.members = [0, 0, 0, 0];
       for (let i = 0; i < this.commitlist.length; i++) {
         if (this.commitlist[i].author_name == "조신성") {
@@ -65,9 +63,7 @@ export default {
           this.members[3] += 1;
         }
       }
-      console.log(this.members);
       memberT = this.members;
-      console.log(memberT);
       graphT();
     }
   }

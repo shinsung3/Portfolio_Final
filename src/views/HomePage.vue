@@ -23,7 +23,7 @@
         Talk is cheap. Show me the code.
       </div>
     </ImgBanner>
-     <ImgurAPI></ImgurAPI>
+    <ImgurAPI></ImgurAPI>
 
     <!-- About Me -->
     <v-container>
@@ -40,7 +40,7 @@
             About Us
           </h2>
           <p
-            class="mr-4 DokdoList"
+            class="mr-4 transfont"
             v-resize-text="{
               ratio: 1.3,
               minFontSize: '15px',
@@ -48,8 +48,9 @@
               delay: 200
             }"
             xs12
+            v-html="output.introduce"
           >
-            안녕하세요. 저희는 <strong>할할놀놀</strong>이라는 팀이구요.
+            <!-- 안녕하세요. 저희는 <strong>할할놀놀</strong>이라는 팀이구요.
             <br />
             나원 Park은 Python천재입니다.
             <br />
@@ -61,7 +62,7 @@
             <br />
             신성 Jo는 Java 할 줄 알아요.
 
-            <br />
+            <br /> -->
           </p>
         </v-flex>
         <v-flex hidden-xs-only pt-3 mt-5 bt-5>
@@ -140,7 +141,7 @@
               Post
             </h2>
           </router-link>
-          <PostList :column="2"></PostList>
+          <PostList :column="3"></PostList>
         </v-flex>
       </v-layout>
 
@@ -162,6 +163,8 @@
           <RepositoryList></RepositoryList>
         </v-flex>
       </v-layout>
+
+      <!-- data-init-식별키=값 으로 셋팅하면 챗플로우에 파라미터와 연동가능. 식별키는 소문자만 가능 -->
     </v-container>
   </div>
 </template>
@@ -175,6 +178,9 @@ import RepositoryList from "../components/RepositoryList";
 import "../CSS/ellipsis.css";
 import ImgurAPI from "../components/ImgurApi";
 import "../CSS/DokdoFont.css";
+import Translate from "@/services/Translate";
+import EventBus from "../eventBus.js";
+import "../CSS/notofont.css";
 
 export default {
   name: "HomePage",
@@ -186,6 +192,16 @@ export default {
     RepositoryList
   },
   data: () => ({
+    output: {
+      introduce: "",
+      original: ""
+    },
+    content: {
+      introduce:
+        "안녕하세요. 저희는 <strong>할할놀놀</strong>이라는 팀이구요.<br>나원 Park은 Python천재입니다.<br>녹구 Kim은 새로운 팀으로 이직했구요.<br>현일 Kim은 백준 순위가 젤 높습니다.<br>훈석 Choi는 나이 is the bigger than everybody<br>신성 Jo는 Java 할 줄 알아요.",
+      original:
+        "안녕하세요. 저희는 <strong>할할놀놀</strong>이라는 팀이구요.<br>나원 Park은 Python천재입니다.<br>녹구 Kim은 새로운 팀으로 이직했구요.<br>현일 Kim은 백준 순위가 젤 높습니다.<br>훈석 Choi는 나이 is the bigger than everybody<br>신성 Jo는 Java 할 줄 알아요."
+    },
     items: [
       {
         id: 1,
@@ -215,8 +231,27 @@ export default {
         name: "김녹구",
         body: "새로운 회사로 이직..."
       }
-    ]
+    ],
+    title: 'Simple Title',
+    options: { body: 'Simple piece of body text.\nSecond line of body text :)'}
   }),
+  mounted() {
+    this.output = this.content;
+    registration.showNotification(this.title, this.options);
+  },
+  created() {
+    EventBus.$on("translate", language => {
+      if (language == "original") {
+        this.lang = language;
+        this.output.introduce = this.content.original;
+      } else {
+        this.lang = language;
+        Translate.translate(language, this.content.original).then(res => {
+          this.output.introduce = res;
+        });
+      }
+    });
+  },
   methods: {
     getImgUrl(img) {
       return require("../assets/" + img);
