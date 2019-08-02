@@ -215,7 +215,7 @@ comments(id,fk,text,writer) {
 			let user = result.user
       chkDup(user.email).then(res => {
         if(res == false) {
-          setAuthorization(user.email, 1111);
+          setAuthorization(user.email, '방문자');
         }
       }) .catch(err => {
         console.log(err);
@@ -233,7 +233,7 @@ comments(id,fk,text,writer) {
 			let user = result.user
       chkDup(user.email).then(res => {
         if(res == false) {
-          setAuthorization(user.email, 1111);
+          setAuthorization(user.email, '방문자');
         }
       }) .catch(err => {
         console.log(err);
@@ -258,7 +258,7 @@ comments(id,fk,text,writer) {
 				alert("회원가입 축하합니다")
         chkDup(email).then(res => {
           if(res == false) {
-            setAuthorization(email, 1111);
+            setAuthorization(email, '방문자');
           }
         }) .catch(err => {
           console.log(err);
@@ -269,7 +269,7 @@ comments(id,fk,text,writer) {
 			}
 		);
 	},
-  
+
 	signIn(email, password) {
 		return firebase.auth().signInWithEmailAndPassword(email, password).then(
 			function(user) {
