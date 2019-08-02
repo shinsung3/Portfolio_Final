@@ -1,41 +1,48 @@
 <template>
-  <v-container align-center>
-    <v-flex align-center>
-      <v-simple-table fixed-header>
-        <thead>
-          <tr>
-            <th class="text-left">User ID</th>
-            <th class="text-left">Authority</th>
-            <th class="text-left">Change Auth</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr v-for="user in users" :key="user.email">
-            <td class="text-xs-center" width="400px">{{ user.email }}</td>
-            <td class="text-xs-center" width="400px">
-              <span v-if="user.auth == 1111">방문자</span>
-              <span v-else-if="user.auth == 2222">팀원</span>
-              <span v-else-if="user.auth == 3333">관리자</span>
-            </td>
-            <td class="text-xs-center" width="400px">
-              <v-menu>
-                <v-chip slot="activator" color="green" dark mx-2>
-                  <span v-if="user.auth == 1111">방문자 <i class="fas fa-caret-down"></i></span>
-                  <span v-else-if="user.auth == 2222">팀원 <i class="fas fa-caret-down"></i></span>
-                  <span v-else-if="user.auth == 3333">관리자 <i class="fas fa-caret-down"></i></span>
-                </v-chip>
-                <v-list>
-                  <v-list-tile v-for="authority in authorities" @click="modifyAuthorization(user.email, authority)">
-                    <v-list-tile-title>{{ authority }}</v-list-tile-title>
-                  </v-list-tile>
-                </v-list>
-              </v-menu>
-            </td>
-          </tr>
-        </tbody>
-      </v-simple-table>
-    </v-flex>
-  </v-container>
+  <v-card>
+    <v-card-title>
+      <v-text-field
+        v-model="search"
+        append-icon="search"
+        label="Search"
+        single-line
+        hide-details
+      ></v-text-field>
+    </v-card-title>
+    <v-data-table
+      :headers="headers"
+      :items="users"
+      :search="search"
+    >
+      <template v-slot:items="props">
+        <td>{{ props.item.email }}</td>
+        <td>
+          <span v-if="props.item.auth == 1111">&nbsp방문자</span>
+          <span v-else-if="props.item.auth == 2222">&nbsp팀원</span>
+          <span v-else-if="props.item.auth == 3333">&nbsp관리자</span>
+        </td>
+        <td>
+          <v-menu>
+            <v-chip slot="activator" color="green" dark mx-2>
+              <span v-if="props.item.auth == 1111">방문자 <i class="fas fa-caret-down"></i></span>
+              <span v-else-if="props.item.auth == 2222">팀원 <i class="fas fa-caret-down"></i></span>
+              <span v-else-if="props.item.auth == 3333">관리자 <i class="fas fa-caret-down"></i></span>
+            </v-chip>
+            <v-list>
+              <v-list-tile v-for="authority in authorities" @click="modifyAuthorization(props.item.email, authority)">
+                <v-list-tile-title>{{ authority }}</v-list-tile-title>
+              </v-list-tile>
+            </v-list>
+          </v-menu>
+        </td>
+      </template>
+      <template v-slot:no-results>
+        <v-alert :value="true" color="error" icon="warning">
+          Your search for "{{ search }}" found no results.
+        </v-alert>
+      </template>
+    </v-data-table>
+  </v-card>
 </template>
 
 <script>
@@ -46,7 +53,13 @@
     data() {
       return {
         users: [],
-        authorities: ['방문자', '팀원', '관리자']
+        authorities: ['방문자', '팀원', '관리자'],
+        search: '',
+        headers: [
+          { text: 'User ID', value: 'email' },
+          { text: 'Authority', value: 'auth' },
+          { text: 'Change Auth', value: 'auth' },
+        ],
       };
     },
     mounted() {
