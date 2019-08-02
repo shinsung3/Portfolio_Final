@@ -17,16 +17,12 @@
       <template v-slot:items="props">
         <td>{{ props.item.email }}</td>
         <td>
-          <span v-if="props.item.auth == 1111">&nbsp방문자</span>
-          <span v-else-if="props.item.auth == 2222">&nbsp팀원</span>
-          <span v-else-if="props.item.auth == 3333">&nbsp관리자</span>
+          <span>&nbsp {{ props.item.auth }} </span>
         </td>
         <td>
           <v-menu>
             <v-chip slot="activator" color="green" dark mx-2>
-              <span v-if="props.item.auth == 1111">방문자 <i class="fas fa-caret-down"></i></span>
-              <span v-else-if="props.item.auth == 2222">팀원 <i class="fas fa-caret-down"></i></span>
-              <span v-else-if="props.item.auth == 3333">관리자 <i class="fas fa-caret-down"></i></span>
+              <span>{{ props.item.auth }} <i class="fas fa-caret-down"></i></span>
             </v-chip>
             <v-list>
               <v-list-tile v-for="authority in authorities" @click="modifyAuthorization(props.item.email, authority)">
@@ -70,12 +66,7 @@
         this.users = await FirebaseService.getAuthorization();
       },
       async modifyAuthorization(email, auth) {
-        if(auth == "방문자")
-          FirebaseService.modifyAuthorization(email, 1111);
-        else if(auth == "팀원")
-          FirebaseService.modifyAuthorization(email, 2222);
-        else if(auth == "관리자")
-          FirebaseService.modifyAuthorization(email, 3333);
+        FirebaseService.modifyAuthorization(email, auth);
         this.users = await FirebaseService.getAuthorization();
       }
     }
