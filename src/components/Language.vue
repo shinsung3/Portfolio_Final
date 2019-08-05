@@ -1,5 +1,5 @@
 <template>
-  <v-menu>
+  <v-menu class="position-right-bottom">
     <v-btn class="mx-2" fab slot="activator" color="warning"><i class="fas fa-language fa-2x"></i></v-btn>
     <v-list>
       <v-list-tile v-for="(language, index) in languages" :key="index" @click=''>
