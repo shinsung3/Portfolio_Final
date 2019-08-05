@@ -19,7 +19,7 @@
           <v-btn @click="linkToPage">
             <v-icon>fas fa-user-edit</v-icon><span id="padding">수정</span>
           </v-btn>
-          <v-btn @click.stop="reset()" class="buttonWriter" href="/Post">
+          <v-btn @click="deleteDB" class="buttonWriter">
             <v-icon>far fa-trash-alt</v-icon><span id="padding">삭제</span>
           </v-btn>
         </v-flex>
@@ -56,6 +56,11 @@ export default {
     },
     linkToPage() {
       this.$router.push("/psWriter?id=" + this.$route.query.id);
+    },
+    deleteDB() {
+      FirebaseService.deletePost(this.post.id);
+      this.posts = FirebaseService.getPosts();
+      location.href = "/Post";
     }
   }
 };

@@ -162,6 +162,12 @@ export default {
         body
       });
   },
+  deletePost(id) {
+    return firestore
+      .collection(POSTS)
+      .doc(id)
+      .delete();
+  },
   getPortfolios() {
     const postsCollection = firestore.collection(PORTFOLIOS);
     return postsCollection
