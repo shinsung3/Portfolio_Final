@@ -41,10 +41,13 @@
               </v-btn>
             </v-flex>
           </v-container>
-          <p>
-            {{ portfolios.body }}
-            {{ idcomments.text }}
-            <br />
+          <v-flex
+            v-for="(i, j) in idcomments.length > limits ? limits : idcomments.length"
+            :key="j"
+          >
+          {{idcomments[i - 1].text}}
+          {{idcomments[i - 1].created_at}}
+          </v-flex>
           </p>
         </v-form>
       </v-flex>
@@ -64,12 +67,12 @@ export default {
   // components: {
   //   Comments
   // },
-  data() {
-    return {
-      portfolios: [],
-      idcomments:[]
-    };
-  },
+  // data() {
+  //   return {
+  //     portfolios: [],
+  //     idcomments: []
+  //   };
+  // },
   data:() => ({
     portfolios: [],
     idcomments:[],

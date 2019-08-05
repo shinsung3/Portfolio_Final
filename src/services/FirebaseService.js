@@ -181,7 +181,6 @@ export default {
   },
 //댓글기능
   comments(id, fk, text, writer) {
-  //  console.log(id);
     return firestore.collection(PORTFOLIOS).doc(id).collection(COMMENTS).add({
       id,
       fk,
@@ -199,7 +198,6 @@ export default {
         let data = doc.data();
         data.id = doc.id;
         data.created_at = new Date(data.created_at.toDate());
-          console.log(data);
         return data;
       });
     });
