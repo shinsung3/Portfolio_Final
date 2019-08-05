@@ -12,15 +12,6 @@
       <v-spacer></v-spacer>
 
       <v-toolbar-items class="hidden-sm-and-down">
-        <v-menu>
-          <v-btn slot="activator" color="warning">Language ▼</v-btn>
-          <!-- <v-btn slot="activator" color="white" flat style="background:orange">Language ▼</v-btn> -->
-          <v-list>
-            <v-list-tile v-for="(language, index) in languages" :key="index" @click=''>
-              <v-list-tile-title @click="tr_click(index)">{{ language }}</v-list-tile-title>
-            </v-list-tile>
-          </v-list>
-        </v-menu>
         <v-btn v-if="this.$store.state.accessToken == ''" flat to="/Login">
           <span class="DokdoHeader2">Login</span>
         </v-btn>
@@ -161,10 +152,6 @@ export default {
         href: "/Repository"
       }
     ],
-    lang : 'original',
-    languages:['원본','한국어','영어','일본어','중국어'],
-    mini: false,
-    right: null
   }),
   created() {
     FirebaseService.loginPersistence();
@@ -175,28 +162,6 @@ export default {
       this.$store.state.accessToken = "";
       FirebaseService.Logout();
     },
-    tr_click(index){
-      if (index==0){
-        this.lang = "original"
-        EventBus.$emit('translate', this.lang)
-      }
-      else if (index==1){
-        this.lang = "ko"
-        EventBus.$emit('translate', this.lang)
-      }
-      else if (index==2){
-        this.lang = "en"
-        EventBus.$emit('translate', this.lang)
-      }
-      else if (index==3){
-        this.lang = "ja"
-        EventBus.$emit('translate', this.lang)
-      }
-      else if (index==4){
-        this.lang = "zh-TW"
-        EventBus.$emit('translate', this.lang)
-      }
-    }
   }
 };
 </script>
