@@ -136,6 +136,15 @@ export default {
       created_at: firebase.firestore.FieldValue.serverTimestamp()
     });
   },
+  editPost(title, body, id) {
+    return firestore
+      .collection(POSTS)
+      .doc(id)
+      .update({
+        title,
+        body
+      });
+  },
   getPortfolios() {
     const postsCollection = firestore.collection(PORTFOLIOS);
     return postsCollection
@@ -209,10 +218,13 @@ export default {
 			})
 	},
   modifyAuthorization(email, auth) {
-    return firestore.collection(USERAUTH).doc(email).update({
-      email,
-      auth
-    })
+    return firestore
+      .collection(USERAUTH)
+      .doc(email)
+      .update({
+        email,
+        auth
+      });
   },
 	loginWithGoogle() {
     let provider = new firebase.auth.GoogleAuthProvider();

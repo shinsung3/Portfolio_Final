@@ -16,7 +16,7 @@
       </v-layout>
       <v-form ref="form" v-model="valid" lazy-validation>
         <v-flex align-center justify-end row fill-height right>
-          <v-btn @click="submit">
+          <v-btn @click="linkToPage">
             <v-icon>fas fa-user-edit</v-icon><span id="padding">수정</span>
           </v-btn>
           <v-btn @click.stop="reset()" class="buttonWriter" href="/Post">
@@ -54,7 +54,9 @@ export default {
     async getPostByIndex() {
       this.post = await FirebaseService.getPostByIndex(this.$route.query.id);
     },
-    loadMorePosts() {}
+    linkToPage() {
+      this.$router.push("/psWriter?id=" + this.$route.query.id);
+    }
   }
 };
 </script>
