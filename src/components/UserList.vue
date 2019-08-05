@@ -21,11 +21,17 @@
         </td>
         <td>
           <v-menu>
-            <v-chip slot="activator" color="green" dark mx-2>
-              <span>{{ props.item.auth }} <i class="fas fa-caret-down"></i></span>
+            <v-chip slot="activator"
+                    color="green"
+                    dark mx-2>
+              <span>{{ props.item.auth }}
+                <i class="fas fa-caret-down"></i>
+              </span>
             </v-chip>
             <v-list>
-              <v-list-tile v-for="authority in authorities" @click="modifyAuthorization(props.item.email, authority)">
+              <v-list-tile
+                v-for="authority in authorities"
+                @click="modifyAuthorization(props.item.email, authority)">
                 <v-list-tile-title>{{ authority }}</v-list-tile-title>
               </v-list-tile>
             </v-list>
@@ -33,7 +39,9 @@
         </td>
       </template>
       <template v-slot:no-results>
-        <v-alert :value="true" color="error" icon="warning">
+        <v-alert :value="true"
+                  color="error"
+                  icon="warning">
           Your search for "{{ search }}" found no results.
         </v-alert>
       </template>
