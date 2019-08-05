@@ -23,7 +23,7 @@
       <h1 class="DokdoList">인원 : {{ portfolios.people }}</h1>
       <br />
       <br />
-      <!-- <Comments /> -->
+      <!-- 댓글 -->
       <v-flex>
         <v-form ref="form">
           <v-container>
@@ -36,7 +36,7 @@
               </v-text-field>
             </v-flex>
             <v-flex>
-              <v-btn color="success" @click="insert">
+              <v-btn color="success" @click="insert" >
                 댓글달기
               </v-btn>
             </v-flex>
@@ -45,8 +45,9 @@
             v-for="(i, j) in idcomments.length > limits ? limits : idcomments.length"
             :key="j"
           >
-          {{idcomments[i - 1].text}}
-          {{idcomments[i - 1].created_at}}
+          {{idcomments[i -1].text}}
+          {{idcomments[i -1].created_at}}
+          {{idcomments[i -1].writer}}
           </v-flex>
           </p>
         </v-form>
@@ -64,15 +65,7 @@ import FirebaseService from "@/services/FirebaseService";
 
 export default {
   name: "PortfolioDetail",
-  // components: {
-  //   Comments
-  // },
-  // data() {
-  //   return {
-  //     portfolios: [],
-  //     idcomments: []
-  //   };
-  // },
+
   data:() => ({
     portfolios: [],
     idcomments:[],
@@ -92,23 +85,32 @@ export default {
       this.portfolios = await FirebaseService.getPortfoliosByIndex(
         this.$route.query.id
       )
+      console.log( this.$route.query.id)
     },
     async getCommentsByIndex(){
       this.idcomments = await FirebaseService.getCommentsByIndex(
         this.$route.query.id
       )
-      console.log( this.portfolios.id)
+      console.log( this.$route.query.id)
+      console.log( this.idcomments)
     },
     insert(){
-      FirebaseService.comments(
+      if (this.idcomments.length == 0)
+        FirebaseService.comments(
         this.id = this.portfolios.id,
-        this.fk,
+        this.fk = 1,
         this.text,
-        this.writer
-      )
+        this.writer = this.$store.state.user.displayName
+        )
+      else
+        FirebaseService.comments(
+          this.id = this.portfolios.id,
+          this.idcomments[0].fk + 1,
+          this.text,
+          this.writer = this.$store.state.user.displayName
+        )
     },
 
-       // location.href = "pfDetail?id={{this.portfolios.id}}";
     loadMorePortfolios() {}
   }
 };
