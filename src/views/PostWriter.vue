@@ -95,7 +95,6 @@ export default {
   methods: {
     async getPostByIndex() {
       this.posts = await FirebaseService.getPostByIndex(this.$route.query.id);
-      console.log(this.posts)
     },
     getBody(msg) {
       this.body = msg;
@@ -115,7 +114,11 @@ export default {
       location.href = "/Post";
     },
     update() {
-      FirebaseService.editPost(this.posts.title, this.posts.body, this.posts.id);
+      FirebaseService.editPost(
+        this.posts.title,
+        this.posts.body,
+        this.posts.id
+      );
       this.posts = FirebaseService.getPosts();
       location.href = "/Post";
     }
