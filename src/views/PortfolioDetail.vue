@@ -88,17 +88,19 @@ export default {
     this.getCommentsByIndex();
     this.comments();
   },
+
   methods: {
     async getPortfoliosByIndex() {
       this.portfolios = await FirebaseService.getPortfoliosByIndex(
         this.$route.query.id
-      ),
+      )
+    },
+    async getCommentsByIndex(){
       this.idcomments = await FirebaseService.getCommentsByIndex(
         this.portfolios.id
-      );
-      console.log(this.portfolios.id);
+      )
+      console.log(  this.portfolios.id)
     },
-
     insert(){
       FirebaseService.comments(
         this.id = this.portfolios.id,
@@ -107,6 +109,7 @@ export default {
         this.writer
       )
     },
+
        // location.href = "pfDetail?id={{this.portfolios.id}}";
     loadMorePortfolios() {}
   }

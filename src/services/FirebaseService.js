@@ -159,7 +159,8 @@ export default {
   // },
 //댓글기능
   comments(id, fk, text, writer) {
-    return firestore.collection(COMMENTS).add({
+    console.log(id);
+    return firestore.collection(PORTFOLIOS).doc(id).collection(COMMENTS).add({
       id,
       fk,
       text,
@@ -172,6 +173,7 @@ export default {
     return postsCollection.get().then(docSnapshots => {
       let datas = docSnapshots.data();
       datas.id = docSnapshots.id;
+      console.log(datas);
       return datas;
     });
   },
