@@ -16,12 +16,15 @@
           <span class="DokdoHeader2">Login</span>
         </v-btn>
         <template v-else>
-          <b class="DokdoHeader2">{{ this.$store.state.userauth }}</b>
+          <img
+            src="https://image.flaticon.com/icons/svg/324/324125.svg"
+            width="30px"
+          />
           <span
             v-if="this.$store.state.user.displayName != undefined"
             class="DokdoHeader2 mt-3 mr-2"
           >
-            <b>{{ this.$store.state.user.displayName }}</b>
+            <b>&nbsp {{ this.$store.state.user.displayName }}</b>
             님 반갑습니다!!
           </span>
           <span v-else class="DokdoHeader2 mt-3 mr-2">
@@ -126,8 +129,8 @@
 import "../CSS/aTag.css";
 import FirebaseService from "../services/FirebaseService.js";
 import "../CSS/DokdoFont.css";
-import EventBus from "../eventBus.js";
-import store from "../store.js";
+import "../eventBus.js";
+import "../store.js";
 
 export default {
   name: "FooterIcon",
@@ -154,7 +157,7 @@ export default {
         icon: "folder_open",
         href: "/Repository"
       }
-    ],
+    ]
   }),
   created() {
     FirebaseService.loginPersistence();
@@ -164,7 +167,7 @@ export default {
       this.$store.state.user = "";
       this.$store.state.accessToken = "";
       FirebaseService.Logout();
-    },
+    }
   }
 };
 </script>
