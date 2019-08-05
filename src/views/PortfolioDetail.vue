@@ -36,7 +36,7 @@
               </v-text-field>
             </v-flex>
             <v-flex>
-              <v-btn color="success" @click="insert" >
+              <v-btn color="success" @click="insert">
                 댓글달기
               </v-btn>
             </v-flex>
@@ -85,14 +85,11 @@ export default {
       this.portfolios = await FirebaseService.getPortfoliosByIndex(
         this.$route.query.id
       )
-      console.log( this.$route.query.id)
     },
     async getCommentsByIndex(){
       this.idcomments = await FirebaseService.getCommentsByIndex(
         this.$route.query.id
       )
-      console.log( this.$route.query.id)
-      console.log( this.idcomments)
     },
     insert(){
       if (this.idcomments.length == 0)
@@ -109,6 +106,8 @@ export default {
           this.text,
           this.writer = this.$store.state.user.displayName
         )
+
+     location.href ="/pfDetail?id=" + this.id
     },
 
     loadMorePortfolios() {}
