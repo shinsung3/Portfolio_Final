@@ -46,7 +46,7 @@
             :key="j"
           >
           {{idcomments[i - 1].text}}
-
+          {{idcomments[i - 1].created_at}}
           </v-flex>
           </p>
         </v-form>
