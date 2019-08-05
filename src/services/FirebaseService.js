@@ -152,7 +152,7 @@ export default {
 
 //댓글기능
   comments(id, fk, text, writer) {
-    console.log(id);
+  //  console.log(id);
     return firestore.collection(PORTFOLIOS).doc(id).collection(COMMENTS).add({
       id,
       fk,
@@ -162,13 +162,17 @@ export default {
     });
   },
   getCommentsByIndex(id) {
-    const postsCollection = firestore.collection(PORTFOLIOS).doc(id).collection(COMMENTS).doc(id);
-    return postsCollection.get().then(docSnapshots => {
-      let datas = docSnapshots.data();
-      datas.id = docSnapshots.id;
-      console.log(datas);
-
-      return datas;
+    const commentsCollection = firestore.collection(PORTFOLIOS).doc(id).collection(COMMENTS);
+    return commentsCollection
+    .get()
+    .then(docSnapshots => {
+      return docSnapshots.docs.map(doc => {
+        let data = doc.data();
+        data.id = doc.id;
+        data.created_at = new Date(data.created_at.toDate());
+          console.log(data);
+        return data;
+      });
     });
   },
 
