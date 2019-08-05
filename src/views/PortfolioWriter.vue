@@ -128,15 +128,12 @@ export default {
   components: {
     // ImgBanner
   },
-  created() {
-    var auth = this.$store.state.userauth;
-    if (auth != "관리자" && auth != "팀원") {
+  mounted() {
+    this.getPortfolios();
+    if (this.$store.state.userauth != "관리자" && this.$store.state.userauth != "팀원") {
       alert("글을 작성할 권한이 없습니다.");
       this.$router.push("/Portfolio");
     }
-  },
-  mounted() {
-    this.getPortfolios();
   },
   methods: {
     getBody(msg) {
