@@ -151,22 +151,33 @@ export default {
   },
 
 //댓글기능
-comments(id,fk,text,writer) {
-  return firestore.collection(COMMENTS).add({
-    id,
-    fk,
-    text,
-    writer,
-    created_at: firebase.firestore.FieldValue.serverTimestamp()
-  });
-},
+  comments(id, fk, text, writer) {
+    console.log(id);
+    return firestore.collection(PORTFOLIOS).doc(id).collection(COMMENTS).add({
+      id,
+      fk,
+      text,
+      writer,
+      created_at: firebase.firestore.FieldValue.serverTimestamp()
+    });
+  },
+  getCommentsByIndex(id) {
+    const postsCollection = firestore.collection(PORTFOLIOS).doc(id).collection(COMMENTS).doc(id);
+    return postsCollection.get().then(docSnapshots => {
+      let datas = docSnapshots.data();
+      datas.id = docSnapshots.id;
+      console.log(datas);
 
+      return datas;
+    });
+  },
 
   getPortfoliosByIndex(id) {
     const postsCollection = firestore.collection(PORTFOLIOS).doc(id);
     return postsCollection.get().then(docSnapshots => {
       let data = docSnapshots.data();
       data.id = docSnapshots.id;
+      console.log(data);
       return data;
     });
   },

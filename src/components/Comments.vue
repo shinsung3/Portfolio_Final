@@ -1,5 +1,6 @@
 <template>
-<div id = "cmt">
+
+<div >
   <v-layout>
     <v-flex>
       <v-form ref="form">
@@ -7,13 +8,13 @@
           <v-flex>
             <v-text-field
             v-model="text"
-            label="댓글을 써주세요"
+            label="댓글을 입력해 주세요"
             required
             >
             </v-text-field>
           </v-flex>
           <v-flex>
-            <v-btn color="success" @click="submit">
+            <v-btn color="success" @click="insert">
               댓글달기
             </v-btn>
           </v-flex>
@@ -22,34 +23,44 @@
     </v-flex>
   </v-layout>
 </div>
+
 </template>
 
 <script>
 
 import FirebaseService from "@/services/FirebaseService";
 import axios from "axios";
+import PortfolioDetail from "../views/PortfolioDetail.vue";
 
 export default{
-    name : "comment",
+    name : "Comments",
     data:() => ({
+      portfolios: [],
       id:"",
-      fk:"",
+      fk: "",
       text: "",
       writer:""
-
     }),
     mounted() {
-      this.comments();
+      this.comments(),
+      this.getPortfoliosByIndex();
     },
     methods: {
-      submit(){
+      async getPortfoliosByIndex() {
+        this.id = await FirebaseService.getPortfoliosByIndex(
+          this.$route.query.id
+        );
+      },
+
+
+      insert(){
         FirebaseService.comments(
           this.id,
           this.fk,
           this.text,
           this.writer
         );
-         location.href = "psDetail";
+    //     location.href = "pfDetail?id=1o5AELEG4kkxnAIbuzXx";
       }
     }
 
