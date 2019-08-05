@@ -130,9 +130,9 @@ export default {
   },
   created() {
     var auth = this.$store.state.userauth;
-    if( auth != '관리자' && auth != '팀원' ) {
-      alert('글을 작성할 권한이 없습니다.')
-      this.$router.push('/Portfolio')
+    if (auth != "관리자" && auth != "팀원") {
+      alert("글을 작성할 권한이 없습니다.");
+      this.$router.push("/Portfolio");
     }
   },
   mounted() {
