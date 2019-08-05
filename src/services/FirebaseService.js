@@ -3,6 +3,7 @@ import "firebase/firestore";
 import "firebase/auth";
 import store from "../store.js";
 import "firebase/functions";
+import '@firebase/messaging';
 
 const POSTS = "posts";
 const PORTFOLIOS = "portfolios";
@@ -16,13 +17,29 @@ const config = {
   authDomain: "halhalnolnol-9b318.firebaseapp.com",
   apiKey: "AIzaSyAzGXg4iu-1spk8IoCm-EwpqJYsNGemOFk",
   databaseURL: "https://halhalnolnol-9b318.firebaseio.com",
-  storageBucket: "halhalnolnol-9b318.appspot.com"
+  storageBucket: "halhalnolnol-9b318.appspot.com",
+  messagingSenderId:"121250140856"
 };
 
 firebase.initializeApp(config);
 const firestore = firebase.firestore();
 const logincheck = firebase.functions().httpsCallable("logincheck");
 const logoutcheck = firebase.functions().httpsCallable("logoutcheck");
+
+const messaging = firebase.messaging();
+messaging.usePublicVapidKey("BOWWayUfWK5q_KCDYkpd1sbnzejtXf6vg49tzL_MHO1AEQJ8WGYFje5HYfHCAGHSlfsCP1ciYp_1vQcxQJrm8Z8");
+Notification.requestPermission().then(function(permission) {
+  if (permission === "granted") {
+    console.log("Notification permission granted.");
+  } else {
+    console.log("Unable to get permission to notify.");
+  }
+});
+
+messaging.getToken().then(token =>{
+    console.log("Home")
+    console.log(token)
+});
 
 //offline check
 firebase
