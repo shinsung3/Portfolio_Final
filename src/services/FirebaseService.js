@@ -136,6 +136,7 @@ export default {
           return data;
         });
       });
+      console.log(data)
   },
   getPostByIndex(id) {
     const postsCollection = firestore.collection(POSTS).doc(id);
@@ -202,7 +203,6 @@ export default {
       created_at: firebase.firestore.FieldValue.serverTimestamp()
     });
   },
-//댓글기능
   comments(id, fk, text, writer) {
     return firestore.collection(PORTFOLIOS).doc(id).collection(COMMENTS).add({
       id,
