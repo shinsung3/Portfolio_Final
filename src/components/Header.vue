@@ -16,6 +16,7 @@
           <span class="DokdoHeader2">Login</span>
         </v-btn>
         <template v-else>
+          <b class="DokdoHeader2">{{ this.$store.state.userauth }}</b>
           <span
             v-if="this.$store.state.user.displayName != undefined"
             class="DokdoHeader2 mt-3 mr-2"
