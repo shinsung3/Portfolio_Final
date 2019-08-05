@@ -71,7 +71,11 @@ export default {
       this.$refs.form.resetValidation();
     },
     submit() {
-      FirebaseService.postPost(this.title, this.body);
+      FirebaseService.postPost(
+        this.title,
+        this.body,
+        this.$store.state.user.email
+      );
       location.href = "/Post";
     }
   }

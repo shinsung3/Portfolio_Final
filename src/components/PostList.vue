@@ -11,6 +11,7 @@
         :title="posts[i - 1].title"
         :body="posts[i - 1].body"
         :id="posts[i - 1].id"
+        :userid="posts[i - 1].userid"
       ></Post>
     </v-flex>
 
@@ -75,7 +76,7 @@ export default {
       this.limits = this.posts.length;
     },
     async loadLessPosts() {
-      this.limits = 8;
+      this.limits = 9;
     }
   }
 };

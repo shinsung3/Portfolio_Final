@@ -31,6 +31,9 @@ export default {
     },
     id: {
       type: String
+    },
+    userid: {
+      type: String
     }
   },
   computed: {
@@ -50,6 +53,9 @@ export default {
       },
       index: {
         id: this.id
+      },
+      userId: {
+        userid: this.userId
       }
     };
   },
