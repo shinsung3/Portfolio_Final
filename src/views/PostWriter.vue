@@ -51,20 +51,14 @@ export default {
       v => (v && v.length <= 30) || "30자 이내로 입력해주세요!"
     ],
     body: "",
-    post: []
+    posts: []
   }),
-  components: {
-    // ImgBanner
-  },
   created() {
     var auth = this.$store.state.userauth;
     if (auth != "관리자" && auth != "팀원") {
       alert("글을 작성할 권한이 없습니다.");
       this.$router.push("/Post");
     }
-  },
-  mounted() {
-    this.getPosts();
   },
   methods: {
     getBody(msg) {
@@ -76,8 +70,9 @@ export default {
     resetValidation() {
       this.$refs.form.resetValidation();
     },
-    async getPosts() {
-      this.post = await FirebaseService.getPosts();
+    submit() {
+      FirebaseService.postPost(this.title, this.body);
+      location.href = "/Post";
     }
   }
 };

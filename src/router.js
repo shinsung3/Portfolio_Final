@@ -5,13 +5,13 @@ import PostPage from "./views/PostPage.vue";
 import PortfolioPage from "./views/PortfolioPage.vue";
 import LoginPage from "./views/LoginPage.vue";
 import PortfolioWriter from "./views/PortfolioWriter.vue";
+import PostWriter from "./views/PostWriter.vue";
 import Repository from "./views/RepositoryPage.vue";
 import Graph from "./views/GraphPage.vue";
 import PFDetail from "./views/PortfolioDetail.vue";
 import PSDetail from "./views/PostDetail.vue";
 import AdminPage from "./views/AdminPage.vue";
 import Comments from "./components/Comments.vue";
-import PostWriter from "./views/PostWriter.vue";
 
 Vue.use(Router);
 
