@@ -1,26 +1,5 @@
 <template>
   <div class="py-3">
-    <!-- <ImgBanner imgSrc="https://source.unsplash.com/random">
-      <h3
-        class="DokdoFont"
-        v-resize-text="{
-          ratio: 1.3,
-          minFontSize: '30px',
-          maxFontSize: '100px',
-          delay: 200
-        }"
-        slot="text"
-      >
-        Portfolio Writer
-      </h3>
-      <div class="DokdoSubTitle" slot="text">
-        말은 쉽지, 코드를 보여줘.
-      </div>
-      <br />
-      <div class="DokdoSubTitle" slot="text">
-        Talk is cheap. Show me the code.
-      </div>
-    </ImgBanner> -->
     <v-layout>
       <v-flex>
         <v-form ref="form" v-model="valid" lazy-validation>

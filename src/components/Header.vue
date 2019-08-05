@@ -41,13 +41,14 @@
           <span class="DokdoHeader2">Project</span>
         </v-btn>
         <v-btn flat to="/admin" v-if="this.$store.state.userauth == '관리자'">
-          <span class="DokdoHeader2">AdmingPage</span>
+          <span class="DokdoHeader2">Admin</span>
         </v-btn>
       </v-toolbar-items>
 
       <v-toolbar-side-icon
         class="hidden-md-and-up"
-        @click.stop="drawer = !drawer">
+        @click.stop="drawer = !drawer"
+      >
         <v-icon color="gray">menu</v-icon>
       </v-toolbar-side-icon>
     </v-toolbar>
@@ -59,7 +60,8 @@
       :mini-variant="mini"
       fixed
       dark
-      temporary>
+      temporary
+    >
       <v-list class="pa-1">
         <v-list-tile v-if="mini" @click.stop="mini = !mini">
           <v-list-tile-action>
@@ -123,7 +125,7 @@
 import "../CSS/aTag.css";
 import FirebaseService from "../services/FirebaseService.js";
 import "../CSS/DokdoFont.css";
-import EventBus from "../eventBus.js"
+import EventBus from "../eventBus.js";
 import store from "../store.js";
 
 export default {
