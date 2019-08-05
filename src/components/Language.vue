@@ -15,7 +15,6 @@ export default {
   data:()=>({
     lang : 'original',
     languages:['원본','한국어','영어','일본어','중국어'],
-    mini: false,
     right: null
   }),
   methods:{
