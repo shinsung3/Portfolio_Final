@@ -1,29 +1,9 @@
 <template>
   <div>
-    <!-- <ImgBanner imgSrc="https://source.unsplash.com/random">
-      <h3
-        class="DokdoFont"
-        v-resize-text="{
-          ratio: 1.3,
-          minFontSize: '40px',
-          maxFontSize: '150px'
-        }"
-        slot="text"
-      >
-        Post
-      </h3>
-      <div class="DokdoSubTitle" slot="text">
-        말은 쉽지, 코드를 보여줘.
-      </div>
-      <br />
-      <div class="DokdoSubTitle" slot="text">
-        Talk is cheap. Show me the code.
-      </div>
-    </ImgBanner> -->
     <v-container>
       <v-layout>
         <v-flex xs12>
-          <PostList :limits="8" :load-more="true" :column="4"></PostList>
+          <PostList :limits="9" :load-more="true" :column="3"></PostList>
         </v-flex>
       </v-layout>
     </v-container>
@@ -31,14 +11,12 @@
 </template>
 
 <script>
-// import ImgBanner from "../components/ImgBanner";
 import PostList from "../components/PostList";
 import "../CSS/DokdoFont.css";
 
 export default {
   name: "PostPage",
   components: {
-    // ImgBanner,
     PostList
   }
 };

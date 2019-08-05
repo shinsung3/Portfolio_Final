@@ -128,10 +128,11 @@ export default {
       return data;
     });
   },
-  postPost(title, body) {
+  postPost(title, body, userId) {
     return firestore.collection(POSTS).add({
       title,
       body,
+      userId,
       created_at: firebase.firestore.FieldValue.serverTimestamp()
     });
   },
@@ -149,7 +150,26 @@ export default {
         });
       });
   },
-
+  getPortfoliosByIndex(id) {
+    const postsCollection = firestore.collection(PORTFOLIOS).doc(id);
+    return postsCollection.get().then(docSnapshots => {
+      let data = docSnapshots.data();
+      data.id = docSnapshots.id;
+      return data;
+    });
+  },
+  postPortfolio(title, body, img, uk, language, complete, people) {
+    return firestore.collection(PORTFOLIOS).add({
+      title,
+      body,
+      img,
+      uk,
+      language,
+      complete,
+      people,
+      created_at: firebase.firestore.FieldValue.serverTimestamp()
+    });
+  },
 //댓글기능
   comments(id, fk, text, writer) {
     console.log(id);
@@ -169,28 +189,6 @@ export default {
       console.log(datas);
 
       return datas;
-    });
-  },
-
-  getPortfoliosByIndex(id) {
-    const postsCollection = firestore.collection(PORTFOLIOS).doc(id);
-    return postsCollection.get().then(docSnapshots => {
-      let data = docSnapshots.data();
-      data.id = docSnapshots.id;
-      console.log(data);
-      return data;
-    });
-  },
-  postPortfolio(title, body, img, uk, language, complete, people) {
-    return firestore.collection(PORTFOLIOS).add({
-      title,
-      body,
-      img,
-      uk,
-      language,
-      complete,
-      people,
-      created_at: firebase.firestore.FieldValue.serverTimestamp()
     });
   },
 	getAuthorization() {
