@@ -70,12 +70,12 @@ export default {
   // components: {
   //   Comments
   // },
-  data() {
-    return {
-      portfolios: [],
-      idcomments: []
-    };
-  },
+  // data() {
+  //   return {
+  //     portfolios: [],
+  //     idcomments: []
+  //   };
+  // },
   data:() => ({
     portfolios: [],
     idcomments: [],
