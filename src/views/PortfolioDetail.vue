@@ -49,8 +49,6 @@
         </v-form>
       </v-flex>
 
-
-
     </v-container>
   </div>
 
@@ -97,9 +95,9 @@ export default {
     },
     async getCommentsByIndex(){
       this.idcomments = await FirebaseService.getCommentsByIndex(
-        this.portfolios.id
+          this.$route.query.id
       )
-      console.log(  this.portfolios.id)
+      console.log( this.portfolios.id)
     },
     insert(){
       FirebaseService.comments(

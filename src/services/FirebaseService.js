@@ -169,11 +169,12 @@ export default {
     });
   },
   getCommentsByIndex(id) {
-    const postsCollection = firestore.collection(COMMENTS).doc(id);
+    const postsCollection = firestore.collection(PORTFOLIOS).doc(id).collection(COMMENTS).doc(id);
     return postsCollection.get().then(docSnapshots => {
       let datas = docSnapshots.data();
       datas.id = docSnapshots.id;
       console.log(datas);
+
       return datas;
     });
   },
@@ -183,6 +184,7 @@ export default {
     return postsCollection.get().then(docSnapshots => {
       let data = docSnapshots.data();
       data.id = docSnapshots.id;
+      console.log(data);
       return data;
     });
   },
