@@ -45,6 +45,7 @@
 <script>
 import Portfolio from "@/components/Portfolio";
 import FirebaseService from "@/services/FirebaseService";
+import "../CSS/btn.css";
 
 export default {
   name: "PortfoliosList",
@@ -95,9 +96,5 @@ export default {
 .button1 {
   background-color: gainsboro;
   border: 0.5px solid gray;
-}
-
-#padding {
-  padding: 3px;
 }
 </style>

@@ -29,9 +29,9 @@
           <v-container>
             <v-flex>
               <v-text-field
-              v-model="text"
-              label="댓글을 입력해 주세요"
-              required
+                v-model="text"
+                label="댓글을 입력해 주세요"
+                required
               >
               </v-text-field>
             </v-flex>
@@ -51,18 +51,15 @@
           </p>
         </v-form>
       </v-flex>
-
     </v-container>
   </div>
-
-
 </template>
 
 <script>
 import "../CSS/FontColor.css";
 import "../CSS/ellipsis.css";
 import "../CSS/DokdoFont.css";
-//import Comments from "../components/Comments.vue";
+import Comments from "../components/Comments.vue";
 import FirebaseService from "@/services/FirebaseService";
 
 export default {
@@ -78,7 +75,7 @@ export default {
   // },
   data:() => ({
     portfolios: [],
-    idcomments: [],
+    idcomments:[],
     id:"",
     fk: "",
     text: "",
@@ -90,7 +87,6 @@ export default {
     this.comments();
   },
 
-
   methods: {
     async getPortfoliosByIndex() {
       this.portfolios = await FirebaseService.getPortfoliosByIndex(
@@ -99,8 +95,9 @@ export default {
     },
     async getCommentsByIndex(){
       this.idcomments = await FirebaseService.getCommentsByIndex(
-          this.$route.query.id
+        this.$route.query.id
       )
+      console.log( this.portfolios.id)
     },
     insert(){
       FirebaseService.comments(
@@ -109,9 +106,9 @@ export default {
         this.text,
         this.writer
       )
-    //  location.href = "pfDetail?id={{this.portfolios.id}}";
     },
 
+       // location.href = "pfDetail?id={{this.portfolios.id}}";
     loadMorePortfolios() {}
   }
 };
