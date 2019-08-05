@@ -215,6 +215,7 @@ export default {
   getCommentsByIndex(id) {
     const commentsCollection = firestore.collection(PORTFOLIOS).doc(id).collection(COMMENTS);
     return commentsCollection
+    .orderBy('created_at', 'desc')
     .get()
     .then(docSnapshots => {
       return docSnapshots.docs.map(doc => {
