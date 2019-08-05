@@ -5,31 +5,60 @@
         <v-form ref="form" v-model="valid" lazy-validation>
           <v-container>
             <!-- title -->
-            <v-flex px10 py10>
-              <v-text-field
-                v-model="title"
-                :counter="30"
-                :rules="titleRules"
-                label="제목"
-                required
-              >
-              </v-text-field>
-            </v-flex>
-            <!-- body -->
-            <v-flex px10 py10>
-              <markdown-editor v-model="body"></markdown-editor>
-            </v-flex>
-            <v-flex align-center justify-end row fill-height right>
-              <v-btn color="success" @click="submit">
-                업로드<img
-                  src="https://image.flaticon.com/icons/svg/261/261868.svg"
-                  width="35px"
-                />
-              </v-btn>
-              <v-btn @click.stop="reset()" class="buttonWriter" href="/Post">
-                취소
-              </v-btn>
-            </v-flex>
+            <template v-if="posts == ''">
+              <v-flex px10 py10>
+                <v-text-field
+                  v-model="title"
+                  :counter="30"
+                  :rules="titleRules"
+                  label="제목"
+                  required
+                >
+                </v-text-field>
+              </v-flex>
+              <!-- body -->
+              <v-flex px10 py10>
+                <markdown-editor v-model="body"></markdown-editor>
+              </v-flex>
+              <v-flex align-center justify-end row fill-height right>
+                <v-btn color="success" @click="submit">
+                  업로드<img
+                    src="https://image.flaticon.com/icons/svg/261/261868.svg"
+                    width="35px"
+                  />
+                </v-btn>
+                <v-btn @click.stop="reset()" class="buttonWriter" href="/Post">
+                  취소
+                </v-btn>
+              </v-flex>
+            </template>
+            <template v-else>
+              <v-flex px10 py10>
+                <v-text-field
+                  v-model="posts.title"
+                  :counter="30"
+                  :rules="titleRules"
+                  label="제목"
+                  required
+                >
+                </v-text-field>
+              </v-flex>
+              <!-- body -->
+              <v-flex px10 py10>
+                <markdown-editor v-model="posts.body"></markdown-editor>
+              </v-flex>
+              <v-flex align-center justify-end row fill-height right>
+                <v-btn color="success" @click="update">
+                  수정<img
+                    src="https://image.flaticon.com/icons/svg/261/261868.svg"
+                    width="35px"
+                  />
+                </v-btn>
+                <v-btn @click.stop="reset()" class="buttonWriter" href="/Post">
+                  취소
+                </v-btn>
+              </v-flex>
+            </template>
           </v-container>
         </v-form>
       </v-flex>
@@ -53,6 +82,9 @@ export default {
     body: "",
     posts: []
   }),
+  mounted() {
+    this.getPostByIndex();
+  },
   created() {
     var auth = this.$store.state.userauth;
     if (auth != "관리자" && auth != "팀원") {
@@ -61,6 +93,10 @@ export default {
     }
   },
   methods: {
+    async getPostByIndex() {
+      this.posts = await FirebaseService.getPostByIndex(this.$route.query.id);
+      console.log(this.posts)
+    },
     getBody(msg) {
       this.body = msg;
     },
@@ -76,6 +112,11 @@ export default {
         this.body,
         this.$store.state.user.email
       );
+      location.href = "/Post";
+    },
+    update() {
+      FirebaseService.editPost(this.posts.title, this.posts.body, this.posts.id);
+      this.posts = FirebaseService.getPosts();
       location.href = "/Post";
     }
   }
