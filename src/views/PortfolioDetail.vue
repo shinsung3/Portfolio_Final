@@ -41,10 +41,13 @@
               </v-btn>
             </v-flex>
           </v-container>
-          <p>
-            {{ portfolios.body }}
-            {{ idcomments.text }}
-            <br />
+          <v-flex
+            v-for="(i, j) in idcomments.length > limits ? limits : idcomments.length"
+            :key="j"
+          >
+          {{idcomments[i - 1].text}}
+
+          </v-flex>
           </p>
         </v-form>
       </v-flex>
@@ -59,7 +62,7 @@
 import "../CSS/FontColor.css";
 import "../CSS/ellipsis.css";
 import "../CSS/DokdoFont.css";
-import Comments from "../components/Comments.vue";
+//import Comments from "../components/Comments.vue";
 import FirebaseService from "@/services/FirebaseService";
 
 export default {
@@ -70,12 +73,12 @@ export default {
   data() {
     return {
       portfolios: [],
-      idcomments:[]
+      idcomments: []
     };
   },
   data:() => ({
     portfolios: [],
-    idcomments:[],
+    idcomments: [],
     id:"",
     fk: "",
     text: "",
@@ -87,6 +90,7 @@ export default {
     this.comments();
   },
 
+
   methods: {
     async getPortfoliosByIndex() {
       this.portfolios = await FirebaseService.getPortfoliosByIndex(
@@ -97,7 +101,6 @@ export default {
       this.idcomments = await FirebaseService.getCommentsByIndex(
           this.$route.query.id
       )
-      console.log( this.portfolios.id)
     },
     insert(){
       FirebaseService.comments(
@@ -106,9 +109,9 @@ export default {
         this.text,
         this.writer
       )
+    //  location.href = "pfDetail?id={{this.portfolios.id}}";
     },
 
-       // location.href = "pfDetail?id={{this.portfolios.id}}";
     loadMorePortfolios() {}
   }
 };
