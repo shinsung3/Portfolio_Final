@@ -1,4 +1,4 @@
-  <template>
+<template>
   <v-layout mt-5 wrap>
     <v-flex
       v-for="(i, j) in portfolios.length > limits ? limits : portfolios.length"
@@ -32,7 +32,7 @@
         <v-icon size="25" class="mr-2">fa-angle-double-up</v-icon>접기
       </v-btn>
 
-      <v-btn class="button1" to="/writer">
+      <v-btn class="button1" to="/pfWriter">
         <img
           src="https://image.flaticon.com/icons/svg/1865/1865689.svg"
           width="30px"

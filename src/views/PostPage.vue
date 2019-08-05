@@ -21,7 +21,6 @@
       </div>
     </ImgBanner> -->
     <v-container>
-      <!-- Post -->
       <v-layout>
         <v-flex xs12>
           <PostList :limits="8" :load-more="true" :column="4"></PostList>

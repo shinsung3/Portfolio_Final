@@ -16,8 +16,10 @@
           <v-btn slot="activator" color="warning">Language ▼</v-btn>
           <!-- <v-btn slot="activator" color="white" flat style="background:orange">Language ▼</v-btn> -->
           <v-list>
-            <v-list-tile v-for="(language, index) in languages" :key="index" @click=''>
-              <v-list-tile-title @click="tr_click(index)">{{ language }}</v-list-tile-title>
+            <v-list-tile v-for="(language, index) in languages" :key="index">
+              <v-list-tile-title @click="tr_click(index)">
+                {{ language }}
+              </v-list-tile-title>
             </v-list-tile>
           </v-list>
         </v-menu>
@@ -50,13 +52,14 @@
           <span class="DokdoHeader2">Project</span>
         </v-btn>
         <v-btn flat to="/admin" v-if="this.$store.state.userauth == '관리자'">
-          <span class="DokdoHeader2">AdmingPage</span>
+          <span class="DokdoHeader2">Admin</span>
         </v-btn>
       </v-toolbar-items>
 
       <v-toolbar-side-icon
         class="hidden-md-and-up"
-        @click.stop="drawer = !drawer">
+        @click.stop="drawer = !drawer"
+      >
         <v-icon color="gray">menu</v-icon>
       </v-toolbar-side-icon>
     </v-toolbar>
@@ -68,7 +71,8 @@
       :mini-variant="mini"
       fixed
       dark
-      temporary>
+      temporary
+    >
       <v-list class="pa-1">
         <v-list-tile v-if="mini" @click.stop="mini = !mini">
           <v-list-tile-action>
@@ -132,7 +136,7 @@
 import "../CSS/aTag.css";
 import FirebaseService from "../services/FirebaseService.js";
 import "../CSS/DokdoFont.css";
-import EventBus from "../eventBus.js"
+import EventBus from "../eventBus.js";
 import store from "../store.js";
 
 export default {
@@ -161,8 +165,8 @@ export default {
         href: "/Repository"
       }
     ],
-    lang : 'original',
-    languages:['원본','한국어','영어','일본어','중국어'],
+    lang: "original",
+    languages: ["원본", "한국어", "영어", "일본어", "중국어"],
     mini: false,
     right: null
   }),
@@ -175,26 +179,22 @@ export default {
       this.$store.state.accessToken = "";
       FirebaseService.Logout();
     },
-    tr_click(index){
-      if (index==0){
-        this.lang = "original"
-        EventBus.$emit('translate', this.lang)
-      }
-      else if (index==1){
-        this.lang = "ko"
-        EventBus.$emit('translate', this.lang)
-      }
-      else if (index==2){
-        this.lang = "en"
-        EventBus.$emit('translate', this.lang)
-      }
-      else if (index==3){
-        this.lang = "ja"
-        EventBus.$emit('translate', this.lang)
-      }
-      else if (index==4){
-        this.lang = "zh-TW"
-        EventBus.$emit('translate', this.lang)
+    tr_click(index) {
+      if (index == 0) {
+        this.lang = "original";
+        EventBus.$emit("translate", this.lang);
+      } else if (index == 1) {
+        this.lang = "ko";
+        EventBus.$emit("translate", this.lang);
+      } else if (index == 2) {
+        this.lang = "en";
+        EventBus.$emit("translate", this.lang);
+      } else if (index == 3) {
+        this.lang = "ja";
+        EventBus.$emit("translate", this.lang);
+      } else if (index == 4) {
+        this.lang = "zh-TW";
+        EventBus.$emit("translate", this.lang);
       }
     }
   }

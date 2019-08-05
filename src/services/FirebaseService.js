@@ -4,13 +4,11 @@ import "firebase/auth";
 import store from "../store.js";
 import "firebase/functions";
 
-
 const POSTS = "posts";
 const PORTFOLIOS = "portfolios";
 const USERAUTH = "userauth";
 const BACKGROUNDIMG = "background";
 const COMMENTS = "comments";
-
 
 // Setup Firebase
 const config = {
@@ -19,7 +17,7 @@ const config = {
   apiKey: "AIzaSyAzGXg4iu-1spk8IoCm-EwpqJYsNGemOFk",
   databaseURL: "https://halhalnolnol-9b318.firebaseio.com",
   storageBucket: "halhalnolnol-9b318.appspot.com"
-  }
+};
 
 firebase.initializeApp(config);
 const firestore = firebase.firestore();
@@ -27,11 +25,13 @@ const logincheck = firebase.functions().httpsCallable("logincheck");
 const logoutcheck = firebase.functions().httpsCallable("logoutcheck");
 
 //offline check
-firebase.firestore().enablePersistence()
+firebase
+  .firestore()
+  .enablePersistence()
   .catch(function(err) {
-    if (err.code == 'failed-precondition') {
+    if (err.code == "failed-precondition") {
       console.log(err);
-    } else if (err.code == 'unimplemented') {
+    } else if (err.code == "unimplemented") {
       console.log(err);
     }
   });
@@ -42,7 +42,7 @@ function chkDup(email) {
     .doc(email)
     .get()
     .then(doc => {
-      if(doc.exists) {
+      if (doc.exists) {
         return true;
       } else {
         return false;
@@ -51,32 +51,35 @@ function chkDup(email) {
 }
 
 function setAuthorization(email, auth) {
-  return firestore.collection(USERAUTH).doc(email).set({
-    email,
-    auth,
-    created_at: firebase.firestore.FieldValue.serverTimestamp()
-  })
+  return firestore
+    .collection(USERAUTH)
+    .doc(email)
+    .set({
+      email,
+      auth,
+      created_at: firebase.firestore.FieldValue.serverTimestamp()
+    });
 }
 
 function getAllUserAuth() {
-  const userauthCollection = firestore.collection(USERAUTH)
+  const userauthCollection = firestore.collection(USERAUTH);
   return userauthCollection
-    .orderBy('created_at', 'desc')
+    .orderBy("created_at", "desc")
     .get()
-    .then((docSnapshots) => {
-      return docSnapshots.docs.map((doc) => {
-        let data = doc.data()
-        data.created_at = new Date(data.created_at.toDate())
-        return data
-      })
-    })
+    .then(docSnapshots => {
+      return docSnapshots.docs.map(doc => {
+        let data = doc.data();
+        data.created_at = new Date(data.created_at.toDate());
+        return data;
+      });
+    });
 }
 
 async function getUserAuth(email) {
   var users = await getAllUserAuth();
-  var auth = '';
-  for(var i = 0; i < users.length; i++) {
-    if(users[i].email == email) {
+  var auth = "";
+  for (var i = 0; i < users.length; i++) {
+    if (users[i].email == email) {
       auth = users[i].auth;
     }
   }
@@ -146,17 +149,7 @@ export default {
         });
       });
   },
-  // getPortfoliosByIndex(id, uk) {
-  //   const postsCollection = firestore
-  //     .collection(PORTFOLIOS)
-  //     .doc(id)
-  //     .field(uk);
-  //   return postsCollection.get().then(docSnapshots => {
-  //     let data = docSnapshots.data();
-  //     data.uk = docSnapshots.uk;
-  //     return data;
-  //   });
-  // },
+
 //댓글기능
 comments(id,fk,text,writer) {
   return firestore.collection(COMMENTS).add({

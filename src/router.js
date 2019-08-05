@@ -11,6 +11,7 @@ import PFDetail from "./views/PortfolioDetail.vue";
 import PSDetail from "./views/PostDetail.vue";
 import AdminPage from "./views/AdminPage.vue";
 import Comments from "./components/Comments.vue";
+import PostWriter from "./views/PostWriter.vue";
 
 Vue.use(Router);
 
@@ -39,9 +40,14 @@ export default new Router({
       component: LoginPage
     },
     {
-      path: "/writer",
-      name: "writer",
+      path: "/pfWriter",
+      name: "pfwriter",
       component: PortfolioWriter
+    },
+    {
+      path: "/psWriter",
+      name: "pswriter",
+      component: PostWriter
     },
     {
       path: "/repository",

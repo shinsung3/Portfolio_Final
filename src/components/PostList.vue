@@ -21,8 +21,14 @@
       <v-btn v-if="loadLess" color="warning" dark v-on:click="loadLessPosts">
         <v-icon size="25" class="mr-2">fa-angle-double-up</v-icon> 접기
       </v-btn>
+      <v-btn class="button1" to="/psWriter">
+        <img
+          src="https://image.flaticon.com/icons/svg/1865/1865689.svg"
+          width="30px"
+        />
+        <span id="padding"><b>글쓰기</b></span>
+      </v-btn>
     </v-flex>
-    
   </v-layout>
 </template>
 
