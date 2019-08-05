@@ -1,7 +1,7 @@
 <template>
   <v-flex class="language">
     <v-menu>
-      <v-btn class="mx-2" fab slot="activator" color="warning"><i class="fas fa-language fa-2x"></i></v-btn>
+      <v-btn class="mx-2" fab slot="activator" color="#ffb802"><i class="fas fa-language fa-2x" style="color:white"></i></v-btn>
       <v-list>
         <v-list-tile v-for="(language, index) in languages" :key="index" @click=''>
           <v-list-tile-title @click="tr_click(index)">{{ language }}</v-list-tile-title>
@@ -49,7 +49,7 @@ export default {
 <style>
   .language{
     position: fixed;
-    bottom: 0;
-    right: 0;
+    bottom: 85px;
+    right: 14px;
   }
 </style>

@@ -1,15 +1,15 @@
 <template lang="html">
   <transition name="back-to-top-fade">
-    <div
-      class="vue-back-to-top mr-5 pr-2"
+    <div id="color"
+      class="vue-back-to-top"
       :style="`bottom:${this.bottom};right:${this.right};`"
       v-show="visible"
       @click="backToTop"
     >
       <slot>
-        <div class="default">
-          <i class="fas fa-arrow-up fa-lg"></i>
-        </div>
+        <v-btn class="default" fab>
+          <i class="fas fa-arrow-up fa-2x"></i>
+        </v-btn>
       </slot>
     </div>
   </transition>
@@ -34,11 +34,11 @@ export default {
     },
     right: {
       type: String,
-      default: "30px"
+      default: "14px"
     },
     bottom: {
       type: String,
-      default: "30px"
+      default: "150px"
     },
     scrollFn: {
       type: Function,
@@ -89,6 +89,7 @@ export default {
 .back-to-top-fade-leave-active {
   transition: opacity .7s;
 }
+
 .back-to-top-fade-enter,
 .back-to-top-fade-leave-to {
   opacity: 0;
@@ -98,25 +99,26 @@ export default {
   cursor:pointer;
   position: fixed;
   z-index: 1000;
+  color:#ffb802
 }
 
 .vue-back-to-top .default {
-  background-color: #ffb802;
-  border-radius: 3px;
-  color: #ffffff;
-  height: 35px;
-  line-height: 30px;
+  color: #ffb802;
   text-align: center;
-  width: 35px;
 }
 
 .vue-back-to-top .default span{
-  color:#ffffff;
+  color:#ffb802;
 }
 
 .vue-back-to-top--is-footer {
   bottom: 50% !important;
   position: absolute;
   transform: translateY(50%);
+}
+
+.color {
+  background-color: #ffb802 !important;
+  color:#ffb802 !important;
 }
 </style>
