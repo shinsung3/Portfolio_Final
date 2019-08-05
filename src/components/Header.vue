@@ -136,6 +136,7 @@ export default {
   name: "FooterIcon",
   data: () => ({
     drawer: null,
+    mini: false,
     items: [
       {
         title: "Home",

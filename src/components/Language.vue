@@ -1,6 +1,6 @@
 <template>
-  <v-menu>
-    <v-btn slot="activator" color="warning">Language ▼</v-btn>
+  <v-menu class="position-right-bottom">
+    <v-btn class="mx-2" fab slot="activator" color="warning"><i class="fas fa-language fa-2x"></i></v-btn>
     <v-list>
       <v-list-tile v-for="(language, index) in languages" :key="index" @click=''>
         <v-list-tile-title @click="tr_click(index)">{{ language }}</v-list-tile-title>
@@ -9,14 +9,12 @@
   </v-menu>
 </template>
 
-
 <script>
 import EventBus from "../eventBus.js"
 export default {
   data:()=>({
     lang : 'original',
     languages:['원본','한국어','영어','일본어','중국어'],
-    mini: false,
     right: null
   }),
   methods:{
