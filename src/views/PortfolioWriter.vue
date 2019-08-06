@@ -314,19 +314,13 @@ export default {
       location.href = "/Portfolio";
     },
     update() {
-      console.log("작동")
-      this.uploadToAlbum();
-      // FirebaseService.deletePortfolio(this.$route.query.id);
-      console.log(this.portfolio)
       FirebaseService.editPortfolio(
         this.portfolio.title,
         this.portfolio.body,
-        this.portfolio.imageUrl,
-        this.portfolio.uk,
         this.portfolio.language,
         this.portfolio.complete,
         this.portfolio.people,
-        this.$store.state.user.email
+        this.portfolio.id
       );
       location.href = "/Portfolio";
     },
