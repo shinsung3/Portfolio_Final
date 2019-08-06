@@ -26,15 +26,4 @@
     <div id="app"></div>
     <!-- built files will be auto injected -->
   </body>
-
-  <script>
-    const functions = require('firebase-functions');
-
-    exports.portfolioNotification = functions.firestore
-      .document("portfolios/{portfolios}")
-      .onCreate(async event => {
-        var msg = "New Portfolio : " + event.date().title;
-        return
-      });
-  </script>
 </html>

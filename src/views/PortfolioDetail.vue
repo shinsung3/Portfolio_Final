@@ -57,7 +57,6 @@
 import "../CSS/FontColor.css";
 import "../CSS/ellipsis.css";
 import "../CSS/DokdoFont.css";
-import Comments from "../components/Comments.vue";
 import FirebaseService from "@/services/FirebaseService";
 
 export default {
@@ -83,12 +82,20 @@ export default {
     async getPortfoliosByIndex() {
       this.portfolios = await FirebaseService.getPortfoliosByIndex(
         this.$route.query.id
-      )
+      );
+    },
+    linkToPage() {
+      this.$router.push("/pfWriter?id=" + this.$route.query.id);
     },
     async getCommentsByIndex() {
       this.idcomments = await FirebaseService.getCommentsByIndex(
         this.$route.query.id
-      )
+      );
+    },
+    deleteDB() {
+      FirebaseService.deletePortfolio(this.portfolios.id);
+      this.posts = FirebaseService.getPosts();
+      location.href = "/Portfolio";
     },
     insert(portid) {
       if (this.idcomments.length == 0) {
@@ -113,8 +120,9 @@ export default {
       this.portid = FirebaseService.delcomment(this.$route.query.id, id);
       location.href = "/pfDetail?id=" + this.portid
     },
-
-    loadMorePortfolios() {}
+    del(fk) {
+      FirebaseService.delcomment(this.$route.query.id, fk);
+    }
   }
 };
 </script>
@@ -125,5 +133,9 @@ export default {
 
 .subfont {
   font-size: 38px;
+}
+
+#button1 {
+  background-color: antiquewhite;
 }
 </style>

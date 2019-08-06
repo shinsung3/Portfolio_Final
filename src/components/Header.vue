@@ -18,7 +18,7 @@
         <template v-else>
           <img
             src="https://image.flaticon.com/icons/svg/324/324125.svg"
-            width="30px"
+            width="30px" v-if="this.$store.state.userauth == '관리자'"
           />
           <span
             v-if="this.$store.state.user.displayName != undefined"
