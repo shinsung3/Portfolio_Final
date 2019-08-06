@@ -1,8 +1,8 @@
 <template>
   <v-container>
-    <v-toolbar flat fixed>
+    <v-toolbar flat fixed id="background1">
       <v-toolbar-side-icon to="/">
-        <v-icon style="color:black">favorite</v-icon>
+        <v-icon style="color:darkorange">favorite</v-icon>
       </v-toolbar-side-icon>
       <v-toolbar-title class="DokdoHeader">
         <router-link to="/">
@@ -172,3 +172,9 @@ export default {
   }
 };
 </script>
+
+<style>
+#background1 {
+  background-color: floralwhite;
+}
+</style>

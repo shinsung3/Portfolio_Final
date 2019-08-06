@@ -35,7 +35,7 @@
               this.$store.state.userauth == '관리자'
           "
         >
-          <v-btn @click="linkToPage">
+          <v-btn @click="linkToPage" color="info">
             <v-icon>fas fa-user-edit</v-icon><span id="padding">수정</span>
           </v-btn>
           <v-btn @click="deleteDB" class="buttonWriter">

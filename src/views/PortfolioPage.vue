@@ -1,6 +1,6 @@
 <template>
   <div>
-    <v-container id="size1">
+    <v-container>
       <v-layout>
         <v-flex xs12>
           <PortfolioList :limits="8" :load-more="true"></PortfolioList>

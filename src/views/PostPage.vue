@@ -1,9 +1,9 @@
 <template>
   <div>
-    <v-container id="size1">
+    <v-container>
       <v-layout>
         <v-flex xs12>
-          <PostList :limits="15" :load-more="true" :column="3"></PostList>
+          <PostList :limits="12" :load-more="true" :column="3"></PostList>
         </v-flex>
       </v-layout>
     </v-container>
@@ -21,9 +21,3 @@ export default {
   }
 };
 </script>
-
-<style>
-#size1 {
-  width: 1300px;
-}
-</style>
