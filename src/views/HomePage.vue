@@ -14,6 +14,7 @@
       >
         말은 쉽지, 코드를 보여줘.
       </h3>
+      <p class="typing"></p>
       <br />
       <div
         class="DokdoSubTitle"
@@ -254,5 +255,9 @@ export default {
       return require("../assets/" + img);
     }
   }
-};
+};  
 </script>
+
+<style media="screen">
+
+</style>

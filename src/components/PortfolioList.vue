@@ -41,6 +41,8 @@
     </v-flex>
   </v-layout>
 </template>
+
+<!-- <link rel="stylesheet" type="text/css" href="csshake.css" /> -->
 <script>
 import Portfolio from "@/components/Portfolio";
 import FirebaseService from "@/services/FirebaseService";
