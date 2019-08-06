@@ -208,7 +208,8 @@ export default {
     portfolio: [],
     language: "",
     complete: "",
-    people: ""
+    people: "",
+    uploadImage: false
   }),
   mounted() {
     this.getPortfolios();
@@ -263,6 +264,7 @@ export default {
     },
     onFilePicked(e) {
       const files = e.target.files;
+      this.uploadImage = true;
       if (files[0] !== undefined) {
         this.imageName = files[0].name;
         if (this.imageName.lastIndexOf(".") <= 0) {
@@ -314,21 +316,34 @@ export default {
       location.href = "/Portfolio";
     },
     update() {
-      FirebaseService.editPortfolio(
-        this.portfolio.title,
-        this.portfolio.body,
-        this.portfolio.language,
-        this.portfolio.complete,
-        this.portfolio.people,
-        this.portfolio.id
-      );
+      if (this.uploadImage === true) {
+        FirebaseService.postPortfolio(
+          this.portfolio.title,
+          this.portfolio.body,
+          this.imageUrl,
+          this.portfolio.language,
+          this.portfolio.uk,
+          this.portfolio.complete,
+          this.portfolio.people,
+          this.$store.state.user.email
+        );
+        FirebaseService.deletePortfolio(this.$route.query.id);
+      } else {
+        FirebaseService.editPortfolio(
+          this.portfolio.title,
+          this.portfolio.body,
+          this.portfolio.language,
+          this.portfolio.complete,
+          this.portfolio.people,
+          this.portfolio.id
+        );
+      }
       location.href = "/Portfolio";
     },
     async getPortfoliosByIndex() {
       this.portfolio = await FirebaseService.getPortfoliosByIndex(
         this.$route.query.id
       );
-      console.log(this.portfolio);
     },
     async getPortfolios() {
       this.portfolios = await FirebaseService.getPortfolios();
