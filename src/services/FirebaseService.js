@@ -147,7 +147,6 @@ export default {
           return data;
         });
       });
-      console.log(data)
   },
   getPostByIndex(id) {
     const postsCollection = firestore.collection(POSTS).doc(id);
@@ -180,6 +179,7 @@ export default {
       .doc(id)
       .delete();
   },
+
   getPortfolios() {
     const postsCollection = firestore.collection(PORTFOLIOS);
     return postsCollection
@@ -214,9 +214,9 @@ export default {
       created_at: firebase.firestore.FieldValue.serverTimestamp()
     });
   },
-  comments(id, fk, text, writer) {
-    return firestore.collection(PORTFOLIOS).doc(id).collection(COMMENTS).add({
-      id,
+  comments(portid, fk, text, writer) {
+    return firestore.collection(PORTFOLIOS).doc(portid).collection(COMMENTS).add({
+      portid,
       fk,
       text,
       writer,
@@ -236,6 +236,15 @@ export default {
         return data;
       });
     });
+  },
+  delcomment(id, fk){
+    console.log(id)
+    console.log(fk)
+    firestore
+    .collection(PORTFOLIOS)
+    .doc(id).collection(COMMENTS)
+    .doc(fk)
+    .delete();
   },
 	getAuthorization() {
 		const userauthCollection = firestore.collection(USERAUTH)

@@ -36,18 +36,23 @@
               </v-text-field>
             </v-flex>
             <v-flex>
-              <v-btn color="success" @click="insert">
+              <v-btn color="success" @click="insert" >
                 댓글달기
               </v-btn>
             </v-flex>
           </v-container>
           <v-flex
             v-for="(i, j) in idcomments.length > limits ? limits : idcomments.length"
-            :key="j"
+            :key=""
           >
           {{idcomments[i -1].text}}
           {{idcomments[i -1].created_at}}
           {{idcomments[i -1].writer}}
+          {{idcomments[i-1].fk}}
+
+          <v-btn color ="red"  @click ="del(idcomments[i -1].fk)">
+            삭제
+          </v-btn>
           </v-flex>
           </p>
         </v-form>
@@ -69,15 +74,17 @@ export default {
   data:() => ({
     portfolios: [],
     idcomments:[],
-    id:"",
+    portid:"",
     fk: "",
     text: "",
-    writer:""
+    writer:"",
+    delfk:""
   }),
   mounted() {
     this.getPortfoliosByIndex();
     this.getCommentsByIndex();
     this.comments();
+    this.del();
   },
 
   methods: {
@@ -91,23 +98,32 @@ export default {
         this.$route.query.id
       )
     },
-    insert(){
+    insert(portid){
       if (this.idcomments.length == 0)
         FirebaseService.comments(
-        this.id = this.portfolios.id,
+       this.portid = this.portfolios.id,
         this.fk = 1,
+          // this.fk,
         this.text,
-        this.writer = this.$store.state.user.displayName
+        this.writer = this.$store.state.user.displayName,
+       location.href ="/pfDetail?id=" + this.portid
         )
       else
         FirebaseService.comments(
-          this.id = this.portfolios.id,
-          this.idcomments[0].fk + 1,
+        this.portid = this.portfolios.id,
+         this.idcomments[0].fk + 1,
+          // this.fk,
           this.text,
-          this.writer = this.$store.state.user.displayName
-        )
+          this.writer = this.$store.state.user.displayName,
+          location.href ="/pfDetail?id="+this.portid
+           )
 
-     location.href ="/pfDetail?id=" + this.id
+    },
+    del(fk){
+      console.log(this.$route.query.id)
+      console.log(fk)
+     FirebaseService.delcomment(this.$route.query.id,fk);
+     //location.href ="/pfDetail?id=" + this.id
     },
 
     loadMorePortfolios() {}
