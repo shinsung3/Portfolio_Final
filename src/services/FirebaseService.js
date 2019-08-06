@@ -214,42 +214,42 @@ export default {
       created_at: firebase.firestore.FieldValue.serverTimestamp()
     });
   },
-  editPortfolio(title, body, language, complete, people, id) {
-    return firestore
-      .collection(PORTFOLIOS)
-      .doc(id)
-      .update({
-        title,
-        body,
-        language,
-        complete,
-        people
+  pcomments(portid, fk, text, writer) {
+     firestore.collection(POSTS).doc(portid).collection(COMMENTS).add({
+      portid,
+      fk,
+      text,
+      writer,
+      created_at: firebase.firestore.FieldValue.serverTimestamp()
+    });
+    return portid
+  },
+  comments(portid, fk, text, writer) {
+     firestore.collection(PORTFOLIOS).doc(portid).collection(COMMENTS).add({
+      portid,
+      fk,
+      text,
+      writer,
+      created_at: firebase.firestore.FieldValue.serverTimestamp()
+    });
+    return portid
+  },
+  getPcommentsByIndex(portid) {
+    const commentsCollection = firestore.collection(POSTS).doc(portid).collection(COMMENTS);
+    return commentsCollection
+    .orderBy('created_at', 'desc')
+    .get()
+    .then(docSnapshots => {
+      return docSnapshots.docs.map(doc => {
+        let data = doc.data();
+        data.id = doc.id;
+        data.created_at = new Date(data.created_at.toDate());
+        return data;
       });
+    });
   },
-  deletePortfolio(id) {
-    return firestore
-      .collection(PORTFOLIOS)
-      .doc(id)
-      .delete();
-  },
-  comments(id, fk, text, writer) {
-    return firestore
-      .collection(PORTFOLIOS)
-      .doc(id)
-      .collection(COMMENTS)
-      .add({
-        id,
-        fk,
-        text,
-        writer,
-        created_at: firebase.firestore.FieldValue.serverTimestamp()
-      });
-  },
-  getCommentsByIndex(id) {
-    const commentsCollection = firestore
-      .collection(PORTFOLIOS)
-      .doc(id)
-      .collection(COMMENTS);
+  getCommentsByIndex(portid) {
+    const commentsCollection = firestore.collection(PORTFOLIOS).doc(portid).collection(COMMENTS);
     return commentsCollection
       .orderBy("created_at", "desc")
       .get()
@@ -261,6 +261,23 @@ export default {
           return data;
         });
       });
+    });
+  },
+  delcomment(portid, id){
+    firestore
+    .collection(PORTFOLIOS)
+    .doc(portid).collection(COMMENTS)
+    .doc(id)
+    .delete();
+    return portid
+  },
+  delPcomment(portid, id){
+    firestore
+    .collection(POSTS)
+    .doc(portid).collection(COMMENTS)
+    .doc(id)
+    .delete();
+    return portid
   },
 	getAuthorization() {
 		const userauthCollection = firestore.collection(USERAUTH)
