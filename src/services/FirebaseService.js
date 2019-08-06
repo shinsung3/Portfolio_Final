@@ -214,17 +214,28 @@ export default {
       created_at: firebase.firestore.FieldValue.serverTimestamp()
     });
   },
-  comments(portid, fk, text, writer) {
-    return firestore.collection(PORTFOLIOS).doc(portid).collection(COMMENTS).add({
+  pcomments(portid, fk, text, writer) {
+     firestore.collection(POSTS).doc(portid).collection(COMMENTS).add({
       portid,
       fk,
       text,
       writer,
       created_at: firebase.firestore.FieldValue.serverTimestamp()
     });
+    return portid
   },
-  getCommentsByIndex(id) {
-    const commentsCollection = firestore.collection(PORTFOLIOS).doc(id).collection(COMMENTS);
+  comments(portid, fk, text, writer) {
+     firestore.collection(PORTFOLIOS).doc(portid).collection(COMMENTS).add({
+      portid,
+      fk,
+      text,
+      writer,
+      created_at: firebase.firestore.FieldValue.serverTimestamp()
+    });
+    return portid
+  },
+  getPcommentsByIndex(portid) {
+    const commentsCollection = firestore.collection(POSTS).doc(portid).collection(COMMENTS);
     return commentsCollection
     .orderBy('created_at', 'desc')
     .get()
@@ -237,14 +248,35 @@ export default {
       });
     });
   },
-  delcomment(id, fk){
-    console.log(id)
-    console.log(fk)
+  getCommentsByIndex(portid) {
+    const commentsCollection = firestore.collection(PORTFOLIOS).doc(portid).collection(COMMENTS);
+    return commentsCollection
+    .orderBy('created_at', 'desc')
+    .get()
+    .then(docSnapshots => {
+      return docSnapshots.docs.map(doc => {
+        let data = doc.data();
+        data.id = doc.id;
+        data.created_at = new Date(data.created_at.toDate());
+        return data;
+      });
+    });
+  },
+  delcomment(portid, id){
     firestore
     .collection(PORTFOLIOS)
-    .doc(id).collection(COMMENTS)
-    .doc(fk)
+    .doc(portid).collection(COMMENTS)
+    .doc(id)
     .delete();
+    return portid
+  },
+  delPcomment(portid, id){
+    firestore
+    .collection(POSTS)
+    .doc(portid).collection(COMMENTS)
+    .doc(id)
+    .delete();
+    return portid
   },
 	getAuthorization() {
 		const userauthCollection = firestore.collection(USERAUTH)
