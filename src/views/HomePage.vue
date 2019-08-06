@@ -23,7 +23,6 @@
         Talk is cheap. Show me the code.
       </div>
     </ImgBanner>
-    <ImgurAPI></ImgurAPI>
 
     <!-- About Me -->
     <v-container>
@@ -49,8 +48,7 @@
             }"
             xs12
             v-html="output.introduce"
-          >
-          </p>
+          ></p>
         </v-flex>
         <v-flex hidden-xs-only pt-3 mt-5 bt-5>
           <v-img :src="getImgUrl('profile.jpg')" aspect-ratio="1.0" />
@@ -88,7 +86,9 @@
               </template>
               <v-card>
                 <v-card-text>{{ item.body }}</v-card-text>
-                <v-card-text style="padding-top:0px">{{ item.enbody }}</v-card-text>
+                <v-card-text style="padding-top:0px">{{
+                  item.enbody
+                }}</v-card-text>
               </v-card>
             </v-expansion-panel-content>
           </v-expansion-panel>
@@ -196,37 +196,41 @@ export default {
         name: "조신성",
         body:
           "저는 12조가 너무 마음에 들구요. 이번에 Best Member로 뽑혔어욬ㅋㅋ",
-        enbody:" I really like our team and I was chosen as the Best Member last time. haha"
+        enbody:
+          " I really like our team and I was chosen as the Best Member last time. haha"
       },
       {
         id: 2,
         name: "박나원",
         body:
           "저는 삽질을 많이하지만 그러다보면 실력이 좋아지지 않을까 믿고 있습니다! ...",
-        enbody:"I messed up a lot, but I believe I'll improve my skills soon! ..."
+        enbody:
+          "I messed up a lot, but I believe I'll improve my skills soon! ..."
       },
       {
         id: 3,
         name: "최훈석",
         body: "저는 오래걸리지만 확실하게 알고 넘어갑니다!!",
-        enbody:"It takes me a long time to work, but I know exactly what I'm going to do!!"
+        enbody:
+          "It takes me a long time to work, but I know exactly what I'm going to do!!"
       },
       {
         id: 4,
         name: "김현일",
         body:
           "열정에 비해 실력은 많이 모자라지만 이번 기회를 통해 실력을 많이 성장시키고자 합니다 화이팅~~!!",
-        enbody:"I'm not good enough for my passion, but I want to use this opportunity to improve my skills. Fighting!"
+        enbody:
+          "I'm not good enough for my passion, but I want to use this opportunity to improve my skills. Fighting!"
       },
       {
         id: 5,
         name: "김녹구",
         body: "새로운 회사로 이직...",
-        enbody:"Move to a new company..."
+        enbody: "Move to a new company..."
       }
     ],
-    title: 'Simple Title',
-    options: { body: 'Simple piece of body text.\nSecond line of body text :)'}
+    title: "Simple Title",
+    options: { body: "Simple piece of body text.\nSecond line of body text :)" }
   }),
   mounted() {
     this.output = this.content;
