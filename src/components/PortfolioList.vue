@@ -32,7 +32,14 @@
       >
         <v-icon size="25" class="mr-2">fa-angle-double-up</v-icon>접기
       </v-btn>
-      <v-btn class="button1" to="/pfWriter" v-if="this.$store.state.userauth == '팀원' || this.$store.state.userauth == '관리자'">
+      <v-btn
+        class="button1"
+        to="/pfWriter"
+        v-if="
+          this.$store.state.userauth == '팀원' ||
+            this.$store.state.userauth == '관리자'
+        "
+      >
         <img
           src="https://image.flaticon.com/icons/svg/1865/1865689.svg"
           width="30px"
