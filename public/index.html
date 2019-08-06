@@ -28,17 +28,13 @@
   </body>
 
   <script>
-    const messaging = firebase.messaging();
-    messaging.usePublicVapidKey("BOWWayUfWK5q_KCDYkpd1sbnzejtXf6vg49tzL_MHO1AEQJ8WGYFje5HYfHCAGHSlfsCP1ciYp_1vQcxQJrm8Z8");
+    const functions = require('firebase-functions');
 
-    Notification.requestPermission().then((permission) => {
-      if (permission === 'granted') {
-        console.log('Notification permission granted.');
-        // TODO(developer): Retrieve an Instance ID token for use with FCM.
-        // ...
-      } else {
-        console.log('Unable to get permission to notify.');
-      }
-    });index.html
+    exports.portfolioNotification = functions.firestore
+      .document("portfolios/{portfolios}")
+      .onCreate(async event => {
+        var msg = "New Portfolio : " + event.date().title;
+        return
+      });
   </script>
 </html>

@@ -26,20 +26,24 @@ const firestore = firebase.firestore();
 const logincheck = firebase.functions().httpsCallable("logincheck");
 const logoutcheck = firebase.functions().httpsCallable("logoutcheck");
 
+var deviceToken = "";
 const messaging = firebase.messaging();
 messaging.usePublicVapidKey("BOWWayUfWK5q_KCDYkpd1sbnzejtXf6vg49tzL_MHO1AEQJ8WGYFje5HYfHCAGHSlfsCP1ciYp_1vQcxQJrm8Z8");
-Notification.requestPermission().then(function(permission) {
-  if (permission === "granted") {
-    console.log("Notification permission granted.");
-  } else {
-    console.log("Unable to get permission to notify.");
-  }
-});
 
-messaging.getToken().then(token =>{
-    console.log("Home")
-    console.log(token)
-});
+function getDeviceToken(email) {
+  messaging.requestPermission()
+   .then(function(){
+     console.log("have permission")
+     return messaging.getToken();
+   })
+   .then(function(token){
+     deviceToken=token;
+     modifyToken(email);
+   })
+   .catch(function(err){
+     console.log(err);
+  })
+}
 
 //offline check
 firebase
@@ -67,13 +71,20 @@ function chkDup(email) {
     });
 }
 
-function setAuthorization(email, auth) {
+function modifyToken(email) {
+  return firestore.collection(USERAUTH).doc(email).update({
+    deviceToken: deviceToken
+  })
+}
+
+function setAuthorization(email, auth, deviceToken) {
   return firestore
     .collection(USERAUTH)
     .doc(email)
     .set({
       email,
       auth,
+      deviceToken,
       created_at: firebase.firestore.FieldValue.serverTimestamp()
     });
 }
@@ -232,9 +243,10 @@ export default {
 		return firebase.auth().signInWithPopup(provider).then(function(result) {
 			let accessToken = result.credential.accessToken
 			let user = result.user
+      getDeviceToken(user.email);
       chkDup(user.email).then(res => {
         if(res == false) {
-          setAuthorization(user.email, '방문자');
+          setAuthorization(user.email, '방문자', deviceToken);
         }
       }) .catch(err => {
         console.log(err);
@@ -249,10 +261,11 @@ export default {
 		let provider = new firebase.auth.FacebookAuthProvider();
 		return firebase.auth().signInWithPopup(provider).then(function(result) {
 			let accessToken = result.credential.accessToken
-			let user = result.user
+			let user = result.user;
+      getDeviceToken(user.email);
       chkDup(user.email).then(res => {
         if(res == false) {
-          setAuthorization(user.email, '방문자');
+          setAuthorization(user.email, '방문자', deviceToken);
         }
       }) .catch(err => {
         console.log(err);
@@ -277,7 +290,8 @@ export default {
 				alert("회원가입 축하합니다")
         chkDup(email).then(res => {
           if(res == false) {
-            setAuthorization(email, '방문자');
+            getDeviceToken(email);
+            setAuthorization(user.email, '방문자', deviceToken);
           }
         }) .catch(err => {
           console.log(err);
@@ -292,6 +306,7 @@ export default {
 	signIn(email, password) {
 		return firebase.auth().signInWithEmailAndPassword(email, password).then(
 			function(user) {
+        getDeviceToken(email);
 				return user
 			},
 			function(err) {
