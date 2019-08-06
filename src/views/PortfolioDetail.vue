@@ -1,6 +1,5 @@
 <template>
   <div>
-    <!-- About Me -->
     <v-container>
       <v-layout my-5>
         <v-flex xs12 sm8>
@@ -23,8 +22,17 @@
       <h1 class="DokdoList">인원 : {{ portfolios.people }}</h1>
       <br />
       <br />
-      <!-- 댓글 -->
       <v-flex>
+        <v-form ref="form" v-model="valid" lazy-validation>
+          <v-flex align-center justify-end row fill-height right>
+            <v-btn @click="linkToPage" id="button1">
+              <v-icon>fas fa-user-edit</v-icon><span id="padding">수정</span>
+            </v-btn>
+            <v-btn @click="deleteDB" class="buttonWriter">
+              <v-icon>far fa-trash-alt</v-icon><span id="padding">삭제</span>
+            </v-btn>
+          </v-flex>
+        </v-form>
         <v-form ref="form">
           <v-container>
             <v-flex>
@@ -36,25 +44,26 @@
               </v-text-field>
             </v-flex>
             <v-flex>
-              <v-btn color="success" @click="insert" >
+              <v-btn color="success" @click="insert">
                 댓글달기
               </v-btn>
             </v-flex>
           </v-container>
           <v-flex
-            v-for="(i, j) in idcomments.length > limits ? limits : idcomments.length"
-            :key=""
+            v-for="(i, j) in idcomments.length > limits
+              ? limits
+              : idcomments.length"
+            :key="j"
           >
-          {{idcomments[i -1].text}}
-          {{idcomments[i -1].created_at}}
-          {{idcomments[i -1].writer}}
-          {{idcomments[i-1].fk}}
+            {{ idcomments[i - 1].text }}
+            {{ idcomments[i - 1].created_at }}
+            {{ idcomments[i - 1].writer }}
+            {{ idcomments[i - 1].fk }}
 
-          <v-btn color ="red"  @click ="del(idcomments[i -1].fk)">
-            삭제
-          </v-btn>
+            <v-btn color="red" @click="del(idcomments[i - 1].fk)">
+              삭제
+            </v-btn>
           </v-flex>
-          </p>
         </v-form>
       </v-flex>
     </v-container>
@@ -65,20 +74,19 @@
 import "../CSS/FontColor.css";
 import "../CSS/ellipsis.css";
 import "../CSS/DokdoFont.css";
-import Comments from "../components/Comments.vue";
 import FirebaseService from "@/services/FirebaseService";
 
 export default {
   name: "PortfolioDetail",
 
-  data:() => ({
+  data: () => ({
     portfolios: [],
-    idcomments:[],
-    portid:"",
+    idcomments: [],
+    portid: "",
     fk: "",
     text: "",
-    writer:"",
-    delfk:""
+    writer: "",
+    delfk: ""
   }),
   mounted() {
     this.getPortfoliosByIndex();
@@ -91,42 +99,43 @@ export default {
     async getPortfoliosByIndex() {
       this.portfolios = await FirebaseService.getPortfoliosByIndex(
         this.$route.query.id
-      )
+      );
     },
-    async getCommentsByIndex(){
+    linkToPage() {
+      this.$router.push("/pfWriter?id=" + this.$route.query.id);
+    },
+    async getCommentsByIndex() {
       this.idcomments = await FirebaseService.getCommentsByIndex(
         this.$route.query.id
-      )
+      );
+    },
+    deleteDB() {
+      FirebaseService.deletePortfolio(this.portfolios.id);
+      this.posts = FirebaseService.getPosts();
+      location.href = "/Portfolio";
     },
     insert(portid){
       if (this.idcomments.length == 0)
         FirebaseService.comments(
-       this.portid = this.portfolios.id,
-        this.fk = 1,
-          // this.fk,
-        this.text,
-        this.writer = this.$store.state.user.displayName,
-       location.href ="/pfDetail?id=" + this.portid
-        )
-      else
-        FirebaseService.comments(
-        this.portid = this.portfolios.id,
-         this.idcomments[0].fk + 1,
+          (this.portid = this.portfolios.id),
+          (this.fk = 1),
           // this.fk,
           this.text,
-          this.writer = this.$store.state.user.displayName,
-          location.href ="/pfDetail?id="+this.portid
-           )
-
+          (this.writer = this.$store.state.user.displayName),
+          (location.href = "/pfDetail?id=" + this.portid)
+        );
+      else
+        FirebaseService.comments(
+          (this.portid = this.portfolios.id),
+          this.idcomments[0].fk + 1,
+          this.text,
+          (this.writer = this.$store.state.user.displayName),
+          (location.href = "/pfDetail?id=" + this.portid)
+        );
     },
-    del(fk){
-      console.log(this.$route.query.id)
-      console.log(fk)
-     FirebaseService.delcomment(this.$route.query.id,fk);
-     //location.href ="/pfDetail?id=" + this.id
-    },
-
-    loadMorePortfolios() {}
+    del(fk) {
+      FirebaseService.delcomment(this.$route.query.id, fk);
+    }
   }
 };
 </script>
@@ -137,5 +146,9 @@ export default {
 
 .subfont {
   font-size: 38px;
+}
+
+#button1 {
+  background-color: antiquewhite;
 }
 </style>
