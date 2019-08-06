@@ -261,7 +261,6 @@ export default {
           return data;
         });
       });
-    });
   },
   delcomment(portid, id){
     firestore

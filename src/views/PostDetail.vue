@@ -12,21 +12,20 @@
             {{ post.body }}
             <br />
           </p>
-<<<<<<< HEAD
         </v-flex>
       </v-layout>
       <v-form ref="form" v-model="valid" lazy-validation>
-=======
-        </center>
-        <p class="DokdoList subfont">
-          {{ post.body }}
-          <br />
-        </p>
-      </v-flex>
-    </v-layout>
-    <!-- <v-form ref="form" v-model="valid" lazy-validation>
->>>>>>> 48cc6a9731e512ea8a1600794a10250705cb4d8b
-        <v-flex align-center justify-end row fill-height right>
+        <v-flex
+          align-center
+          justify-end
+          row
+          fill-height
+          right
+          v-if="
+            this.$store.state.userauth == '팀원' ||
+              this.$store.state.userauth == '관리자'
+          "
+        >
           <v-btn @click="linkToPage">
             <v-icon>fas fa-user-edit</v-icon><span id="padding">수정</span>
           </v-btn>
