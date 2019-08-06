@@ -3,7 +3,7 @@
     <v-layout>
       <v-flex>
         <v-form ref="form" v-model="valid" lazy-validation>
-          <v-container>
+          <v-container id="size">
             <template v-if="portfolio == ''">
               <!-- title -->
               <v-flex px10 py10>
@@ -15,6 +15,10 @@
                   required
                 >
                 </v-text-field>
+              </v-flex>
+              <!-- body -->
+              <v-flex px10 py10>
+                <markdown-editor v-model="body"></markdown-editor>
               </v-flex>
               <!-- language -->
               <v-flex px10 py10>
@@ -48,10 +52,6 @@
                   >
                   </v-text-field>
                 </v-flex>
-              </v-flex>
-              <!-- body -->
-              <v-flex px10 py10>
-                <markdown-editor v-model="body"></markdown-editor>
               </v-flex>
               <!-- image -->
               <v-flex>

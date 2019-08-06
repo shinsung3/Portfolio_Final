@@ -25,7 +25,7 @@
     </ImgBanner>
 
     <!-- About Me -->
-    <v-container id="size1">
+    <v-container>
       <v-layout my-5>
         <v-flex xs12 sm8>
           <h2
