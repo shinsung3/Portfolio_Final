@@ -3,7 +3,7 @@ import "firebase/firestore";
 import "firebase/auth";
 import store from "../store.js";
 import "firebase/functions";
-import '@firebase/messaging';
+import "@firebase/messaging";
 
 const POSTS = "posts";
 const PORTFOLIOS = "portfolios";
@@ -18,7 +18,7 @@ const config = {
   apiKey: "AIzaSyAzGXg4iu-1spk8IoCm-EwpqJYsNGemOFk",
   databaseURL: "https://halhalnolnol-9b318.firebaseio.com",
   storageBucket: "halhalnolnol-9b318.appspot.com",
-  messagingSenderId:"121250140856"
+  messagingSenderId: "121250140856"
 };
 
 firebase.initializeApp(config);
@@ -179,7 +179,6 @@ export default {
       .doc(id)
       .delete();
   },
-
   getPortfolios() {
     const postsCollection = firestore.collection(PORTFOLIOS);
     return postsCollection
@@ -202,7 +201,7 @@ export default {
       return data;
     });
   },
-  postPortfolio(title, body, img, uk, language, complete, people) {
+  postPortfolio(title, body, img, uk, language, complete, people, userId) {
     return firestore.collection(PORTFOLIOS).add({
       title,
       body,
@@ -211,40 +210,61 @@ export default {
       language,
       complete,
       people,
+      userId,
       created_at: firebase.firestore.FieldValue.serverTimestamp()
     });
   },
-  comments(portid, fk, text, writer) {
-    return firestore.collection(PORTFOLIOS).doc(portid).collection(COMMENTS).add({
-      portid,
-      fk,
-      text,
-      writer,
-      created_at: firebase.firestore.FieldValue.serverTimestamp()
-    });
+  editPortfolio(title, body, img, uk, language, complete, people, userId, id) {
+    return firestore
+      .collection(PORTFOLIOS)
+      .doc(id)
+      .update({
+        title,
+        body,
+        img,
+        uk,
+        language,
+        complete,
+        people,
+        userId,
+        created_at: firebase.firestore.FieldValue.serverTimestamp()
+      });
+  },
+  deletePortfolio(id) {
+    return firestore
+      .collection(PORTFOLIOS)
+      .doc(id)
+      .delete();
+  },
+  comments(id, fk, text, writer) {
+    return firestore
+      .collection(PORTFOLIOS)
+      .doc(id)
+      .collection(COMMENTS)
+      .add({
+        id,
+        fk,
+        text,
+        writer,
+        created_at: firebase.firestore.FieldValue.serverTimestamp()
+      });
   },
   getCommentsByIndex(id) {
-    const commentsCollection = firestore.collection(PORTFOLIOS).doc(id).collection(COMMENTS);
+    const commentsCollection = firestore
+      .collection(PORTFOLIOS)
+      .doc(id)
+      .collection(COMMENTS);
     return commentsCollection
-    .orderBy('created_at', 'desc')
-    .get()
-    .then(docSnapshots => {
-      return docSnapshots.docs.map(doc => {
-        let data = doc.data();
-        data.id = doc.id;
-        data.created_at = new Date(data.created_at.toDate());
-        return data;
+      .orderBy("created_at", "desc")
+      .get()
+      .then(docSnapshots => {
+        return docSnapshots.docs.map(doc => {
+          let data = doc.data();
+          data.id = doc.id;
+          data.created_at = new Date(data.created_at.toDate());
+          return data;
+        });
       });
-    });
-  },
-  delcomment(id, fk){
-    console.log(id)
-    console.log(fk)
-    firestore
-    .collection(PORTFOLIOS)
-    .doc(id).collection(COMMENTS)
-    .doc(fk)
-    .delete();
   },
 	getAuthorization() {
 		const userauthCollection = firestore.collection(USERAUTH)

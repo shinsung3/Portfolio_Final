@@ -4,95 +4,180 @@
       <v-flex>
         <v-form ref="form" v-model="valid" lazy-validation>
           <v-container>
-            <!-- title -->
-            <v-flex px10 py10>
-              <v-text-field
-                v-model="title"
-                :counter="30"
-                :rules="titleRules"
-                label="제목"
-                required
-              >
-              </v-text-field>
-            </v-flex>
-            <!-- language -->
-            <v-flex px10 py10>
-              <v-text-field
-                v-model="language"
-                :counter="30"
-                :rules="titleRules"
-                label="사용언어"
-                required
-              >
-              </v-text-field>
-            </v-flex>
-            <!-- complete -->
-            <v-flex px10 py10>
-              <v-text-field
-                v-model="complete"
-                :counter="30"
-                :rules="titleRules"
-                label="기간"
-                required
-              >
-              </v-text-field>
-              <!-- people -->
+            <template v-if="portfolio == ''">
+              <!-- title -->
               <v-flex px10 py10>
                 <v-text-field
-                  v-model="people"
+                  v-model="title"
                   :counter="30"
                   :rules="titleRules"
-                  label="참여인원"
+                  label="제목"
                   required
                 >
                 </v-text-field>
               </v-flex>
-            </v-flex>
-            <!-- body -->
-            <v-flex px10 py10>
-              <markdown-editor v-model="body"></markdown-editor>
-            </v-flex>
-
-            <!-- image -->
-            <v-flex>
-              <v-container fluid>
-                <v-flex
-                  xs12
-                  class="text-xs-center text-sm-center text-md-center text-lg-center"
+              <!-- language -->
+              <v-flex px10 py10>
+                <v-text-field
+                  v-model="language"
+                  :counter="30"
+                  :rules="titleRules"
+                  label="사용언어"
+                  required
                 >
-                  <img :src="imageUrl" height="150" v-if="imageUrl" />
+                </v-text-field>
+              </v-flex>
+              <!-- complete -->
+              <v-flex px10 py10>
+                <v-text-field
+                  v-model="complete"
+                  :counter="30"
+                  :rules="titleRules"
+                  label="기간"
+                  required
+                >
+                </v-text-field>
+                <!-- people -->
+                <v-flex px10 py10>
                   <v-text-field
-                    label="Select Image"
-                    @click="pickFile"
-                    v-model="imageName"
-                    prepend-icon="attach_file"
+                    v-model="people"
+                    :counter="30"
+                    :rules="titleRules"
+                    label="참여인원"
+                    required
                   >
                   </v-text-field>
-                  <input
-                    type="file"
-                    ref="image"
-                    accept="image/*"
-                    @change="onFilePicked"
-                    class="input_css"
-                  />
                 </v-flex>
-              </v-container>
-            </v-flex>
-            <v-flex align-center justify-end row fill-height right>
-              <v-btn color="success" @click="submit">
-                업로드<img
-                  src="https://image.flaticon.com/icons/svg/261/261868.svg"
-                  width="35px"
-                />
-              </v-btn>
-              <v-btn
-                @click.stop="reset()"
-                class="buttonWriter"
-                href="/Portfolio"
-              >
-                취소
-              </v-btn>
-            </v-flex>
+              </v-flex>
+              <!-- body -->
+              <v-flex px10 py10>
+                <markdown-editor v-model="body"></markdown-editor>
+              </v-flex>
+              <!-- image -->
+              <v-flex>
+                <v-container fluid>
+                  <v-flex
+                    xs12
+                    class="text-xs-center text-sm-center text-md-center text-lg-center"
+                  >
+                    <img :src="imageUrl" height="150" v-if="imageUrl" />
+                    <v-text-field
+                      label="Select Image"
+                      @click="pickFile"
+                      v-model="imageName"
+                      prepend-icon="attach_file"
+                    >
+                    </v-text-field>
+                    <input
+                      type="file"
+                      ref="image"
+                      accept="image/*"
+                      @change="onFilePicked"
+                      class="input_css"
+                    />
+                  </v-flex>
+                </v-container>
+              </v-flex>
+              <v-flex align-center justify-end row fill-height right>
+                <v-btn color="success" @click="submit">
+                  업로드<img
+                    src="https://image.flaticon.com/icons/svg/261/261868.svg"
+                    width="35px"
+                  />
+                </v-btn>
+                <v-btn
+                  @click.stop="reset()"
+                  class="buttonWriter"
+                  href="/Portfolio"
+                >
+                  취소
+                </v-btn>
+              </v-flex>
+            </template>
+            <template v-else>
+              <v-flex px10 py10>
+                <v-text-field
+                  v-model="portfolio.title"
+                  :counter="30"
+                  :rules="titleRules"
+                  label="제목"
+                  required
+                >
+                </v-text-field>
+              </v-flex>
+              <v-flex px10 py10>
+                <v-text-field
+                  v-model="portfolio.language"
+                  :counter="30"
+                  :rules="titleRules"
+                  label="사용언어"
+                  required
+                >
+                </v-text-field>
+              </v-flex>
+              <v-flex px10 py10>
+                <v-text-field
+                  v-model="portfolio.complete"
+                  :counter="30"
+                  :rules="titleRules"
+                  label="기간"
+                  required
+                >
+                </v-text-field>
+                <v-flex px10 py10>
+                  <v-text-field
+                    v-model="portfolio.people"
+                    :counter="30"
+                    :rules="titleRules"
+                    label="참여인원"
+                    required
+                  >
+                  </v-text-field>
+                </v-flex>
+              </v-flex>
+              <v-flex px10 py10>
+                <markdown-editor v-model="portfolio.body"></markdown-editor>
+              </v-flex>
+              <v-flex>
+                <v-container fluid>
+                  <v-flex
+                    xs12
+                    class="text-xs-center text-sm-center text-md-center text-lg-center"
+                  >
+                    <img :src="imageUrl" height="150" v-if="imageUrl" />
+                    <v-text-field
+                      label="Select Image"
+                      @click="pickFile"
+                      v-model="imageName"
+                      prepend-icon="attach_file"
+                    >
+                    </v-text-field>
+                    <input
+                      type="file"
+                      ref="image"
+                      accept="image/*"
+                      @change="onFilePicked"
+                      class="input_css"
+                    />
+                  </v-flex>
+                </v-container>
+              </v-flex>
+              <v-flex align-center justify-end row fill-height right>
+                <v-btn color="success" @click="update">
+                  수정<img
+                    src="https://image.flaticon.com/icons/svg/261/261868.svg"
+                    width="35px"
+                  />
+                </v-btn>
+                <v-btn
+                  @click.stop="reset()"
+                  class="buttonWriter"
+                  href="/Portfolio"
+                >
+                  취소
+                </v-btn>
+              </v-flex>
+            </template>
           </v-container>
         </v-form>
       </v-flex>
@@ -102,12 +187,11 @@
 
 <script>
 import FirebaseService from "@/services/FirebaseService";
-// import ImgBanner from "../components/ImgBanner";
 import "../CSS/DokdoFont.css";
 import axios from "axios";
 
 export default {
-  name: "PortfolioPage",
+  name: "PortfolioWriter",
   data: () => ({
     valid: true,
     title: "",
@@ -120,17 +204,19 @@ export default {
     imageFile: "",
     body: "",
     imageDeleteHash: "",
-    portpolios: [],
+    portfolios: [],
+    portfolio: [],
     language: "",
     complete: "",
     people: ""
   }),
-  components: {
-    // ImgBanner
-  },
   mounted() {
     this.getPortfolios();
-    if (this.$store.state.userauth != "관리자" && this.$store.state.userauth != "팀원") {
+    this.getPortfoliosByIndex();
+    if (
+      this.$store.state.userauth != "관리자" &&
+      this.$store.state.userauth != "팀원"
+    ) {
       alert("글을 작성할 권한이 없습니다.");
       this.$router.push("/Portfolio");
     }
@@ -211,7 +297,8 @@ export default {
           1,
           this.complete,
           this.language,
-          this.people
+          this.people,
+          this.$store.state.user.email
         );
       else
         FirebaseService.postPortfolio(
@@ -221,9 +308,33 @@ export default {
           this.portfolios[0].uk + 1,
           this.complete,
           this.language,
-          this.people
+          this.people,
+          this.$store.state.user.email
         );
       location.href = "/Portfolio";
+    },
+    update() {
+      console.log("작동")
+      this.uploadToAlbum();
+      // FirebaseService.deletePortfolio(this.$route.query.id);
+      console.log(this.portfolio)
+      FirebaseService.editPortfolio(
+        this.portfolio.title,
+        this.portfolio.body,
+        this.portfolio.imageUrl,
+        this.portfolio.uk,
+        this.portfolio.language,
+        this.portfolio.complete,
+        this.portfolio.people,
+        this.$store.state.user.email
+      );
+      location.href = "/Portfolio";
+    },
+    async getPortfoliosByIndex() {
+      this.portfolio = await FirebaseService.getPortfoliosByIndex(
+        this.$route.query.id
+      );
+      console.log(this.portfolio);
     },
     async getPortfolios() {
       this.portfolios = await FirebaseService.getPortfolios();

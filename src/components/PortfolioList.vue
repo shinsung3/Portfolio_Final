@@ -15,6 +15,7 @@
         :imgSrc="portfolios[i - 1].img"
         :uk="portfolios[i - 1].uk"
         :id="portfolios[i - 1].id"
+        :userid="portfolios[i - 1].userid"
       >
       </Portfolio>
     </v-flex>
