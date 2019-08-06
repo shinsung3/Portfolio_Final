@@ -14,7 +14,15 @@
           </p>
         </v-flex>
       </v-layout>
-      <v-form ref="form" v-model="valid" lazy-validation>
+      <v-form
+        ref="form"
+        v-model="valid"
+        lazy-validation
+        v-if="
+          this.$store.state.userauth == '팀원' ||
+            this.$store.state.userauth == '관리자'
+        "
+      >
         <v-flex align-center justify-end row fill-height right>
           <v-btn @click="linkToPage">
             <v-icon>fas fa-user-edit</v-icon><span id="padding">수정</span>
