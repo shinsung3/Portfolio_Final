@@ -1,6 +1,6 @@
 <template>
   <div>
-    <v-container>
+    <v-container id="size">
       <v-layout my-5>
         <v-flex xs12 sm8>
           <center>
@@ -83,5 +83,9 @@ export default {
 
 .subfont {
   font-size: 38px;
+}
+
+#size {
+  width: 960px;
 }
 </style>

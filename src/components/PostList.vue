@@ -22,7 +22,7 @@
       <v-btn v-if="loadLess" color="warning" dark v-on:click="loadLessPosts">
         <v-icon size="25" class="mr-2">fa-angle-double-up</v-icon> 접기
       </v-btn>
-      <v-btn class="button1" to="/psWriter">
+      <v-btn id="hot" to="/psWriter">
         <img
           src="https://image.flaticon.com/icons/svg/1865/1865689.svg"
           width="30px"
@@ -86,5 +86,10 @@ export default {
 .mw-700 {
   max-width: 700px;
   margin: auto;
+}
+
+#hot {
+  background-color: hotpink;
+  color: white;
 }
 </style>
