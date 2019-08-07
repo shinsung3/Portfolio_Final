@@ -149,9 +149,9 @@ export default {
       this.portid = FirebaseService.delcomment(this.$route.query.id, id);
       location.href = "/pfDetail?id=" + this.portid
     },
-    del(fk) {
-      FirebaseService.delcomment(this.$route.query.id, fk);
-    }
+    // del(fk) {
+    //   FirebaseService.delcomment(this.$route.query.id, fk);
+    // }
   }
 };
 </script>
