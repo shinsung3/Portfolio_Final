@@ -3,7 +3,7 @@
     <v-flex row>
       <v-card @click="linkToPage" hover>
         <div class="paddingSize">
-          <div class="caption">{{ formatedDate }}</div>
+          <div>{{ formatedDate }}</div>
           <div class="headline text2">{{ subject.translate }}</div>
           <span class="grey--text text1">{{ content.translate }}</span>
         </div>

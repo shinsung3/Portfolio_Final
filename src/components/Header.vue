@@ -39,7 +39,7 @@
           <span class="DokdoHeader2">Portfolio</span>
         </v-btn>
         <v-btn flat to="/Post">
-          <span class="DokdoHeader2">Post</span>
+          <span class="DokdoHeader2">Skill</span>
         </v-btn>
         <v-btn flat to="/repository">
           <span class="DokdoHeader2">Project</span>
@@ -149,7 +149,7 @@ export default {
         href: "/Portfolio"
       },
       {
-        title: "Post",
+        title: "skill",
         icon: "event",
         href: "/Post"
       },

@@ -137,7 +137,7 @@
                 }"
                 class="my-5 text-xs-center DokdoList FontColor"
               >
-                Post
+                Skill
               </h2>
             </router-link>
             <PostList :column="3"></PostList>
@@ -278,14 +278,14 @@ export default {
 }
 
 .typing {
-animation-duration: 3s;
-animation-name: slidein;
+  animation-duration: 3s;
+  animation-name: slidein;
 }
 
 @keyframes slidein {
   from {
     margin-left: 100%;
-    width: 300%
+    width: 300%;
   }
 
   to {
