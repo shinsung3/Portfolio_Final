@@ -1,5 +1,5 @@
 const functions = require('firebase-functions');
-const admin = require ('firebase-admin');
+const admin = require('firebase-admin');
 admin.initializeApp();
 
 // Create and Deploy Your First Cloud Functions
@@ -27,7 +27,7 @@ const uid = context.auth.uid;
   return {email};
 });
 
-exports.portflioNotification = functions.firestore
+exports.portfolioNotification = functions.firestore
   .document("portfolios/{portfolios}")
   .onCreate(async event => {
      var msg = "New Portfolio : " + event.data().title;
@@ -35,7 +35,7 @@ exports.portflioNotification = functions.firestore
      return pushMessage(msg);
   });
 
-exports.sendPostNotification = functions.firestore
+exports.postNotification = functions.firestore
   .document("posts/{posts}")
   .onCreate(async event => {
      var msg = "New Post : " + event.data().title;
@@ -56,7 +56,7 @@ users
  .get()
  .then(snapshot => {
    snapshot.forEach(doc => {
-     if (doc.data().deviceToken !== "") {
+     if (doc.data().deviceToken != null) {
        console.log(doc.data().deviceToken);
        token = doc.data().deviceToken;
        console.log("전송 : ", token);
@@ -73,7 +73,7 @@ users
    });
    return "모든 유저에게 메시지 전송";
  })
- .catch(err => {
-   console.log("문서를 얻어오는데 실패했습니다", err);
+ .catch(error => {
+   console.log("문서를 얻어오는데 실패했습니다", error);
  });
 }

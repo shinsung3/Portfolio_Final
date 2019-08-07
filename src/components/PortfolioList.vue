@@ -21,27 +21,40 @@
       </vueper-slide>
     </vueper-slides>
 
-    <v-flex xs12 text-xs-center round my-5 v-if="loadMore">
-      <v-btn v-if="loadMore" color="info" dark v-on:click="loadMorePortfolios">
-        <v-icon size="25" class="mr-2">fa-plus</v-icon>더 보기
-      </v-btn>
-      <v-btn
-        v-if="loadLess"
-        color="warning"
-        dark
-        v-on:click="loadLessPortfolios"
-      >
-        <v-icon size="25" class="mr-2">fa-angle-double-up</v-icon>접기
-      </v-btn>
-      <v-btn class="button1" to="/pfWriter" v-if="this.$store.state.userauth == '팀원' || this.$store.state.userauth == '관리자'">
-        <img
-          src="https://image.flaticon.com/icons/svg/1865/1865689.svg"
-          width="30px"
-        />
-        <span id="padding"><b>글쓰기</b></span>
-      </v-btn>
-    </v-flex>
-  </v-layout>
+      <v-flex xs12 text-xs-center round my-5 v-if="loadMore">
+        <v-btn
+          v-if="loadMore"
+          color="info"
+          dark
+          v-on:click="loadMorePortfolios"
+        >
+          <v-icon size="25" class="mr-2">fa-plus</v-icon>더 보기
+        </v-btn>
+        <v-btn
+          v-if="loadLess"
+          color="warning"
+          dark
+          v-on:click="loadLessPortfolios"
+        >
+          <v-icon size="25" class="mr-2">fa-angle-double-up</v-icon>접기
+        </v-btn>
+        <v-btn
+          id="hot"
+          to="/pfWriter"
+          v-if="
+            this.$store.state.userauth == '팀원' ||
+              this.$store.state.userauth == '관리자'
+          "
+        >
+          <img
+            src="https://image.flaticon.com/icons/svg/1865/1865689.svg"
+            width="30px"
+          />
+          <span id="padding"><b>글쓰기</b></span>
+        </v-btn>
+      </v-flex>
+    </v-layout>
+  </v-container>
 </template>
 
 <script src="https://unpkg.com/vue"></script>
@@ -102,8 +115,8 @@ export default {
   margin: auto;
 }
 
-.button1 {
-  background-color: gainsboro;
-  border: 0.5px solid gray;
+#hot {
+  background-color: hotpink;
+  color: white;
 }
 </style>

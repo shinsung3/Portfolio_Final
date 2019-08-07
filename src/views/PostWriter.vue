@@ -3,7 +3,7 @@
     <v-layout>
       <v-flex>
         <v-form ref="form" v-model="valid" lazy-validation>
-          <v-container>
+          <v-container id="size">
             <!-- title -->
             <template v-if="posts == ''">
               <v-flex px10 py10>

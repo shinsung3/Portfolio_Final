@@ -3,7 +3,7 @@ import "firebase/firestore";
 import "firebase/auth";
 import store from "../store.js";
 import "firebase/functions";
-import '@firebase/messaging';
+import "@firebase/messaging";
 
 const POSTS = "posts";
 const PORTFOLIOS = "portfolios";
@@ -18,7 +18,7 @@ const config = {
   apiKey: "AIzaSyAzGXg4iu-1spk8IoCm-EwpqJYsNGemOFk",
   databaseURL: "https://halhalnolnol-9b318.firebaseio.com",
   storageBucket: "halhalnolnol-9b318.appspot.com",
-  messagingSenderId:"121250140856"
+  messagingSenderId: "121250140856"
 };
 
 firebase.initializeApp(config);
@@ -33,7 +33,6 @@ messaging.usePublicVapidKey("BOWWayUfWK5q_KCDYkpd1sbnzejtXf6vg49tzL_MHO1AEQJ8WGY
 function getDeviceToken(email) {
   messaging.requestPermission()
    .then(function(){
-     console.log("have permission")
      return messaging.getToken();
    })
    .then(function(token){
@@ -179,7 +178,6 @@ export default {
       .doc(id)
       .delete();
   },
-
   getPortfolios() {
     const postsCollection = firestore.collection(PORTFOLIOS);
     return postsCollection
@@ -202,7 +200,7 @@ export default {
       return data;
     });
   },
-  postPortfolio(title, body, img, uk, language, complete, people) {
+  postPortfolio(title, body, img, uk, language, complete, people, userId) {
     return firestore.collection(PORTFOLIOS).add({
       title,
       body,
@@ -211,20 +209,24 @@ export default {
       language,
       complete,
       people,
+      userId,
       created_at: firebase.firestore.FieldValue.serverTimestamp()
     });
   },
+  //comments
   comments(portid, fk, text, writer) {
-    return firestore.collection(PORTFOLIOS).doc(portid).collection(COMMENTS).add({
+     firestore.collection(COMMENTS).add({
       portid,
       fk,
       text,
       writer,
       created_at: firebase.firestore.FieldValue.serverTimestamp()
     });
+    return portid
   },
-  getCommentsByIndex(id) {
-    const commentsCollection = firestore.collection(PORTFOLIOS).doc(id).collection(COMMENTS);
+
+  getcommentsByIndex() {
+    const commentsCollection = firestore.collection(COMMENTS);
     return commentsCollection
     .orderBy('created_at', 'desc')
     .get()
@@ -237,13 +239,10 @@ export default {
       });
     });
   },
-  delcomment(id, fk){
-    console.log(id)
-    console.log(fk)
+  delcomment(id){
     firestore
-    .collection(PORTFOLIOS)
-    .doc(id).collection(COMMENTS)
-    .doc(fk)
+    .collection(COMMENTS)
+    .doc(id)
     .delete();
   },
 	getAuthorization() {
