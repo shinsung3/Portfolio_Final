@@ -19,6 +19,25 @@
             </v-btn>
           </v-flex>
         </v-container>
+        <v-flex
+          v-for="(i, j) in idcomments.length > limits
+            ? limits
+            : idcomments.length"
+          :key="j"
+        >
+          {{ idcomments[i - 1].text }}
+          {{ idcomments[i - 1].created_at }}
+          {{ idcomments[i - 1].writer }}
+          {{ idcomments[i - 1].fk }}
+
+          <v-btn color="red" @click="del(idcomments[i - 1].id)">
+            삭제
+          </v-btn>
+        </v-flex>
+
+
+
+
       </v-form>
     </v-flex>
   </v-layout>
@@ -35,33 +54,47 @@ import PortfolioDetail from "../views/PortfolioDetail.vue";
 export default{
     name : "Comments",
     data:() => ({
-      portfolios: [],
-      id:"",
+      idcomments: [],
+      portid:"",
       fk: "",
       text: "",
       writer:""
     }),
     mounted() {
-      this.comments(),
-      this.getPortfoliosByIndex();
+      this.getPcommentsByIndex();
+      this.pcomments();
+      this.delPcomment();
     },
     methods: {
-      async getPortfoliosByIndex() {
-        this.id = await FirebaseService.getPortfoliosByIndex(
+      async getPcommentsByIndex() {
+        this.idcomments = await FirebaseService.getPcommentsByIndex(
           this.$route.query.id
         );
       },
 
-
-      insert(){
-        FirebaseService.comments(
-          this.id,
-          this.fk,
-          this.text,
-          this.writer
-        );
-    //     location.href = "pfDetail?id=1o5AELEG4kkxnAIbuzXx";
-      }
+      insert(portid) {
+        if (this.idcomments.length == 0) {
+          this.portid = FirebaseService.pcomments(
+            this.portid = this.$route.query.id,
+            this.fk = 1,
+            this.text,
+            this.writer = this.$store.state.user.displayName,
+          )
+          location.href = "/psDetail?id=" + this.portid
+        } else {
+          this.portid = FirebaseService.pcomments(
+            this.portid = this.$route.query.id,
+            this.idcomments[0].fk + 1,
+            this.text,
+            this.writer = this.$store.state.user.displayName,
+          )
+          location.href = "/psDetail?id=" + this.portid
+        }
+      },
+      del(id) {
+        this.portid = FirebaseService.delPcomment(this.$route.query.id, id);
+        location.href = "/psDetail?id=" + this.portid
+      },
     }
 
 
