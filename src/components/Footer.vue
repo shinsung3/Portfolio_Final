@@ -1,7 +1,6 @@
 <template>
 <footer >
   <v-flex class="hidden-sm-and-down">
-    <!-- 날씨위젯 -->
     <weather
        api-key="ffefdc2265390e7ff31988ef8fa4eb32"
        title="Weather"
@@ -39,44 +38,28 @@
       </ul>
     </div>
   </v-flex>
-
 </footer>
 </template>
 
 <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
-<!-- <script src="https://kit.fontawesome.com/0815a79704.js"></script> -->
-
-
 <script>
+
 import "../CSS/aTag.css"
+import VueWeatherWidget from 'vue-weather-widget';
+import 'vue-weather-widget/dist/css/vue-weather-widget.css';
 
 export default {
   components: {
       'weather': VueWeatherWidget
-  },
-  data() {
-    return {
-    }
   }
 }
 
-import VueWeatherWidget from 'vue-weather-widget';
-import 'vue-weather-widget/dist/css/vue-weather-widget.css';
-
-
 </script>
-
-
-
-
-
-
 <style>
 #footer {
   justify-content: center;
-  /* padding: 5px; */
   background-color: darkgray;
   color: black;
   height: 80px;
@@ -86,11 +69,4 @@ import 'vue-weather-widget/dist/css/vue-weather-widget.css';
    font-size: 20px;
 }
 
-/* 날씨스타일 */
-.fe_daily{
- display: hidden !important;
-}
-.fe_title{
-  display:
-}
 </style>

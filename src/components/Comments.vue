@@ -3,7 +3,7 @@
   <v-layout>
     <v-flex>
       <v-form ref="form">
-        <v-container>
+        <v-container >
           <v-flex>
             <v-text-field v-model="text" label="댓글을 입력해 주세요" required>
             </v-text-field>
