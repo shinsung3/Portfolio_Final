@@ -33,7 +33,6 @@ messaging.usePublicVapidKey("BOWWayUfWK5q_KCDYkpd1sbnzejtXf6vg49tzL_MHO1AEQJ8WGY
 function getDeviceToken(email) {
   messaging.requestPermission()
    .then(function(){
-     console.log("have permission")
      return messaging.getToken();
    })
    .then(function(token){
