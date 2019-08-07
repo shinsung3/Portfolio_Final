@@ -18,14 +18,19 @@
             ? limits
             : idcomments.length" :key="j">
           <div v-if="idcomments[i - 1].portid == thisid">
-            {{idcomments[i - 1].portid}}
             {{ idcomments[i - 1].text }}
             {{ idcomments[i - 1].created_at }}
             {{ idcomments[i - 1].writer }}
+            <div v-if="idcomments[i - 1].writer == thislogin">
             <v-btn color="red" @click="del(idcomments[i - 1].id)">
               삭제
             </v-btn>
+            <v-btn color="red" @click="함수명(idcomments[i - 1].id)">
+              수정
+            </v-btn>
+
           </div>
+        </div>
         </v-flex>
 
       </v-form>
@@ -48,7 +53,8 @@ export default {
     text: "",
     writer: "",
     thisid: "",
-    thisurl: ""
+    thisurl: "",
+    thislogin:""
   }),
   mounted() {
     this.getcommentsByIndex();
@@ -61,7 +67,7 @@ export default {
         this.$route.query.id
       );
       this.thisid = this.$route.query.id
-
+      this.thislogin =  this.$store.state.user.displayName
     },
 
     insert(portid) {
