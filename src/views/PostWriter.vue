@@ -48,7 +48,7 @@
                 <markdown-editor v-model="posts.body"></markdown-editor>
               </v-flex>
               <v-flex align-center justify-end row fill-height right>
-                <v-btn color="success" @click="update">
+                <v-btn color="info" @click="update">
                   수정<img
                     src="https://image.flaticon.com/icons/svg/261/261868.svg"
                     width="35px"
