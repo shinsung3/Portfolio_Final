@@ -25,135 +25,148 @@
     </ImgBanner>
 
     <!-- About Me -->
-    <v-container>
-      <v-layout my-5>
-        <v-flex xs12 sm8>
-          <h2
-            v-resize-text="{
-              ratio: 1.3,
-              minFontSize: '35px',
-              maxFontSize: '50px'
-            }"
-            class="my-5 text-xs-center text-sm-left DokdoList"
-          >
-            About Us
-          </h2>
-          <p
-            class="mr-4 DokdoList"
+    <div>
+      <v-container>
+        <v-layout my-5>
+          <v-flex xs12 sm8>
+            <h2
+              v-resize-text="{
+                ratio: 1.3,
+                minFontSize: '35px',
+                maxFontSize: '50px'
+              }"
+              class="my-5 text-xs-center text-sm-left DokdoList"
+            >
+              About Us
+            </h2>
+            <p
+              class="mr-4 DokdoList"
+              v-resize-text="{
+                ratio: 1.3,
+                minFontSize: '15px',
+                maxFontSize: '30px',
+                delay: 200
+              }"
+              xs12
+              v-html="output.introduce"
+            ></p>
+          </v-flex>
+          <v-flex hidden-xs-only pt-3 mt-5 bt-5>
+            <v-img :src="getImgUrl('profile.jpg')" aspect-ratio="1.0" />
+          </v-flex>
+        </v-layout>
+      </v-container>
+    </div>
+    <div>
+      <v-container>
+        <center>
+          <h1
+            class="DokdoList"
             v-resize-text="{
               ratio: 1.3,
               minFontSize: '15px',
-              maxFontSize: '30px',
+              maxFontSize: '50px',
               delay: 200
             }"
-            xs12
-            v-html="output.introduce"
-          ></p>
-        </v-flex>
-        <v-flex hidden-xs-only pt-3 mt-5 bt-5>
-          <v-img :src="getImgUrl('profile.jpg')" aspect-ratio="1.0" />
-        </v-flex>
-      </v-layout>
-      <center>
-        <h1
-          class="DokdoList"
-          v-resize-text="{
-            ratio: 1.3,
-            minFontSize: '15px',
-            maxFontSize: '50px',
-            delay: 200
-          }"
-        >
-          Team Introduction
-        </h1>
-      </center>
-      <v-layout>
-        <v-flex xs12>
-          <v-expansion-panel inset>
-            <v-expansion-panel-content v-for="item in items" :key="item.id">
-              <template v-slot:header>
-                <div
-                  class="DokdoList"
-                  v-resize-text="{
-                    ratio: 1.3,
-                    minFontSize: '15px',
-                    maxFontSize: '28px',
-                    delay: 200
-                  }"
-                >
-                  {{ item.name }}
-                </div>
-              </template>
-              <v-card>
-                <v-card-text>{{ item.body }}</v-card-text>
-                <v-card-text style="padding-top:0px">{{
-                  item.enbody
-                }}</v-card-text>
-              </v-card>
-            </v-expansion-panel-content>
-          </v-expansion-panel>
-        </v-flex>
-      </v-layout>
-
-      <!-- Portfolio -->
-      <v-layout my-5 id="Portfolio">
-        <v-flex xs12>
-          <router-link to="/Portfolio">
-            <h2
-              v-resize-text="{
-                ratio: 1.3,
-                minFontSize: '35px',
-                maxFontSize: '50px'
-              }"
-              class="my-5 text-xs-center DokdoList FontColor"
-            >
-              Portfolio
-            </h2>
-          </router-link>
-          <PortfolioList></PortfolioList>
-        </v-flex>
-      </v-layout>
-
-      <!-- Post -->
-      <v-layout my-5>
-        <v-flex xs12>
-          <router-link to="/Post">
-            <h2
-              v-resize-text="{
-                ratio: 1.3,
-                minFontSize: '35px',
-                maxFontSize: '50px'
-              }"
-              class="my-5 text-xs-center DokdoList FontColor"
-            >
-              Post
-            </h2>
-          </router-link>
-          <PostList :column="3"></PostList>
-        </v-flex>
-      </v-layout>
-
-      <!-- Github -->
-      <v-layout my-5>
-        <v-flex xs12>
-          <router-link to="/Repository">
-            <h2
-              v-resize-text="{
-                ratio: 1.3,
-                minFontSize: '35px',
-                maxFontSize: '50px'
-              }"
-              class="my-5 text-xs-center DokdoList FontColor"
-            >
-              Project
-            </h2>
-          </router-link>
-          <RepositoryList></RepositoryList>
-        </v-flex>
-      </v-layout>
-
-      <!-- data-init-식별키=값 으로 셋팅하면 챗플로우에 파라미터와 연동가능. 식별키는 소문자만 가능 -->
-    </v-container>
+          >
+            Team Introduction
+          </h1>
+        </center>
+        <v-layout>
+          <v-flex xs12>
+            <v-expansion-panel inset>
+              <v-expansion-panel-content v-for="item in items" :key="item.id">
+                <template v-slot:header>
+                  <div
+                    class="DokdoList"
+                    v-resize-text="{
+                      ratio: 1.3,
+                      minFontSize: '15px',
+                      maxFontSize: '28px',
+                      delay: 200
+                    }"
+                  >
+                    {{ item.name }}
+                  </div>
+                </template>
+                <v-card>
+                  <v-card-text>{{ item.body }}</v-card-text>
+                  <v-card-text style="padding-top:0px">{{
+                    item.enbody
+                  }}</v-card-text>
+                </v-card>
+              </v-expansion-panel-content>
+            </v-expansion-panel>
+          </v-flex>
+        </v-layout>
+      </v-container>
+    </div>
+    <div id="background1">
+      <v-container>
+        <!-- Portfolio -->
+        <v-layout my-5 id="Portfolio">
+          <v-flex xs12>
+            <router-link to="/Portfolio">
+              <h2
+                v-resize-text="{
+                  ratio: 1.3,
+                  minFontSize: '35px',
+                  maxFontSize: '50px'
+                }"
+                class="my-5 text-xs-center DokdoList FontColor"
+              >
+                Portfolio
+              </h2>
+            </router-link>
+            <PortfolioList></PortfolioList>
+          </v-flex>
+        </v-layout>
+      </v-container>
+    </div>
+    <div>
+      <v-container>
+        <!-- Post -->
+        <v-layout my-5>
+          <v-flex xs12>
+            <router-link to="/Post">
+              <h2
+                v-resize-text="{
+                  ratio: 1.3,
+                  minFontSize: '35px',
+                  maxFontSize: '50px'
+                }"
+                class="my-5 text-xs-center DokdoList FontColor"
+              >
+                Post
+              </h2>
+            </router-link>
+            <PostList :column="3"></PostList>
+          </v-flex>
+        </v-layout>
+      </v-container>
+    </div>
+    <div id="postColor">
+      <v-container>
+        <!-- Github -->
+        <v-layout my-5>
+          <v-flex xs12>
+            <router-link to="/Repository">
+              <h2
+                v-resize-text="{
+                  ratio: 1.3,
+                  minFontSize: '35px',
+                  maxFontSize: '50px'
+                }"
+                class="my-5 text-xs-center DokdoList FontColor"
+              >
+                Project
+              </h2>
+            </router-link>
+            <RepositoryList></RepositoryList>
+          </v-flex>
+        </v-layout>
+      </v-container>
+    </div>
   </div>
 </template>
 
@@ -256,3 +269,13 @@ export default {
   }
 };
 </script>
+
+<style>
+#postColor {
+  background-color: #ffe3b1;
+}
+
+#gitColor {
+  background-color: #aaebcb;
+}
+</style>

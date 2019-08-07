@@ -5,7 +5,6 @@
       :class="'xs' + 12 / column"
       px-3
       :key="j"
-      style="background-color:seashell;"
     >
       <Post
         :date="posts[i - 1].created_at"
