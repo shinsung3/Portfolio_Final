@@ -10,13 +10,13 @@
         }"
         slot="text"
         id=".font-weight-regular.font-italic"
-        class="DokdoFont"
+        class="typing DokdoFont"
       >
         말은 쉽지, 코드를 보여줘.
       </h3>
       <br />
       <div
-        class="DokdoSubTitle"
+        class="typing DokdoSubTitle"
         slot="text"
         id=".font-weight-regular.font-italic"
       >
@@ -25,8 +25,8 @@
     </ImgBanner>
 
     <!-- About Me -->
-    <v-container>
-      <v-layout my-5>
+    <v-container id="bigcontainer">
+      <v-layout my-5 class="smallitem">
         <v-flex xs12 sm8>
           <h2
             v-resize-text="{
@@ -96,7 +96,7 @@
       </v-layout>
 
       <!-- Portfolio -->
-      <v-layout my-5 id="Portfolio">
+      <v-layout my-5 id="Portfolio" class="smallitem">
         <v-flex xs12>
           <router-link to="/Portfolio">
             <h2
@@ -115,7 +115,7 @@
       </v-layout>
 
       <!-- Post -->
-      <v-layout my-5>
+      <v-layout my-5 class="smallitem">
         <v-flex xs12>
           <router-link to="/Post">
             <h2
@@ -134,7 +134,7 @@
       </v-layout>
 
       <!-- Github -->
-      <v-layout my-5>
+      <v-layout my-5 class="smallitem">
         <v-flex xs12>
           <router-link to="/Repository">
             <h2
@@ -256,3 +256,23 @@ export default {
   }
 };
 </script>
+
+<style media="screen">
+  .typing {
+    animation-duration:3s;
+    animation-name:slidein;
+    /* animation-iteration-count: infinite;
+    animation-direction: alternate; */
+  }
+  @keyframes slidein {
+    from {
+      margin-left: 100%;
+      width: 300%
+    }
+
+    to {
+      margin-left: 0%;
+      width: 100%;
+    }
+  }
+</style>
