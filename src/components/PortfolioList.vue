@@ -1,23 +1,25 @@
 <template>
   <v-layout mt-5 wrap>
-    <v-flex
-      v-for="(i, j) in portfolios.length > limits ? limits : portfolios.length"
-      :key="j"
-      xs12
-      sm6
-      lg3
-    >
-      <Portfolio
-        class="ma-3"
-        :date="portfolios[i - 1].created_at.toString()"
-        :title="portfolios[i - 1].title"
-        :body="portfolios[i - 1].body"
-        :imgSrc="portfolios[i - 1].img"
-        :uk="portfolios[i - 1].uk"
-        :id="portfolios[i - 1].id"
+    <vueper-slides class="no-shadow" :visible-slides="3" :slide-ratio="1/4" :dragging-distance="70">
+      <vueper-slide
+        v-for="(i, j) in portfolios.length > limits ? limits : portfolios.length"
+        :key="j"
+        xs12
+        sm6
+        lg3
       >
-      </Portfolio>
-    </v-flex>
+        <Portfolio
+          class="ma-3"
+          :date="portfolios[i - 1].created_at.toString()"
+          :title="portfolios[i - 1].title"
+          :body="portfolios[i - 1].body"
+          :imgSrc="portfolios[i - 1].img"
+          :uk="portfolios[i - 1].uk"
+          :id="portfolios[i - 1].id"
+        >
+        </Portfolio>
+      </vueper-slide>
+    </vueper-slides>
 
     <v-flex xs12 text-xs-center round my-5 v-if="loadMore">
       <v-btn v-if="loadMore" color="info" dark v-on:click="loadMorePortfolios">
@@ -42,11 +44,15 @@
   </v-layout>
 </template>
 
+<script src="https://unpkg.com/vue"></script>
+<script src="https://unpkg.com/vueperslides"></script>
 <!-- <link rel="stylesheet" type="text/css" href="csshake.css" /> -->
 <script>
 import Portfolio from "@/components/Portfolio";
 import FirebaseService from "@/services/FirebaseService";
 import "../CSS/btn.css";
+import { VueperSlides, VueperSlide } from 'vueperslides'
+// import 'vueperslides/dist/vueperslides.css'
 
 export default {
   name: "PortfoliosList",
@@ -70,7 +76,9 @@ export default {
     };
   },
   components: {
-    Portfolio
+    Portfolio,
+    VueperSlides,
+    VueperSlide
   },
   mounted() {
     this.getPortfolios();
