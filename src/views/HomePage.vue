@@ -278,20 +278,21 @@ export default {
 #gitColor {
   background-color: #aaebcb;
 }
-<style media="screen">
-  .typing {
-  animation-duration: 3s;
-  animation-name: slidein;
-  }
-  @keyframes slidein {
-    from {
-      margin-left: 100%;
-      width: 300%
-    }
 
-    to {
-      margin-left: 0%;
-      width: 100%;
-    }
+.typing {
+animation-duration: 3s;
+animation-name: slidein;
+}
+
+@keyframes slidein {
+  from {
+    margin-left: 100%;
+    width: 300%
   }
+
+  to {
+    margin-left: 0%;
+    width: 100%;
+  }
+}
 </style>
