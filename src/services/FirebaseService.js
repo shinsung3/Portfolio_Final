@@ -134,8 +134,7 @@ export default {
     });
   },
   getPosts() {
-    const postsCollection = firestore.collection(POSTS);
-    return postsCollection
+    return firestore.collection(POSTS)
       .orderBy("created_at", "desc")
       .get()
       .then(docSnapshots => {
@@ -147,8 +146,8 @@ export default {
         });
       });
   },
-  getPostByIndex(id) {
-    const postsCollection = firestore.collection(POSTS).doc(id);
+  async getPostByIndex(id) {
+    const postsCollection = await firestore.collection(POSTS).doc(id);
     return postsCollection.get().then(docSnapshots => {
       let data = docSnapshots.data();
       data.id = docSnapshots.id;
