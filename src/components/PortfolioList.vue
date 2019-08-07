@@ -7,7 +7,6 @@
         xs12
         sm6
         lg3
-        style="background-color:seashell;"
       >
         <Portfolio
           class="ma-3"
