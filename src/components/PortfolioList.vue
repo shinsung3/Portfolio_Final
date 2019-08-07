@@ -1,7 +1,6 @@
 <template>
   <v-layout mt-5 wrap>
-    <vueper-slides class="no-shadow" :visible-slides="3" :slide-ratio="1/4" :dragging-distance="70">
-      <vueper-slide
+      <v-flex
         v-for="(i, j) in portfolios.length > limits ? limits : portfolios.length"
         :key="j"
         xs12
@@ -18,8 +17,7 @@
           :id="portfolios[i - 1].id"
         >
         </Portfolio>
-      </vueper-slide>
-    </vueper-slides>
+      </v-flex>
 
       <v-flex xs12 text-xs-center round my-5 v-if="loadMore">
         <v-btn
