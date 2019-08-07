@@ -44,40 +44,7 @@
         </v-flex>
       </v-form>
       <!-- 댓글 -->
-      <v-flex>
-        <v-form ref="form">
-          <v-container>
-            <v-flex>
-              <v-text-field
-                v-model="text"
-                label="댓글을 입력해 주세요"
-                required
-              >
-              </v-text-field>
-            </v-flex>
-            <v-flex>
-              <v-btn color="success" @click="insert">
-                댓글달기
-              </v-btn>
-            </v-flex>
-          </v-container>
-          <v-flex
-            v-for="(i, j) in idcomments.length > limits
-              ? limits
-              : idcomments.length"
-            :key="j"
-          >
-            {{ idcomments[i - 1].text }}
-            {{ idcomments[i - 1].created_at }}
-            {{ idcomments[i - 1].writer }}
-            {{ idcomments[i - 1].fk }}
-
-            <v-btn color="red" @click="del(idcomments[i - 1].id)">
-              삭제
-            </v-btn>
-          </v-flex>
-        </v-form>
-      </v-flex>
+      <Comments />
     </v-container>
   </div>
 </template>
@@ -87,10 +54,13 @@ import "../CSS/FontColor.css";
 import "../CSS/ellipsis.css";
 import "../CSS/DokdoFont.css";
 import FirebaseService from "@/services/FirebaseService";
+import Comments from "../components/Comments.vue";
 
 export default {
   name: "PortfolioDetail",
-
+  components: {
+    Comments
+  },
   data: () => ({
     portfolios: [],
     idcomments: [],
@@ -102,8 +72,6 @@ export default {
   }),
   mounted() {
     this.getPortfoliosByIndex();
-    this.getCommentsByIndex();
-    this.comments();
     this.del();
   },
 
@@ -126,32 +94,9 @@ export default {
       this.posts = FirebaseService.getPosts();
       location.href = "/Portfolio";
     },
-    insert(portid) {
-      if (this.idcomments.length == 0) {
-        this.portid = FirebaseService.comments(
-          this.portid = this.portfolios.id,
-          this.fk = 1,
-          this.text,
-          this.writer = this.$store.state.user.displayName,
-        )
-        location.href = "/pfDetail?id=" + this.portid
-      } else {
-        this.portid = FirebaseService.comments(
-          this.portid = this.portfolios.id,
-          this.idcomments[0].fk + 1,
-          this.text,
-          this.writer = this.$store.state.user.displayName,
-        )
-        location.href = "/pfDetail?id=" + this.portid
-      }
-    },
-    del(id) {
-      this.portid = FirebaseService.delcomment(this.$route.query.id, id);
-      location.href = "/pfDetail?id=" + this.portid
-    },
-    // del(fk) {
-    //   FirebaseService.delcomment(this.$route.query.id, fk);
-    // }
+    del(fk) {
+      FirebaseService.delcomment(this.$route.query.id, fk);
+    }
   }
 };
 </script>
