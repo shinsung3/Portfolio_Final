@@ -285,11 +285,7 @@ export default {
 @keyframes slidein {
   from {
     margin-left: 100%;
-<<<<<<< HEAD
     width: 300%;
-=======
-    width: 300%
->>>>>>> de5328f8440b85bad5f40fd2ea332953971d4e14
   }
 
   to {
