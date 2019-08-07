@@ -214,18 +214,9 @@ export default {
       created_at: firebase.firestore.FieldValue.serverTimestamp()
     });
   },
-  pcomments(portid, fk, text, writer) {
-     firestore.collection(POSTS).doc(portid).collection(COMMENTS).add({
-      portid,
-      fk,
-      text,
-      writer,
-      created_at: firebase.firestore.FieldValue.serverTimestamp()
-    });
-    return portid
-  },
+  //comments
   comments(portid, fk, text, writer) {
-     firestore.collection(PORTFOLIOS).doc(portid).collection(COMMENTS).add({
+     firestore.collection(COMMENTS).add({
       portid,
       fk,
       text,
@@ -234,8 +225,9 @@ export default {
     });
     return portid
   },
-  getPcommentsByIndex(portid) {
-    const commentsCollection = firestore.collection(POSTS).doc(portid).collection(COMMENTS);
+
+  getcommentsByIndex() {
+    const commentsCollection = firestore.collection(COMMENTS);
     return commentsCollection
     .orderBy('created_at', 'desc')
     .get()
@@ -248,35 +240,11 @@ export default {
       });
     });
   },
-  getCommentsByIndex(portid) {
-    const commentsCollection = firestore.collection(PORTFOLIOS).doc(portid).collection(COMMENTS);
-    return commentsCollection
-      .orderBy("created_at", "desc")
-      .get()
-      .then(docSnapshots => {
-        return docSnapshots.docs.map(doc => {
-          let data = doc.data();
-          data.id = doc.id;
-          data.created_at = new Date(data.created_at.toDate());
-          return data;
-        });
-      });
-  },
-  delcomment(portid, id){
+  delcomment(id){
     firestore
-    .collection(PORTFOLIOS)
-    .doc(portid).collection(COMMENTS)
+    .collection(COMMENTS)
     .doc(id)
     .delete();
-    return portid
-  },
-  delPcomment(portid, id){
-    firestore
-    .collection(POSTS)
-    .doc(portid).collection(COMMENTS)
-    .doc(id)
-    .delete();
-    return portid
   },
 	getAuthorization() {
 		const userauthCollection = firestore.collection(USERAUTH)
