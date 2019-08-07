@@ -14,23 +14,26 @@
             </v-btn>
           </v-flex>
         </v-container>
+
         <v-flex v-for="(i, j) in idcomments.length > limits
             ? limits
             : idcomments.length" :key="j">
-          <div v-if="idcomments[i - 1].portid == thisid">
-            {{ idcomments[i - 1].text }}
-            {{ idcomments[i - 1].created_at }}
-            {{ idcomments[i - 1].writer }}
-            <div v-if="idcomments[i - 1].writer == thislogin">
-            <v-btn color="red" @click="del(idcomments[i - 1].id)">
-              삭제
-            </v-btn>
-            <v-btn color="red" @click="함수명(idcomments[i - 1].id)">
-              수정
-            </v-btn>
 
-          </div>
-        </div>
+          <v-card
+            class="mx-auto"
+          >
+            <v-list-item>
+              <v-list-item-content v-if="idcomments[i - 1].portid == thisid">
+                <div class="overline"><v-chip class="ma-2"><strong>{{ idcomments[i - 1].writer }}</strong></v-chip> {{ idcomments[i - 1].created_at | moment("YYYY년 MM월 DD일")}}</div>
+                <v-list-item-subtitle class="ma-3">{{ idcomments[i - 1].text }}</v-list-item-subtitle>
+              </v-list-item-content>
+            </v-list-item>
+
+            <v-card-actions v-if="idcomments[i - 1].writer == thislogin">
+              <v-btn text @click="del(idcomments[i - 1].id)">삭제</v-btn>
+              <v-btn text @click="함수명(idcomments[i - 1].id)">수정</v-btn>
+            </v-card-actions>
+          </v-card>
         </v-flex>
 
       </v-form>

@@ -30,6 +30,8 @@ Vue.use(Vuetify, {
   iconfont: "md"
 });
 
+Vue.use(require('vue-moment'));
+
 import store from "./store";
 import Header from "./components/Header.vue";
 import Top from "./components/Top.vue";
