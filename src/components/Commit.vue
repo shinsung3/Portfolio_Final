@@ -1,28 +1,21 @@
 <template>
   <v-container>
     <div>
-      <center>
-        <h1
-          style="font-family: 'East Sea Dokdo', cursive;"
-          v-resize-text="{
-            ratio: 1.3,
-            minFontSize: '15px',
-            maxFontSize: '50px',
-            delay: 200
-          }"
-        >
-          Commit
-        </h1>
+      <center @click="goToUrl()">
+        <img
+          src="https://image.flaticon.com/icons/svg/39/39378.svg"
+          width="100px"
+        />
+        <img
+          src="https://image.flaticon.com/icons/svg/1536/1536475.svg"
+          width="40px"
+        />
       </center>
       <v-layout row>
         <v-flex>
           <v-card>
             <v-list two-line style="background: antiquewhite;">
-              <v-list-tile
-                v-for="(item, i) in this.getMembers()"
-                :key="i"
-                @click="goToUrl()"
-              >
+              <v-list-tile v-for="(item, i) in this.getMembers()" :key="i">
                 <v-list-tile-avatar v-if="item.author_name === 'nnnangni'">
                   <img src="../assets/Park1.jpg" width="20px" />
                 </v-list-tile-avatar>
@@ -102,9 +95,8 @@ export default {
       return this.gitlabData.GitRepositories;
     },
     goToUrl() {
-      window.location.href = "https://lab.ssafy.com/nnnangni/webmobile-sub2";
+      window.location.href = "https://lab.ssafy.com/nnnangni/webmobile-final";
     }
   }
 };
-
 </script>

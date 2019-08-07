@@ -177,7 +177,6 @@ import PortfolioList from "../components/PortfolioList";
 import PostList from "../components/PostList";
 import RepositoryList from "../components/RepositoryList";
 import "../CSS/ellipsis.css";
-import ImgurAPI from "../components/ImgurApi";
 import "../CSS/DokdoFont.css";
 import Translate from "@/services/Translate";
 import EventBus from "../eventBus.js";
@@ -187,7 +186,6 @@ export default {
   name: "HomePage",
   components: {
     ImgBanner,
-    ImgurAPI,
     PortfolioList,
     PostList,
     RepositoryList
@@ -276,7 +274,7 @@ export default {
 }
 
 #gitColor {
-  background-color: #aaebcb;
+  background-color: ##aaebcb;
 }
 
 .typing {
