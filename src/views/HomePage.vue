@@ -137,7 +137,7 @@
                 }"
                 class="my-5 text-xs-center DokdoList FontColor"
               >
-                Post
+                Skill
               </h2>
             </router-link>
             <PostList :column="3"></PostList>
