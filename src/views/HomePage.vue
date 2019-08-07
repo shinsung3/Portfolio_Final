@@ -10,13 +10,13 @@
         }"
         slot="text"
         id=".font-weight-regular.font-italic"
-        class="DokdoFont"
+        class="typing DokdoFont"
       >
         말은 쉽지, 코드를 보여줘.
       </h3>
       <br />
       <div
-        class="DokdoSubTitle"
+        class="typing DokdoSubTitle"
         slot="text"
         id=".font-weight-regular.font-italic"
       >
@@ -270,6 +270,7 @@ export default {
 };
 </script>
 
+<<<<<<< HEAD
 <style>
 #postColor {
   background-color: #ffe3b1;
@@ -278,4 +279,24 @@ export default {
 #gitColor {
   background-color: #aaebcb;
 }
+=======
+<style media="screen">
+  .typing {
+    animation-duration:3s;
+    animation-name:slidein;
+    /* animation-iteration-count: infinite;
+    animation-direction: alternate; */
+  }
+  @keyframes slidein {
+    from {
+      margin-left: 100%;
+      width: 300%
+    }
+
+    to {
+      margin-left: 0%;
+      width: 100%;
+    }
+  }
+>>>>>>> 9b4ecf615a41b09fab5346c5543c419dc545700d
 </style>
