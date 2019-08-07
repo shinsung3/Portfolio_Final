@@ -1,10 +1,7 @@
 <template>
-  <v-container>
-    <v-layout mt-5 wrap>
+  <v-layout mt-5 wrap>
       <v-flex
-        v-for="(i, j) in portfolios.length > limits
-          ? limits
-          : portfolios.length"
+        v-for="(i, j) in portfolios.length > limits ? limits : portfolios.length"
         :key="j"
         xs12
         sm6
@@ -18,7 +15,6 @@
           :imgSrc="portfolios[i - 1].img"
           :uk="portfolios[i - 1].uk"
           :id="portfolios[i - 1].id"
-          :userid="portfolios[i - 1].userid"
         >
         </Portfolio>
       </v-flex>
@@ -58,10 +54,16 @@
     </v-layout>
   </v-container>
 </template>
+
+<script src="https://unpkg.com/vue"></script>
+<script src="https://unpkg.com/vueperslides"></script>
+<!-- <link rel="stylesheet" type="text/css" href="csshake.css" /> -->
 <script>
 import Portfolio from "@/components/Portfolio";
 import FirebaseService from "@/services/FirebaseService";
 import "../CSS/btn.css";
+import { VueperSlides, VueperSlide } from 'vueperslides'
+// import 'vueperslides/dist/vueperslides.css'
 
 export default {
   name: "PortfoliosList",
@@ -85,7 +87,9 @@ export default {
     };
   },
   components: {
-    Portfolio
+    Portfolio,
+    VueperSlides,
+    VueperSlide
   },
   mounted() {
     this.getPortfolios();
