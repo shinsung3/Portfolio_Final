@@ -26,14 +26,47 @@
               this.$store.state.userauth == '관리자'
           "
         >
-          <v-btn @click="linkToPage" color="info">
+          <!-- <v-btn @click="linkToPage" color="info">
             <v-icon>fas fa-user-edit</v-icon><span id="padding">수정</span>
-          </v-btn>
+          </v-btn> -->
+          <v-dialog
+            v-model="dialog"
+            width="500"
+          >
+            <template v-slot:activator="{ on }">
+              <v-btn
+                id="hot"
+                color="red lighten-2"
+                dark
+                v-on="on"
+              >
+                <v-icon>edit</v-icon>&nbsp수정
+              </v-btn>
+            </template>
+
+            <v-card>
+              <v-card-title
+                class="headline grey lighten-2"
+                primary-title
+              >
+                포스트수정
+              </v-card-title>
+
+              <v-card-text>
+                <SkillWriter/>
+              </v-card-text>
+
+            </v-card>
+          </v-dialog>
           <v-btn @click="deleteDB" class="buttonWriter">
-            <v-icon>far fa-trash-alt</v-icon><span id="padding">삭제</span>
+            <v-icon>delete</v-icon><span id="padding">삭제</span>
           </v-btn>
         </v-flex>
       </v-form>
+      <br>
+      <br>
+      <br>
+      <br>
       <Comments />
     </v-container>
   </div>
@@ -46,11 +79,13 @@ import "../CSS/DokdoFont.css";
 import "../CSS/btn.css";
 import FirebaseService from "@/services/FirebaseService";
 import Comments from "../components/Comments.vue";
+import SkillWriter from "../components/SkillWriter";
 
 export default {
   name: "PostDetail",
   components: {
-    Comments
+    Comments,
+    SkillWriter
   },
   data() {
     return {
