@@ -76,7 +76,7 @@ function modifyToken(email) {
   })
 }
 
-function setAuthorization(email, auth, deviceToken) {
+function setAuthorization(email, auth, deviceToken, userName) {
   return firestore
     .collection(USERAUTH)
     .doc(email)
@@ -84,6 +84,7 @@ function setAuthorization(email, auth, deviceToken) {
       email,
       auth,
       deviceToken,
+      userName,
       created_at: firebase.firestore.FieldValue.serverTimestamp()
     });
 }
@@ -111,6 +112,17 @@ async function getUserAuth(email) {
     }
   }
   store.state.userauth = auth;
+}
+
+async function getUserName(email) {
+  var users = await getAllUserAuth();
+  var userName = "";
+  for (var i = 0; i < users.length; i++) {
+    if (users[i].email == email) {
+      userName = users[i].userName;
+    }
+  }
+  store.state.user.displayName = userName;
 }
 
 export default {
@@ -274,7 +286,8 @@ export default {
       getDeviceToken(user.email);
       chkDup(user.email).then(res => {
         if(res == false) {
-          setAuthorization(user.email, '방문자', deviceToken);
+          setAuthorization(user.email, '방문자', deviceToken, user.displayName);
+          getUserName(user.email);
         }
       }) .catch(err => {
         console.log(err);
@@ -293,7 +306,8 @@ export default {
       getDeviceToken(user.email);
       chkDup(user.email).then(res => {
         if(res == false) {
-          setAuthorization(user.email, '방문자', deviceToken);
+          setAuthorization(user.email, '방문자', deviceToken, user.displayName);
+          getUserName(user.email);
         }
       }) .catch(err => {
         console.log(err);
@@ -312,14 +326,15 @@ export default {
 		});
 		logoutcheck({})
 	},
-	signUp(email, password) {
+	signUp(email, password, userName) {
 		firebase.auth().createUserWithEmailAndPassword(email, password).then(
 			function(user) {
 				alert("회원가입을 축하합니다")
         chkDup(email).then(res => {
           if(res == false) {
             getDeviceToken(email);
-            setAuthorization(user.email, '방문자', deviceToken);
+            setAuthorization(email, '방문자', deviceToken, userName);
+            getUserName(email);
           }
         }) .catch(err => {
           console.log(err);
@@ -348,6 +363,7 @@ export default {
 			  if (user) {
 			    store.state.user = user;
 					store.state.accessToken = user.email;
+          getUserName(user.email);
           getUserAuth(user.email);
 			  }
 			});

@@ -21,14 +21,9 @@
             width="30px" v-if="this.$store.state.userauth == '관리자'"
           />
           <span
-            v-if="this.$store.state.user.displayName != undefined"
             class="DokdoHeader2 mt-3 mr-2"
           >
             <b>&nbsp {{ this.$store.state.user.displayName }}</b>
-            님 반갑습니다!!
-          </span>
-          <span v-else class="DokdoHeader2 mt-3 mr-2">
-            <b>{{ this.$store.state.accessToken }}</b>
             님 반갑습니다!!
           </span>
           <v-btn flat to="/" @click="setLogOut">

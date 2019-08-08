@@ -1,45 +1,112 @@
 <template>
-<div>
-  <v-layout>
-    <v-flex>
-      <v-form ref="form">
-        <v-container>
-          <v-flex>
-            <v-text-field v-model="text" label="댓글을 입력해 주세요" required>
+  <v-container>
+    <v-layout>
+      <v-content>
+        <v-flex>
+          <v-row>
+            <v-text-field v-model="text" append-icon="message" label="댓글을 입력해 주세요" required>
             </v-text-field>
-          </v-flex>
-          <v-flex>
-            <v-btn color="success" @click="insert">
-              댓글달기
+            <v-btn flat icon @click="insert">
+              <v-icon>add_comment</v-icon>
             </v-btn>
-          </v-flex>
-        </v-container>
+          </v-row>
+        </v-flex>
 
         <v-flex v-for="(i, j) in idcomments.length > limits
             ? limits
             : idcomments.length" :key="j">
 
-          <v-card
-            class="mx-auto"
-          >
+          <div>
             <v-list-item>
               <v-list-item-content v-if="idcomments[i - 1].portid == thisid">
-                <div class="overline"><v-chip class="ma-2"><strong>{{ idcomments[i - 1].writer }}</strong></v-chip> {{ idcomments[i - 1].created_at | moment("YYYY년 MM월 DD일")}}</div>
+                <div class="overline">
+                  <v-chip class="ma-2"><strong>{{ idcomments[i - 1].writer }}</strong></v-chip> {{ idcomments[i - 1].created_at | moment("YYYY년 MM월 DD일")}}
+                </div>
                 <v-list-item-subtitle class="ma-3">{{ idcomments[i - 1].text }}</v-list-item-subtitle>
+                <v-row>
+
+                  <v-card-actions v-if="idcomments[i - 1].writer == thislogin">
+                    <v-btn v-if="check==''" flat icon @click="check=idcomments[i - 1].id">
+                      <v-icon>chat</v-icon>
+                    </v-btn>
+                    <v-btn v-else-if="check==idcomments[i - 1].id" flat icon @click="check=''">
+                      <v-icon>arrow_back</v-icon>
+                    </v-btn>
+                    <v-btn v-else flat icon @click="check=idcomments[i - 1].id">
+                      <v-icon>chat</v-icon>
+                    </v-btn>
+                    <v-btn flat icon @click="del(idcomments[i - 1].id)">
+                      <v-icon>close</v-icon>
+                    </v-btn>
+                    <v-btn flat icon @click="함수명(idcomments[i - 1].id)">
+                      <v-icon>edit</v-icon>
+                    </v-btn>
+                  </v-card-actions>
+                  <v-card-actions v-else>
+                    <v-btn v-if="check==''" flat icon @click="check=idcomments[i - 1].id">
+                      <v-icon>chat</v-icon>
+                    </v-btn>
+                    <v-btn v-else-if="check==idcomments[i - 1].id" flat icon @click="check=''">
+                      <v-icon>arrow_back</v-icon>
+                    </v-btn>
+                    <v-btn v-else flat icon @click="check=idcomments[i - 1].id">
+                      <v-icon>chat</v-icon>
+                    </v-btn>
+                  </v-card-actions>
+                </v-row>
               </v-list-item-content>
+
             </v-list-item>
 
-            <v-card-actions v-if="idcomments[i - 1].writer == thislogin">
-              <v-btn text @click="del(idcomments[i - 1].id)">삭제</v-btn>
-              <v-btn text @click="함수명(idcomments[i - 1].id)">수정</v-btn>
-            </v-card-actions>
-          </v-card>
+            <!-- 대댓글부분 -->
+            <div v-if="check==idcomments[i - 1].id" class="ml-5">
+
+              <v-row>
+                <v-container>
+                  <v-flex>
+                    <v-row>
+                      <v-text-field v-model="text" append-icon="message" label="대댓글을 입력해 주세요" required>
+                      </v-text-field>
+                      <v-btn flat icon @click="replyinsert">
+                        <v-icon>add_comment</v-icon>
+                      </v-btn>
+                    </v-row>
+                  </v-flex>
+                </v-container>
+                <v-flex v-for="(i, j) in idcomments.length > limits
+                      ? limits
+                      : idcomments.length" :key="j">
+                  <div>
+                    <v-list-item>
+                      <v-list-item-content v-if="idcomments[i - 1].portid == check">
+                        <div class="overline">
+                          <v-chip class="ma-2"><strong>{{ idcomments[i - 1].writer }}</strong></v-chip> {{ idcomments[i - 1].created_at | moment("YYYY년 MM월 DD일")}}
+                        </div>
+                        <v-list-item-subtitle class="ma-3">{{ idcomments[i - 1].text }}</v-list-item-subtitle>
+                        <v-card-actions v-if="idcomments[i - 1].writer == thislogin">
+                          <v-btn flat icon @click="del(idcomments[i - 1].id)">
+                            <v-icon>close</v-icon>
+                          </v-btn>
+                          <v-btn flat icon @click="함수명(idcomments[i - 1].id)">
+                            <v-icon>edit</v-icon>
+                          </v-btn>
+                        </v-card-actions>
+                      </v-list-item-content>
+                    </v-list-item>
+
+                  </div>
+                </v-flex>
+
+              </v-row>
+            </div>
+
+
+          </div>
         </v-flex>
 
-      </v-form>
-    </v-flex>
-  </v-layout>
-</div>
+      </v-content>
+    </v-layout>
+  </v-container>
 </template>
 
 <script>
@@ -57,7 +124,9 @@ export default {
     writer: "",
     thisid: "",
     thisurl: "",
-    thislogin:""
+    thislogin: "",
+    check: "",
+
   }),
   mounted() {
     this.getcommentsByIndex();
@@ -70,7 +139,7 @@ export default {
         this.$route.query.id
       );
       this.thisid = this.$route.query.id
-      this.thislogin =  this.$store.state.user.displayName
+      this.thislogin = this.$store.state.user.displayName
     },
 
     insert(portid) {
@@ -94,6 +163,27 @@ export default {
         location.href = this.thisurl
       }
     },
+    replyinsert(portid) {
+      if (this.idcomments.length == 0) {
+        this.thisurl = document.location.href
+        this.portid = FirebaseService.comments(
+          this.portid = this.check,
+          this.fk = 1,
+          this.text,
+          this.writer = this.$store.state.user.displayName,
+        )
+        location.href = this.thisurl
+      } else {
+        this.thisurl = document.location.href
+        this.portid = FirebaseService.comments(
+          this.portid = this.check,
+          this.idcomments[0].fk + 1,
+          this.text,
+          this.writer = this.$store.state.user.displayName,
+        )
+        location.href = this.thisurl
+      }
+    },
     del(id) {
       this.thisurl = document.location.href
       this.portid = FirebaseService.delcomment(id);
@@ -104,3 +194,9 @@ export default {
 
 }
 </script>
+
+<style media="screen">
+  .comments {
+    border-color: transparent!important;
+  }
+</style>

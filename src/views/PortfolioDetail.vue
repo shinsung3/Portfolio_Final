@@ -43,6 +43,10 @@
           </v-btn>
         </v-flex>
       </v-form>
+      <br />
+      <br />
+      <br />
+      <br />
       <!-- 댓글 -->
       <Comments />
     </v-container>
