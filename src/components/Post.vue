@@ -1,15 +1,66 @@
 <template>
-  <v-layout py-4 h-100>
-    <v-flex row>
-      <v-card @click="linkToPage" hover>
-        <div class="paddingSize">
-          <div>{{ formatedDate }}</div>
-          <div class="headline text2">{{ subject.translate }}</div>
-          <span class="grey--text text1">{{ content.translate }}</span>
-        </div>
-      </v-card>
-    </v-flex>
-  </v-layout>
+  <div>
+    <div v-if="idx == 1 || idx % 13 == 1" class="hex hex-1 hex-gap">
+      <div class="corner-1"></div>
+      <div class="corner-2"></div>
+      <div class="inner">
+        <h2>{{ subject.translate }}</h2>
+        <hr />
+        <p style="width:150px;">{{ content.translate }}</p>
+      </div>
+      <a href="#"></a>
+    </div>
+    <div
+      v-else-if="idx != 1 && idx % 13 != 1 && (idx == 3 || idx % 4 == 0)"
+      class="hex hex-2"
+    >
+      <div class="corner-1"></div>
+      <div class="corner-2"></div>
+      <div class="inner">
+        <h2>{{ subject.translate }}</h2>
+        <hr />
+        <p style="width:150px;">{{ content.translate }}</p>
+      </div>
+      <a href="#"></a>
+    </div>
+    <div
+      v-else-if="idx != 1 && idx % 13 != 1 && (idx == 3 || idx % 5 == 0)"
+      class="hex hex-3"
+    >
+      <div class="corner-1"></div>
+      <div class="corner-2"></div>
+      <div class="inner">
+        <h2>{{ subject.translate }}</h2>
+        <hr />
+        <p style="width:150px;">{{ content.translate }}</p>
+      </div>
+      <a href="#"></a>
+    </div>
+
+    <div
+      v-else-if="idx != 1 && idx % 13 != 1 && (idx == 3 || idx % 3 == 0)"
+      class="hex hex-1"
+    >
+      <div class="corner-1"></div>
+      <div class="corner-2"></div>
+      <div class="inner">
+        <h2>{{ subject.translate }}</h2>
+        <hr />
+        <p style="width:150px;">{{ content.translate }}</p>
+      </div>
+      <a href="#"></a>
+    </div>
+    <div v-else class="hex">
+      <div class="corner-1"></div>
+      <div class="corner-2"></div>
+      <div class="inner">
+        <h2>{{ subject.translate }}</h2>
+        <hr />
+        <p style="width:150px;">{{ content.translate }}</p>
+      </div>
+      <a href="#"></a>
+    </div>
+  </div>
 </template>
 
 <script>
@@ -34,6 +85,9 @@ export default {
     },
     userid: {
       type: String
+    },
+    idx: {
+      type: Number
     }
   },
   computed: {
@@ -96,8 +150,142 @@ export default {
   height: 100%;
 }
 
-.paddingSize {
-  padding: 15px;
-  background-color: whitesmoke;
+.hex {
+  width: 150px;
+  height: 86px;
+  background-color: #ccc;
+  background-repeat: no-repeat;
+  background-position: 50% 50%;
+  -webkit-background-size: auto 173px;
+  -moz-background-size: auto 173px;
+  -ms-background-size: auto 173px;
+  -o-background-size: auto 173px;
+  position: relative;
+  float: left;
+  margin: 25px 5px;
+  text-align: center;
+  zoom: 1;
+}
+
+.hex.hex-gap {
+  margin-left: 86px;
+}
+
+.hex a {
+  display: block;
+  width: 100%;
+  height: 100%;
+  text-indent: -9999em;
+  position: absolute;
+  top: 0;
+  left: 0;
+}
+
+.hex .corner-1,
+.hex .corner-2 {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: inherit;
+  overflow: hidden;
+  -webkit-backface-visibility: hidden;
+  -moz-backface-visibility: hidden;
+  -ms-backface-visibility: hidden;
+  -o-backface-visibility: hidden;
+  backface-visibility: hidden;
+}
+
+.hex .corner-1 {
+  -webkit-transform: rotate(60deg);
+  -moz-transform: rotate(60deg);
+  -ms-transform: rotate(60deg);
+  -o-transform: rotate(60deg);
+  transform: rotate(60deg);
+}
+
+.hex .corner-2 {
+  -webkit-transform: rotate(-60deg);
+  -moz-transform: rotate(-60deg);
+  -ms-transform: rotate(-60deg);
+  -o-transform: rotate(-60deg);
+  transform: rotate(-60deg);
+}
+
+.hex .corner-1:before,
+.hex .corner-2:before {
+  width: 173px;
+  height: 173px;
+  content: "";
+  position: absolute;
+  background: inherit;
+  top: 0;
+  left: 0;
+  background: inherit;
+  background-repeat: no-repeat;
+  -webkit-backface-visibility: hidden;
+  -moz-backface-visibility: hidden;
+  -ms-backface-visibility: hidden;
+  -o-backface-visibility: hidden;
+  backface-visibility: hidden;
+}
+
+.hex .corner-1:before {
+  -webkit-transform: rotate(-60deg) translate(-87px, 0px);
+  -moz-transform: rotate(-60deg) translate(-87px, 0px);
+  -ms-transform: rotate(-60deg) translate(-87px, 0px);
+  -o-transform: rotate(-60deg) translate(-87px, 0px);
+  transform: rotate(-60deg) translate(-87px, 0px);
+  -webkit-transform-origin: 0 0;
+  -moz-transform-origin: 0 0;
+  -ms-transform-origin: 0 0;
+  -o-transform-origin: 0 0;
+  transform-origin: 0 0;
+}
+
+.hex .corner-2:before {
+  -webkit-transform: rotate(60deg) translate(-48px, -11px);
+  -moz-transform: rotate(60deg) translate(-48px, -11px);
+  -ms-transform: rotate(60deg) translate(-48px, -11px);
+  -o-transform: rotate(60deg) translate(-48px, -11px);
+  transform: rotate(60deg) translate(-48px, -11px);
+  bottom: 0;
+}
+
+.hex .inner {
+  color: #eee;
+  position: absolute;
+}
+
+.hex h2 {
+  font-family: "Josefin Sans", sans-serif;
+  margin: 0;
+}
+
+.hex hr {
+  border: 0;
+  border-top: 1px solid #eee;
+  width: 60%;
+  margin: 15px auto;
+}
+
+.hex p {
+  font-size: 16px;
+  font-family: "Kotta One", serif;
+  width: 150px;
+}
+
+.hex.hex-1 {
+  background: #74cddb;
+  z-index: 1;
+}
+
+.hex.hex-2 {
+  background: #f5c53c;
+}
+
+.hex.hex-3 {
+  background: #80b971;
 }
 </style>

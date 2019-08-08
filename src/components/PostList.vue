@@ -1,36 +1,25 @@
 <template>
-  <v-layout row wrap>
-    <v-flex
-      v-for="(i, j) in posts.length > limits ? limits : posts.length"
-      :class="'xs' + 12 / column"
-      px-3
-      :key="j"
-    >
-      <Post
-        :date="posts[i - 1].created_at"
-        :title="posts[i - 1].title"
-        :body="posts[i - 1].body"
-        :id="posts[i - 1].id"
-        :userid="posts[i - 1].userid"
-      ></Post>
-    </v-flex>
+  <!-- <v-layout row wrap> -->
+  <div>
+    <div class="">
+      <v-flex
+        v-for="(i, j) in posts.length > limits ? limits : posts.length"
+        :key="j"
+      >
+        <Post
+          :idx="i"
+          :date="posts[i - 1].created_at"
+          :title="posts[i - 1].title"
+          :body="posts[i - 1].body"
+          :id="posts[i - 1].id"
+          :userid="posts[i - 1].userid"
+        ></Post>
+      </v-flex>
+    </div>
 
-    <v-flex xs12 text-xs-center round my-5 v-if="loadMore">
-      <v-btn v-if="loadMore" color="info" dark v-on:click="loadMorePosts">
-        <v-icon size="25" class="mr-2">fa-plus</v-icon> 더 보기
-      </v-btn>
-      <v-btn v-if="loadLess" color="warning" dark v-on:click="loadLessPosts">
-        <v-icon size="25" class="mr-2">fa-angle-double-up</v-icon> 접기
-      </v-btn>
-      <v-btn id="hot" to="/psWriter">
-        <img
-          src="https://image.flaticon.com/icons/svg/1865/1865689.svg"
-          width="30px"
-        />
-        <span id="padding"><b>글쓰기</b></span>
-      </v-btn>
-    </v-flex>
-  </v-layout>
+    <v-flex xs12 text-xs-center round my-5 v-if="loadMore"> </v-flex>
+  </div>
+  <!-- </v-layout> -->
 </template>
 
 <script>
@@ -76,7 +65,7 @@ export default {
       this.limits = this.posts.length;
     },
     async loadLessPosts() {
-      this.limits = 9;
+      this.limits = 13;
     }
   }
 };

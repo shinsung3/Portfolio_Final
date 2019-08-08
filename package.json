@@ -12,6 +12,7 @@
     "axios": "^0.18.1",
     "chart.js": "^2.8.0",
     "chartkick": "^3.1.0",
+    "compass": "^0.1.1",
     "core-js": "^2.6.5",
     "csshake": "^1.5.3",
     "detect-browser": "^4.5.1",
