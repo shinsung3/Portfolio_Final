@@ -14,7 +14,7 @@
 
 <script>
 export default {
-  name: 'ImgBanner',
+  name: "ImgBanner",
   props: {
     imgSrc: {
       type: String
@@ -23,8 +23,8 @@ export default {
       type: String
     }
   },
-  methods: {},
-}
+  methods: {}
+};
 </script>
 <style>
 .text-shadow {

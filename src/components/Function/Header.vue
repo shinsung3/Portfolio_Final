@@ -73,7 +73,7 @@
 
         <v-list-tile avatar tag="div">
           <v-list-tile-avatar>
-            <img src="../assets/icon.jpg" />
+            <img src="../../assets/icon.jpg" />
           </v-list-tile-avatar>
 
           <v-list-tile-content>
@@ -107,7 +107,7 @@
 
         <v-list-tile>
           <v-list-tile-action>
-            <img src="../assets/login.svg" width="24px" />
+            <img src="../../assets/login.svg" width="24px" />
           </v-list-tile-action>
           <v-list-tile-content>
             <v-btn flat to="/Login" v-if="this.$store.state.accessToken == ''">
@@ -124,11 +124,11 @@
 </template>
 
 <script>
-import "../CSS/aTag.css";
-import FirebaseService from "../services/FirebaseService.js";
-import "../CSS/DokdoFont.css";
-import "../eventBus.js";
-import "../store.js";
+import "../../CSS/aTag.css";
+import FirebaseService from "../../services/FirebaseService.js";
+import "../../CSS/DokdoFont.css";
+import "../../eventBus.js";
+import "../../store.js";
 
 export default {
   name: "FooterIcon",

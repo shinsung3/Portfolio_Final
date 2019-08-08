@@ -31,10 +31,10 @@ Vue.use(Vuetify, {
 Vue.use(require("vue-moment"));
 
 import store from "./store";
-import Header from "./components/Header.vue";
-import Top from "./components/Top.vue";
-import Bookmark from "./components/BookMark.vue";
-import Footer from "./components/Footer.vue";
+import Header from "./components/Function/Header.vue";
+import Top from "./components/Function/Top.vue";
+import Bookmark from "./components/Function/BookMark.vue";
+import Footer from "./components/Function/Footer.vue";
 import Chatbot from "./components/ChatBot.vue";
 import Language from "./components/Language.vue";
 
