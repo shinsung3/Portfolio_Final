@@ -16,55 +16,67 @@
             ? limits
             : idcomments.length" :key="j">
 
-          <v-card class="mx-auto">
+          <div>
             <v-list-item>
               <v-list-item-content v-if="idcomments[i - 1].portid == thisid">
                 <div class="overline">
                   <v-chip class="ma-2"><strong>{{ idcomments[i - 1].writer }}</strong></v-chip> {{ idcomments[i - 1].created_at | moment("YYYY년 MM월 DD일")}}
                 </div>
                 <v-list-item-subtitle class="ma-3">{{ idcomments[i - 1].text }}</v-list-item-subtitle>
-                <div v-if="check==''">
-                  <v-btn color="aqua" @click="check=idcomments[i - 1].id">
-                    댓글확인
-                  </v-btn>
-                </div>
-                <div v-else-if="check==idcomments[i - 1].id">
-                  <v-btn color="aqua" @click="check=''">
-                    감추기
-                  </v-btn>
-                </div>
-                <div v-else>
-                  <v-btn color="aqua" @click="check=idcomments[i - 1].id">
-                    댓글확인
-                  </v-btn>
-                </div>
-                <v-card-actions v-if="idcomments[i - 1].writer == thislogin">
-                  <v-btn text @click="del(idcomments[i - 1].id)">삭제</v-btn>
-                  <v-btn text @click="함수명(idcomments[i - 1].id)">수정</v-btn>
-                </v-card-actions>
+                <v-row>
+
+                  <v-card-actions v-if="idcomments[i - 1].writer == thislogin">
+                    <v-btn v-if="check==''" flat icon @click="check=idcomments[i - 1].id">
+                      <v-icon>chat</v-icon>
+                    </v-btn>
+                    <v-btn v-else-if="check==idcomments[i - 1].id" flat icon @click="check=''">
+                      <v-icon>arrow_back</v-icon>
+                    </v-btn>
+                    <v-btn v-else flat icon @click="check=idcomments[i - 1].id">
+                      <v-icon>chat</v-icon>
+                    </v-btn>
+                    <v-btn flat icon @click="del(idcomments[i - 1].id)">
+                      <v-icon>close</v-icon>
+                    </v-btn>
+                    <v-btn flat icon @click="함수명(idcomments[i - 1].id)">
+                      <v-icon>edit</v-icon>
+                    </v-btn>
+                  </v-card-actions>
+                  <v-card-actions v-else>
+                    <v-btn v-if="check==''" flat icon @click="check=idcomments[i - 1].id">
+                      <v-icon>chat</v-icon>
+                    </v-btn>
+                    <v-btn v-else-if="check==idcomments[i - 1].id" flat icon @click="check=''">
+                      <v-icon>arrow_back</v-icon>
+                    </v-btn>
+                    <v-btn v-else flat icon @click="check=idcomments[i - 1].id">
+                      <v-icon>chat</v-icon>
+                    </v-btn>
+                  </v-card-actions>
+                </v-row>
               </v-list-item-content>
 
             </v-list-item>
 
             <!-- 대댓글부분 -->
-            <div v-if="check==idcomments[i - 1].id">
+            <div v-if="check==idcomments[i - 1].id" class="ml-5">
 
-              <v-form ref="form">
+              <v-row>
                 <v-container>
                   <v-flex>
-                    <v-text-field v-model="text" label="대댓글을 입력해 주세요" required>
-                    </v-text-field>
-                  </v-flex>
-                  <v-flex>
-                    <v-btn color="success" @click="replyinsert">
-                      댓글달기
-                    </v-btn>
+                    <v-row>
+                      <v-text-field v-model="text" append-icon="message" label="대댓글을 입력해 주세요" required>
+                      </v-text-field>
+                      <v-btn flat icon @click="replyinsert">
+                        <v-icon>add_comment</v-icon>
+                      </v-btn>
+                    </v-row>
                   </v-flex>
                 </v-container>
                 <v-flex v-for="(i, j) in idcomments.length > limits
                       ? limits
                       : idcomments.length" :key="j">
-                  <v-card class="mx-auto">
+                  <div>
                     <v-list-item>
                       <v-list-item-content v-if="idcomments[i - 1].portid == check">
                         <div class="overline">
@@ -72,20 +84,24 @@
                         </div>
                         <v-list-item-subtitle class="ma-3">{{ idcomments[i - 1].text }}</v-list-item-subtitle>
                         <v-card-actions v-if="idcomments[i - 1].writer == thislogin">
-                          <v-btn text @click="del(idcomments[i - 1].id)">삭제</v-btn>
-                          <v-btn text @click="함수명(idcomments[i - 1].id)">수정</v-btn>
+                          <v-btn flat icon @click="del(idcomments[i - 1].id)">
+                            <v-icon>close</v-icon>
+                          </v-btn>
+                          <v-btn flat icon @click="함수명(idcomments[i - 1].id)">
+                            <v-icon>edit</v-icon>
+                          </v-btn>
                         </v-card-actions>
                       </v-list-item-content>
                     </v-list-item>
 
-                  </v-card>
+                  </div>
                 </v-flex>
 
-              </v-form>
+              </v-row>
             </div>
 
 
-          </v-card>
+          </div>
         </v-flex>
 
       </v-content>
