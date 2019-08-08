@@ -16,7 +16,6 @@
 <script src="https://www.gstatic.com/firebasejs/6.2.4/firebase-app.js"></script>
 
 <script>
-// main.js
 import "material-design-icons-iconfont/dist/material-design-icons.css";
 import Vue from "vue";
 import Vuetify from "vuetify";
@@ -46,7 +45,6 @@ export default {
     Bookmark,
     Footer,
     Chatbot,
-    // PlusMenu
     Language
   },
   store,

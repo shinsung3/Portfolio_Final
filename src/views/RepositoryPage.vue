@@ -94,8 +94,8 @@
 
 <script>
 // import ImgBanner from "../components/ImgBanner";
-import Gitlab from "../components/GitlabButton.vue";
-import GraphDraw from "../components/GraphDraw.vue";
+import Gitlab from "../components/Repository/GitlabButton.vue";
+import GraphDraw from "../components/Repository/GraphDraw.vue";
 import "../CSS/DokdoFont.css";
 
 export default {

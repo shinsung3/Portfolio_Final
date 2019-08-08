@@ -1,6 +1,7 @@
 <template lang="html">
   <transition name="back-to-top-fade">
-    <div id="color"
+    <div
+      id="color"
       class="vue-back-to-top"
       :style="`bottom:${this.bottom};right:${this.right};`"
       v-show="visible"

@@ -8,7 +8,7 @@
 <script src="https://www.amcharts.com/lib/4/lang/de_DE.js"></script>
 <script src="https://www.amcharts.com/lib/4/geodata/germanyLow.js"></script>
 <script>
-import Repository from "../components/Repository.vue";
+import Repository from "@/components/Repository/Repository";
 import GitlabService from "@/services/GitlabService";
 import * as am4core from "@amcharts/amcharts4/core";
 import * as am4charts from "@amcharts/amcharts4/charts";
