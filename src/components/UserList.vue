@@ -15,22 +15,24 @@
       :search="search"
     >
       <template v-slot:items="props">
-        <td>{{ props.item.email }}</td>
-        <td>
-          <span>&nbsp {{ props.item.auth }} </span>
-        </td>
-        <td>
-          <v-menu>
-            <v-chip slot="activator" color="green" dark mx-2>
-              <span>{{ props.item.auth }} <i class="fas fa-caret-down"></i></span>
-            </v-chip>
-            <v-list>
-              <v-list-tile v-for="authority in authorities" @click="modifyAuthorization(props.item.email, authority)">
-                <v-list-tile-title>{{ authority }}</v-list-tile-title>
-              </v-list-tile>
-            </v-list>
-          </v-menu>
-        </td>
+        <template v-if="props.item.email !== adminEmail">
+          <td>{{ props.item.email }}</td>
+          <td>
+            <span>&nbsp {{ props.item.auth }} </span>
+          </td>
+          <td>
+            <v-menu>
+              <v-chip slot="activator" color="green" dark mx-2>
+                <span>{{ props.item.auth }} <i class="fas fa-caret-down"></i></span>
+              </v-chip>
+              <v-list>
+                <v-list-tile v-for="authority in authorities" @click="modifyAuthorization(props.item.email, authority)">
+                  <v-list-tile-title>{{ authority }}</v-list-tile-title>
+                </v-list-tile>
+              </v-list>
+            </v-menu>
+          </td>
+        </template>
       </template>
       <template v-slot:no-results>
         <v-alert :value="true" color="error" icon="warning">
@@ -48,6 +50,7 @@
     name: "UserList",
     data() {
       return {
+        adminEmail: "",
         users: [],
         authorities: ['방문자', '팀원', '관리자'],
         search: '',
@@ -60,6 +63,7 @@
     },
     mounted() {
       this.getUserList();
+      this.adminEmail = this.$store.state.user.email;
     },
     methods: {
       async getUserList() {
