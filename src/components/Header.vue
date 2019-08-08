@@ -39,6 +39,9 @@
         <v-btn flat to="/repository">
           <span class="DokdoHeader2">Project</span>
         </v-btn>
+        <v-btn flat to="/test">
+          <span class="DokdoHeader2">tEST</span>
+        </v-btn>
         <v-btn flat to="/admin" v-if="this.$store.state.userauth == '관리자'">
           <span class="DokdoHeader2">Admin</span>
         </v-btn>

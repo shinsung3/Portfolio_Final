@@ -12,6 +12,7 @@ import PFDetail from "./views/PortfolioDetail.vue";
 import PSDetail from "./views/PostDetail.vue";
 import AdminPage from "./views/AdminPage.vue";
 import Comments from "./components/Comments.vue";
+import Test from "./components/test.vue";
 
 Vue.use(Router);
 
@@ -78,6 +79,11 @@ export default new Router({
       path: "/comment",
       name: "comment",
       component: Comments
+    },
+    {
+      path: "/test",
+      name: "test",
+      component: Test
     }
   ]
 });
