@@ -59,11 +59,17 @@
                           class="headline grey lighten-2"
                           primary-title
                         >
-                          댓글수정
+                          {{idcomments[i - 1].text}}
                         </v-card-title>
 
                         <v-card-text>
-                          여기에 수정해보십시오!!
+                          <v-text-field
+                            v-model="retext"
+                            label="수정하실 댓글을 적어주세요!"
+                            required
+                            append-outer-icon="add_comment"
+                            @click:append-outer="set(idcomments[i - 1].id)">
+                          </v-text-field>
                         </v-card-text>
 
                         <v-divider></v-divider>
@@ -72,8 +78,7 @@
                           <v-spacer></v-spacer>
                           <v-btn
                             color="primary"
-                            text
-                            @click="dialog = false"
+                            @click="set(idcomments[i - 1].id)"
                           >
                             I accept
                           </v-btn>
@@ -165,18 +170,20 @@ export default {
     portid: "",
     fk: "",
     text: "",
+    retext:"",
     reply:"",
     writer: "",
     thisid: "",
     thisurl: "",
     thislogin: "",
     check: "",
-
+    // dialog: "false",
   }),
   mounted() {
     this.getcommentsByIndex();
     this.comments();
     this.delcomment();
+    this.setcomment();
   },
   methods: {
     async getcommentsByIndex() {
@@ -232,6 +239,15 @@ export default {
     del(id) {
       this.thisurl = document.location.href
       this.portid = FirebaseService.delcomment(id);
+      location.href = this.thisurl
+    },
+    set(id) {
+      console.log("go?")
+      this.thisurl = document.location.href
+      this.portid = FirebaseService.setcomment(
+        id,
+        this.retext
+      );
       location.href = this.thisurl
     },
   }

@@ -256,6 +256,17 @@ export default {
     .doc(id)
     .delete();
   },
+  setcomment(id,retext){
+    console.log(id)
+    console.log(retext)
+    firestore
+    .collection(COMMENTS)
+    .doc(id)
+    .update({
+      text: retext,
+      created_at: firebase.firestore.FieldValue.serverTimestamp()
+    });
+  },
 	getAuthorization() {
 		const userauthCollection = firestore.collection(USERAUTH)
 		return userauthCollection
