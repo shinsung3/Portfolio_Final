@@ -11,11 +11,6 @@
         {{ content.translate }}
       </div>
     </v-card-text>
-    <!-- <v-card-text class="grey--text text1">
-      <div class="grey-text text1">
-        {{ date }}
-      </div>
-    </v-card-text> -->
   </v-card>
 </template>
 
