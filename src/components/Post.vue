@@ -1,65 +1,278 @@
 <template>
   <div>
-    <div v-if="idx == 1 || idx % 13 == 1" class="hex hex-1 hex-gap">
-      <div class="corner-1"></div>
-      <div class="corner-2"></div>
-      <div class="inner">
-        <h2>{{ subject.translate }}</h2>
-        <hr />
-        <p style="width:150px;">{{ content.translate }}</p>
-      </div>
-      <a href="#"></a>
-    </div>
-    <div
-      v-else-if="idx != 1 && idx % 13 != 1 && (idx == 3 || idx % 4 == 0)"
-      class="hex hex-2"
-    >
-      <div class="corner-1"></div>
-      <div class="corner-2"></div>
-      <div class="inner">
-        <h2>{{ subject.translate }}</h2>
-        <hr />
-        <p style="width:150px;">{{ content.translate }}</p>
-      </div>
-      <a href="#"></a>
-    </div>
-    <div
-      v-else-if="idx != 1 && idx % 13 != 1 && (idx == 3 || idx % 5 == 0)"
-      class="hex hex-3"
-    >
-      <div class="corner-1"></div>
-      <div class="corner-2"></div>
-      <div class="inner">
-        <h2>{{ subject.translate }}</h2>
-        <hr />
-        <p style="width:150px;">{{ content.translate }}</p>
-      </div>
-      <a href="#"></a>
-    </div>
+    <v-flex>
+      <v-flex
+        hidden-md-and-down
+        v-if="idx == 1 || idx % 13 == 1"
+        class="hex hex-1 hex-gap"
+      >
+        <div class="corner-1"></div>
+        <div class="corner-2"></div>
+        <div class="inner" @click="linkToPage">
+          <h2>{{ subject.translate }}</h2>
+          <hr />
+          <p style="width:150px;">{{ content.translate }}</p>
+        </div>
+      </v-flex>
+      <v-flex
+        hidden-md-and-down
+        v-else-if="idx != 1 && idx % 13 != 1 && (idx == 3 || idx % 4 == 0)"
+        class="hex hex-2"
+      >
+        <div class="corner-1"></div>
+        <div class="corner-2"></div>
+        <div class="inner" @click="linkToPage">
+          <h2>{{ subject.translate }}</h2>
+          <hr />
+          <p style="width:150px;">{{ content.translate }}</p>
+        </div>
+      </v-flex>
+      <v-flex
+        hidden-md-and-down
+        v-else-if="idx != 1 && idx % 13 != 1 && (idx == 3 || idx % 5 == 0)"
+        class="hex hex-3"
+      >
+        <div class="corner-1"></div>
+        <div class="corner-2"></div>
+        <div class="inner" @click="linkToPage">
+          <h2>{{ subject.translate }}</h2>
+          <hr />
+          <p style="width:150px;">{{ content.translate }}</p>
+        </div>
+        <a href="#"></a>
+      </v-flex>
 
-    <div
-      v-else-if="idx != 1 && idx % 13 != 1 && (idx == 3 || idx % 3 == 0)"
-      class="hex hex-1"
-    >
-      <div class="corner-1"></div>
-      <div class="corner-2"></div>
-      <div class="inner">
-        <h2>{{ subject.translate }}</h2>
-        <hr />
-        <p style="width:150px;">{{ content.translate }}</p>
-      </div>
-      <a href="#"></a>
-    </div>
-    <div v-else class="hex">
-      <div class="corner-1"></div>
-      <div class="corner-2"></div>
-      <div class="inner">
-        <h2>{{ subject.translate }}</h2>
-        <hr />
-        <p style="width:150px;">{{ content.translate }}</p>
-      </div>
-      <a href="#"></a>
-    </div>
+      <v-flex
+        hidden-md-and-down
+        v-else-if="idx != 1 && idx % 13 != 1 && (idx == 3 || idx % 3 == 0)"
+        class="hex hex-1"
+      >
+        <div class="corner-1"></div>
+        <div class="corner-2"></div>
+        <div class="inner" @click="linkToPage">
+          <h2>{{ subject.translate }}</h2>
+          <hr />
+          <p style="width:150px;">{{ content.translate }}</p>
+        </div>
+        <a href="#"></a>
+      </v-flex>
+      <v-flex hidden-md-and-down v-else class="hex">
+        <div class="corner-1"></div>
+        <div class="corner-2"></div>
+        <div class="inner" @click="linkToPage">
+          <h2>{{ subject.translate }}</h2>
+          <hr />
+          <p style="width:150px;">{{ content.translate }}</p>
+        </div>
+        <a href="#"></a>
+      </v-flex>
+
+      <v-flex
+        hidden-sm-and-down
+        hidden-lg-and-up
+        v-if="idx == 1 || idx % 9 == 1"
+        class="hex hex-1 hex-gap"
+      >
+        <div class="corner-1"></div>
+        <div class="corner-2"></div>
+        <div class="inner" @click="linkToPage">
+          <h2>{{ subject.translate }}</h2>
+          <hr />
+          <p style="width:150px;">{{ content.translate }}</p>
+        </div>
+      </v-flex>
+      <v-flex
+        hidden-sm-and-down
+        hidden-lg-and-up
+        v-else-if="idx != 1 && idx % 9 != 1 && (idx == 3 || idx % 4 == 0)"
+        class="hex hex-2"
+      >
+        <div class="corner-1"></div>
+        <div class="corner-2"></div>
+        <div class="inner" @click="linkToPage">
+          <h2>{{ subject.translate }}</h2>
+          <hr />
+          <p style="width:150px;">{{ content.translate }}</p>
+        </div>
+      </v-flex>
+      <v-flex
+        hidden-sm-and-down
+        hidden-lg-and-up
+        v-else-if="idx != 1 && idx % 9 != 1 && (idx == 3 || idx % 5 == 0)"
+        class="hex hex-3"
+      >
+        <div class="corner-1"></div>
+        <div class="corner-2"></div>
+        <div class="inner" @click="linkToPage">
+          <h2>{{ subject.translate }}</h2>
+          <hr />
+          <p style="width:150px;">{{ content.translate }}</p>
+        </div>
+        <a href="#"></a>
+      </v-flex>
+
+      <v-flex
+        hidden-sm-and-down
+        hidden-lg-and-up
+        v-else-if="idx != 1 && idx % 9 != 1 && (idx == 3 || idx % 3 == 0)"
+        class="hex hex-1"
+      >
+        <div class="corner-1"></div>
+        <div class="corner-2"></div>
+        <div class="inner" @click="linkToPage">
+          <h2>{{ subject.translate }}</h2>
+          <hr />
+          <p style="width:150px;">{{ content.translate }}</p>
+        </div>
+        <a href="#"></a>
+      </v-flex>
+      <v-flex hidden-sm-and-down hidden-lg-and-up v-else class="hex">
+        <div class="corner-1"></div>
+        <div class="corner-2"></div>
+        <div class="inner" @click="linkToPage">
+          <h2>{{ subject.translate }}</h2>
+          <hr />
+          <p style="width:150px;">{{ content.translate }}</p>
+        </div>
+        <a href="#"></a>
+      </v-flex>
+
+      <v-flex
+        hidden-md-and-up
+        hidden-xs-and-down
+        v-if="idx == 1 || idx % 3 == 1"
+        class="hex hex-1 hex-gap"
+      >
+        <div class="corner-1"></div>
+        <div class="corner-2"></div>
+        <div class="inner" @click="linkToPage">
+          <h2>{{ subject.translate }}</h2>
+          <hr />
+          <p style="width:150px;">{{ content.translate }}</p>
+        </div>
+      </v-flex>
+      <v-flex
+        hidden-md-and-up
+        hidden-sm-only
+        v-else-if="idx != 1 && idx %3 != 1 && (idx == 3 || idx % 4 == 0)"
+        class="hex hex-2"
+      >
+        <div class="corner-1"></div>
+        <div class="corner-2"></div>
+        <div class="inner" @click="linkToPage">
+          <h2>{{ subject.translate }}</h2>
+          <hr />
+          <p style="width:150px;">{{ content.translate }}</p>
+        </div>
+      </v-flex>
+      <v-flex
+        hidden-md-and-up
+        hidden-xs-and-down
+        v-else-if="idx != 1 && idx % 3 != 1 && (idx == 3 || idx % 5 == 0)"
+        class="hex hex-3"
+      >
+        <div class="corner-1"></div>
+        <div class="corner-2"></div>
+        <div class="inner" @click="linkToPage">
+          <h2>{{ subject.translate }}</h2>
+          <hr />
+          <p style="width:150px;">{{ content.translate }}</p>
+        </div>
+        <a href="#"></a>
+      </v-flex>
+
+      <v-flex
+        hidden-md-and-up
+        hidden-xs-and-down
+        v-else-if="idx != 1 && idx % 3 != 1 && (idx == 3 || idx % 3 == 0)"
+        class="hex hex-1"
+      >
+        <div class="corner-1"></div>
+        <div class="corner-2"></div>
+        <div class="inner" @click="linkToPage">
+          <h2>{{ subject.translate }}</h2>
+          <hr />
+          <p style="width:150px;">{{ content.translate }}</p>
+        </div>
+        <a href="#"></a>
+      </v-flex>
+      <v-flex hidden-md-and-up hidden-xs-and-down v-else class="hex">
+        <div class="corner-1"></div>
+        <div class="corner-2"></div>
+        <div class="inner" @click="linkToPage">
+          <h2>{{ subject.translate }}</h2>
+          <hr />
+          <p style="width:150px;">{{ content.translate }}</p>
+        </div>
+        <a href="#"></a>
+      </v-flex>
+      <!--pad만 잘 보이게 될때까지 살리지 않을 예정....->
+      <!-- <v-flex
+        hidden-sm-and-up
+        v-if="idx == 1 || idx % 3 == 1"
+        class="hex hex-1 hex-gap"
+      >
+        <div class="corner-1"></div>
+        <div class="corner-2"></div>
+        <div class="inner" @click="linkToPage">
+          <h2>{{ subject.translate }}</h2>
+          <hr />
+          <p style="width:150px;">{{ content.translate }}</p>
+        </div>
+      </v-flex>
+      <v-flex
+        hidden-sm-and-up
+        v-else-if="idx != 1 && idx %3 != 1 && (idx == 3 || idx % 4 == 0)"
+        class="hex hex-2"
+      >
+        <div class="corner-1"></div>
+        <div class="corner-2"></div>
+        <div class="inner" @click="linkToPage">
+          <h2>{{ subject.translate }}</h2>
+          <hr />
+          <p style="width:150px;">{{ content.translate }}</p>
+        </div>
+      </v-flex>
+      <v-flex
+        hidden-sm-and-up
+        v-else-if="idx != 1 && idx % 3 != 1 && (idx == 3 || idx % 5 == 0)"
+        class="hex hex-3"
+      >
+        <div class="corner-1"></div>
+        <div class="corner-2"></div>
+        <div class="inner" @click="linkToPage">
+          <h2>{{ subject.translate }}</h2>
+          <hr />
+          <p style="width:150px;">{{ content.translate }}</p>
+        </div>
+        <a href="#"></a>
+      </v-flex>
+
+      <v-flex
+        hidden-sm-and-up
+        v-else-if="idx != 1 && idx % 3 != 1 && (idx == 3 || idx % 3 == 0)"
+        class="hex hex-1"
+      >
+        <div class="corner-1"></div>
+        <div class="corner-2"></div>
+        <div class="inner" @click="linkToPage">
+          <h2>{{ subject.translate }}</h2>
+          <hr />
+          <p style="width:150px;">{{ content.translate }}</p>
+        </div>
+        <a href="#"></a>
+      </v-flex>
+      <v-flex hidden-sm-and-up v-else class="hex">
+        <div class="corner-1"></div>
+        <div class="corner-2"></div>
+        <div class="inner" @click="linkToPage">
+          <h2>{{ subject.translate }}</h2>
+          <hr />
+          <p style="width:150px;">{{ content.translate }}</p>
+        </div>
+        <a href="#"></a>
+      </v-flex> -->
+    </v-flex>
   </div>
 </template>
 
