@@ -9,10 +9,18 @@
               {{ portfolios.title }}
             </p>
           </center>
-          <p class="DokdoList subfont">
+          <!-- <p class="DokdoList subfont">
             {{ portfolios.body }}
-            <br />
-          </p>
+            <br /> -->
+          <!-- </p> -->
+          <v-card light>
+            <v-card-text>
+              <h1>내용</h1>
+              <hr />
+              <!-- {{selArticle.content}} -->
+              <viewer :value="portfolios.body" />
+            </v-card-text>
+          </v-card>
         </v-flex>
         <v-flex pt-3 mt-5 bt-5>
           <v-img :src="portfolios.img" aspect-ratio="1.0" />
