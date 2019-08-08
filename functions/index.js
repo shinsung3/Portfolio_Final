@@ -32,7 +32,7 @@ exports.portfolioNotification = functions.firestore
   .onCreate(async event => {
      var msg = "New Portfolio : " + event.data().title;
      console.log(msg);
-     return pushMessage(msg);
+     return pushMessage("Portfolio", msg);
   });
 
 exports.postNotification = functions.firestore
@@ -40,7 +40,7 @@ exports.postNotification = functions.firestore
   .onCreate(async event => {
      var msg = "New Post : " + event.data().title;
      console.log(msg);
-     return pushMessage(msg);
+     return pushMessage("Post", msg);
   });
 
   exports.commentNotification = functions.firestore
@@ -48,13 +48,14 @@ exports.postNotification = functions.firestore
     .onCreate(async event => {
       var msg = "New Comment : " + event.data().text;
       console.log(msg);
-      return pushMessage(msg);
+      return pushMessage("Comment", msg);
     });
 
-function pushMessage(msg) {
+function pushMessage(kind, msg) {
   var payload = {
     notification: {
-      title: msg
+      title: kind,
+      body: msg
     }
 };
 
@@ -65,9 +66,13 @@ users
  .then(snapshot => {
    snapshot.forEach(doc => {
      if (doc.data().deviceToken != null) {
-       console.log(doc.data().deviceToken);
        token = doc.data().deviceToken;
        console.log("전송 : ", token);
+       if(payload.notification.title === "Comment" && doc.data().auth !== "관리자") {
+          return;
+       }
+       console.log(payload.notification.title)
+
        admin.messaging().sendToDevice(token, payload)
          .then(function(response) {
            console.log('메시지 전송 성공:', response);
