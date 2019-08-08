@@ -315,7 +315,7 @@ export default {
 	signUp(email, password) {
 		firebase.auth().createUserWithEmailAndPassword(email, password).then(
 			function(user) {
-				alert("회원가입 축하합니다")
+				alert("회원가입을 축하합니다")
         chkDup(email).then(res => {
           if(res == false) {
             getDeviceToken(email);
@@ -351,5 +351,14 @@ export default {
           getUserAuth(user.email);
 			  }
 			});
-	}
+	},
+  userDelete() {
+    var user = firebase.auth().currentUser;
+
+    user.delete().then(function() {
+      alert(user.email + "님 정상적으로 탈퇴되었습니다");
+    }).catch(function(error) {
+      console.log(error)
+    });
+  }
 }
