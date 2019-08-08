@@ -43,6 +43,14 @@ exports.postNotification = functions.firestore
      return pushMessage(msg);
   });
 
+  exports.postComment = functions.firestore
+    .document("comments/{comments}")
+    .onCreate(async event => {
+      var msg = "New Comment : " + event.data().title;
+      console.log(msg);
+      return pushMessage(msg);
+    });
+
 function pushMessage(msg) {
   var payload = {
     notification: {
