@@ -29,6 +29,13 @@
               v-model="password"
             ></v-text-field>
           </v-flex>
+          <v-flex xs12>
+            <v-text-field
+              label="UserName*"
+              required
+              v-model="username"
+            ></v-text-field>
+          </v-flex>
         </v-container>
       </v-card-text>
       <v-card-actions>
@@ -50,12 +57,13 @@ export default {
     return {
       dialogSignUp: false,
       email: "",
-      password: ""
+      password: "",
+      username: ""
     };
   },
   methods: {
     async signUp() {
-      FirebaseService.signUp(this.email, this.password);
+      FirebaseService.signUp(this.email, this.password, this.username);
       this.email = "";
       this.password = "";
       this.dialogSignUp = false;
