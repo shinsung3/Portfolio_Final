@@ -61,7 +61,7 @@
                         >
                           {{idcomments[i - 1].text}}
                         </v-card-title>
-
+                        
                         <v-card-text>
                           <v-text-field
                             v-model="retext"
