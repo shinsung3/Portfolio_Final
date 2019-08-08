@@ -63,7 +63,7 @@
                         </v-card-title>
 
                         <v-card-text>
-                          여기에 수정해보십셔
+                          여기에 수정해보십시오!!
                         </v-card-text>
 
                         <v-divider></v-divider>
