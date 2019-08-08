@@ -9,8 +9,18 @@
         color="red lighten-2"
         dark
         v-on="on"
+        v-if="posts == ''"
       >
         <v-icon>border_color</v-icon>&nbsp글쓰기
+      </v-btn>
+      <v-btn
+        id="hot"
+        color="red lighten-2"
+        dark
+        v-on="on"
+        v-else
+      >
+        <v-icon>border_color</v-icon>&nbsp수정하기
       </v-btn>
     </template>
 

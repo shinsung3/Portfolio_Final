@@ -19,36 +19,7 @@
           >
             <v-icon size="25" class="mr-2">fa-angle-double-up</v-icon> 접기
           </v-btn>
-
-          <!-- <v-dialog
-            v-model="dialog"
-            width="500"
-          >
-            <template v-slot:activator="{ on }">
-              <v-btn
-                id="hot"
-                color="red lighten-2"
-                dark
-                v-on="on"
-              >
-                <v-icon>border_color</v-icon>&nbsp글쓰기
-              </v-btn>
-            </template>
-
-            <v-card>
-              <v-card-title
-                class="headline grey lighten-2"
-                primary-title
-              >
-                포스트작성
-              </v-card-title>
-
-              <v-card-text> -->
-            <SkillWriter/>
-              <!-- </v-card-text> -->
-
-            <!-- </v-card>
-          </v-dialog> -->
+          <SkillWriter/>
         </center>
       </v-container>
     </v-container>
