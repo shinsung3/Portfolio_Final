@@ -37,9 +37,6 @@
                       <v-icon>comment</v-icon>
                     </v-btn>
                     <!-- 여기에 수정버튼,모달창 -->
-                    <!-- <v-btn flat icon @click="함수명(idcomments[i - 1].id)">
-                      <v-icon>edit</v-icon>
-                    </v-btn> -->
                     <v-dialog
                       v-model="dialog"
                       width="500"
@@ -59,16 +56,14 @@
                           class="headline grey lighten-2"
                           primary-title
                         >
-                          {{idcomments[i - 1].text}}
+                         수정하실 댓글을 적어주세요
                         </v-card-title>
                         
                         <v-card-text>
                           <v-text-field
-                            v-model="retext"
-                            label="수정하실 댓글을 적어주세요!"
+                            v-model="idcomments[i - 1].text"
                             required
-                            append-outer-icon="add_comment"
-                            @click:append-outer="set(idcomments[i - 1].id)">
+                            >
                           </v-text-field>
                         </v-card-text>
 
@@ -78,7 +73,7 @@
                           <v-spacer></v-spacer>
                           <v-btn
                             color="primary"
-                            @click="set(idcomments[i - 1].id)"
+                            @click="set(idcomments[i - 1].id, idcomments[i - 1].text)"
                           >
                             I accept
                           </v-btn>
@@ -241,12 +236,11 @@ export default {
       this.portid = FirebaseService.delcomment(id);
       location.href = this.thisurl
     },
-    set(id) {
-      console.log("go?")
+    set(id,retext) {
       this.thisurl = document.location.href
       this.portid = FirebaseService.setcomment(
         id,
-        this.retext
+        retext
       );
       location.href = this.thisurl
     },
