@@ -66,7 +66,7 @@
                   <v-flex>
                     <v-row>
                       <v-text-field
-                        v-model="text"
+                        v-model="reply"
                         label="댓글을 입력해 주세요"
                         required
                         append-outer-icon="add_comment"
@@ -124,6 +124,7 @@ export default {
     portid: "",
     fk: "",
     text: "",
+    reply:"",
     writer: "",
     thisid: "",
     thisurl: "",
@@ -172,7 +173,7 @@ export default {
         this.portid = FirebaseService.comments(
           this.portid = this.check,
           this.fk = 1,
-          this.text,
+          this.reply,
           this.writer = this.$store.state.user.displayName,
         )
         location.href = this.thisurl
@@ -181,7 +182,7 @@ export default {
         this.portid = FirebaseService.comments(
           this.portid = this.check,
           this.idcomments[0].fk + 1,
-          this.text,
+          this.reply,
           this.writer = this.$store.state.user.displayName,
         )
         location.href = this.thisurl
