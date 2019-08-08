@@ -4,11 +4,13 @@
       <v-content>
         <v-flex>
           <v-row>
-            <v-text-field v-model="text" append-icon="message" label="댓글을 입력해 주세요" required>
+            <v-text-field
+              v-model="text"
+              label="댓글을 입력해 주세요"
+              required
+              append-outer-icon="add_comment"
+              @click:append-outer="insert">
             </v-text-field>
-            <v-btn flat icon @click="insert">
-              <v-icon>add_comment</v-icon>
-            </v-btn>
           </v-row>
         </v-flex>
 
@@ -24,16 +26,15 @@
                 </div>
                 <v-list-item-subtitle class="ma-3">{{ idcomments[i - 1].text }}</v-list-item-subtitle>
                 <v-row>
-
                   <v-card-actions v-if="idcomments[i - 1].writer == thislogin">
                     <v-btn v-if="check==''" flat icon @click="check=idcomments[i - 1].id">
-                      <v-icon>chat</v-icon>
+                      <v-icon>comment</v-icon>
                     </v-btn>
                     <v-btn v-else-if="check==idcomments[i - 1].id" flat icon @click="check=''">
                       <v-icon>arrow_back</v-icon>
                     </v-btn>
                     <v-btn v-else flat icon @click="check=idcomments[i - 1].id">
-                      <v-icon>chat</v-icon>
+                      <v-icon>comment</v-icon>
                     </v-btn>
                     <v-btn flat icon @click="del(idcomments[i - 1].id)">
                       <v-icon>close</v-icon>
@@ -54,22 +55,23 @@
                     </v-btn>
                   </v-card-actions>
                 </v-row>
+                <hr class="bottomline">
               </v-list-item-content>
-
             </v-list-item>
 
             <!-- 대댓글부분 -->
             <div v-if="check==idcomments[i - 1].id" class="ml-5">
-
               <v-row>
-                <v-container>
+                <v-container style="padding:0px">
                   <v-flex>
                     <v-row>
-                      <v-text-field v-model="text" append-icon="message" label="대댓글을 입력해 주세요" required>
+                      <v-text-field
+                        v-model="text"
+                        label="댓글을 입력해 주세요"
+                        required
+                        append-outer-icon="add_comment"
+                        @click:append-outer="replyinsert">
                       </v-text-field>
-                      <v-btn flat icon @click="replyinsert">
-                        <v-icon>add_comment</v-icon>
-                      </v-btn>
                     </v-row>
                   </v-flex>
                 </v-container>
@@ -91,6 +93,7 @@
                             <v-icon>edit</v-icon>
                           </v-btn>
                         </v-card-actions>
+                        <hr class="bottomline">
                       </v-list-item-content>
                     </v-list-item>
 
@@ -199,4 +202,10 @@ export default {
   .comments {
     border-color: transparent!important;
   }
+
+  /* hr {
+    border: 0;
+    height: 1px;
+    background-color:grey;
+  } */
 </style>
