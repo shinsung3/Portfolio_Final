@@ -26,14 +26,16 @@
               this.$store.state.userauth == '관리자'
           "
         >
-          <v-btn @click="linkToPage" color="info">
-            <v-icon>fas fa-user-edit</v-icon><span id="padding">수정</span>
-          </v-btn>
+          <SkillWriter/>
           <v-btn @click="deleteDB" class="buttonWriter">
-            <v-icon>far fa-trash-alt</v-icon><span id="padding">삭제</span>
+            <v-icon>delete</v-icon><span id="padding">삭제</span>
           </v-btn>
         </v-flex>
       </v-form>
+      <br>
+      <br>
+      <br>
+      <br>
       <Comments />
     </v-container>
   </div>
@@ -46,15 +48,17 @@ import "../CSS/DokdoFont.css";
 import "../CSS/btn.css";
 import FirebaseService from "@/services/FirebaseService";
 import Comments from "../components/Comments.vue";
+import SkillWriter from "../components/SkillWriter";
 
 export default {
   name: "PostDetail",
   components: {
-    Comments
+    Comments,
+    SkillWriter
   },
   data() {
     return {
-      post: []
+      post: [],
     };
   },
   mounted() {

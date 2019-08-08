@@ -19,13 +19,36 @@
           >
             <v-icon size="25" class="mr-2">fa-angle-double-up</v-icon> 접기
           </v-btn>
-          <v-btn id="hot" to="/psWriter">
-            <img
-              src="https://image.flaticon.com/icons/svg/1865/1865689.svg"
-              width="30px"
-            />
-            <span id="padding"><b>글쓰기</b></span>
-          </v-btn>
+
+          <!-- <v-dialog
+            v-model="dialog"
+            width="500"
+          >
+            <template v-slot:activator="{ on }">
+              <v-btn
+                id="hot"
+                color="red lighten-2"
+                dark
+                v-on="on"
+              >
+                <v-icon>border_color</v-icon>&nbsp글쓰기
+              </v-btn>
+            </template>
+
+            <v-card>
+              <v-card-title
+                class="headline grey lighten-2"
+                primary-title
+              >
+                포스트작성
+              </v-card-title>
+
+              <v-card-text> -->
+            <SkillWriter/>
+              <!-- </v-card-text> -->
+
+            <!-- </v-card>
+          </v-dialog> -->
         </center>
       </v-container>
     </v-container>
@@ -36,11 +59,13 @@
 import PostList from "../components/PostList";
 import "../CSS/DokdoFont.css";
 import FirebaseService from "@/services/FirebaseService";
+import SkillWriter from "../components/SkillWriter";
 
 export default {
   name: "PostPage",
   components: {
-    PostList
+    PostList,
+    SkillWriter
   },
   props: {
     column: {
@@ -62,7 +87,7 @@ export default {
   },
   data() {
     return {
-      posts: []
+      posts: [],
     };
   },
   mounted() {
