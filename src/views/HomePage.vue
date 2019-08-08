@@ -172,7 +172,7 @@
 
 <script>
 import "../CSS/FontColor.css";
-import ImgBanner from "../components/ImgBanner";
+import ImgBanner from "../components/Function/ImgBanner";
 import PortfolioList from "../components/PortfolioList";
 import PostList from "../components/PostList";
 import RepositoryList from "../components/Repository/RepositoryList";

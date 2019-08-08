@@ -2,15 +2,15 @@
 <script src="https://unpkg.com/lodash@4.16.0"></script>
 
 <template>
-<v-app>
-  <textarea :value="input" @input="update"></textarea>
-  <div v-html="compiledMarkdown"></div>
-</v-app>
+  <v-app>
+    <textarea :value="input" @input="update"></textarea>
+    <div v-html="compiledMarkdown"></div>
+  </v-app>
 </template>
 
 <script>
-export default ({
-  name: 'app',
+export default {
+  name: "app",
   data() {
     return {
         input: '# hello'

@@ -54,7 +54,7 @@
 
 
 <script>
-import "../CSS/aTag.css"
+import "../../CSS/aTag.css"
 
 export default {
   components: {
