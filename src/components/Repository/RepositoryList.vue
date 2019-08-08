@@ -24,7 +24,7 @@
 </template>
 
 <script>
-import Repository from "@/components/Repository";
+import Repository from "@/components/Repository/Repository";
 import GitlabService from "@/services/GitlabService";
 
 export default {

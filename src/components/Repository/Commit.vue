@@ -17,23 +17,23 @@
             <v-list two-line style="background: antiquewhite;">
               <v-list-tile v-for="(item, i) in this.getMembers()" :key="i">
                 <v-list-tile-avatar v-if="item.author_name === 'nnnangni'">
-                  <img src="../assets/Park1.jpg" width="20px" />
+                  <img src="../../assets/Park1.jpg" width="20px" />
                 </v-list-tile-avatar>
 
                 <v-list-tile-avatar v-if="item.author_name === '조신성'">
-                  <img src="../assets/Jo1.jpg" width="20px"/>
+                  <img src="../../assets/Jo1.jpg" width="20px"/>
                 </v-list-tile-avatar>
 
                 <v-list-tile-avatar v-if="item.author_name === 'nustar'">
-                  <img src="../assets/Jo1.jpg" width="20px" />
+                  <img src="../../assets/Jo1.jpg" width="20px" />
                 </v-list-tile-avatar>
 
                 <v-list-tile-avatar v-if="item.author_name === 'KHI'">
-                  <img src="../assets/kim1.png" width="20px" />
+                  <img src="../../assets/kim1.png" width="20px" />
                 </v-list-tile-avatar>
 
                 <v-list-tile-avatar v-if="item.author_name === 'Help_dog'">
-                  <img src="../assets/choi1.jpg" width="20px" />
+                  <img src="../../assets/choi1.jpg" width="20px" />
                 </v-list-tile-avatar>
 
                 <v-list-title v-if="item.author_name === '박나원'">
