@@ -85,13 +85,6 @@ export default {
   mounted() {
     this.getPostByIndex();
   },
-  created() {
-    var auth = this.$store.state.userauth;
-    if (auth != "관리자" && auth != "팀원") {
-      alert("글을 작성할 권한이 없습니다.");
-      this.$router.push("/Post");
-    }
-  },
   methods: {
     async getPostByIndex() {
       this.posts = await FirebaseService.getPostByIndex(this.$route.query.id);
@@ -104,6 +97,7 @@ export default {
     },
     resetValidation() {
       this.$refs.form.resetValidation();
+      // this.$refs.form.resetValidation();
     },
     submit() {
       FirebaseService.postPost(

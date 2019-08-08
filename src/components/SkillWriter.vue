@@ -1,68 +1,119 @@
 <template>
-    <v-form ref="form" v-model="valid" lazy-validation>
-      <v-container>
-        <!-- 작성할 때 -->
-        <template v-if="posts == ''">
-          <v-flex px10 py10>
-            <v-text-field
-              v-model="title"
-              :counter="30"
-              :rules="titleRules"
-              label="제목"
-              required
-            >
-            </v-text-field>
-          </v-flex>
-          <!-- body -->
-          <v-flex px10 py10>
-            <v-text-field v-model="body" label="내용"></v-text-field>
-          </v-flex>
-          <v-flex align-center justify-end row fill-height right>
-            <v-btn color="success" @click="submit">
-              업로드<img
-                src="https://image.flaticon.com/icons/svg/261/261868.svg"
-                width="35px"
-              />
-            </v-btn>
-            <v-btn
-              color="primary"
-              text
-              @click="dialog = false"
-            >
-              I accept
-            </v-btn>
-          </v-flex>
-        </template>
-        <!-- 수정할때 -->
-        <template v-else>
-          <v-flex px10 py10>
-            <v-text-field
-              v-model="posts.title"
-              :counter="30"
-              :rules="titleRules"
-              label="제목"
-              required
-            >
-            </v-text-field>
-          </v-flex>
-          <!-- body -->
-          <v-flex px10 py10>
-            <v-text-field v-model="posts.body"></v-text-field>
-          </v-flex>
-          <v-flex align-center justify-end row fill-height right>
-            <v-btn color="info" @click="update">
-              수정<img
-                src="https://image.flaticon.com/icons/svg/261/261868.svg"
-                width="35px"
-              />
-            </v-btn>
-            <v-btn @click.stop="reset()" class="buttonWriter" href="/Post">
-              취소
-            </v-btn>
-          </v-flex>
-        </template>
-      </v-container>
-    </v-form>
+  <v-dialog
+    v-model="dialog"
+    width="500"
+  >
+    <template v-slot:activator="{ on }">
+      <v-btn
+        id="hot"
+        color="red lighten-2"
+        dark
+        v-on="on"
+      >
+        <v-icon>border_color</v-icon>&nbsp글쓰기
+      </v-btn>
+    </template>
+
+    <v-card>
+      <v-card-title
+        class="headline grey lighten-2"
+        primary-title
+      >
+        Skill
+      </v-card-title>
+
+      <v-card-text>
+        <v-form ref="form" v-model="valid" lazy-validation>
+          <v-container>
+            <!-- 작성할 때 -->
+            <template v-if="posts == ''">
+              <v-content>
+                <v-flex px10 py10>
+                  <v-text-field
+                    v-model="title"
+                    :counter="30"
+                    :rules="titleRules"
+                    label="사용언어"
+                    required
+                  >
+                  </v-text-field>
+                </v-flex>
+                <!-- body -->
+                <v-flex px10 py10>
+                  <v-text-field v-model="body" label="사용자"></v-text-field>
+                </v-flex>
+              </v-content>
+              <v-content>
+                <v-flex align-center justify-end row fill-height right>
+                  <v-btn
+                    id="hot"
+                    color="red lighten-2"
+                    dark
+                    v-on="on"
+                    @click="submit"
+                  >
+                    <v-icon>border_color</v-icon>&nbsp글쓰기
+                  </v-btn>
+                  <v-btn
+                    color="primary"
+                    text
+                    @click="dialog = false"
+                  >
+                    <v-icon>cancel</v-icon>&nbsp취소
+                  </v-btn>
+                </v-flex>
+              </v-content>
+            </template>
+            <!-- 수정할때 -->
+            <template v-else>
+              <v-content>
+                <v-flex px10 py10>
+                  <v-text-field
+                    v-model="posts.title"
+                    :counter="30"
+                    :rules="titleRules"
+                    label="사용언어"
+                    required
+                  >
+                  </v-text-field>
+                </v-flex>
+                <!-- body -->
+                <v-flex px10 py10>
+                  <v-text-field v-model="posts.body" label="사용자"></v-text-field>
+                </v-flex>
+              </v-content>
+              <v-content>
+                <v-flex align-center justify-end row fill-height right>
+                  <!-- <v-btn color="info" @click="update">
+                    수정<img
+                      src="https://image.flaticon.com/icons/svg/261/261868.svg"
+                      width="35px"
+                    />
+                  </v-btn> -->
+                  <v-btn
+                    id="hot"
+                    color="red lighten-2"
+                    dark
+                    v-on="on"
+                    @click="update"
+                  >
+                    <v-icon>border_color</v-icon>&nbsp수정
+                  </v-btn>
+                  <v-btn
+                    color="primary"
+                    text
+                    @click="dialog = false"
+                  >
+                    <v-icon>cancel</v-icon>&nbsp취소
+                  </v-btn>
+                </v-flex>
+              </v-content>
+            </template>
+          </v-container>
+        </v-form>
+      </v-card-text>
+    </v-card>
+  </v-dialog>
 </template>
 
 <script>
@@ -84,13 +135,6 @@ export default {
   }),
   mounted() {
     this.getPostByIndex();
-  },
-  created() {
-    var auth = this.$store.state.userauth;
-    if (auth != "관리자" && auth != "팀원") {
-      alert("글을 작성할 권한이 없습니다.");
-      this.$router.push("/Post");
-    }
   },
   methods: {
     async getPostByIndex() {
@@ -127,11 +171,11 @@ export default {
 </script>
 
 <style>
-.buttonWriter {
+/* .buttonWriter {
   float: right;
 }
 
 .input_css {
   display: none;
-}
+} */
 </style>

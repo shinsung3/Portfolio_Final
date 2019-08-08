@@ -20,7 +20,7 @@
             <v-icon size="25" class="mr-2">fa-angle-double-up</v-icon> 접기
           </v-btn>
 
-          <v-dialog
+          <!-- <v-dialog
             v-model="dialog"
             width="500"
           >
@@ -43,12 +43,12 @@
                 포스트작성
               </v-card-title>
 
-              <v-card-text>
-                <SkillWriter/>
-              </v-card-text>
+              <v-card-text> -->
+            <SkillWriter/>
+              <!-- </v-card-text> -->
 
-            </v-card>
-          </v-dialog>
+            <!-- </v-card>
+          </v-dialog> -->
         </center>
       </v-container>
     </v-container>
@@ -87,7 +87,7 @@ export default {
   },
   data() {
     return {
-      posts: []
+      posts: [],
     };
   },
   mounted() {
