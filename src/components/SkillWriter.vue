@@ -1,6 +1,6 @@
 <template>
     <v-form ref="form" v-model="valid" lazy-validation>
-      <v-container id="size">
+      <v-container>
         <!-- 작성할 때 -->
         <template v-if="posts == ''">
           <v-flex px10 py10>

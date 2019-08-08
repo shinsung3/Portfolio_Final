@@ -52,9 +52,9 @@
                 포스트수정
               </v-card-title>
 
-              <v-card-text>
+              <!-- <v-card-text> -->
                 <SkillWriter/>
-              </v-card-text>
+              <!-- </v-card-text> -->
 
             </v-card>
           </v-dialog>
