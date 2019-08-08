@@ -1,19 +1,16 @@
 <template>
-<div>
-  <v-layout>
-    <v-flex>
-      <v-form ref="form">
-        <v-container>
-          <v-flex>
-            <v-text-field v-model="text" label="댓글을 입력해 주세요" required>
+  <v-container>
+    <v-layout>
+      <v-content>
+        <v-flex>
+          <v-row>
+            <v-text-field v-model="text" append-icon="message" label="댓글을 입력해 주세요" required>
             </v-text-field>
-          </v-flex>
-          <v-flex>
-            <v-btn color="success" @click="insert">
-              댓글달기
+            <v-btn flat icon @click="insert">
+              <v-icon>add_comment</v-icon>
             </v-btn>
-          </v-flex>
-        </v-container>
+          </v-row>
+        </v-flex>
 
         <v-flex v-for="(i, j) in idcomments.length > limits
             ? limits
@@ -91,10 +88,9 @@
           </v-card>
         </v-flex>
 
-      </v-form>
-    </v-flex>
-  </v-layout>
-</div>
+      </v-content>
+    </v-layout>
+  </v-container>
 </template>
 
 <script>
@@ -182,3 +178,9 @@ export default {
 
 }
 </script>
+
+<style media="screen">
+  .comments {
+    border-color: transparent!important;
+  }
+</style>
