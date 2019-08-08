@@ -287,6 +287,7 @@ export default {
       chkDup(user.email).then(res => {
         if(res == false) {
           setAuthorization(user.email, '방문자', deviceToken, user.displayName);
+          getUserName(user.email);
         }
       }) .catch(err => {
         console.log(err);
@@ -306,6 +307,7 @@ export default {
       chkDup(user.email).then(res => {
         if(res == false) {
           setAuthorization(user.email, '방문자', deviceToken, user.displayName);
+          getUserName(user.email);
         }
       }) .catch(err => {
         console.log(err);
@@ -332,6 +334,7 @@ export default {
           if(res == false) {
             getDeviceToken(email);
             setAuthorization(email, '방문자', deviceToken, userName);
+            getUserName(email);
           }
         }) .catch(err => {
           console.log(err);
