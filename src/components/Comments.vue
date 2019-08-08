@@ -36,11 +36,52 @@
                     <v-btn v-else flat icon @click="check=idcomments[i - 1].id">
                       <v-icon>comment</v-icon>
                     </v-btn>
+                    <!-- 여기에 수정버튼,모달창 -->
+                    <!-- <v-btn flat icon @click="함수명(idcomments[i - 1].id)">
+                      <v-icon>edit</v-icon>
+                    </v-btn> -->
+                    <v-dialog
+                      v-model="dialog"
+                      width="500"
+                    >
+                      <template v-slot:activator="{ on }">
+                        <v-btn
+                          flat
+                          icon
+                          v-on="on"
+                        >
+                          <v-icon>edit</v-icon>
+                        </v-btn>
+                      </template>
+
+                      <v-card>
+                        <v-card-title
+                          class="headline grey lighten-2"
+                          primary-title
+                        >
+                          댓글수정
+                        </v-card-title>
+
+                        <v-card-text>
+                          여기에 수정해보십셔
+                        </v-card-text>
+
+                        <v-divider></v-divider>
+
+                        <v-card-actions>
+                          <v-spacer></v-spacer>
+                          <v-btn
+                            color="primary"
+                            text
+                            @click="dialog = false"
+                          >
+                            I accept
+                          </v-btn>
+                        </v-card-actions>
+                      </v-card>
+                    </v-dialog>
                     <v-btn flat icon @click="del(idcomments[i - 1].id)">
                       <v-icon>close</v-icon>
-                    </v-btn>
-                    <v-btn flat icon @click="함수명(idcomments[i - 1].id)">
-                      <v-icon>edit</v-icon>
                     </v-btn>
                   </v-card-actions>
                   <v-card-actions v-else>
@@ -55,7 +96,7 @@
                     </v-btn>
                   </v-card-actions>
                 </v-row>
-                <hr class="bottomline">
+                <hr class="bottomline" style="margin:10px 0px">
               </v-list-item-content>
             </v-list-item>
 
@@ -86,14 +127,14 @@
                         </div>
                         <v-list-item-subtitle class="ma-3">{{ idcomments[i - 1].text }}</v-list-item-subtitle>
                         <v-card-actions v-if="idcomments[i - 1].writer == thislogin">
-                          <v-btn flat icon @click="del(idcomments[i - 1].id)">
-                            <v-icon>close</v-icon>
-                          </v-btn>
                           <v-btn flat icon @click="함수명(idcomments[i - 1].id)">
                             <v-icon>edit</v-icon>
                           </v-btn>
+                          <v-btn flat icon @click="del(idcomments[i - 1].id)">
+                            <v-icon>close</v-icon>
+                          </v-btn>
                         </v-card-actions>
-                        <hr class="bottomline">
+                        <hr class="bottomline" style="margin:10px 0px">
                       </v-list-item-content>
                     </v-list-item>
 
