@@ -45,13 +45,13 @@
                   </v-card-actions>
                   <v-card-actions v-else>
                     <v-btn v-if="check==''" flat icon @click="check=idcomments[i - 1].id">
-                      <v-icon>chat</v-icon>
+                      <v-icon>comment</v-icon>
                     </v-btn>
                     <v-btn v-else-if="check==idcomments[i - 1].id" flat icon @click="check=''">
                       <v-icon>arrow_back</v-icon>
                     </v-btn>
                     <v-btn v-else flat icon @click="check=idcomments[i - 1].id">
-                      <v-icon>chat</v-icon>
+                      <v-icon>comment</v-icon>
                     </v-btn>
                   </v-card-actions>
                 </v-row>
