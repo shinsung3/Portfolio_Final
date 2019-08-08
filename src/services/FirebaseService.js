@@ -224,20 +224,16 @@ export default {
       created_at: firebase.firestore.FieldValue.serverTimestamp()
     });
   },
-  editPortfolio(title, body, img, uk, language, complete, people, userId, id) {
+  editPortfolio(title, body, language, complete, people, id) {
     return firestore
       .collection(PORTFOLIOS)
       .doc(id)
       .update({
         title,
         body,
-        img,
-        uk,
         language,
         complete,
-        people,
-        userId,
-        created_at: firebase.firestore.FieldValue.serverTimestamp()
+        people
       });
   },
   deletePortfolio(id) {
