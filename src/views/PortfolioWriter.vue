@@ -48,7 +48,7 @@
                   :rules="titleRules"
                   label="사용언어"
                   required
-                >
+                > 
                 </v-text-field>
               </v-flex>
               <!-- complete -->
