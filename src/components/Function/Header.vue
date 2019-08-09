@@ -27,17 +27,17 @@
             <span class="DokdoHeader2">Logout</span>
           </v-btn>
         </template>
-        <v-btn flat to="/Portfolio">
-          <span class="DokdoHeader2">Portfolio</span>
+        <v-btn flat to="/info">
+          <span class="DokdoHeader2">Profile</span>
         </v-btn>
         <v-btn flat to="/Post">
           <span class="DokdoHeader2">Skill</span>
         </v-btn>
+        <v-btn flat to="/Portfolio">
+          <span class="DokdoHeader2">Portfolio</span>
+        </v-btn>
         <v-btn flat to="/repository">
           <span class="DokdoHeader2">Project</span>
-        </v-btn>
-        <v-btn flat to="/info">
-          <span class="DokdoHeader2">Team</span>
         </v-btn>
         <v-btn flat to="/admin" v-if="this.$store.state.userauth == '관리자'">
           <span class="DokdoHeader2">Admin</span>
