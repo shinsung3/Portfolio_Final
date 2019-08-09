@@ -9,11 +9,7 @@
         hide-details
       ></v-text-field>
     </v-card-title>
-    <v-data-table
-      :headers="headers"
-      :items="users"
-      :search="search"
-    >
+    <v-data-table :headers="headers" :items="users" :search="search">
       <template v-slot:items="props">
         <template v-if="props.item.email !== adminEmail">
           <td>{{ props.item.email }}</td>
@@ -23,10 +19,17 @@
           <td>
             <v-menu>
               <v-chip slot="activator" color="green" dark mx-2>
-                <span>{{ props.item.auth }} <i class="fas fa-caret-down"></i></span>
+                <span>
+                  {{ props.item.auth }}
+                  <i class="fas fa-caret-down"></i>
+                </span>
               </v-chip>
               <v-list>
-                <v-list-tile v-for="authority in authorities" @click="modifyAuthorization(props.item.email, authority)">
+                <v-list-tile
+                  v-for="(authority, j) in authorities"
+                  @click="modifyAuthorization(props.item.email, authority)"
+                  :key="j"
+                >
                   <v-list-tile-title>{{ authority }}</v-list-tile-title>
                 </v-list-tile>
               </v-list>
@@ -44,38 +47,37 @@
 </template>
 
 <script>
-  import FirebaseService from "@/services/FirebaseService";
+import FirebaseService from "@/services/FirebaseService";
 
-  export default {
-    name: "UserList",
-    data() {
-      return {
-        adminEmail: "",
-        users: [],
-        authorities: ['방문자', '팀원', '관리자'],
-        search: '',
-        headers: [
-          { text: 'User ID', value: 'email' },
-          { text: 'Authority', value: 'auth' },
-          { text: 'Change Auth', value: 'auth' },
-        ],
-      };
+export default {
+  name: "UserList",
+  data() {
+    return {
+      adminEmail: "",
+      users: [],
+      authorities: ["방문자", "팀원", "관리자"],
+      search: "",
+      headers: [
+        { text: "User ID", value: "email" },
+        { text: "Authority", value: "auth" },
+        { text: "Change Auth", value: "auth" }
+      ]
+    };
+  },
+  mounted() {
+    this.getUserList();
+    this.adminEmail = this.$store.state.user.email;
+  },
+  methods: {
+    async getUserList() {
+      this.users = await FirebaseService.getAuthorization();
     },
-    mounted() {
-      this.getUserList();
-      this.adminEmail = this.$store.state.user.email;
-    },
-    methods: {
-      async getUserList() {
-        this.users = await FirebaseService.getAuthorization();
-      },
-      async modifyAuthorization(email, auth) {
-        FirebaseService.modifyAuthorization(email, auth);
-        this.users = await FirebaseService.getAuthorization();
-      }
+    async modifyAuthorization(email, auth) {
+      FirebaseService.modifyAuthorization(email, auth);
+      this.users = await FirebaseService.getAuthorization();
     }
   }
-
+};
 </script>
 
 <style media="screen">

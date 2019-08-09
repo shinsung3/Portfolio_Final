@@ -55,7 +55,10 @@ export default {
   },
   methods: {
     async signIn() {
-      this.$store.state.user = FirebaseService.signIn(this.email, this.password);
+      this.$store.state.user = FirebaseService.signIn(
+        this.email,
+        this.password
+      );
       this.email = "";
       this.password = "";
       this.dialogSignIn = false;

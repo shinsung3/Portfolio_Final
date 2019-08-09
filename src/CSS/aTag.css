@@ -3,6 +3,11 @@ a {
   text-decoration: none;
 }
 
+#aTag {
+  color: white;
+  text-decoration: none;
+}
+
 a:hover {
   text-decoration: none;
 }
