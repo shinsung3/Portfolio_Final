@@ -35,7 +35,7 @@ import Header from "./components/Function/Header.vue";
 import Top from "./components/Function/Top.vue";
 import Bookmark from "./components/Function/BookMark.vue";
 import Footer from "./components/Function/Footer.vue";
-import Chatbot from "./components/ChatBot.vue";
+import Chatbot from "./components/Function/ChatBot.vue";
 import Language from "./components/Language.vue";
 
 export default {

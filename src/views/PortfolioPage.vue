@@ -11,8 +11,7 @@
 </template>
 
 <script>
-import PortfolioList from "../components/PortfolioList";
-import "../CSS/DokdoFont.css";
+import PortfolioList from "../components/Portfolio/PortfolioList";
 export default {
   name: "PortfolioPage",
   components: {
