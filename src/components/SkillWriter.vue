@@ -4,24 +4,24 @@
     width="500"
   >
     <template v-slot:activator="{ on }">
-      <v-btn
-        id="hot"
-        color="red lighten-2"
-        dark
-        v-on="on"
-        v-if="posts == ''"
-      >
-        <v-icon>border_color</v-icon>&nbsp글쓰기
-      </v-btn>
-      <v-btn
-        id="hot"
-        color="red lighten-2"
-        dark
-        v-on="on"
-        v-else
-      >
-        <v-icon>border_color</v-icon>&nbsp수정하기
-      </v-btn>
+        <v-btn
+          id="hot"
+          color="red lighten-2"
+          dark
+          v-on="on"
+          v-if="posts == ''"
+        >
+          <v-icon>border_color</v-icon>&nbsp글쓰기
+        </v-btn>
+        <v-btn
+          id="hot"
+          color="red lighten-2"
+          dark
+          v-on="on"
+          v-else
+        >
+          <v-icon>border_color</v-icon>&nbsp수정하기
+        </v-btn>
     </template>
 
     <v-card>
@@ -33,7 +33,11 @@
       </v-card-title>
 
       <v-card-text>
-        <v-form ref="form" v-model="valid" lazy-validation>
+        <v-form
+          ref="form"
+          v-model="valid"
+          lazy-validation
+        >
           <v-container>
             <!-- 작성할 때 -->
             <template v-if="posts == ''">
@@ -50,11 +54,20 @@
                 </v-flex>
                 <!-- body -->
                 <v-flex px10 py10>
-                  <v-text-field v-model="body" label="사용자"></v-text-field>
+                  <v-text-field
+                    v-model="body"
+                    label="사용자"
+                  ></v-text-field>
                 </v-flex>
               </v-content>
               <v-content>
-                <v-flex align-center justify-end row fill-height right>
+                <v-flex
+                  align-center
+                  justify-end
+                  row
+                  fill-height
+                  right
+                >
                   <v-btn
                     id="hot"
                     color="red lighten-2"
@@ -89,17 +102,20 @@
                 </v-flex>
                 <!-- body -->
                 <v-flex px10 py10>
-                  <v-text-field v-model="posts.body" label="사용자"></v-text-field>
+                  <v-text-field
+                    v-model="posts.body"
+                    label="사용자"
+                  ></v-text-field>
                 </v-flex>
               </v-content>
               <v-content>
-                <v-flex align-center justify-end row fill-height right>
-                  <!-- <v-btn color="info" @click="update">
-                    수정<img
-                      src="https://image.flaticon.com/icons/svg/261/261868.svg"
-                      width="35px"
-                    />
-                  </v-btn> -->
+                <v-flex
+                  align-center
+                  justify-end
+                  row
+                  fill-height
+                  right
+                >
                   <v-btn
                     id="hot"
                     color="red lighten-2"
@@ -168,6 +184,11 @@ export default {
       location.href = "/Post";
     },
     update() {
+      if(this.$store.state.user.email !== this.posts.userId) {
+          alert("수정할 권한이 없습니다!!")
+          return;
+      }
+
       FirebaseService.editPost(
         this.posts.title,
         this.posts.body,

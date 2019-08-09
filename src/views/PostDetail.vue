@@ -14,7 +14,11 @@
           </p>
         </v-flex>
       </v-layout>
-      <v-form ref="form" v-model="valid" lazy-validation>
+      <v-form
+        ref="form"
+        v-model="valid"
+        lazy-validation
+      >
         <v-flex
           align-center
           justify-end
@@ -72,6 +76,10 @@ export default {
       this.$router.push("/psWriter?id=" + this.$route.query.id);
     },
     deleteDB() {
+      if(this.$store.state.user.email !== this.post.userId) {
+          alert("삭제할 권한이 없습니다!!")
+          return;
+      }
       FirebaseService.deletePost(this.post.id);
       this.posts = FirebaseService.getPosts();
       location.href = "/Post";
