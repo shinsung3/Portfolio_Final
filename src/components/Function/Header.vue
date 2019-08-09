@@ -20,9 +20,7 @@
             src="https://image.flaticon.com/icons/svg/324/324125.svg"
             width="30px" v-if="this.$store.state.userauth == '관리자'"
           />
-          <span
-            class="DokdoHeader2 mt-3 mr-2"
-          >
+          <span class="DokdoHeader2 mt-3 mr-2">
             <b>&nbsp {{ this.$store.state.user.displayName }}</b>
             님 반갑습니다!!
           </span>
