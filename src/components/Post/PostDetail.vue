@@ -44,7 +44,7 @@
 <script>
 import FirebaseService from "@/services/FirebaseService";
 import Comments from "../Function/Comments.vue";
-import SkillWriter from "../SkillWriter";
+import SkillWriter from "../Function/SkillWriter";
 
 export default {
   name: "PostDetail",

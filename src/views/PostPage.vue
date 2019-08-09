@@ -37,7 +37,7 @@
 import PostList from "../components/Post/PostList";
 import "../CSS/DokdoFont.css";
 import FirebaseService from "@/services/FirebaseService";
-import SkillWriter from "../components/SkillWriter";
+import SkillWriter from "../components/Function/SkillWriter";
 
 export default {
   name: "PostPage",
