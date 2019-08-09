@@ -23,7 +23,7 @@
 </template>
 
 <script>
-import Post from "@/components/Post";
+import Post from "@/components/Post/Post";
 import FirebaseService from "@/services/FirebaseService";
 
 export default {

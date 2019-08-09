@@ -174,7 +174,7 @@
 import "../CSS/FontColor.css";
 import ImgBanner from "../components/Function/ImgBanner";
 import PortfolioList from "../components/Portfolio/PortfolioList";
-import PostList from "../components/PostList";
+import PostList from "../components/Post/PostList";
 import RepositoryList from "../components/Repository/RepositoryList";
 import "../CSS/ellipsis.css";
 import "../CSS/DokdoFont.css";

@@ -3,21 +3,12 @@
     <v-container>
       <v-layout>
         <v-flex xs12>
-          <PostList
-            :limits="limits"
-            :load-more="true"
-            :column="3">
-          </PostList>
+          <PostList :limits="limits" :load-more="true" :column="3"> </PostList>
         </v-flex>
       </v-layout>
       <v-container>
         <center>
-          <v-btn
-            v-if="loadMore"
-            color="info"
-            dark
-            v-on:click="loadMorePosts"
-          >
+          <v-btn v-if="loadMore" color="info" dark v-on:click="loadMorePosts">
             <v-icon size="25" class="mr-2">fa-plus</v-icon> 더 보기
           </v-btn>
           <v-btn
@@ -31,9 +22,10 @@
           <v-row
             v-if="
               this.$store.state.userauth == '팀원' ||
-              this.$store.state.userauth == '관리자'"
+                this.$store.state.userauth == '관리자'
+            "
           >
-            <SkillWriter/>
+            <SkillWriter />
           </v-row>
         </center>
       </v-container>
@@ -42,7 +34,7 @@
 </template>
 
 <script>
-import PostList from "../components/PostList";
+import PostList from "../components/Post/PostList";
 import "../CSS/DokdoFont.css";
 import FirebaseService from "@/services/FirebaseService";
 import SkillWriter from "../components/SkillWriter";
@@ -73,7 +65,7 @@ export default {
   },
   data() {
     return {
-      posts: [],
+      posts: []
     };
   },
   mounted() {
@@ -85,7 +77,6 @@ export default {
     },
     async loadMorePosts() {
       this.limits = this.posts.length;
-      console.log(this.limits)
     },
     async loadLessPosts() {
       this.limits = 13;
