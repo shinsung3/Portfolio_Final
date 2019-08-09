@@ -1,6 +1,20 @@
 <template>
-  <div v-if="check == true">
-    <v-img :src="this.$store.state.BannerImgUrl" aspect-ratio="1.7">
+  <div v-if="check == 2">
+    <v-img :src="imgSrc" aspect-ratio="1.7">
+      <v-layout align-center justify-center row fill-height>
+        <v-flex text-xs-center>
+          <span class="text-shadow display-2 font-weight-light">
+            <slot name="text" />
+          </span>
+          <v-btn>
+            Click Me
+          </v-btn>
+        </v-flex>
+      </v-layout>
+    </v-img>
+  </div>
+  <div v-else-if="check == 1">
+    <v-img :src="imgSrc" style="height: 500px;">
       <v-layout align-center justify-center row fill-height>
         <v-flex text-xs-center>
           <span class="text-shadow display-2 font-weight-light">
@@ -11,7 +25,7 @@
     </v-img>
   </div>
   <div v-else>
-    <v-img :src="imgSrc" style="height: 500px;">
+    <v-img :src="this.$store.state.BannerImgUrl" aspect-ratio="1.7">
       <v-layout align-center justify-center row fill-height>
         <v-flex text-xs-center>
           <span class="text-shadow display-2 font-weight-light">
@@ -34,8 +48,8 @@ export default {
       type: String
     },
     check: {
-      type: Boolean,
-      default: true
+      type: Number,
+      default: 3
     }
   },
   methods: {}

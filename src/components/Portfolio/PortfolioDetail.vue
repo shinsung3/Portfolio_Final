@@ -1,6 +1,6 @@
 <template>
   <div>
-    <ImgBanner :imgSrc="portfolios.img" :check="false">
+    <ImgBanner :imgSrc="portfolios.img" :check="1">
       <h3
         v-resize-text="{
           ratio: 1.3,
