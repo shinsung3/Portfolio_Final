@@ -58,7 +58,7 @@
                         >
                          수정하실 댓글을 적어주세요
                         </v-card-title>
-                        
+
                         <v-card-text>
                           <v-text-field
                             v-model="idcomments[i - 1].text"
@@ -122,14 +122,55 @@
                   <div>
                     <v-list-item>
                       <v-list-item-content v-if="idcomments[i - 1].portid == check">
+
                         <div class="overline">
                           <v-chip class="ma-2"><strong>{{ idcomments[i - 1].writer }}</strong></v-chip> {{ idcomments[i - 1].created_at | moment("YYYY년 MM월 DD일")}}
                         </div>
                         <v-list-item-subtitle class="ma-3">{{ idcomments[i - 1].text }}</v-list-item-subtitle>
                         <v-card-actions v-if="idcomments[i - 1].writer == thislogin">
-                          <v-btn flat icon @click="함수명(idcomments[i - 1].id)">
-                            <v-icon>edit</v-icon>
-                          </v-btn>
+                          <v-dialog
+                            v-model="dialog"
+                            width="500"
+                          >
+                            <template v-slot:activator="{ on }">
+                              <v-btn
+                                flat
+                                icon
+                                v-on="on"
+                              >
+                                <v-icon>edit</v-icon>
+                              </v-btn>
+                            </template>
+
+                            <v-card>
+                              <v-card-title
+                                class="headline grey lighten-2"
+                                primary-title
+                              >
+                               수정하실 댓글을 적어주세요
+                              </v-card-title>
+
+                              <v-card-text>
+                                <v-text-field
+                                  v-model="idcomments[i - 1].text"
+                                  required
+                                  >
+                                </v-text-field>
+                              </v-card-text>
+
+                              <v-divider></v-divider>
+
+                              <v-card-actions>
+                                <v-spacer></v-spacer>
+                                <v-btn
+                                  color="primary"
+                                  @click="set(idcomments[i - 1].id, idcomments[i - 1].text)"
+                                >
+                                  I accept
+                                </v-btn>
+                              </v-card-actions>
+                            </v-card>
+                          </v-dialog>
                           <v-btn flat icon @click="del(idcomments[i - 1].id)">
                             <v-icon>close</v-icon>
                           </v-btn>
