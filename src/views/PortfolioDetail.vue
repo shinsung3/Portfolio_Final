@@ -1,23 +1,36 @@
 <template>
   <div>
-    <!-- About Me -->
+    <ImgBanner portfolio="portfolios" imgSrc="portfolios.img" :check="false">
+      <h3
+        v-resize-text="{
+          ratio: 1.3,
+          minFontSize: '30px',
+          maxFontSize: '100px',
+          delay: 200
+        }"
+        slot="text"
+        id=".font-weight-regular.font-italic"
+        class="typing DokdoFont"
+      >
+        {{ portfolios.title }}
+      </h3>
+    </ImgBanner>
     <v-container>
-      <v-layout my-5>
-        <v-flex xs12 sm8>
-          <center>
-            <p class="DokdoList font">
-              {{ portfolios.title }}
-            </p>
-          </center>
+      <!-- <v-layout my-5>
+        <v-flex xs12 sm8> -->
+      <!-- <center>
+        <p class="DokdoList font">
+          {{ portfolios.title }}
+        </p>
+      </center> -->
           <!-- <p class="DokdoList subfont">
             {{ portfolios.body }}
             <br /> -->
           <!-- </p> -->
-          <v-card light>
+          <!-- <v-card light>
             <v-card-text>
               <h1>내용</h1>
               <hr />
-              <!-- {{selArticle.content}} -->
               <viewer :value="portfolios.body" />
             </v-card-text>
           </v-card>
@@ -25,10 +38,30 @@
         <v-flex pt-3 mt-5 bt-5>
           <v-img :src="portfolios.img" aspect-ratio="1.0" />
         </v-flex>
-      </v-layout>
-      <h1 class="DokdoList">개발 언어 : {{ portfolios.language }}</h1>
-      <h1 class="DokdoList">기간 : {{ portfolios.complete }}</h1>
-      <h1 class="DokdoList">인원 : {{ portfolios.people }}</h1>
+      </v-layout> -->
+      <v-container fluid :grid-list-md="!$vuetify.breakpoint.xs">
+        <v-layout wrap row>
+          <v-layout>
+            <v-flex xs12>
+              <viewer :value="portfolios.body" />
+            </v-flex>
+          </v-layout>
+        </v-layout>
+      </v-container>
+
+      <br />
+      <br />
+      <br />
+      <h1>개발 상세 정보</h1>
+      <div>
+        <b>개발 언어 : {{ portfolios.language }}</b>
+      </div>
+      <div>
+        <b>기간 : {{ portfolios.complete }}</b>
+      </div>
+      <div>
+        <b>인원 : {{ portfolios.people }}</b>
+      </div>
       <br />
       <br />
       <v-form ref="form" v-model="valid" lazy-validation>
@@ -67,11 +100,13 @@ import "../CSS/ellipsis.css";
 import "../CSS/DokdoFont.css";
 import FirebaseService from "@/services/FirebaseService";
 import Comments from "../components/Comments.vue";
+import ImgBanner from "../components/Function/ImgBanner";
 
 export default {
   name: "PortfolioDetail",
   components: {
-    Comments
+    Comments,
+    ImgBanner
   },
   data: () => ({
     portfolios: [],
