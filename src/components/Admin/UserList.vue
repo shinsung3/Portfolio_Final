@@ -81,15 +81,16 @@ export default {
 </script>
 
 <style media="screen">
-  v-simple-table {
-    width:100%;
-    height:300px;
-    table-layout:fixed;
-    border-collapse: collapse;
-  }
+v-simple-table {
+  width: 100%;
+  height: 300px;
+  table-layout: fixed;
+  border-collapse: collapse;
+}
 
-  th, td {
-    border-bottom:1px dotted;
-    padding:5px;
-  }
+th,
+td {
+  border-bottom: 1px dotted;
+  padding: 5px;
+}
 </style>

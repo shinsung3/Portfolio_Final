@@ -4,7 +4,7 @@
     <v-content>
       <Header />
       <router-view />
-      <Bookmark />
+      <!-- <Bookmark /> -->
       <Chatbot />
       <Top />
       <Language />

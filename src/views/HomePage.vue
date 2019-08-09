@@ -69,7 +69,7 @@
               delay: 200
             }"
           >
-            Team Introduction
+            <router-link to="/info" id="aTag">Team Introduction</router-link>
           </h1>
         </center>
         <v-layout>
