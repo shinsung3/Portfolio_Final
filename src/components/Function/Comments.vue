@@ -196,8 +196,6 @@
 
 <script>
 import FirebaseService from "@/services/FirebaseService";
-import axios from "axios";
-import PortfolioDetail from "../views/PortfolioDetail.vue";
 
 export default {
   name: "Comments",
