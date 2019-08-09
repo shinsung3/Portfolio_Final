@@ -36,7 +36,7 @@ import Top from "./components/Function/Top.vue";
 import Bookmark from "./components/Function/BookMark.vue";
 import Footer from "./components/Function/Footer.vue";
 import Chatbot from "./components/Function/ChatBot.vue";
-import Language from "./components/Language.vue";
+import Language from "./components/Function/Language.vue";
 
 export default {
   name: "App",

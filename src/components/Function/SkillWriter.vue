@@ -1,43 +1,21 @@
 <template>
-  <v-dialog
-    v-model="dialog"
-    width="500"
-  >
+  <v-dialog v-model="dialog" width="500">
     <template v-slot:activator="{ on }">
-        <v-btn
-          id="hot"
-          color="red lighten-2"
-          dark
-          v-on="on"
-          v-if="posts == ''"
-        >
-          <v-icon>border_color</v-icon>&nbsp글쓰기
-        </v-btn>
-        <v-btn
-          id="hot"
-          color="red lighten-2"
-          dark
-          v-on="on"
-          v-else
-        >
-          <v-icon>border_color</v-icon>&nbsp수정하기
-        </v-btn>
+      <v-btn id="hot" color="red lighten-2" dark v-on="on" v-if="posts == ''">
+        <v-icon>border_color</v-icon>글쓰기
+      </v-btn>
+      <v-btn id="hot" color="red lighten-2" dark v-on="on" v-else>
+        <v-icon>border_color</v-icon>수정하기
+      </v-btn>
     </template>
 
     <v-card>
-      <v-card-title
-        class="headline grey lighten-2"
-        primary-title
-      >
+      <v-card-title class="headline grey lighten-2" primary-title>
         Skill
       </v-card-title>
 
       <v-card-text>
-        <v-form
-          ref="form"
-          v-model="valid"
-          lazy-validation
-        >
+        <v-form ref="form" v-model="valid" lazy-validation>
           <v-container>
             <!-- 작성할 때 -->
             <template v-if="posts == ''">
@@ -54,20 +32,11 @@
                 </v-flex>
                 <!-- body -->
                 <v-flex px10 py10>
-                  <v-text-field
-                    v-model="body"
-                    label="사용자"
-                  ></v-text-field>
+                  <v-text-field v-model="body" label="사용자"></v-text-field>
                 </v-flex>
               </v-content>
               <v-content>
-                <v-flex
-                  align-center
-                  justify-end
-                  row
-                  fill-height
-                  right
-                >
+                <v-flex align-center justify-end row fill-height right>
                   <v-btn
                     id="hot"
                     color="red lighten-2"
@@ -75,14 +44,10 @@
                     v-on="on"
                     @click="submit"
                   >
-                    <v-icon>border_color</v-icon>&nbsp글쓰기
+                    <v-icon>border_color</v-icon>글쓰기
                   </v-btn>
-                  <v-btn
-                    color="primary"
-                    text
-                    @click="dialog = false"
-                  >
-                    <v-icon>cancel</v-icon>&nbsp취소
+                  <v-btn color="primary" text @click="dialog = false">
+                    <v-icon>cancel</v-icon>취소
                   </v-btn>
                 </v-flex>
               </v-content>
@@ -109,13 +74,7 @@
                 </v-flex>
               </v-content>
               <v-content>
-                <v-flex
-                  align-center
-                  justify-end
-                  row
-                  fill-height
-                  right
-                >
+                <v-flex align-center justify-end row fill-height right>
                   <v-btn
                     id="hot"
                     color="red lighten-2"
@@ -123,14 +82,10 @@
                     v-on="on"
                     @click="update"
                   >
-                    <v-icon>border_color</v-icon>&nbsp수정
+                    <v-icon>border_color</v-icon>수정
                   </v-btn>
-                  <v-btn
-                    color="primary"
-                    text
-                    @click="dialog = false"
-                  >
-                    <v-icon>cancel</v-icon>&nbsp취소
+                  <v-btn color="primary" text @click="dialog = false">
+                    <v-icon>cancel</v-icon>취소
                   </v-btn>
                 </v-flex>
               </v-content>
@@ -144,7 +99,6 @@
 
 <script>
 import FirebaseService from "@/services/FirebaseService";
-import "../CSS/DokdoFont.css";
 
 export default {
   name: "PostWriter",
@@ -157,7 +111,7 @@ export default {
     ],
     body: "",
     posts: [],
-    dialog: false,
+    dialog: false
   }),
   mounted() {
     this.getPostByIndex();
@@ -184,9 +138,9 @@ export default {
       location.href = "/Post";
     },
     update() {
-      if(this.$store.state.user.email !== this.posts.userId) {
-          alert("수정할 권한이 없습니다!!")
-          return;
+      if (this.$store.state.user.email !== this.posts.userId) {
+        alert("수정할 권한이 없습니다!!");
+        return;
       }
 
       FirebaseService.editPost(
@@ -200,13 +154,3 @@ export default {
   }
 };
 </script>
-
-<style>
-/* .buttonWriter {
-  float: right;
-}
-
-.input_css {
-  display: none;
-} */
-</style>
