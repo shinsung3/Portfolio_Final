@@ -51,7 +51,7 @@ import "../CSS/ellipsis.css";
 import "../CSS/DokdoFont.css";
 import "../CSS/btn.css";
 import FirebaseService from "@/services/FirebaseService";
-import Comments from "../components/Comments.vue";
+import Comments from "../components/Function/Comments.vue";
 import SkillWriter from "../components/SkillWriter";
 
 export default {
