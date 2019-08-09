@@ -49,7 +49,7 @@
 
 <script>
 import FirebaseService from "@/services/FirebaseService";
-import "../CSS/DokdoFont.css";
+import "../../CSS/DokdoFont.css";
 
 export default {
   name: "SignUp",

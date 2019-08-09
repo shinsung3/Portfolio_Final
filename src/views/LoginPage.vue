@@ -33,10 +33,10 @@
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
 <script>
 import FirebaseService from '@/services/FirebaseService'
-import SignIn from '../components/SignIn.vue'
-import SignUp from '../components/SignUp.vue'
-import SignInGoogle from '../components/SignInGoogle.vue'
-import SignInFacebook from '../components/SignInFacebook.vue'
+import SignIn from "../components/Sign/SignIn.vue";
+import SignUp from "../components/Sign/SignUp.vue";
+import SignInGoogle from "../components/Sign/SignInGoogle.vue";
+import SignInFacebook from "../components/Sign/SignInFacebook.vue";
 
 export default {
   name: 'LoginPage',

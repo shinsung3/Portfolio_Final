@@ -25,8 +25,8 @@
 </template>
 
 <script>
-import UserList from "../components/UserList";
-import PostsCount from "../components/PostsCount";
+import UserList from "../components/Admin/UserList";
+import PostsCount from "../components/Admin/PostsCount";
 
 export default {
   name: "Adminpage",
