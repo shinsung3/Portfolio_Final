@@ -2,7 +2,7 @@
   <v-container>
     <v-toolbar flat fixed id="background1">
       <v-toolbar-side-icon to="/">
-        <v-icon style="color:darkorange">favorite</v-icon>
+        <v-img :src="getImgUrl('bee.png')" aspect-ratio="1.0" />
       </v-toolbar-side-icon>
       <v-toolbar-title class="DokdoHeader">
         <router-link to="/">
@@ -16,12 +16,11 @@
           <span class="DokdoHeader2">Login</span>
         </v-btn>
         <template v-else>
-          <img
-            src="https://image.flaticon.com/icons/svg/324/324125.svg"
-            width="30px" v-if="this.$store.state.userauth == '관리자'"
-          />
+          <v-toolbar-side-icon>
+            <v-img :src="getImgUrl('bee.png')" aspect-ratio="1.0" />
+          </v-toolbar-side-icon>
           <span class="DokdoHeader2 mt-3 mr-2">
-            <b>&nbsp {{ this.$store.state.user.displayName }}</b>
+            <b>{{ this.$store.state.user.displayName }}</b>
             님 반갑습니다!!
           </span>
           <v-btn flat to="/" @click="setLogOut">
@@ -164,6 +163,9 @@ export default {
       this.$store.state.user = "";
       this.$store.state.accessToken = "";
       FirebaseService.Logout();
+    },
+    getImgUrl(img) {
+      return require("../../assets/" + img);
     }
   }
 };
