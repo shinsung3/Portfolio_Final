@@ -18,7 +18,27 @@
               </v-flex>
               <!-- body -->
               <v-flex px10 py10>
-                <markdown-editor v-model="body"></markdown-editor>
+                <v-container fluid :grid-list-md="!$vuetify.breakpoint.xs">
+                  <v-layout wrap row>
+                    <v-flex xs12>
+                      <editor v-model="body" />
+                    </v-flex>
+                  </v-layout>
+                  <br />
+                  <br />
+                  <h2>
+                    <img
+                      src="https://image.flaticon.com/icons/svg/425/425960.svg"
+                      width="25px"
+                    />
+                    <span id="gap">미리보기</span>
+                  </h2>
+                  <v-layout>
+                    <v-flex xs12 id="editbody">
+                      <viewer :value="body" />
+                    </v-flex>
+                  </v-layout>
+                </v-container>
               </v-flex>
               <!-- language -->
               <v-flex px10 py10>
@@ -106,6 +126,29 @@
                 </v-text-field>
               </v-flex>
               <v-flex px10 py10>
+                <v-container fluid :grid-list-md="!$vuetify.breakpoint.xs">
+                  <v-layout wrap row>
+                    <v-flex xs12>
+                      <editor v-model="portfolio.body" />
+                    </v-flex>
+                  </v-layout>
+                  <br />
+                  <br />
+                  <h2>
+                    <img
+                      src="https://image.flaticon.com/icons/svg/425/425960.svg"
+                      width="25px"
+                    />
+                    <span id="gap">미리보기</span>
+                  </h2>
+                  <v-layout>
+                    <v-flex xs12 id="editbody">
+                      <viewer :value="portfolio.body" />
+                    </v-flex>
+                  </v-layout>
+                </v-container>
+              </v-flex>
+              <v-flex px10 py10>
                 <v-text-field
                   v-model="portfolio.language"
                   :counter="30"
@@ -134,9 +177,6 @@
                   >
                   </v-text-field>
                 </v-flex>
-              </v-flex>
-              <v-flex px10 py10>
-                <markdown-editor v-model="portfolio.body"></markdown-editor>
               </v-flex>
               <v-flex>
                 <v-container fluid>
@@ -359,5 +399,14 @@ export default {
 
 .input_css {
   display: none;
+}
+
+#editbody {
+  border: 0.5px solid lightgray;
+  padding: 20px;
+}
+
+#gap {
+  padding: 2px 20px 20px 10px;
 }
 </style>
