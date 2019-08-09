@@ -227,7 +227,6 @@
 
 <script>
 import FirebaseService from "@/services/FirebaseService";
-import "../CSS/DokdoFont.css";
 import axios from "axios";
 
 export default {
