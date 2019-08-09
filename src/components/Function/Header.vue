@@ -2,7 +2,7 @@
   <v-container>
     <v-toolbar flat fixed id="background1">
       <v-toolbar-side-icon to="/">
-        <v-icon style="color:darkorange">favorite</v-icon>
+        <v-img :src="getImgUrl('bee.png')" aspect-ratio="1.0" />
       </v-toolbar-side-icon>
       <v-toolbar-title class="DokdoHeader">
         <router-link to="/">
@@ -164,6 +164,9 @@ export default {
       this.$store.state.user = "";
       this.$store.state.accessToken = "";
       FirebaseService.Logout();
+    },
+    getImgUrl(img) {
+      return require("../../assets/" + img);
     }
   }
 };
