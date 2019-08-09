@@ -11,7 +11,7 @@
         v-on="on"
         v-if="posts == ''"
       >
-        <v-icon>border_color</v-icon>&nbsp글쓰기
+        <v-icon>border_color</v-icon>&nbsp글쓰기기
       </v-btn>
       <v-btn
         id="hot"
