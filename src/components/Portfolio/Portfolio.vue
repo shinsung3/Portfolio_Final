@@ -15,9 +15,8 @@
 </template>
 
 <script>
-import "../CSS/ellipsis.css";
 import Translate from "@/services/Translate";
-import EventBus from "../eventBus.js";
+import EventBus from "../../eventBus.js";
 
 export default {
   name: "Portfolio",
