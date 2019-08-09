@@ -1,6 +1,6 @@
 <template>
   <div>
-    <ImgBanner portfolio="portfolios" imgSrc="portfolios.img" :check="false">
+    <ImgBanner :imgSrc="portfolios.img" :check="false">
       <h3
         v-resize-text="{
           ratio: 1.3,
@@ -16,29 +16,6 @@
       </h3>
     </ImgBanner>
     <v-container>
-      <!-- <v-layout my-5>
-        <v-flex xs12 sm8> -->
-      <!-- <center>
-        <p class="DokdoList font">
-          {{ portfolios.title }}
-        </p>
-      </center> -->
-          <!-- <p class="DokdoList subfont">
-            {{ portfolios.body }}
-            <br /> -->
-          <!-- </p> -->
-          <!-- <v-card light>
-            <v-card-text>
-              <h1>내용</h1>
-              <hr />
-              <viewer :value="portfolios.body" />
-            </v-card-text>
-          </v-card>
-        </v-flex>
-        <v-flex pt-3 mt-5 bt-5>
-          <v-img :src="portfolios.img" aspect-ratio="1.0" />
-        </v-flex>
-      </v-layout> -->
       <v-container fluid :grid-list-md="!$vuetify.breakpoint.xs">
         <v-layout wrap row>
           <v-layout>
@@ -53,6 +30,7 @@
       <br />
       <br />
       <h1>개발 상세 정보</h1>
+      <hr />
       <div>
         <b>개발 언어 : {{ portfolios.language }}</b>
       </div>

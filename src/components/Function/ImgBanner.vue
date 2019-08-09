@@ -9,11 +9,9 @@
         </v-flex>
       </v-layout>
     </v-img>
-    <div>1{{ check }}</div>
-    <div>{{ imgSrc }}</div>
   </div>
   <div v-else>
-    <v-img :src="imgSrc" aspect-ratio="1.7">
+    <v-img :src="imgSrc" style="height: 500px;">
       <v-layout align-center justify-center row fill-height>
         <v-flex text-xs-center>
           <span class="text-shadow display-2 font-weight-light">
@@ -22,8 +20,6 @@
         </v-flex>
       </v-layout>
     </v-img>
-    <div>1{{ check }}</div>
-    <div>{{ imgSrc }}</div>
   </div>
 </template>
 
