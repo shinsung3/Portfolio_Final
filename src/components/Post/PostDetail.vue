@@ -14,11 +14,7 @@
           </p>
         </v-flex>
       </v-layout>
-      <v-form
-        ref="form"
-        v-model="valid"
-        lazy-validation
-      >
+      <v-form ref="form" v-model="valid" lazy-validation>
         <v-flex
           align-center
           justify-end
@@ -30,29 +26,25 @@
               this.$store.state.userauth == '관리자'
           "
         >
-          <SkillWriter/>
+          <SkillWriter />
           <v-btn @click="deleteDB" class="buttonWriter">
             <v-icon>delete</v-icon><span id="padding">삭제</span>
           </v-btn>
         </v-flex>
       </v-form>
-      <br>
-      <br>
-      <br>
-      <br>
+      <br />
+      <br />
+      <br />
+      <br />
       <Comments />
     </v-container>
   </div>
 </template>
 
 <script>
-import "../CSS/FontColor.css";
-import "../CSS/ellipsis.css";
-import "../CSS/DokdoFont.css";
-import "../CSS/btn.css";
 import FirebaseService from "@/services/FirebaseService";
-import Comments from "../components/Function/Comments.vue";
-import SkillWriter from "../components/SkillWriter";
+import Comments from "../Function/Comments.vue";
+import SkillWriter from "../SkillWriter";
 
 export default {
   name: "PostDetail",
@@ -62,7 +54,7 @@ export default {
   },
   data() {
     return {
-      post: [],
+      post: []
     };
   },
   mounted() {
@@ -76,9 +68,9 @@ export default {
       this.$router.push("/psWriter?id=" + this.$route.query.id);
     },
     deleteDB() {
-      if(this.$store.state.user.email !== this.post.userId) {
-          alert("삭제할 권한이 없습니다!!")
-          return;
+      if (this.$store.state.user.email !== this.post.userId) {
+        alert("삭제할 권한이 없습니다!!");
+        return;
       }
       FirebaseService.deletePost(this.post.id);
       this.posts = FirebaseService.getPosts();
