@@ -99,7 +99,7 @@ import "../CSS/FontColor.css";
 import "../CSS/ellipsis.css";
 import "../CSS/DokdoFont.css";
 import FirebaseService from "@/services/FirebaseService";
-import Comments from "../components/Comments.vue";
+import Comments from "../components/Function/Comments.vue";
 import ImgBanner from "../components/Function/ImgBanner";
 
 export default {
