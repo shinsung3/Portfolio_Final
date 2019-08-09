@@ -52,49 +52,29 @@
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
 <!-- <script src="https://kit.fontawesome.com/0815a79704.js"></script> -->
 
-
 <script>
-import "../../CSS/aTag.css"
+import VueWeatherWidget from "vue-weather-widget";
+import "vue-weather-widget/dist/css/vue-weather-widget.css";
 
 export default {
   components: {
-      'weather': VueWeatherWidget
-  },
-  data() {
-    return {
-    }
+    weather: VueWeatherWidget
   }
-}
-
-import VueWeatherWidget from 'vue-weather-widget';
-import 'vue-weather-widget/dist/css/vue-weather-widget.css';
-
-
+};
 </script>
-
-
-
-
-
-
 <style>
 #footer {
   justify-content: center;
-  /* padding: 5px; */
   background-color: darkgray;
   color: black;
   height: 80px;
 }
-#local{
-   font-weight: bold ;
-   font-size: 20px;
+#local {
+  font-weight: bold;
+  font-size: 20px;
 }
 
-/* 날씨스타일 */
-.fe_daily{
- display: hidden !important;
-}
-.fe_title{
-  display:
+.fe_daily {
+  display: hidden !important;
 }
 </style>
