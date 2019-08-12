@@ -114,7 +114,10 @@
                       icon
                       @click="check = idcomments[i - 1].id"
                     >
-                      <v-icon>comment</v-icon>
+                      <v-icon>comment</v-icon>&nbsp
+                      {{
+                        idcomments[i - 1].replynum
+                      }}
                     </v-btn>
                     <v-btn
                       v-else-if="check == idcomments[i - 1].id"
@@ -130,7 +133,10 @@
                       icon
                       @click="check = idcomments[i - 1].id"
                     >
-                      <v-icon>comment</v-icon>
+                      <v-icon>comment</v-icon>&nbsp
+                      {{
+                        idcomments[i - 1].replynum
+                      }}
                     </v-btn>
                   </v-card-actions>
                 </span>

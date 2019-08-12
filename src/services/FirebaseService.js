@@ -333,6 +333,15 @@ export default {
         auth
       });
   },
+  userModify(password) {
+    var user = firebase.auth().currentUser;
+
+    user.updatePassword(password).then(function() {
+      alert("비밀번호가 정상적으로 수정되었습니다.");
+    }).catch(function(error) {
+      alert("에러!!!!!");
+    });
+  },
 	loginWithGoogle() {
     let provider = new firebase.auth.GoogleAuthProvider();
 		return firebase.auth().signInWithPopup(provider).then(function(result) {

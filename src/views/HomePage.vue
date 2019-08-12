@@ -171,16 +171,12 @@
 </template>
 
 <script>
-import "../CSS/FontColor.css";
 import ImgBanner from "../components/Function/ImgBanner";
 import PortfolioList from "../components/Portfolio/PortfolioList";
 import PostList from "../components/Post/PostList";
 import RepositoryList from "../components/Repository/RepositoryList";
-import "../CSS/ellipsis.css";
-import "../CSS/DokdoFont.css";
 import Translate from "@/services/Translate";
 import EventBus from "../eventBus.js";
-// import "../CSS/notofont.css";
 
 export default {
   name: "HomePage",
@@ -239,13 +235,10 @@ export default {
         body: "새로운 회사로 이직...",
         enbody: "Move to a new company..."
       }
-    ],
-    title: "Simple Title",
-    options: { body: "Simple piece of body text.\nSecond line of body text :)" }
+    ]
   }),
   mounted() {
     this.output = this.content;
-    registration.showNotification(this.title, this.options);
   },
   created() {
     EventBus.$on("translate", language => {
