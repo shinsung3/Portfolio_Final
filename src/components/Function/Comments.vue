@@ -264,6 +264,8 @@ export default {
     thislogin: "",
     check: "",
     replynum: 0,
+    good:0,
+    bad:0
   }),
   mounted() {
     this.getcommentsByIndex();
@@ -289,7 +291,9 @@ export default {
           (this.fk = 1),
           this.text,
           (this.writer = this.$store.state.user.displayName),
-          this.replynum = 0
+          this.replynum = 0,
+          this.good = 0,
+          this.bad = 0
         );
         location.href = this.thisurl;
       } else {
@@ -299,7 +303,9 @@ export default {
           this.idcomments[0].fk + 1,
           this.text,
           (this.writer = this.$store.state.user.displayName),
-          this.replynum = 0
+          this.replynum = 0,
+          this.good = 0,
+          this.bad = 0
         );
         location.href = this.thisurl;
       }
@@ -312,7 +318,10 @@ export default {
           (this.fk = 1),
           this.reply,
           (this.writer = this.$store.state.user.displayName),
-          this.replynum = 0
+          this.replynum = 0,
+          this.good = 0,
+          this.bad = 0
+
         ),
           FirebaseService.setcount(portid, num+1)
           location.href = this.thisurl;
@@ -323,7 +332,9 @@ export default {
           this.idcomments[0].fk + 1,
           this.reply,
           (this.writer = this.$store.state.user.displayName),
-          this.replynum = 0
+          this.replynum = 0,
+          this.good = 0,
+          this.bad = 0
         ),
           FirebaseService.setcount(portid, num+1)
           location.href = this.thisurl;
