@@ -270,10 +270,10 @@ export default {
   }),
   mounted() {
     this.getcommentsByIndex();
-    this.comments();
-    this.delcomment();
-    this.setcomment();
-    this.setcount();
+    // this.comments();
+    // this.delcomment();
+    // this.setcomment();
+    // this.setcount();
   },
   methods: {
     async getcommentsByIndex() {
