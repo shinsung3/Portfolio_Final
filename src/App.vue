@@ -40,7 +40,7 @@ import Top from "./components/Function/Top.vue";
 import Footer from "./components/Function/Footer.vue";
 import Chatbot from "./components/Function/ChatBot.vue";
 import Language from "./components/Function/Language.vue";
-import Intro from "./views/Intro.vue";
+import Intro from "./views/IntroPage.vue";
 
 export default {
   name: "App",

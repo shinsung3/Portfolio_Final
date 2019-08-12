@@ -8,7 +8,7 @@ import Repository from "./views/RepositoryPage.vue";
 import Graph from "./views/GraphPage.vue";
 import AdminPage from "./views/AdminPage.vue";
 import Info from "./views/InfoPage.vue";
-import Intro from "./views/Intro.vue";
+import Intro from "./views/IntroPage.vue";
 
 import PFDetail from "./components/Portfolio/PortfolioDetail.vue";
 import PSDetail from "./components/Post/PostDetail.vue";
