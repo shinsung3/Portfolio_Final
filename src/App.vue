@@ -2,12 +2,17 @@
   <v-app>
     <title>할할놀놀</title>
     <v-content>
-      <Header />
-      <router-view />
-      <Chatbot />
-      <Top />
-      <Language />
-      <Footer />
+      <div v-if="path != '/'">
+        <Header />
+        <router-view />
+        <Chatbot />
+        <Top />
+        <Language />
+        <Footer />
+      </div>
+      <div v-else>
+        <Intro />
+      </div>
     </v-content>
   </v-app>
 </template>
@@ -35,6 +40,7 @@ import Top from "./components/Function/Top.vue";
 import Footer from "./components/Function/Footer.vue";
 import Chatbot from "./components/Function/ChatBot.vue";
 import Language from "./components/Function/Language.vue";
+import Intro from "./views/Intro.vue";
 
 export default {
   name: "App",
@@ -43,11 +49,18 @@ export default {
     Top,
     Footer,
     Chatbot,
-    Language
+    Language,
+    Intro
   },
   store,
   data() {
-    return {};
+    return {
+      path: ""
+    };
+  },
+  mounted() {
+    this.path = this.$route.path;
+    console.log(this.path);
   }
 };
 </script>
