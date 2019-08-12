@@ -244,16 +244,17 @@ export default {
   },
 
   //comments
-  comments(portid, fk, text, writer, replynum) {
-     firestore.collection(COMMENTS).add({
+  comments(portid, fk, text, writer, replynum, good, bad) {
+    firestore.collection(COMMENTS).add({
       portid,
       fk,
       text,
       writer,
       replynum,
+      good,
+      bad,
       created_at: firebase.firestore.FieldValue.serverTimestamp()
     });
-    return portid
   },
 
   getcommentsByIndex() {
@@ -286,6 +287,22 @@ export default {
     });
   },
   setcount(portid, num){
+    firestore
+    .collection(COMMENTS)
+    .doc(portid)
+    .update({
+      replynum:num
+    })
+  },
+  addgood(portid, num){
+    firestore
+    .collection(COMMENTS)
+    .doc(portid)
+    .update({
+      replynum:num
+    })
+  },
+  addbad(portid, num){
     firestore
     .collection(COMMENTS)
     .doc(portid)

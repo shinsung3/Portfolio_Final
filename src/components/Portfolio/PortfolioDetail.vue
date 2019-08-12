@@ -85,7 +85,6 @@ export default {
   },
   data: () => ({
     portfolios: [],
-    idcomments: [],
     portid: "",
     fk: "",
     text: "",
@@ -106,19 +105,11 @@ export default {
     linkToPage() {
       this.$router.push("/pfWriter?id=" + this.$route.query.id);
     },
-    async getCommentsByIndex() {
-      this.idcomments = await FirebaseService.getCommentsByIndex(
-        this.$route.query.id
-      );
-    },
     deleteDB() {
       FirebaseService.deletePortfolio(this.portfolios.id);
       this.posts = FirebaseService.getPosts();
       location.href = "/Portfolio";
     },
-    del(fk) {
-      FirebaseService.delcomment(this.$route.query.id, fk);
-    }
   }
 };
 </script>

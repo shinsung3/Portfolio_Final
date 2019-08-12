@@ -3,7 +3,7 @@
     <v-layout>
       <v-content>
         <v-flex>
-          <v-row>
+          <span>
             <v-text-field
               v-model="text"
               label="댓글을 입력해 주세요"
@@ -12,14 +12,11 @@
               @click:append-outer="insert"
             >
             </v-text-field>
-          </v-row>
+          </span>
         </v-flex>
 
         <v-flex
-          v-for="(i, j) in idcomments.length > limits
-            ? limits
-            : idcomments.length"
-          :key="j"
+          v-for="i in idcomments.length"
         >
           <div>
             <v-list-item>
@@ -31,13 +28,11 @@
                   {{
                     idcomments[i - 1].created_at | moment("YYYY년 MM월 DD일")
                   }}
-                  <!-- 이부분 수정해줘 나원's -->
-                  <!-- 여기까지가 리플 몇개인지 알려주는애 -->
                 </div>
                 <v-list-item-subtitle class="ma-3">
                   {{ idcomments[i - 1].text }}
                 </v-list-item-subtitle>
-                <v-row>
+                <span>
                   <v-card-actions v-if="idcomments[i - 1].writer == thislogin">
                     <v-btn
                       v-if="check == ''"
@@ -144,17 +139,17 @@
                       }}
                     </v-btn>
                   </v-card-actions>
-                </v-row>
+                </span>
                 <hr class="bottomline" style="margin:10px 0px" />
               </v-list-item-content>
             </v-list-item>
 
             <!-- 대댓글부분 -->
             <div v-if="check == idcomments[i - 1].id" class="ml-5">
-              <v-row>
+              <span>
                 <v-container style="padding:0px">
                   <v-flex>
-                    <v-row>
+                    <span>
                       <v-text-field
                         v-model="reply"
                         label="댓글을 입력해 주세요"
@@ -163,14 +158,11 @@
                         @click:append-outer="replyinsert(idcomments[i - 1].id, idcomments[i - 1].replynum)"
                       >
                       </v-text-field>
-                    </v-row>
+                    </span>
                   </v-flex>
                 </v-container>
                 <v-flex
-                  v-for="(i, j) in idcomments.length > limits
-                    ? limits
-                    : idcomments.length"
-                  :key="j"
+                  v-for="i in idcomments.length"
                 >
                   <div>
                     <v-list-item>
@@ -246,7 +238,7 @@
                     </v-list-item>
                   </div>
                 </v-flex>
-              </v-row>
+              </span>
             </div>
           </div>
         </v-flex>
@@ -259,7 +251,7 @@
 import FirebaseService from "@/services/FirebaseService";
 
 export default {
-  name: "Comments",
+  name: "comments",
   data: () => ({
     idcomments: [],
     portid: "",
@@ -273,6 +265,8 @@ export default {
     thislogin: "",
     check: "",
     replynum: 0,
+    good:0,
+    bad:0
   }),
   mounted() {
     this.getcommentsByIndex();
