@@ -21,9 +21,6 @@ import EventBus from "../../eventBus.js";
 export default {
   name: "Portfolio",
   props: {
-    date: {
-      type: Date
-    },
     title: {
       type: String
     },
@@ -34,7 +31,7 @@ export default {
       type: String
     },
     uk: {
-      type: Number
+      type: String
     },
     id: {
       type: String
