@@ -20,6 +20,8 @@
                 {{
                     idcomments[i - 1].created_at | moment("YYYY년 MM월 DD일")
                   }}
+
+
               </div>
               <div class="ma-3">
                 {{ idcomments[i - 1].text }}
@@ -42,6 +44,20 @@
                       }}
                   </v-btn>
                   <!-- 여기에 수정버튼,모달창 -->
+                  <v-btn flat icon color="blue" @click="likegood(idcomments[i - 1].id, idcomments[i - 1].good)" >
+                    <v-icon>thumb_up</v-icon>
+                    {{
+                      idcomments[i - 1].good
+                    }}
+                  </v-btn>
+
+                  <v-btn flat icon color="red" @click="likebad(idcomments[i - 1].id, idcomments[i - 1].bad)">
+                    <v-icon>thumb_down</v-icon>
+                    {{
+                      idcomments[i - 1].bad
+                    }}
+                  </v-btn>
+
                   <v-dialog v-model="dialog" width="500">
                     <template v-slot:activator="{ on }">
                       <v-btn flat icon v-on="on">
@@ -188,16 +204,13 @@ export default {
     thislogin: "",
     check: "",
     replynum: 0,
-    good: 0,
-    bad: 0,
-    dialog: false
+    good:0 ,
+    bad:0 ,
+
   }),
   mounted() {
     this.getcommentsByIndex();
-    // this.comments();
-    // this.delcomment();
-    // this.setcomment();
-    // this.setcount();
+
   },
   methods: {
     async getcommentsByIndex() {
@@ -216,7 +229,9 @@ export default {
           (this.fk = 1),
           this.text,
           (this.writer = this.$store.state.user.displayName),
-          this.replynum = 0
+          this.replynum = 0,
+          this.good=0,
+          this.bad=0
         );
         location.href = this.thisurl;
       } else {
@@ -226,7 +241,9 @@ export default {
           this.idcomments[0].fk + 1,
           this.text,
           (this.writer = this.$store.state.user.displayName),
-          this.replynum = 0
+          this.replynum = 0,
+          this.good= 0,
+          this.bad= 0
         );
         location.href = this.thisurl;
       }
@@ -239,7 +256,9 @@ export default {
             (this.fk = 1),
             this.reply,
             (this.writer = this.$store.state.user.displayName),
-            this.replynum = 0
+            this.replynum = 0,
+            this.good= 0,
+            this.bad= 0
           ),
           FirebaseService.setcount(portid, num + 1)
         location.href = this.thisurl;
@@ -250,7 +269,9 @@ export default {
             this.idcomments[0].fk + 1,
             this.reply,
             (this.writer = this.$store.state.user.displayName),
-            this.replynum = 0
+            this.replynum = 0,
+            this.good= 0,
+            this.bad= 0
           ),
           FirebaseService.setcount(portid, num + 1)
         location.href = this.thisurl;
@@ -264,6 +285,16 @@ export default {
     set(id, retext) {
       this.thisurl = document.location.href;
       this.portid = FirebaseService.setcomment(id, retext);
+      location.href = this.thisurl;
+    },
+    likegood(id, good) {
+      this.thisurl = document.location.href;
+      this.portid = FirebaseService.commentgood(id, good+1);
+      location.href = this.thisurl;
+    },
+    likebad(id, bad) {
+      this.thisurl = document.location.href;
+      this.portid = FirebaseService.commentbad(id, bad+1);
       location.href = this.thisurl;
     }
   }

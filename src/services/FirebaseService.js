@@ -293,23 +293,22 @@ export default {
       replynum:num
     })
   },
-  addgood(portid, num){
+  commentgood(portid, num){
     firestore
     .collection(COMMENTS)
     .doc(portid)
     .update({
-      replynum:num
+      good: num
     })
   },
-  addbad(portid, num){
+  commentbad(portid, num){
     firestore
     .collection(COMMENTS)
     .doc(portid)
     .update({
-      replynum:num
+      bad: num
     })
   },
-
 	getAuthorization() {
 		const userauthCollection = firestore.collection(USERAUTH)
 		return userauthCollection
