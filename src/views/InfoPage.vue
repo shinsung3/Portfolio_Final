@@ -18,7 +18,7 @@
               <div id="pdSize" class="info1">Javascript</div>
               <div id="pdSize" class="info1">R</div>
               <div class="my-2">
-                <v-btn depressed large id="but1">
+                <v-btn round depressed large id="but1">
                   Nnnangni
                 </v-btn>
               </div>
@@ -40,7 +40,7 @@
               <div id="pdSize" class="info3">HTML5</div>
             </center>
             <div class="my-2">
-              <v-btn depressed large id="but2">Gerrad Jr.</v-btn>
+              <v-btn round depressed large id="but2">Gerrad Jr.</v-btn>
             </div>
           </v-flex>
           <v-flex id="inline">
@@ -59,7 +59,7 @@
               <div id="pdSize" class="info2">MySql/MyBatis</div>
             </center>
             <div class="my-2">
-              <v-btn depressed large id="but3">Nustar★</v-btn>
+              <v-btn round depressed large id="but3">Nustar★</v-btn>
             </div>
           </v-flex>
           <v-flex id="inline">
@@ -78,7 +78,7 @@
               <div id="pdSize" class="info4">C</div>
             </center>
             <div class="my-2">
-              <v-btn depressed large id="but4">Huuuuulu</v-btn>
+              <v-btn round depressed large id="but4">Huuuuulu</v-btn>
             </div>
           </v-flex>
         </v-flex>

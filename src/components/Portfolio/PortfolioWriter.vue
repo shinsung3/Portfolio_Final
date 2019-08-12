@@ -360,8 +360,8 @@ export default {
           this.portfolio.title,
           this.portfolio.body,
           this.imageUrl,
-          this.portfolio.language,
           this.portfolio.uk,
+          this.portfolio.language,
           this.portfolio.complete,
           this.portfolio.people,
           this.$store.state.user.email
