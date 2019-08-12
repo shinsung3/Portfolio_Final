@@ -244,8 +244,8 @@ export default {
   },
 
   //comments
-  comments(portid, fk, text, writer, replynum,good,bad) {
-     firestore.collection(COMMENTS).add({
+  comments(portid, fk, text, writer, replynum, good, bad) {
+    firestore.collection(COMMENTS).add({
       portid,
       fk,
       text,
@@ -255,7 +255,6 @@ export default {
       bad,
       created_at: firebase.firestore.FieldValue.serverTimestamp()
     });
-    return portid
   },
 
   getcommentsByIndex() {

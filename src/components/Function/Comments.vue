@@ -3,7 +3,7 @@
     <v-layout>
       <v-content>
         <v-flex>
-          <v-row>
+          <span>
             <v-text-field
               v-model="text"
               label="댓글을 입력해 주세요"
@@ -12,14 +12,11 @@
               @click:append-outer="insert"
             >
             </v-text-field>
-          </v-row>
+          </span>
         </v-flex>
 
         <v-flex
-          v-for="(i, j) in idcomments.length > 0
-            ? 0
-            : idcomments.length"
-          :key="j"
+          v-for="i in idcomments.length"
         >
           <div>
             <v-list-item>
@@ -31,16 +28,11 @@
                   {{
                     idcomments[i - 1].created_at | moment("YYYY년 MM월 DD일")
                   }}
-                  <!-- 이부분 수정해줘 나원's -->
-                  {{
-                    idcomments[i - 1].replynum
-                  }}
-                  <!-- 여기까지가 리플 몇개인지 알려주는애 -->
                 </div>
                 <v-list-item-subtitle class="ma-3">
                   {{ idcomments[i - 1].text }}
                 </v-list-item-subtitle>
-                <v-row>
+                <span>
                   <v-card-actions v-if="idcomments[i - 1].writer == thislogin">
                     <v-btn
                       v-if="check == ''"
@@ -48,7 +40,10 @@
                       icon
                       @click="check = idcomments[i - 1].id"
                     >
-                      <v-icon>comment</v-icon>
+                      <v-icon>comment</v-icon>&nbsp
+                      {{
+                        idcomments[i - 1].replynum
+                      }}
                     </v-btn>
                     <v-btn
                       v-else-if="check == idcomments[i - 1].id"
@@ -64,7 +59,10 @@
                       icon
                       @click="check = idcomments[i - 1].id"
                     >
-                      <v-icon>comment</v-icon>
+                      <v-icon>comment</v-icon>&nbsp
+                      {{
+                        idcomments[i - 1].replynum
+                      }}
                     </v-btn>
                     <!-- 여기에 수정버튼,모달창 -->
                     <v-dialog v-model="dialog" width="500">
@@ -135,17 +133,17 @@
                       <v-icon>comment</v-icon>
                     </v-btn>
                   </v-card-actions>
-                </v-row>
+                </span>
                 <hr class="bottomline" style="margin:10px 0px" />
               </v-list-item-content>
             </v-list-item>
 
             <!-- 대댓글부분 -->
             <div v-if="check == idcomments[i - 1].id" class="ml-5">
-              <v-row>
+              <span>
                 <v-container style="padding:0px">
                   <v-flex>
-                    <v-row>
+                    <span>
                       <v-text-field
                         v-model="reply"
                         label="댓글을 입력해 주세요"
@@ -154,14 +152,11 @@
                         @click:append-outer="replyinsert(idcomments[i - 1].id, idcomments[i - 1].replynum)"
                       >
                       </v-text-field>
-                    </v-row>
+                    </span>
                   </v-flex>
                 </v-container>
                 <v-flex
-                  v-for="(i, j) in idcomments.length > limits
-                    ? limits
-                    : idcomments.length"
-                  :key="j"
+                  v-for="i in idcomments.length"
                 >
                   <div>
                     <v-list-item>
@@ -237,7 +232,7 @@
                     </v-list-item>
                   </div>
                 </v-flex>
-              </v-row>
+              </span>
             </div>
           </div>
         </v-flex>
@@ -291,9 +286,7 @@ export default {
           (this.fk = 1),
           this.text,
           (this.writer = this.$store.state.user.displayName),
-          this.replynum = 0,
-          this.good = 0,
-          this.bad = 0
+          this.replynum = 0
         );
         location.href = this.thisurl;
       } else {
@@ -303,9 +296,7 @@ export default {
           this.idcomments[0].fk + 1,
           this.text,
           (this.writer = this.$store.state.user.displayName),
-          this.replynum = 0,
-          this.good = 0,
-          this.bad = 0
+          this.replynum = 0
         );
         location.href = this.thisurl;
       }
@@ -318,10 +309,7 @@ export default {
           (this.fk = 1),
           this.reply,
           (this.writer = this.$store.state.user.displayName),
-          this.replynum = 0,
-          this.good = 0,
-          this.bad = 0
-
+          this.replynum = 0
         ),
           FirebaseService.setcount(portid, num+1)
           location.href = this.thisurl;
@@ -332,9 +320,7 @@ export default {
           this.idcomments[0].fk + 1,
           this.reply,
           (this.writer = this.$store.state.user.displayName),
-          this.replynum = 0,
-          this.good = 0,
-          this.bad = 0
+          this.replynum = 0
         ),
           FirebaseService.setcount(portid, num+1)
           location.href = this.thisurl;
