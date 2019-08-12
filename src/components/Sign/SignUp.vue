@@ -67,7 +67,7 @@ export default {
       this.email = "";
       this.password = "";
       this.dialogSignUp = false;
-      this.$router.push("/");
+      this.$router.push("/home");
     },
     cancleSignUp() {
       this.email = "";

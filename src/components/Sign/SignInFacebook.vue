@@ -13,7 +13,7 @@ export default {
       const result = await FirebaseService.loginWithFacebook();
       this.$store.state.accessToken = result.credential.accessToken;
       this.$store.state.user = result.user;
-      this.$router.push("/");
+      this.$router.push("/home");
     }
   }
 };
