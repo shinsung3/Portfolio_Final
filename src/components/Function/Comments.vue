@@ -16,8 +16,8 @@
         </v-flex>
 
         <v-flex
-          v-for="(i, j) in idcomments.length > limits
-            ? limits
+          v-for="(i, j) in idcomments.length > 0
+            ? 0
             : idcomments.length"
           :key="j"
         >
