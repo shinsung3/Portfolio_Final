@@ -65,7 +65,7 @@ users
  .get()
  .then(snapshot => {
    snapshot.forEach(doc => {
-     if (doc.data().deviceToken != null) {
+     if (doc.data().deviceToken !== "") {
        token = doc.data().deviceToken;
        console.log("전송 : ", token);
        if(payload.notification.title === "Comment" && doc.data().auth !== "관리자") {
