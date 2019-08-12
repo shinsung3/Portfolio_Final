@@ -31,6 +31,11 @@
                   {{
                     idcomments[i - 1].created_at | moment("YYYY년 MM월 DD일")
                   }}
+                  <!-- 이부분 수정해줘 나원's -->
+                  {{
+                    idcomments[i - 1].replynum
+                  }}
+                  <!-- 여기까지가 리플 몇개인지 알려주는애 -->
                 </div>
                 <v-list-item-subtitle class="ma-3">
                   {{ idcomments[i - 1].text }}
@@ -146,7 +151,7 @@
                         label="댓글을 입력해 주세요"
                         required
                         append-outer-icon="add_comment"
-                        @click:append-outer="replyinsert"
+                        @click:append-outer="replyinsert(idcomments[i - 1].id, idcomments[i - 1].replynum)"
                       >
                       </v-text-field>
                     </v-row>
@@ -163,6 +168,7 @@
                       <v-list-item-content
                         v-if="idcomments[i - 1].portid == check"
                       >
+
                         <div class="overline">
                           <v-chip class="ma-2"
                             ><strong>{{
@@ -173,6 +179,7 @@
                             idcomments[i - 1].created_at
                               | moment("YYYY년 MM월 DD일")
                           }}
+
                         </div>
                         <v-list-item-subtitle class="ma-3">{{
                           idcomments[i - 1].text
@@ -255,13 +262,15 @@ export default {
     thisid: "",
     thisurl: "",
     thislogin: "",
-    check: ""
+    check: "",
+    replynum: 0,
   }),
   mounted() {
     this.getcommentsByIndex();
     this.comments();
     this.delcomment();
     this.setcomment();
+    this.setcount();
   },
   methods: {
     async getcommentsByIndex() {
@@ -279,7 +288,8 @@ export default {
           (this.portid = this.$route.query.id),
           (this.fk = 1),
           this.text,
-          (this.writer = this.$store.state.user.displayName)
+          (this.writer = this.$store.state.user.displayName),
+          this.replynum = 0
         );
         location.href = this.thisurl;
       } else {
@@ -288,30 +298,35 @@ export default {
           (this.portid = this.$route.query.id),
           this.idcomments[0].fk + 1,
           this.text,
-          (this.writer = this.$store.state.user.displayName)
+          (this.writer = this.$store.state.user.displayName),
+          this.replynum = 0
         );
         location.href = this.thisurl;
       }
     },
-    replyinsert(portid) {
+    replyinsert(portid , num) {
       if (this.idcomments.length == 0) {
         this.thisurl = document.location.href;
         this.portid = FirebaseService.comments(
           (this.portid = this.check),
           (this.fk = 1),
           this.reply,
-          (this.writer = this.$store.state.user.displayName)
-        );
-        location.href = this.thisurl;
+          (this.writer = this.$store.state.user.displayName),
+          this.replynum = 0
+        ),
+          FirebaseService.setcount(portid, num+1)
+          location.href = this.thisurl;
       } else {
         this.thisurl = document.location.href;
         this.portid = FirebaseService.comments(
           (this.portid = this.check),
           this.idcomments[0].fk + 1,
           this.reply,
-          (this.writer = this.$store.state.user.displayName)
-        );
-        location.href = this.thisurl;
+          (this.writer = this.$store.state.user.displayName),
+          this.replynum = 0
+        ),
+          FirebaseService.setcount(portid, num+1)
+          location.href = this.thisurl;
       }
     },
     del(id) {

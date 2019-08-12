@@ -244,12 +244,13 @@ export default {
   },
 
   //comments
-  comments(portid, fk, text, writer) {
+  comments(portid, fk, text, writer, replynum) {
      firestore.collection(COMMENTS).add({
       portid,
       fk,
       text,
       writer,
+      replynum,
       created_at: firebase.firestore.FieldValue.serverTimestamp()
     });
     return portid
@@ -276,8 +277,6 @@ export default {
     .delete();
   },
   setcomment(id,retext){
-    console.log(id)
-    console.log(retext)
     firestore
     .collection(COMMENTS)
     .doc(id)
@@ -286,6 +285,15 @@ export default {
       created_at: firebase.firestore.FieldValue.serverTimestamp()
     });
   },
+  setcount(portid, num){
+    firestore
+    .collection(COMMENTS)
+    .doc(portid)
+    .update({
+      replynum:num
+    })
+  },
+
 	getAuthorization() {
 		const userauthCollection = firestore.collection(USERAUTH)
 		return userauthCollection
