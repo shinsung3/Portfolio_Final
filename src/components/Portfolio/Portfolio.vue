@@ -31,7 +31,7 @@ export default {
       type: String
     },
     uk: {
-      type: String
+      type: Number
     },
     id: {
       type: String
@@ -46,9 +46,6 @@ export default {
       content: {
         translate: this.body,
         original: this.body
-      },
-      index: {
-        index: this.uk
       }
     };
   },
