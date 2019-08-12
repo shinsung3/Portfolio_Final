@@ -245,7 +245,7 @@
 import FirebaseService from "@/services/FirebaseService";
 
 export default {
-  name: "Comments",
+  name: "comments",
   data: () => ({
     idcomments: [],
     portid: "",
