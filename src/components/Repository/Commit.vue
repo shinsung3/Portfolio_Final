@@ -35,7 +35,7 @@
                 <v-list-tile-avatar v-if="item.author_name === 'Help_dog'">
                   <img src="../../assets/choi1.jpg" width="20px" />
                 </v-list-tile-avatar>
-                <v-list-tile-avater
+                <v-list-title
                   v-if="
                     item.author_name === '최훈석' ||
                       item.author_name === '김현일' ||
@@ -47,7 +47,7 @@
                     width="40px"
                   />
                   &nbsp&nbsp&nbsp
-                </v-list-tile-avater>
+                </v-list-title>
 
                 <v-list-tile-content>
                   <v-list-tile-title v-html="item.title"></v-list-tile-title>
