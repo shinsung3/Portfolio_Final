@@ -1,26 +1,5 @@
 <template>
   <div>
-    <!-- <ImgBanner imgSrc="https://source.unsplash.com/random">
-      <h3
-        class="DokdoFont"
-        v-resize-text="{
-          ratio: 1.3,
-          minFontSize: '40px',
-          maxFontSize: '150px'
-        }"
-        slot="text"
-      >
-        Project
-      </h3>
-      <div class="DokdoSubTitle" slot="text">
-        말은 쉽지, 코드를 보여줘.
-      </div>
-      <br />
-      <div class="DokdoSubTitle" slot="text">
-        Talk is cheap. Show me the code.
-      </div>
-    </ImgBanner> -->
-
     <v-container>
       <!-- Gitlab 연동 -->
       <center>
@@ -93,15 +72,13 @@
 </template>
 
 <script>
-// import ImgBanner from "../components/ImgBanner";
-import Gitlab from "../components/GitlabButton.vue";
-import GraphDraw from "../components/GraphDraw.vue";
+import Gitlab from "../components/Repository/GitlabButton.vue";
+import GraphDraw from "../components/Repository/GraphDraw.vue";
 import "../CSS/DokdoFont.css";
 
 export default {
   name: "RepositoryPage",
   components: {
-    // ImgBanner,
     Gitlab,
     GraphDraw
   }

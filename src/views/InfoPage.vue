@@ -63,7 +63,7 @@
               <div id="pdSize" class="info2">CSS3</div>
               <div id="pdSize" class="info2">HTML5</div>
               <div id="pdSize" class="info2">MySql/MyBatis</div>
-            </center> 
+            </center>
             <div class="my-2">
               <v-btn round depressed large id="but3">Nustar★</v-btn>
             </div>

@@ -10,8 +10,8 @@
 </template>
 
 <script>
-import Commit from "../components/Commit.vue";
-import Draw from "../components/GraphDraw.vue";
+import Commit from "../components/Repository/Commit.vue";
+import Draw from "../components/Repository/GraphDraw.vue";
 
 export default {
   name: "RepositoryPage",

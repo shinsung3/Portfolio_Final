@@ -11,7 +11,7 @@
             delay: 200
           }"
         >
-        관리자 페이지 <i class="fas fa-users-cog"></i>
+          관리자 페이지<v-icon>fas fa-users-cog</v-icon>
         </h1>
       </center>
       <v-flex>
@@ -25,21 +25,20 @@
 </template>
 
 <script>
-  import UserList from "../components/UserList";
-  import PostsCount from "../components/PostsCount";
+import UserList from "../components/Admin/UserList";
+import PostsCount from "../components/Admin/PostsCount";
 
-
-  export default {
-    name: "Adminpage",
-    components: {
-      UserList,
-      PostsCount
-    },
-    created() {
-      if( this.$store.state.userauth != '관리자'){
-        alert("관리자만 접근할 수 있습니다.")
-        this.$router.push('/');
-      }
+export default {
+  name: "Adminpage",
+  components: {
+    UserList,
+    PostsCount
+  },
+  created() {
+    if (this.$store.state.userauth != "관리자") {
+      alert("관리자만 접근할 수 있습니다.");
+      this.$router.push("/home");
     }
   }
+};
 </script>

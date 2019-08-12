@@ -4,13 +4,18 @@ import HomePage from "./views/HomePage.vue";
 import PostPage from "./views/PostPage.vue";
 import PortfolioPage from "./views/PortfolioPage.vue";
 import LoginPage from "./views/LoginPage.vue";
-import PortfolioWriter from "./views/PortfolioWriter.vue";
 import Repository from "./views/RepositoryPage.vue";
 import Graph from "./views/GraphPage.vue";
-import PFDetail from "./views/PortfolioDetail.vue";
-import PSDetail from "./views/PostDetail.vue";
 import AdminPage from "./views/AdminPage.vue";
-import Comments from "./components/Comments.vue";
+import Info from "./views/InfoPage.vue";
+import Intro from "./views/Intro.vue";
+
+import PFDetail from "./components/Portfolio/PortfolioDetail.vue";
+import PSDetail from "./components/Post/PostDetail.vue";
+import Comments from "./components/Function/Comments.vue";
+import Test from "./components/test.vue";
+import PortfolioWriter from "./components/Portfolio/PortfolioWriter.vue";
+import PostWriter from "./components/Post/PostWriter.vue";
 
 Vue.use(Router);
 
@@ -20,6 +25,11 @@ export default new Router({
   routes: [
     {
       path: "/",
+      name: "intro",
+      component: Intro
+    },
+    {
+      path: "/home",
       name: "home",
       component: HomePage
     },
@@ -39,9 +49,14 @@ export default new Router({
       component: LoginPage
     },
     {
-      path: "/writer",
-      name: "writer",
+      path: "/pfWriter",
+      name: "pfwriter",
       component: PortfolioWriter
+    },
+    {
+      path: "/psWriter",
+      name: "pswriter",
+      component: PostWriter
     },
     {
       path: "/repository",
@@ -72,6 +87,16 @@ export default new Router({
       path: "/comment",
       name: "comment",
       component: Comments
+    },
+    {
+      path: "/test",
+      name: "test",
+      component: Test
+    },
+    {
+      path: "/info",
+      name: "info",
+      component: Info
     }
   ]
 });
