@@ -99,7 +99,7 @@ export default {
 .vue-back-to-top {
   cursor:pointer;
   position: fixed;
-  z-index: 1000;
+  z-index: 1;
   color:#ffb802
 }
 

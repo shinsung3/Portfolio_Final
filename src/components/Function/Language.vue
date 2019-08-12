@@ -4,9 +4,9 @@
       <v-btn class="mx-2" fab slot="activator" color="#ffb802"
         ><i class="fas fa-language fa-2x" style="color:white"></i
       ></v-btn>
-      <v-list>
+      <v-list style="z-index: 999">
         <v-list-tile v-for="(language, index) in languages" :key="index">
-          <v-list-tile-title @click="tr_click(index)">{{
+          <v-list-tile-title @click="tr_click(index)" style="z-index: 999">{{
             language
           }}</v-list-tile-title>
         </v-list-tile>
