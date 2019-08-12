@@ -13,7 +13,6 @@
       <v-card-title class="headline grey lighten-2" primary-title>
         Skill
       </v-card-title>
-
       <v-card-text>
         <v-form ref="form" v-model="valid" lazy-validation>
           <v-container>
@@ -101,7 +100,7 @@
 import FirebaseService from "@/services/FirebaseService";
 
 export default {
-  name: "PostWriter",
+  name: "SkillWriter",
   data: () => ({
     valid: true,
     title: "",
@@ -111,7 +110,8 @@ export default {
     ],
     body: "",
     posts: [],
-    dialog: false
+    dialog: false,
+    on: false
   }),
   mounted() {
     this.getPostByIndex();
