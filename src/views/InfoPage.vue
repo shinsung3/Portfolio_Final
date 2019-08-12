@@ -5,8 +5,10 @@
         <v-flex xs12>
           <v-flex id="inline">
             <center>
-              <img src="../assets/1.gif" width="150px" />
+              <img src="https://image.flaticon.com/icons/svg/2025/2025310.svg" width="70px" />
               <hr id="hrCss" />
+              <br />
+              <img src="../assets/1.gif" width="150px" />
               <h1 class="NameFont">Park Nawon</h1>
               <hr id="hrCss" />
               <br />
@@ -26,8 +28,10 @@
           </v-flex>
           <v-flex id="inline">
             <center>
-              <img src="../assets/12.gif" width="150px" />
+              <img src="https://image.flaticon.com/icons/svg/2025/2025162.svg" width="70px" />
               <hr id="hrCss1" />
+              <br />
+              <img src="../assets/12.gif" width="150px" />
               <h1 class="NameFont">Kim HyunIl</h1>
               <hr id="hrCss1" />
               <br />
@@ -45,8 +49,10 @@
           </v-flex>
           <v-flex id="inline">
             <center>
-              <img src="../assets/23.gif" width="150px" />
+              <img src="../assets/honey.svg" width="70px" />
               <hr id="hrCss2" />
+              <br />
+              <img src="../assets/23.gif" width="150px" />
               <h1 class="NameFont">Jo ShinSung</h1>
               <hr id="hrCss2" />
               <br />
@@ -64,8 +70,10 @@
           </v-flex>
           <v-flex id="inline">
             <center>
-              <img src="../assets/4.gif" width="150px" />
+              <img src="https://image.flaticon.com/icons/svg/2025/2025299.svg" width="70px" />
               <hr id="hrCss3" />
+              <br />
+              <img src="../assets/4.gif" width="150px" />
               <h1 class="NameFont">Choi HunSeok</h1>
               <hr id="hrCss3" />
               <br />
