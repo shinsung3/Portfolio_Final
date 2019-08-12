@@ -20,7 +20,47 @@
             <v-img :src="getImgUrl('bee.png')" aspect-ratio="1.0" />
           </v-toolbar-side-icon>
           <span class="DokdoHeader2 mt-3 mr-2">
-            <b>{{ this.$store.state.user.displayName }}</b>
+
+            <template>
+              <v-dialog v-model="dialogModify" persistent max-width="600px">
+                <template v-slot:activator="{ on }" class="DokdoHeader2">
+                  <v-btn round color="#ADD8E6" dark v-on="on">
+                    <b>{{ $store.state.user.displayName }}</b>
+                  </v-btn>
+                </template>
+                  <v-card>
+                    <v-card-title align-center>
+                      <span id="modaltitle" class="DokdoList">
+                        회원정보 수정
+                        <v-icon size="25" color="black">fa-wrench</v-icon>
+                      </span>
+                    </v-card-title>
+                    <v-card-text>
+                      <v-container grid-list-md>
+                        <v-flex xs12>
+                          <span
+                            label="Email*"
+                          > {{ $store.state.user.email }} </span>
+                        </v-flex>
+                        <v-flex xs12>
+                          <v-text-field
+                            label="Password*"
+                            type="password"
+                            required
+                            v-model="password"
+                          ></v-text-field>
+                        </v-flex>
+                      </v-container>
+                    </v-card-text>
+                    <v-card-actions>
+                      <v-spacer></v-spacer>
+                      <v-btn color="blue-grey" flat @click="modify">완료</v-btn>
+                      <v-btn color="blue-grey" flat @click="cancleModify">취소</v-btn>
+                    </v-card-actions>
+                  </v-card>
+              </v-dialog>
+            </template>
+
             님 반갑습니다!!
           </span>
           <v-btn flat to="/" @click="setLogOut">
@@ -125,7 +165,8 @@ import "../../CSS/aTag.css";
 import FirebaseService from "../../services/FirebaseService.js";
 import "../../CSS/DokdoFont.css";
 import "../../eventBus.js";
-import "../../store.js";
+import store from "../../store.js";
+import UserModify from "../Sign/UserModify.vue";
 
 export default {
   name: "FooterIcon",
@@ -153,7 +194,11 @@ export default {
         icon: "folder_open",
         href: "/Repository"
       }
-    ]
+    ],
+    dialogModify: false,
+    email: "",
+    password: "",
+    nickname: ""
   }),
   created() {
     FirebaseService.loginPersistence();
@@ -166,6 +211,16 @@ export default {
     },
     getImgUrl(img) {
       return require("../../assets/" + img);
+    },
+    async modify() {
+      FirebaseService.userModify(this.password);
+      this.password = "";
+      this.dialogModify = false;
+      this.$router.push("/");
+    },
+    cancleModify() {
+      this.password = "";
+      this.dialogModify = false;
     }
   }
 };
@@ -174,5 +229,10 @@ export default {
 <style>
 #background1 {
   background-color: floralwhite;
+}
+
+#signupval {
+  width: 4%;
+  color: #2a7189;
 }
 </style>
