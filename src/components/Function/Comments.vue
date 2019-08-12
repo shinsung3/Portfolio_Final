@@ -1,250 +1,173 @@
 <template>
-  <v-container>
-    <v-layout>
-      <v-content>
-        <v-flex>
-          <span>
-            <v-text-field
-              v-model="text"
-              label="댓글을 입력해 주세요"
-              required
-              append-outer-icon="add_comment"
-              @click:append-outer="insert"
-            >
-            </v-text-field>
-          </span>
-        </v-flex>
+<v-container>
+  <v-layout>
+    <v-content>
+      <v-flex>
+        <span>
+          <v-text-field v-model="text" label="댓글을 입력해 주세요" required append-outer-icon="add_comment" @click:append-outer="insert">
+          </v-text-field>
+        </span>
+      </v-flex>
 
-        <v-flex
-          v-for="i in idcomments.length"
-        >
+      <v-flex v-for="i in idcomments.length">
+        <div>
           <div>
-            <v-list-item>
-              <v-list-item-content v-if="idcomments[i - 1].portid == thisid">
-                <div class="overline">
-                  <v-chip class="ma-2">
-                    <strong>{{ idcomments[i - 1].writer }}</strong>
-                  </v-chip>
-                  {{
+            <div v-if="idcomments[i - 1].portid == thisid">
+              <div class="overline">
+                <v-chip class="ma-2">
+                  <strong>{{ idcomments[i - 1].writer }}</strong>
+                </v-chip>
+                {{
                     idcomments[i - 1].created_at | moment("YYYY년 MM월 DD일")
                   }}
-                </div>
-                <v-list-item-subtitle class="ma-3">
-                  {{ idcomments[i - 1].text }}
-                </v-list-item-subtitle>
-                <span>
-                  <v-card-actions v-if="idcomments[i - 1].writer == thislogin">
-                    <v-btn
-                      v-if="check == ''"
-                      flat
-                      icon
-                      @click="check = idcomments[i - 1].id"
-                    >
-                      <v-icon>comment</v-icon>&nbsp
-                      {{
-                        idcomments[i - 1].replynum
-                      }}
-                    </v-btn>
-                    <v-btn
-                      v-else-if="check == idcomments[i - 1].id"
-                      flat
-                      icon
-                      @click="check = ''"
-                    >
-                      <v-icon>arrow_back</v-icon>
-                    </v-btn>
-                    <v-btn
-                      v-else
-                      flat
-                      icon
-                      @click="check = idcomments[i - 1].id"
-                    >
-                      <v-icon>comment</v-icon>&nbsp
-                      {{
-                        idcomments[i - 1].replynum
-                      }}
-                    </v-btn>
-                    <!-- 여기에 수정버튼,모달창 -->
-                    <v-dialog v-model="dialog" width="500">
-                      <template v-slot:activator="{ on }">
-                        <v-btn flat icon v-on="on">
-                          <v-icon>edit</v-icon>
-                        </v-btn>
-                      </template>
-
-                      <v-card>
-                        <v-card-title
-                          class="headline grey lighten-2"
-                          primary-title
-                        >
-                          수정하실 댓글을 적어주세요</v-card-title
-                        >
-
-                        <v-card-text>
-                          <v-text-field
-                            v-model="idcomments[i - 1].text"
-                            required
-                          >
-                          </v-text-field>
-                        </v-card-text>
-
-                        <v-divider></v-divider>
-
-                        <v-card-actions>
-                          <v-spacer></v-spacer>
-                          <v-btn
-                            color="primary"
-                            @click="
-                              set(idcomments[i - 1].id, idcomments[i - 1].text)
-                            "
-                          >
-                            I accept
-                          </v-btn>
-                        </v-card-actions>
-                      </v-card>
-                    </v-dialog>
-                    <v-btn flat icon @click="del(idcomments[i - 1].id)">
-                      <v-icon>close</v-icon>
-                    </v-btn>
-                  </v-card-actions>
-                  <v-card-actions v-else>
-                    <v-btn
-                      v-if="check == ''"
-                      flat
-                      icon
-                      @click="check = idcomments[i - 1].id"
-                    >
-                      <v-icon>comment</v-icon>&nbsp
-                      {{
-                        idcomments[i - 1].replynum
-                      }}
-                    </v-btn>
-                    <v-btn
-                      v-else-if="check == idcomments[i - 1].id"
-                      flat
-                      icon
-                      @click="check = ''"
-                    >
-                      <v-icon>arrow_back</v-icon>
-                    </v-btn>
-                    <v-btn
-                      v-else
-                      flat
-                      icon
-                      @click="check = idcomments[i - 1].id"
-                    >
-                      <v-icon>comment</v-icon>&nbsp
-                      {{
-                        idcomments[i - 1].replynum
-                      }}
-                    </v-btn>
-                  </v-card-actions>
-                </span>
-                <hr class="bottomline" style="margin:10px 0px" />
-              </v-list-item-content>
-            </v-list-item>
-
-            <!-- 대댓글부분 -->
-            <div v-if="check == idcomments[i - 1].id" class="ml-5">
+              </div>
+              <div class="ma-3">
+                {{ idcomments[i - 1].text }}
+              </div>
               <span>
-                <v-container style="padding:0px">
-                  <v-flex>
-                    <span>
-                      <v-text-field
-                        v-model="reply"
-                        label="댓글을 입력해 주세요"
-                        required
-                        append-outer-icon="add_comment"
-                        @click:append-outer="replyinsert(idcomments[i - 1].id, idcomments[i - 1].replynum)"
-                      >
-                      </v-text-field>
-                    </span>
-                  </v-flex>
-                </v-container>
-                <v-flex
-                  v-for="i in idcomments.length"
-                >
-                  <div>
-                    <v-list-item>
-                      <v-list-item-content
-                        v-if="idcomments[i - 1].portid == check"
-                      >
+                <v-card-actions v-if="idcomments[i - 1].writer == thislogin">
+                  <v-btn v-if="check == ''" flat icon @click="check = idcomments[i - 1].id">
+                    <v-icon>comment</v-icon>&nbsp
+                    {{
+                        idcomments[i - 1].replynum
+                      }}
+                  </v-btn>
+                  <v-btn v-else-if="check == idcomments[i - 1].id" flat icon @click="check = ''">
+                    <v-icon>arrow_back</v-icon>
+                  </v-btn>
+                  <v-btn v-else flat icon @click="check = idcomments[i - 1].id">
+                    <v-icon>comment</v-icon>&nbsp
+                    {{
+                        idcomments[i - 1].replynum
+                      }}
+                  </v-btn>
+                  <!-- 여기에 수정버튼,모달창 -->
+                  <v-dialog v-model="dialog" width="500">
+                    <template v-slot:activator="{ on }">
+                      <v-btn flat icon v-on="on">
+                        <v-icon>edit</v-icon>
+                      </v-btn>
+                    </template>
 
-                        <div class="overline">
-                          <v-chip class="ma-2"
-                            ><strong>{{
+                    <v-card>
+                      <v-card-title class="headline grey lighten-2" primary-title>
+                        수정하실 댓글을 적어주세요</v-card-title>
+
+                      <v-card-text>
+                        <v-text-field v-model="idcomments[i - 1].text" required>
+                        </v-text-field>
+                      </v-card-text>
+                      <v-card-actions>
+                        <v-spacer></v-spacer>
+                        <v-btn color="primary" @click="
+                              set(idcomments[i - 1].id, idcomments[i - 1].text)
+                            ">
+                          I accept
+                        </v-btn>
+                      </v-card-actions>
+                    </v-card>
+                  </v-dialog>
+                  <v-btn flat icon @click="del(idcomments[i - 1].id)">
+                    <v-icon>close</v-icon>
+                  </v-btn>
+                </v-card-actions>
+                <v-card-actions v-else>
+                  <v-btn v-if="check == ''" flat icon @click="check = idcomments[i - 1].id">
+                    <v-icon>comment</v-icon>&nbsp
+                    {{
+                        idcomments[i - 1].replynum
+                      }}
+                  </v-btn>
+                  <v-btn v-else-if="check == idcomments[i - 1].id" flat icon @click="check = ''">
+                    <v-icon>arrow_back</v-icon>
+                  </v-btn>
+                  <v-btn v-else flat icon @click="check = idcomments[i - 1].id">
+                    <v-icon>comment</v-icon>&nbsp
+                    {{
+                        idcomments[i - 1].replynum
+                      }}
+                  </v-btn>
+                </v-card-actions>
+              </span>
+              <hr class="bottomline" style="margin:10px 0px" />
+            </div>
+          </div>
+
+          <!-- 대댓글부분 -->
+          <div v-if="check == idcomments[i - 1].id" class="ml-5">
+            <span>
+              <v-container style="padding:0px">
+                <v-flex>
+                  <span>
+                    <v-text-field v-model="reply" label="댓글을 입력해 주세요" required append-outer-icon="add_comment" @click:append-outer="replyinsert(idcomments[i - 1].id, idcomments[i - 1].replynum)">
+                    </v-text-field>
+                  </span>
+                </v-flex>
+              </v-container>
+              <v-flex v-for="i in idcomments.length">
+                <div>
+                  <div>
+                    <div v-if="idcomments[i - 1].portid == check">
+
+                      <div class="overline">
+                        <v-chip class="ma-2"><strong>{{
                               idcomments[i - 1].writer
-                            }}</strong></v-chip
-                          >
-                          {{
+                            }}</strong></v-chip>
+                        {{
                             idcomments[i - 1].created_at
                               | moment("YYYY년 MM월 DD일")
                           }}
 
-                        </div>
-                        <v-list-item-subtitle class="ma-3">{{
+                      </div>
+                      <div class="ma-3">{{
                           idcomments[i - 1].text
-                        }}</v-list-item-subtitle>
-                        <v-card-actions
-                          v-if="idcomments[i - 1].writer == thislogin"
-                        >
-                          <v-dialog v-model="dialog" width="500">
-                            <template v-slot:activator="{ on }">
-                              <v-btn flat icon v-on="on">
-                                <v-icon>edit</v-icon>
-                              </v-btn>
-                            </template>
+                        }}</div>
+                      <v-card-actions v-if="idcomments[i - 1].writer == thislogin">
+                        <v-dialog v-model="dialog" width="500">
+                          <template v-slot:activator="{ on }">
+                            <v-btn flat icon v-on="on">
+                              <v-icon>edit</v-icon>
+                            </v-btn>
+                          </template>
 
-                            <v-card>
-                              <v-card-title
-                                class="headline grey lighten-2"
-                                primary-title
-                              >
-                                수정하실 댓글을 적어주세요
-                              </v-card-title>
+                          <v-card>
+                            <v-card-title class="headline grey lighten-2" primary-title>
+                              수정하실 댓글을 적어주세요
+                            </v-card-title>
 
-                              <v-card-text>
-                                <v-text-field
-                                  v-model="idcomments[i - 1].text"
-                                  required
-                                >
-                                </v-text-field>
-                              </v-card-text>
-
-                              <v-divider></v-divider>
-
-                              <v-card-actions>
-                                <v-spacer></v-spacer>
-                                <v-btn
-                                  color="primary"
-                                  @click="
+                            <v-card-text>
+                              <v-text-field v-model="idcomments[i - 1].text" required>
+                              </v-text-field>
+                            </v-card-text>
+                            <v-card-actions>
+                              <v-spacer></v-spacer>
+                              <v-btn color="primary" @click="
                                     set(
                                       idcomments[i - 1].id,
                                       idcomments[i - 1].text
                                     )
-                                  "
-                                >
-                                  I accept
-                                </v-btn>
-                              </v-card-actions>
-                            </v-card>
-                          </v-dialog>
-                          <v-btn flat icon @click="del(idcomments[i - 1].id)">
-                            <v-icon>close</v-icon>
-                          </v-btn>
-                        </v-card-actions>
-                        <hr class="bottomline" style="margin:10px 0px" />
-                      </v-list-item-content>
-                    </v-list-item>
+                                  ">
+                                I accept
+                              </v-btn>
+                            </v-card-actions>
+                          </v-card>
+                        </v-dialog>
+                        <v-btn flat icon @click="del(idcomments[i - 1].id)">
+                          <v-icon>close</v-icon>
+                        </v-btn>
+                      </v-card-actions>
+                      <hr class="bottomline" style="margin:10px 0px" />
+                    </div>
                   </div>
-                </v-flex>
-              </span>
-            </div>
+                </div>
+              </v-flex>
+            </span>
           </div>
-        </v-flex>
-      </v-content>
-    </v-layout>
-  </v-container>
+        </div>
+      </v-flex>
+    </v-content>
+  </v-layout>
+</v-container>
 </template>
 
 <script>
@@ -265,8 +188,9 @@ export default {
     thislogin: "",
     check: "",
     replynum: 0,
-    good:0,
-    bad:0
+    good: 0,
+    bad: 0,
+    dialog: false
   }),
   mounted() {
     this.getcommentsByIndex();
@@ -307,29 +231,29 @@ export default {
         location.href = this.thisurl;
       }
     },
-    replyinsert(portid , num) {
+    replyinsert(portid, num) {
       if (this.idcomments.length == 0) {
         this.thisurl = document.location.href;
         this.portid = FirebaseService.comments(
-          (this.portid = this.check),
-          (this.fk = 1),
-          this.reply,
-          (this.writer = this.$store.state.user.displayName),
-          this.replynum = 0
-        ),
-          FirebaseService.setcount(portid, num+1)
-          location.href = this.thisurl;
+            (this.portid = this.check),
+            (this.fk = 1),
+            this.reply,
+            (this.writer = this.$store.state.user.displayName),
+            this.replynum = 0
+          ),
+          FirebaseService.setcount(portid, num + 1)
+        location.href = this.thisurl;
       } else {
         this.thisurl = document.location.href;
         this.portid = FirebaseService.comments(
-          (this.portid = this.check),
-          this.idcomments[0].fk + 1,
-          this.reply,
-          (this.writer = this.$store.state.user.displayName),
-          this.replynum = 0
-        ),
-          FirebaseService.setcount(portid, num+1)
-          location.href = this.thisurl;
+            (this.portid = this.check),
+            this.idcomments[0].fk + 1,
+            this.reply,
+            (this.writer = this.$store.state.user.displayName),
+            this.replynum = 0
+          ),
+          FirebaseService.setcount(portid, num + 1)
+        location.href = this.thisurl;
       }
     },
     del(id) {
