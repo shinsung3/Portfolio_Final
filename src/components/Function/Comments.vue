@@ -32,9 +32,6 @@
                     idcomments[i - 1].created_at | moment("YYYY년 MM월 DD일")
                   }}
                   <!-- 이부분 수정해줘 나원's -->
-                  {{
-                    idcomments[i - 1].replynum
-                  }}
                   <!-- 여기까지가 리플 몇개인지 알려주는애 -->
                 </div>
                 <v-list-item-subtitle class="ma-3">
@@ -48,7 +45,10 @@
                       icon
                       @click="check = idcomments[i - 1].id"
                     >
-                      <v-icon>comment</v-icon>
+                      <v-icon>comment</v-icon>&nbsp
+                      {{
+                        idcomments[i - 1].replynum
+                      }}
                     </v-btn>
                     <v-btn
                       v-else-if="check == idcomments[i - 1].id"
@@ -64,7 +64,10 @@
                       icon
                       @click="check = idcomments[i - 1].id"
                     >
-                      <v-icon>comment</v-icon>
+                      <v-icon>comment</v-icon>&nbsp
+                      {{
+                        idcomments[i - 1].replynum
+                      }}
                     </v-btn>
                     <!-- 여기에 수정버튼,모달창 -->
                     <v-dialog v-model="dialog" width="500">
