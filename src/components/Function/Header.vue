@@ -5,8 +5,8 @@
         <v-img :src="getImgUrl('bee.png')" aspect-ratio="1.0" />
       </v-toolbar-side-icon>
       <v-toolbar-title class="DokdoHeader">
-        <router-link to="/" style="text-decoration: none;">
-          <span class="DokdoHeader">할할놀놀</span>
+        <router-link to="/">
+          <span class="DokdoHeader" id="aTag">할할놀놀</span>
         </router-link>
       </v-toolbar-title>
       <v-spacer></v-spacer>
@@ -171,6 +171,7 @@
 
 <script>
 import FirebaseService from "../../services/FirebaseService.js";
+import "../../CSS/aTag.css";
 
 export default {
   name: "FooterIcon",

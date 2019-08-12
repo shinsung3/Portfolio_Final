@@ -177,6 +177,7 @@ import PostList from "../components/Post/PostList";
 import RepositoryList from "../components/Repository/RepositoryList";
 import Translate from "@/services/Translate";
 import EventBus from "../eventBus.js";
+import "../CSS/aTag.css";
 
 export default {
   name: "HomePage",
