@@ -20,44 +20,53 @@
             <v-img :src="getImgUrl('bee.png')" aspect-ratio="1.0" />
           </v-toolbar-side-icon>
           <span class="DokdoHeader2 mt-3 mr-2">
-
             <template>
               <v-dialog v-model="dialogModify" persistent max-width="600px">
                 <template v-slot:activator="{ on }" class="DokdoHeader2">
-                  <v-btn round color="#ADD8E6" dark v-on="on" data-tooltip-text="클릭시 회원정보 수정">
-                    <b style="font-size:24px">{{ $store.state.user.displayName }}</b>
+                  <v-btn
+                    round
+                    color="#ADD8E6"
+                    dark
+                    v-on="on"
+                    data-tooltip-text="클릭시 회원정보 수정"
+                  >
+                    <b style="font-size:20px">{{
+                      $store.state.user.displayName
+                    }}</b>
                   </v-btn>
                 </template>
-                  <v-card>
-                    <v-card-title align-center>
-                      <span id="modaltitle" class="DokdoList">
-                        회원정보 수정
-                        <v-icon size="25" color="black">fa-wrench</v-icon>
-                      </span>
-                    </v-card-title>
-                    <v-card-text>
-                      <v-container grid-list-md>
-                        <v-flex xs12>
-                          <span
-                            label="Email*"
-                          > {{ $store.state.user.email }} </span>
-                        </v-flex>
-                        <v-flex xs12>
-                          <v-text-field
-                            label="Password*"
-                            type="password"
-                            required
-                            v-model="password"
-                          ></v-text-field>
-                        </v-flex>
-                      </v-container>
-                    </v-card-text>
-                    <v-card-actions>
-                      <v-spacer></v-spacer>
-                      <v-btn color="blue-grey" flat @click="modify">완료</v-btn>
-                      <v-btn color="blue-grey" flat @click="cancleModify">취소</v-btn>
-                    </v-card-actions>
-                  </v-card>
+                <v-card>
+                  <v-card-title align-center>
+                    <span id="modaltitle" class="DokdoList">
+                      회원정보 수정
+                      <v-icon size="25" color="black">fa-wrench</v-icon>
+                    </span>
+                  </v-card-title>
+                  <v-card-text>
+                    <v-container grid-list-md>
+                      <v-flex xs12>
+                        <span label="Email*">
+                          {{ $store.state.user.email }}
+                        </span>
+                      </v-flex>
+                      <v-flex xs12>
+                        <v-text-field
+                          label="Password*"
+                          type="password"
+                          required
+                          v-model="password"
+                        ></v-text-field>
+                      </v-flex>
+                    </v-container>
+                  </v-card-text>
+                  <v-card-actions>
+                    <v-spacer></v-spacer>
+                    <v-btn color="blue-grey" flat @click="modify">완료</v-btn>
+                    <v-btn color="blue-grey" flat @click="cancleModify">
+                      취소
+                    </v-btn>
+                  </v-card-actions>
+                </v-card>
               </v-dialog>
             </template>
 
@@ -161,11 +170,7 @@
 </template>
 
 <script>
-import "../../CSS/aTag.css";
 import FirebaseService from "../../services/FirebaseService.js";
-import "../../CSS/DokdoFont.css";
-import "../../eventBus.js";
-import store from "../../store.js";
 
 export default {
   name: "FooterIcon",
@@ -236,46 +241,40 @@ export default {
 }
 
 [data-tooltip-text]:hover {
-	position: relative;
+  position: relative;
 }
 
 [data-tooltip-text]:after {
-	-webkit-transition: bottom .3s ease-in-out, opacity .3s ease-in-out;
-	-moz-transition: bottom .3s ease-in-out, opacity .3s ease-in-out;
-	transition: bottom .3s ease-in-out, opacity .3s ease-in-out;
-
-	background-color: rgba(0, 0, 0, 0.8);
-
+  -webkit-transition: bottom 0.3s ease-in-out, opacity 0.3s ease-in-out;
+  -moz-transition: bottom 0.3s ease-in-out, opacity 0.3s ease-in-out;
+  transition: bottom 0.3s ease-in-out, opacity 0.3s ease-in-out;
+  background-color: rgba(0, 0, 0, 0.8);
   -webkit-box-shadow: 0px 0px 3px 1px rgba(50, 50, 50, 0.4);
-	-moz-box-shadow: 0px 0px 3px 1px rgba(50, 50, 50, 0.4);
-	box-shadow: 0px 0px 3px 1px rgba(50, 50, 50, 0.4);
-
+  -moz-box-shadow: 0px 0px 3px 1px rgba(50, 50, 50, 0.4);
+  box-shadow: 0px 0px 3px 1px rgba(50, 50, 50, 0.4);
   -webkit-border-radius: 5px;
-	-moz-border-radius: 5px;
-	border-radius: 5px;
-
-  color: #FFFFFF;
-	font-size: 20px;
-	margin-bottom: 10px;
-	padding: 7px 12px;
-	position: absolute;
-	width: auto;
-	min-width: 50px;
-	max-width: 300px;
-	word-wrap: break-word;
-
-	z-index: 9999;
-
-	opacity: 0;
-	left: -9999px;
+  -moz-border-radius: 5px;
+  border-radius: 5px;
+  color: #ffffff;
+  font-size: 20px;
+  margin-bottom: 10px;
+  padding: 7px 12px;
+  position: absolute;
+  width: auto;
+  min-width: 50px;
+  max-width: 300px;
+  word-wrap: break-word;
+  z-index: 9999;
+  opacity: 0;
+  left: -9999px;
   top: 90%;
 
-	content: attr(data-tooltip-text);
+  content: attr(data-tooltip-text);
 }
 
 [data-tooltip-text]:hover:after {
-	top: 130%;
-	left: 0;
-	opacity: 1;
+  top: 130%;
+  left: 0;
+  opacity: 1;
 }
 </style>
