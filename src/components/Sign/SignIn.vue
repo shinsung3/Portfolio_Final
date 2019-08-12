@@ -62,7 +62,7 @@ export default {
       this.email = "";
       this.password = "";
       this.dialogSignIn = false;
-      this.$router.push("/");
+      this.$router.push("/home");
     },
     cancleSignIn() {
       this.email = "";

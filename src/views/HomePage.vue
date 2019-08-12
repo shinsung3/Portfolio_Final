@@ -114,6 +114,7 @@
                   maxFontSize: '50px'
                 }"
                 class="my-5 text-xs-center DokdoList FontColor"
+                id="aTag"
               >
                 Portfolio
               </h2>
@@ -136,6 +137,7 @@
                   maxFontSize: '50px'
                 }"
                 class="my-5 text-xs-center DokdoList FontColor"
+                id="aTag"
               >
                 Skill
               </h2>
@@ -158,6 +160,7 @@
                   maxFontSize: '50px'
                 }"
                 class="my-5 text-xs-center DokdoList FontColor"
+                id="aTag"
               >
                 Project
               </h2>

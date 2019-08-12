@@ -35,7 +35,7 @@
               enter-active-class="animated tada"
               items.length="1"
             >
-              <br />
+            <br />
               <span v-for="item in items" v-bind:key="item" class="list-item">
                 <v-btn depressed large href="/home">GO! HOME!</v-btn>
               </span>

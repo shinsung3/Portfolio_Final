@@ -1,11 +1,11 @@
 <template>
   <v-container>
     <v-toolbar flat fixed id="background1">
-      <v-toolbar-side-icon to="/">
+      <v-toolbar-side-icon to="/home">
         <v-img :src="getImgUrl('bee.png')" aspect-ratio="1.0" />
       </v-toolbar-side-icon>
       <v-toolbar-title class="DokdoHeader">
-        <router-link to="/">
+        <router-link to="/home">
           <span class="DokdoHeader" id="aTag">할할놀놀</span>
         </router-link>
       </v-toolbar-title>
@@ -72,7 +72,7 @@
 
             님 반갑습니다!!
           </span>
-          <v-btn flat to="/" @click="setLogOut">
+          <v-btn flat to="/home" @click="setLogOut">
             <span class="DokdoHeader2">Logout</span>
           </v-btn>
         </template>
@@ -159,7 +159,7 @@
             <v-btn flat to="/Login" v-if="this.$store.state.accessToken == ''">
               <v-list-tile-title>Login</v-list-tile-title>
             </v-btn>
-            <v-btn flat to="/" v-else @click="setLogOut">
+            <v-btn flat to="/home" v-else @click="setLogOut">
               <v-list-tile-title>Logout</v-list-tile-title>
             </v-btn>
           </v-list-tile-content>
@@ -182,7 +182,7 @@ export default {
       {
         title: "Home",
         icon: "home",
-        href: "/"
+        href: "/home"
       },
       {
         title: "Portfolio",
@@ -221,7 +221,7 @@ export default {
       FirebaseService.userModify(this.password);
       this.password = "";
       this.dialogModify = false;
-      this.$router.push("/");
+      this.$router.push("/home");
     },
     cancleModify() {
       this.password = "";
