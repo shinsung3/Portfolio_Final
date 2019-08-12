@@ -1,10 +1,10 @@
 <template>
   <v-dialog v-model="dialogModify" persistent max-width="600px">
-    <template v-slot:activator="{ on }" class="DokdoHeader2 mt-3 mr-2">
-      <v-btn id="signupval" round color="#ADD8E6" dark v-on="on">
-        <b>{{ this.$store.state.user.displayName }}</b>
+    <template v-slot:activator="{ on }" class="DokdoHeader2">
+      <v-btn round color="#ADD8E6" dark v-on="on">
+        <b>{{ nickname }}</b>
       </v-btn>
-
+    </template>
       <v-card>
         <v-card-title align-center>
           <span id="modaltitle" class="DokdoList">
@@ -17,7 +17,7 @@
             <v-flex xs12>
               <span
                 label="Email*"
-              > {{ this.$store.state.user.email }} </span>
+              > {{ email }} </span>
             </v-flex>
             <v-flex xs12>
               <v-text-field
@@ -35,7 +35,6 @@
           <v-btn color="blue-grey" flat @click="cancleModify">취소</v-btn>
         </v-card-actions>
       </v-card>
-    </template>
   </v-dialog>
 </template>
 
@@ -47,25 +46,33 @@ export default {
   name: "UserModify",
   data() {
     return {
-      dialogModify: false
+      dialogModify: false,
+      email: "",
+      password: "",
+      nickname: ""
     }
+  },
+  mounted() {
+    FirebaseService.loginPersistence();
+    this.email = this.$store.state.user.email;
+    this.nickname = this.$store.state.user.displayName;
   },
   methods: {
     async modify() {
-      FirebaseService.modify(this.email, this.password, this.username);
-      this.email = "";
+      FirebaseService.userModify(this.password);
       this.password = "";
-      this.dialogSignUp = false;
+      this.dialogModify = false;
       this.$router.push("/");
+    },
+    cancleModify() {
+      this.password = "";
+      this.dialogModify = false;
     }
   }
 }
 </script>
 
 <style>
-#modaltitle {
-  font-size: 250%;
-}
 #signupval {
   width: 4%;
   color: #2a7189;
