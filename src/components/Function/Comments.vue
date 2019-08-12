@@ -20,6 +20,14 @@
                 {{
                     idcomments[i - 1].created_at | moment("YYYY년 MM월 DD일")
                   }}
+                <!-- 좋아요 -->
+                {{
+                  idcomments[i - 1].good
+                }}
+                <!-- 싫어요-->
+                {{
+                    idcomments[i - 1].bad
+                }}
               </div>
               <div class="ma-3">
                 {{ idcomments[i - 1].text }}
@@ -113,11 +121,18 @@
                         <v-chip class="ma-2"><strong>{{
                               idcomments[i - 1].writer
                             }}</strong></v-chip>
-                        {{
+                            {{
                             idcomments[i - 1].created_at
                               | moment("YYYY년 MM월 DD일")
-                          }}
-
+                            }}
+                            <!-- 좋아요 -->
+                            {{
+                              idcomments[i - 1].good
+                            }}
+                            <!-- 싫어요-->
+                            {{
+                              idcomments[i - 1].bad
+                            }}
                       </div>
                       <div class="ma-3">{{
                           idcomments[i - 1].text
@@ -216,7 +231,9 @@ export default {
           (this.fk = 1),
           this.text,
           (this.writer = this.$store.state.user.displayName),
-          this.replynum = 0
+          this.replynum = 0,
+          this.good =0,
+          this.bad=0
         );
         location.href = this.thisurl;
       } else {
@@ -226,7 +243,9 @@ export default {
           this.idcomments[0].fk + 1,
           this.text,
           (this.writer = this.$store.state.user.displayName),
-          this.replynum = 0
+          this.replynum = 0,
+          this.good =0,
+          this.bad=0
         );
         location.href = this.thisurl;
       }
@@ -239,7 +258,9 @@ export default {
             (this.fk = 1),
             this.reply,
             (this.writer = this.$store.state.user.displayName),
-            this.replynum = 0
+            this.replynum = 0,
+            this.good =0,
+            this.bad=0
           ),
           FirebaseService.setcount(portid, num + 1)
         location.href = this.thisurl;
@@ -250,7 +271,9 @@ export default {
             this.idcomments[0].fk + 1,
             this.reply,
             (this.writer = this.$store.state.user.displayName),
-            this.replynum = 0
+            this.replynum = 0,
+            this.good =0,
+            this.bad=0
           ),
           FirebaseService.setcount(portid, num + 1)
         location.href = this.thisurl;
