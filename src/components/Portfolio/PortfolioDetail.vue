@@ -88,12 +88,10 @@ export default {
     portid: "",
     fk: "",
     text: "",
-    writer: "",
-    delfk: ""
+    writer: ""
   }),
   mounted() {
     this.getPortfoliosByIndex();
-    this.del();
   },
 
   methods: {
