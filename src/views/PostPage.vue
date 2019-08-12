@@ -19,14 +19,14 @@
           >
             <v-icon size="25" class="mr-2">fa-angle-double-up</v-icon> 접기
           </v-btn>
-          <v-row
+          <span
             v-if="
               this.$store.state.userauth == '팀원' ||
                 this.$store.state.userauth == '관리자'
             "
           >
             <SkillWriter />
-          </v-row>
+          </span>
         </center>
       </v-container>
     </v-container>
