@@ -28,7 +28,7 @@
               </div>
               <span>
                 <!-- 좋아요 싫어요 -->
-                <div>
+                <div style="text-align:right">
                   <v-btn flat icon color="blue" @click="likeG(idcomments[i - 1].id,  idcomments[i - 1].good,  idcomments[i - 1].bad)" >
                     <v-icon>thumb_up</v-icon>
                     {{
@@ -133,6 +133,7 @@
                     <div v-if="idcomments[i - 1].portid == check">
 
                       <div class="overline">
+                        <v-icon color="teal darken-2">subdirectory_arrow_right</v-icon>
                         <v-chip class="ma-2"><strong>{{
                               idcomments[i - 1].writer
                             }}</strong></v-chip>
@@ -146,7 +147,7 @@
                           idcomments[i - 1].text
                         }}</div>
                         <!-- 좋아요 싫어요 -->
-                        <div>
+                        <div style="text-align:right">
                           <v-btn flat icon color="blue" @click="likeG(idcomments[i - 1].id,  idcomments[i - 1].good,  idcomments[i - 1].bad)" >
                             <v-icon>thumb_up</v-icon>
                             {{
