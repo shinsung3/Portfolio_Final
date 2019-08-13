@@ -18,17 +18,18 @@
   </v-container>
 </template>
 
+
 <script>
 import Portfolio from "@/components/Portfolio/Portfolio";
 import FirebaseService from "@/services/FirebaseService";
 import { Carousel3d, Slide } from 'vue-carousel-3d';
 
 export default {
-  new : "#PortfolioMain",
+   name : "PortfolioMain",
   data() {
     return {
       portfolios: [],
-      slides:""
+      slides: 100
     }
   },
   components: {
