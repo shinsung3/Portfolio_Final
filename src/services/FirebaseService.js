@@ -300,6 +300,7 @@ export default {
         replynum: num
       });
   },
+ // 좋아요
   likegood(comment, userid){
     firestore
       .collection(LIKE)
@@ -336,7 +337,6 @@ export default {
       .catch(()=> {
         return 0;
       });
-
   },
   getlike() {
     const likeCollection = firestore.collection(LIKE);
@@ -350,6 +350,21 @@ export default {
       });
     });
   },
+  setlike(id, good, bad){
+    firestore
+      .collection(COMMENTS)
+      .doc(id)
+      .update({
+        good: good,
+        bad: bad
+      });
+
+
+  },
+
+
+
+
 	getAuthorization() {
 		const userauthCollection = firestore.collection(USERAUTH)
 		return userauthCollection
