@@ -31,7 +31,10 @@
           </v-flex>
           <v-flex id="inline">
             <center>
-              <img src="https://image.flaticon.com/icons/svg/1113/1113432.svg" width="70px" />
+              <img
+                src="https://image.flaticon.com/icons/svg/1113/1113432.svg"
+                width="70px"
+              />
               <hr id="hrCss1" />
               <br />
               <img src="../assets/12.gif" width="150px" />
@@ -52,7 +55,10 @@
           </v-flex>
           <v-flex id="inline">
             <center>
-              <img src="https://image.flaticon.com/icons/svg/1965/1965132.svg" width="70px" />
+              <img
+                src="https://image.flaticon.com/icons/svg/1965/1965132.svg"
+                width="70px"
+              />
               <hr id="hrCss2" />
               <br />
               <img src="../assets/23.gif" width="150px" />
@@ -73,7 +79,10 @@
           </v-flex>
           <v-flex id="inline">
             <center>
-              <img src="https://image.flaticon.com/icons/svg/1328/1328357.svg" width="70px" />
+              <img
+                src="https://image.flaticon.com/icons/svg/1328/1328357.svg"
+                width="70px"
+              />
               <hr id="hrCss3" />
               <br />
               <img src="../assets/4.gif" width="150px" />
