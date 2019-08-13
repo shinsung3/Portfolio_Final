@@ -76,6 +76,12 @@ function modifyToken(email) {
   })
 }
 
+function modifyUserAuth(email, auth) {
+  return firestore.collection(USERAUTH).doc(email).update({
+    auth: auth
+  })
+}
+
 function setAuthorization(email, auth, deviceToken, userName) {
   return firestore
     .collection(USERAUTH)
@@ -429,6 +435,7 @@ export default {
 
     user.delete().then(function() {
       swal ( "Delete account," , user.email + "님 정상적으로 탈퇴되었습니다" ,  "info" )
+      modifyUserAuth(email, "방문자")
     }).catch(function(error) {
       console.log(error)
     });
