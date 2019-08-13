@@ -13,6 +13,15 @@ import "./registerServiceWorker";
 import VModal from "vue-js-modal";
 // vue-resource is needed too
 import VueResource from "vue-resource";
+
+import "tui-editor/dist/tui-editor.css";
+import "tui-editor/dist/tui-editor-contents.css";
+import "codemirror/lib/codemirror.css";
+import { Editor, Viewer } from "@toast-ui/vue-editor";
+
+Vue.component("editor", Editor);
+Vue.component("viewer", Viewer);
+
 Vue.use(VueResource);
 
 Vue.use(VModal, { dynamic: true });
@@ -25,7 +34,7 @@ const { detect } = require("detect-browser");
 const browser = detect();
 // console.log(browser.name)
 if (browser.name != "chrome") {
-  alert("해당 사이트는 크롬에 최적화 되어 있습니다 :)");
+  swal ( "Chorme Optimize" , "해당 사이트는 크롬에 최적화 되어 있습니다." ,  "info" )
 }
 
 Vue.config.productionTip = false;

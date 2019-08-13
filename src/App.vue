@@ -1,17 +1,18 @@
 <template>
   <v-app>
     <title>할할놀놀</title>
-    <!-- <main-header/> -->
-    <!-- <Header/> -->
     <v-content>
-      <Header />
-      <router-view />
-      <Bookmark />
-      <Chatbot />
-      <Top />
-      <!-- <PlusMenu /> -->
-      <Language />
-      <Footer />
+      <div v-if="path != '/'">
+        <Header />
+        <router-view />
+        <Chatbot />
+        <Top />
+        <Language />
+        <Footer />
+      </div>
+      <div v-else>
+        <Intro />
+      </div>
     </v-content>
   </v-app>
 </template>
@@ -24,6 +25,8 @@ import "material-design-icons-iconfont/dist/material-design-icons.css";
 import Vue from "vue";
 import Vuetify from "vuetify";
 import VueResizeText from "vue-resize-text";
+import Carousel3d from "vue-carousel-3d";
+import swal from "sweetalert";
 
 Vue.use(VueResizeText);
 
@@ -31,29 +34,37 @@ Vue.use(Vuetify, {
   iconfont: "md"
 });
 
+Vue.use(require("vue-moment"));
+
+Vue.use(Carousel3d);
+
 import store from "./store";
-import Header from "./components/Header.vue";
-import Top from "./components/Top.vue";
-import Bookmark from "./components/BookMark.vue";
-import Footer from "./components/Footer.vue";
-import Chatbot from "./components/ChatBot.vue";
-// import PlusMenu from "./components/PlusMenu.vue";
-import Language from "./components/Language.vue";
+import Header from "./components/Function/Header.vue";
+import Top from "./components/Function/Top.vue";
+import Footer from "./components/Function/Footer.vue";
+import Chatbot from "./components/Function/ChatBot.vue";
+import Language from "./components/Function/Language.vue";
+import Intro from "./views/IntroPage.vue";
 
 export default {
   name: "App",
   components: {
     Header,
     Top,
-    Bookmark,
     Footer,
     Chatbot,
-    // PlusMenu
-    Language
+    Language,
+    Intro
   },
   store,
   data() {
-    return {};
+    return {
+      path: ""
+    };
+  },
+  mounted() {
+    this.path = this.$route.path;
+    console.log(this.path);
   }
 };
 </script>
