@@ -36,14 +36,13 @@
                   </v-btn>
                 </template>
                 <v-card>
-                  <v-card-title align-center>
-                    <span id="modaltitle" class="DokdoList">
+                  <v-card-title style="align-items:auto">
+                    <span xs-3 id="modaltitle" class="DokdoList mr-5 pr-5">
                       회원정보 수정
                       <v-icon size="25" color="black">fa-wrench</v-icon>
                     </span>
-                    <span>
-                      <v-spacer></v-spacer>
-                      <v-btn @click="userDelete"><i class="fas fa-user-slash"></i>탈퇴</v-btn>
+                    <span class="offset-12 ml-5 pl-5">
+                      <v-btn flat class="ml-5 pl-5" @click="userDelete"><i class="fas fa-user-slash pl-5"></i>탈퇴</v-btn>
                     </span>
                   </v-card-title>
                   <v-card-text>
@@ -287,4 +286,5 @@ export default {
   left: 0;
   opacity: 1;
 }
+
 </style>
