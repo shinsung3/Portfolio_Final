@@ -145,7 +145,8 @@ export default {
     });
   },
   getPosts() {
-    return firestore.collection(POSTS)
+    return firestore
+      .collection(POSTS)
       .orderBy("created_at", "desc")
       .get()
       .then(docSnapshots => {
@@ -197,7 +198,6 @@ export default {
         return docSnapshots.docs.map(doc => {
           let data = doc.data();
           data.id = doc.id;
-          data.created_at = new Date(data.created_at.toDate());
           return data;
         });
       });

@@ -1,5 +1,5 @@
 <template>
-  <footer>
+  <footer style="background-color:cornsilk;">
     <v-flex class="hidden-sm-and-down">
       <!-- 날씨위젯 -->
       <weather

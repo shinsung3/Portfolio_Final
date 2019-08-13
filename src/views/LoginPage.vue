@@ -1,5 +1,5 @@
 <template>
-  <v-layout align-center justify-center row>
+  <v-layout align-center justify-center row style="background-color:cornsilk;">
     <v-flex xs12 text-xs-center>
       <v-layout my-5 align-center
               justify-center row
