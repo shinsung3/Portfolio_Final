@@ -119,7 +119,6 @@
                 Portfolio
               </h2>
             </router-link>
-            <!-- <PortfolioList></PortfolioList> -->
             <PortfolioMain></PortfolioMain>
           </v-flex>
         </v-layout>
@@ -188,7 +187,6 @@ export default {
   name: "HomePage",
   components: {
     ImgBanner,
-    // PortfolioList,
     PostList,
     RepositoryList,
     PortfolioMain

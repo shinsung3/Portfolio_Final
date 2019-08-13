@@ -1,8 +1,17 @@
 <template>
   <v-container id="PortfolioMain">
-    <v-layout id="PortfolioMain">
-      <carousel-3d :controls-visible="true" :clickable="false" style="height:346px!important">
-        <slide v-for="(i, j) in slides" :index="j" :key="j" style="height:346px!important">
+    <v-layout>
+      <carousel-3d
+        :controls-visible="true"
+        :clickable="false"
+        style="height:346px!important"
+      >
+        <slide
+          v-for="(i, j) in slides"
+          :index="j"
+          :key="j"
+          style="height:346px!important"
+        >
           <Portfolio
             :title="portfolios[i - 1].title"
             :body="portfolios[i - 1].body"
@@ -18,19 +27,21 @@
   </v-container>
 </template>
 
-
 <script>
 import Portfolio from "@/components/Portfolio/Portfolio";
 import FirebaseService from "@/services/FirebaseService";
-import { Carousel3d, Slide } from 'vue-carousel-3d';
+import { Carousel3d, Slide } from "vue-carousel-3d";
 
 export default {
-   name : "PortfolioMain",
+  name: "PortfolioMain",
   data() {
     return {
       portfolios: [],
-      slides: 100
-    }
+      slides: {
+        type: Number,
+        default: 0
+      }
+    };
   },
   components: {
     Portfolio,
@@ -44,19 +55,18 @@ export default {
     async getPortfolios() {
       this.portfolios = await FirebaseService.getPortfolios();
       this.slides = this.portfolios.length;
-    },
+    }
   }
 };
 </script>
 <style>
-
 .carousel-3d-container {
-  margin:0;
+  margin: 0;
   border-width: 0px;
   border-style: none;
   border-color: grey;
-  height:346px;
-  width:auto;
+  height: 346px;
+  width: auto;
 }
 
 .carousel-3d {
@@ -66,10 +76,9 @@ export default {
 }
 
 .carousel-3d-slide {
-  height:346px!important;
+  height: 346px !important;
   border-width: 0px;
-  border-style:none!important;
-  box-shadow: 1px 1px #D3D3D3;
-  /* border-color: grey!important; */
+  border-style: none !important;
+  box-shadow: 1px 1px #d3d3d3;
 }
 </style>
