@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div style="background-color:cornsilk;">
     <v-container>
       <center>
         <h1

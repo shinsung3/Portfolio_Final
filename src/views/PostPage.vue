@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div style="background-color:cornsilk;">
     <v-container>
       <v-layout>
         <v-flex xs12>
