@@ -41,6 +41,10 @@
                       회원정보 수정
                       <v-icon size="25" color="black">fa-wrench</v-icon>
                     </span>
+                    <span>
+                      <v-spacer></v-spacer>
+                      <v-btn @click="userDelete"><i class="fas fa-user-slash"></i>탈퇴</v-btn>
+                    </span>
                   </v-card-title>
                   <v-card-text>
                     <v-container grid-list-md>
@@ -226,6 +230,11 @@ export default {
     cancleModify() {
       this.password = "";
       this.dialogModify = false;
+    },
+    userDelete() {
+      FirebaseService.userDelete();
+      this.dialogModify = false;
+      this.setLogOut();
     }
   }
 };
