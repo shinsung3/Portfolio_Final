@@ -105,7 +105,7 @@
       <v-container>
         <!-- Portfolio -->
         <v-layout my-5 id="Portfolio">
-          <v-flex xs12>
+          <v-flex>
             <router-link to="/Portfolio">
               <h2
                 v-resize-text="{
