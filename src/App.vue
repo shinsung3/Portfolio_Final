@@ -25,6 +25,8 @@ import "material-design-icons-iconfont/dist/material-design-icons.css";
 import Vue from "vue";
 import Vuetify from "vuetify";
 import VueResizeText from "vue-resize-text";
+import Carousel3d from 'vue-carousel-3d'
+import swal from 'sweetalert';
 
 Vue.use(VueResizeText);
 
@@ -33,6 +35,8 @@ Vue.use(Vuetify, {
 });
 
 Vue.use(require("vue-moment"));
+
+Vue.use(Carousel3d);
 
 import store from "./store";
 import Header from "./components/Function/Header.vue";

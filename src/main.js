@@ -34,7 +34,7 @@ const { detect } = require("detect-browser");
 const browser = detect();
 // console.log(browser.name)
 if (browser.name != "chrome") {
-  alert("해당 사이트는 크롬에 최적화 되어 있습니다 :)");
+  swal ( "Chorme Optimize" , "해당 사이트는 크롬에 최적화 되어 있습니다." ,  "info" )
 }
 
 Vue.config.productionTip = false;
