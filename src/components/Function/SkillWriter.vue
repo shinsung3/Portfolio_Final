@@ -139,7 +139,7 @@ export default {
     },
     update() {
       if (this.$store.state.user.email !== this.posts.userId) {
-        alert("수정할 권한이 없습니다!!");
+        swal ( "Authorization" , "수정할 권한이 없습니다!" ,  "info" )
         return;
       }
 

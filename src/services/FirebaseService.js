@@ -373,16 +373,16 @@ export default {
 	Logout() {
 		firebase.auth().signOut().then(function() {
       store.state.userauth = ''
-			alert("로그아웃 되었습니다.")
+      swal ( "Logout" ,  "로그아웃 되었습니다." ,  "success" )
 		}).catch(function(error) {
-  		alert("로그아웃 실패.")
+  		swal ( "Fail" ,  "로그아웃이 실패하였습니다." ,  "error" )
 		});
 		logoutcheck({})
 	},
 	signUp(email, password, userName) {
 		firebase.auth().createUserWithEmailAndPassword(email, password).then(
 			function(user) {
-				alert("회원가입을 축하합니다")
+        swal ( "Welcome" ,  "회원가입을 축하합니다." ,  "success" )
         chkDup(email).then(res => {
           if(res == false) {
             getDeviceToken(email);
@@ -394,7 +394,7 @@ export default {
         });
 			},
 			function(err) {
-			 	alert("error, " + err.message);
+        swal ( "Error" ,  "error, " + err.message ,  "error" )
 			}
 		);
 	},
@@ -407,7 +407,7 @@ export default {
 			},
 			function(err) {
 				store.state.accessToken = '';
-				alert("error, " + err.message)
+				swal ( "Error" ,  "error, " + err.message ,  "error" )
 			}
 		);
 	},
@@ -425,7 +425,7 @@ export default {
     var user = firebase.auth().currentUser;
 
     user.delete().then(function() {
-      alert(user.email + "님 정상적으로 탈퇴되었습니다");
+      swal ( "Delete account," , user.email + "님 정상적으로 탈퇴되었습니다" ,  "info" )
     }).catch(function(error) {
       console.log(error)
     });
