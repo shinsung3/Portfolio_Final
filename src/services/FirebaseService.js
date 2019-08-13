@@ -315,7 +315,7 @@ export default {
   likebad(comment, userid){
     firestore
       .collection(LIKE)
-      .doc(comment)
+      .doc(comment + userid)
       .set({
         comment,
         userid,
