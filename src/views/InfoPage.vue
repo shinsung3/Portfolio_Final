@@ -5,7 +5,10 @@
         <v-flex xs12>
           <v-flex id="inline">
             <center>
-              <img src="https://image.flaticon.com/icons/svg/2025/2025310.svg" width="70px" />
+              <img
+                src="https://image.flaticon.com/icons/svg/346/346195.svg"
+                width="70px"
+              />
               <hr id="hrCss" />
               <br />
               <img src="../assets/1.gif" width="150px" />
@@ -28,7 +31,7 @@
           </v-flex>
           <v-flex id="inline">
             <center>
-              <img src="https://image.flaticon.com/icons/svg/2025/2025162.svg" width="70px" />
+              <img src="https://image.flaticon.com/icons/svg/1113/1113432.svg" width="70px" />
               <hr id="hrCss1" />
               <br />
               <img src="../assets/12.gif" width="150px" />
@@ -49,7 +52,7 @@
           </v-flex>
           <v-flex id="inline">
             <center>
-              <img src="../assets/honey.svg" width="70px" />
+              <img src="https://image.flaticon.com/icons/svg/1965/1965132.svg" width="70px" />
               <hr id="hrCss2" />
               <br />
               <img src="../assets/23.gif" width="150px" />
@@ -70,7 +73,7 @@
           </v-flex>
           <v-flex id="inline">
             <center>
-              <img src="https://image.flaticon.com/icons/svg/2025/2025299.svg" width="70px" />
+              <img src="https://image.flaticon.com/icons/svg/1328/1328357.svg" width="70px" />
               <hr id="hrCss3" />
               <br />
               <img src="../assets/4.gif" width="150px" />
@@ -110,25 +113,25 @@ export default {
 #hrCss {
   border: 0;
   height: 6px;
-  background: #ccc;
+  background: #eaceae;
 }
 
 #hrCss1 {
   border: 0;
   height: 6px;
-  background: cornflowerblue;
+  background: #c8a88c;
 }
 
 #hrCss2 {
   border: 0;
   height: 6px;
-  background: seagreen;
+  background: #c88566;
 }
 
 #hrCss3 {
   border: 0;
   height: 6px;
-  background: tomato;
+  background: #81665c;
 }
 
 #pdSize {
@@ -136,46 +139,46 @@ export default {
 }
 
 .info1 {
-  color: darkgray;
+  color: #eaceae;
   font-size: 20px;
   font-family: "Acme", sans-serif;
 }
 
 .info2 {
-  color: seagreen;
+  color: #c88566;
   font-size: 20px;
   font-family: "Acme", sans-serif;
 }
 
 .info3 {
-  color: cornflowerblue;
+  color: #c8a88c;
   font-size: 20px;
   font-family: "Acme", sans-serif;
 }
 
 .info4 {
-  color: tomato;
+  color: #81665c;
   font-size: 20px;
   font-family: "Acme", sans-serif;
 }
 
 #but1 {
-  background-color: darkgray;
+  background-color: #eaceae;
   color: white;
 }
 
 #but2 {
-  background-color: cornflowerblue;
+  background-color: #c8a88c;
   color: white;
 }
 
 #but3 {
-  background-color: seagreen;
+  background-color: #c88566;
   color: white;
 }
 
 #but4 {
-  background-color: tomato;
+  background-color: #81665c;
   color: white;
 }
 </style>
