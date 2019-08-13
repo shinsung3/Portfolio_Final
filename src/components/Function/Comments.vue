@@ -54,6 +54,27 @@
                 {{ idcomments[i - 1].text }}
               </div>
               <span>
+                <!-- 좋아요 싫어요 -->
+                <div v-for="k in idlike.length">
+                  <div v-if="idcomments[i - 1].id == idlike[k-1].comment ? setting(idlike[i-1].good): ">
+                      {{idlike[i-1].good}}
+                  </div>
+                </div>
+                <div>
+                  <v-btn flat icon color="blue" @click="likeG(idcomments[i - 1].id)" >
+                    <v-icon>thumb_up</v-icon>
+                    {{
+                      idcomments[i - 1].good,
+                    }}
+                  </v-btn>
+
+                  <v-btn flat icon color="red" @click="likeB(idcomments[i - 1].id)">
+                    <v-icon>thumb_down</v-icon>
+                    {{
+                      idcomments[i - 1].bad
+                    }}
+                  </v-btn>
+                </div>
                 <v-card-actions v-if="idcomments[i - 1].writer == thislogin">
                   <v-btn v-if="check == ''" flat icon @click="check = idcomments[i - 1].id">
                     <v-icon>comment</v-icon>&nbsp
@@ -71,21 +92,40 @@
                       }}
                   </v-btn>
                   <!-- 여기에 수정버튼,모달창 -->
-                  <v-btn flat icon color="blue" @click="likegood(idcomments[i - 1].id, idcomments[i - 1].good)" >
-                    <v-icon>thumb_up</v-icon>
-                    {{
-                      idcomments[i - 1].good
-                    }}
+
+
+                  <v-dialog v-model="dialog" width="500">
+                    <template v-slot:activator="{ on }">
+                      <v-btn flat icon v-on="on">
+                        <v-icon>edit</v-icon>
+                      </v-btn>
+                    </template>
+
+                    <v-card>
+                      <v-card-title class="headline grey lighten-2" primary-title>
+                        수정하실 댓글을 적어주세요</v-card-title>
+
+                      <v-card-text>
+                        <v-text-field v-model="idcomments[i - 1].text" required>
+                        </v-text-field>
+                      </v-card-text>
+                      <v-card-actions>
+                        <v-spacer></v-spacer>
+                        <v-btn color="primary" @click="
+                              set(idcomments[i - 1].id, idcomments[i - 1].text)
+                            ">
+                          I accept
+                        </v-btn>
+                      </v-card-actions>
+                    </v-card>
+                  </v-dialog>
+                  <v-btn flat icon @click="del(idcomments[i - 1].id)">
+                    <v-icon>close</v-icon>
                   </v-btn>
 
-                  <v-btn flat icon color="red" @click="likebad(idcomments[i - 1].id, idcomments[i - 1].bad)">
-                    <v-icon>thumb_down</v-icon>
-                    {{
-                      idcomments[i - 1].bad
-                    }}
-                  </v-btn>
 
                 </v-card-actions>
+
                 <v-card-actions v-else>
                   <v-btn v-if="check == ''" flat icon @click="check = idcomments[i - 1].id">
                     <v-icon>comment</v-icon>&nbsp
@@ -140,10 +180,38 @@
                                 </v-btn>
                               </template>
 
-                              <v-card>
-                                <v-card-title class="headline grey lighten-2" primary-title>
-                                  수정하실 댓글을 적어주세요
-                                </v-card-title>
+                      </div>
+                      <div class="ma-3">{{
+                          idcomments[i - 1].text
+                        }}</div>
+                        <!-- 좋아요 싫어요 -->
+                        <div>
+                          <v-btn flat icon color="blue" @click="likegood(idcomments[i - 1].id, idcomments[i - 1].good)" >
+                            <v-icon>thumb_up</v-icon>
+                            {{
+                              idcomments[i - 1].good
+                            }}
+                          </v-btn>
+
+                          <v-btn flat icon color="red" @click="likebad(idcomments[i - 1].id, idcomments[i - 1].bad)">
+                            <v-icon>thumb_down</v-icon>
+                            {{
+                              idcomments[i - 1].bad
+                            }}
+                          </v-btn>
+                        </div>
+                      <v-card-actions v-if="idcomments[i - 1].writer == thislogin">
+                        <v-dialog v-model="dialog" width="500">
+                          <template v-slot:activator="{ on }">
+                            <v-btn flat icon v-on="on">
+                              <v-icon>edit</v-icon>
+                            </v-btn>
+                          </template>
+
+                          <v-card>
+                            <v-card-title class="headline grey lighten-2" primary-title>
+                              수정하실 댓글을 적어주세요
+                            </v-card-title>
 
                                 <v-card-text>
                                   <v-text-field v-model="idcomments[i - 1].text" required>
@@ -192,6 +260,7 @@ export default {
   name: "comments",
   data: () => ({
     idcomments: [],
+    idlike: [],
     portid: "",
     fk: "",
     text: "",
@@ -205,10 +274,10 @@ export default {
     replynum: 0,
     good:0 ,
     bad:0 ,
-
   }),
   mounted() {
     this.getcommentsByIndex();
+    this.getlike();
 
   },
   methods: {
@@ -219,7 +288,13 @@ export default {
       this.thisid = this.$route.query.id;
       this.thislogin = this.$store.state.user.displayName;
     },
-
+    async getlike() {
+      this.idlike = await FirebaseService.getlike(
+      );
+    },
+    setting(good){
+      console.log(good)
+    },
     insert(portid) {
       if (this.idcomments.length == 0) {
         this.thisurl = document.location.href;
@@ -286,18 +361,22 @@ export default {
       this.portid = FirebaseService.setcomment(id, retext);
       location.href = this.thisurl;
     },
-    likegood(id, good) {
-      this.thisurl = document.location.href;
-      this.portid = FirebaseService.commentgood(id, good+1);
-      location.href = this.thisurl;
+    async likeG(id) {
+      var ok =  await FirebaseService.likecheck(id, this.$store.state.user.displayName, 1, 0)
+      console.log(ok)
+      if(ok!=1){
+        FirebaseService.likegood(id, this.$store.state.user.displayName);
+      }
     },
-    likebad(id, bad) {
-      this.thisurl = document.location.href;
-      this.portid = FirebaseService.commentbad(id, bad+1);
-      location.href = this.thisurl;
-    }
+    async likeB(id) {
+    var ok =  await FirebaseService.likecheck(id, this.$store.state.user.displayName, 0, 1)
+    console.log(ok)
+      if(ok!=1){
+        FirebaseService.likegood(id, this.$store.state.user.displayName);
+      }
+     }
   }
-};
+}
 </script>
 
 <style media="screen">
