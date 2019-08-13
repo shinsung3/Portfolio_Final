@@ -25,8 +25,8 @@ import "material-design-icons-iconfont/dist/material-design-icons.css";
 import Vue from "vue";
 import Vuetify from "vuetify";
 import VueResizeText from "vue-resize-text";
-import Carousel3d from 'vue-carousel-3d'
-import swal from 'sweetalert';
+import Carousel3d from "vue-carousel-3d";
+import swal from "sweetalert";
 
 Vue.use(VueResizeText);
 
