@@ -28,20 +28,15 @@
               </div>
               <span>
                 <!-- 좋아요 싫어요 -->
-                <div v-for="k in idlike.length">
-                  <div v-if="idcomments[i - 1].id == idlike[k-1].comment">
-                      {{idlike[i-1].good}}
-                  </div>
-                </div>
                 <div>
-                  <v-btn flat icon color="blue" @click="likeG(idcomments[i - 1].id)" >
+                  <v-btn flat icon color="blue" @click="likeG(idcomments[i - 1].id,  idcomments[i - 1].good,  idcomments[i - 1].bad)" >
                     <v-icon>thumb_up</v-icon>
                     {{
                       idcomments[i - 1].good,
                     }}
                   </v-btn>
 
-                  <v-btn flat icon color="red" @click="likeB(idcomments[i - 1].id)">
+                  <v-btn flat icon color="red" @click="likeB(idcomments[i - 1].id,  idcomments[i - 1].good,  idcomments[i - 1].bad)">
                     <v-icon>thumb_down</v-icon>
                     {{
                       idcomments[i - 1].bad
@@ -152,14 +147,14 @@
                         }}</div>
                         <!-- 좋아요 싫어요 -->
                         <div>
-                          <v-btn flat icon color="blue" @click="likegood(idcomments[i - 1].id, idcomments[i - 1].good)" >
+                          <v-btn flat icon color="blue" @click="likeG(idcomments[i - 1].id,  idcomments[i - 1].good,  idcomments[i - 1].bad)" >
                             <v-icon>thumb_up</v-icon>
                             {{
-                              idcomments[i - 1].good
+                              idcomments[i - 1].good,
                             }}
                           </v-btn>
 
-                          <v-btn flat icon color="red" @click="likebad(idcomments[i - 1].id, idcomments[i - 1].bad)">
+                          <v-btn flat icon color="red" @click="likeB(idcomments[i - 1].id,  idcomments[i - 1].good,  idcomments[i - 1].bad)">
                             <v-icon>thumb_down</v-icon>
                             {{
                               idcomments[i - 1].bad
@@ -233,8 +228,8 @@ export default {
     thislogin: "",
     check: "",
     replynum: 0,
-    good:0 ,
-    bad:0 ,
+    good: 0,
+    bad: 0,
   }),
   mounted() {
     this.getcommentsByIndex();
@@ -322,19 +317,40 @@ export default {
       this.portid = FirebaseService.setcomment(id, retext);
       location.href = this.thisurl;
     },
-    async likeG(id) {
+    async likeG(id, good, bad) {
+      this.thisurl = document.location.href;
       var ok =  await FirebaseService.likecheck(id, this.$store.state.user.displayName, 1, 0)
-      console.log(ok)
-      if(ok!=1){
-        FirebaseService.likegood(id, this.$store.state.user.displayName);
+      console.log(id, good, bad)
+      if(ok==1){
+        await FirebaseService.setlike(id, good+1, bad-1,"g-old")
       }
+
+      if(ok!=1){
+        console.log(id, good, bad,"g-new")
+        await FirebaseService.likegood(id, this.$store.state.user.displayName);
+        await FirebaseService.setlike(id, good+1, bad)
+      }
+      this.idcomments = await FirebaseService.getcommentsByIndex(
+        this.$route.query.id
+      );
     },
-    async likeB(id) {
+    async likeB(id, good, bad) {
+      this.thisurl = document.location.href;
     var ok =  await FirebaseService.likecheck(id, this.$store.state.user.displayName, 0, 1)
-    console.log(ok)
-      if(ok!=1){
-        FirebaseService.likegood(id, this.$store.state.user.displayName);
+      console.log(id, good, bad,"b-old")
+      if(ok==1){
+        await FirebaseService.setlike(id, good-1, bad+1)
       }
+
+      if(ok!=1){
+        console.log(id, good, bad,"b-new")
+        await FirebaseService.likebad(id, this.$store.state.user.displayName);
+        await FirebaseService.setlike(id, good, bad+1)
+
+      }
+      this.idcomments = await FirebaseService.getcommentsByIndex(
+        this.$route.query.id
+      );
      }
   }
 }
