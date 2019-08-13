@@ -29,14 +29,14 @@
               <span>
                 <!-- 좋아요 싫어요 -->
                 <div style="text-align:right">
-                  <v-btn flat icon color="blue" @click="likeG(idcomments[i - 1].id,  idcomments[i - 1].good,  idcomments[i - 1].bad)" >
+                  <v-btn flat icon color="red" @click="likeG(idcomments[i - 1].id,  idcomments[i - 1].good,  idcomments[i - 1].bad)" >
                     <v-icon>thumb_up</v-icon>
                     {{
                       idcomments[i - 1].good,
                     }}
                   </v-btn>
 
-                  <v-btn flat icon color="red" @click="likeB(idcomments[i - 1].id,  idcomments[i - 1].good,  idcomments[i - 1].bad)">
+                  <v-btn flat icon color="blue" @click="likeB(idcomments[i - 1].id,  idcomments[i - 1].good,  idcomments[i - 1].bad)">
                     <v-icon>thumb_down</v-icon>
                     {{
                       idcomments[i - 1].bad
@@ -325,7 +325,7 @@ export default {
       var num = await FirebaseService.goodcheck(id, this.$store.state.user.displayName)
       console.log(this.ok)
         if(num!=1){
-          await FirebaseService.setlike(id, good+1, bad-1,"g-old")
+          await FirebaseService.setlike(id, good+1, bad-1)
           await FirebaseService.likecheck(id, this.$store.state.user.displayName, 1, 0)
           }
       }
