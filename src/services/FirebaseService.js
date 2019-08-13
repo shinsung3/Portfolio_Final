@@ -337,6 +337,7 @@ export default {
 			let accessToken = result.credential.accessToken
 			let user = result.user
       getDeviceToken(user.email);
+      swal ( "Login" ,  "로그인 되었습니다." ,  "success" )
       chkDup(user.email).then(res => {
         if(res == false) {
           setAuthorization(user.email, '방문자', deviceToken, user.displayName);
@@ -357,6 +358,7 @@ export default {
 			let accessToken = result.credential.accessToken
 			let user = result.user;
       getDeviceToken(user.email);
+      swal ( "Login" ,  "로그인 되었습니다." ,  "success" )
       chkDup(user.email).then(res => {
         if(res == false) {
           setAuthorization(user.email, '방문자', deviceToken, user.displayName);
@@ -402,6 +404,7 @@ export default {
 	signIn(email, password) {
 		return firebase.auth().signInWithEmailAndPassword(email, password).then(
 			function(user) {
+        swal ( "Login" ,  "로그인 되었습니다." ,  "success" )
         getDeviceToken(email);
 				return user
 			},
