@@ -1,6 +1,6 @@
 <template>
   <v-card @click="linkToPage" hover>
-    <v-img :src="imgSrc" height="200px" />
+    <v-img :src="imgSrc" height="220px" />
     <v-card-title primary-title>
       <div class="headline text2">
         <strong>{{ subject.translate }}</strong>

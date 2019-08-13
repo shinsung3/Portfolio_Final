@@ -104,7 +104,7 @@
          processData: false,
          contentType: false
         }).then(response => {
-          alert("Upload Success!!")
+          swal ( "Success" , "성공적으로 업로드되었습니다!" ,  "success" )
         })
       },
       getAlbumImages() {

@@ -8,15 +8,10 @@
       </v-layout>
       <v-container>
         <center>
-          <v-btn v-if="loadMore" color="info" dark v-on:click="loadMorePosts">
+          <v-btn v-if="loadMore" id="plusBtn" dark v-on:click="loadMorePosts">
             <v-icon size="25" class="mr-2">fa-plus</v-icon> 더 보기
           </v-btn>
-          <v-btn
-            v-if="loadLess"
-            color="warning"
-            dark
-            v-on:click="loadLessPosts"
-          >
+          <v-btn v-if="loadLess" id="minusBtn" dark v-on:click="loadLessPosts">
             <v-icon size="25" class="mr-2">fa-angle-double-up</v-icon> 접기
           </v-btn>
           <span

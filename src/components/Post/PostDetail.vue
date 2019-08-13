@@ -69,7 +69,7 @@ export default {
     },
     deleteDB() {
       if (this.$store.state.user.email !== this.post.userId) {
-        alert("삭제할 권한이 없습니다!!");
+        swal ( "Authorization" , "삭제할 권한이 없습니다." ,  "info" )
         return;
       }
       FirebaseService.deletePost(this.post.id);

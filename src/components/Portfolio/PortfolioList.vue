@@ -24,7 +24,7 @@
       <v-flex xs12 text-xs-center round my-5 v-if="loadMore">
         <v-btn
           v-if="loadMore"
-          color="info"
+          id="plusBtn"
           dark
           v-on:click="loadMorePortfolios"
         >
@@ -32,25 +32,21 @@
         </v-btn>
         <v-btn
           v-if="loadLess"
-          color="warning"
+          id="minusBtn"
           dark
           v-on:click="loadLessPortfolios"
         >
           <v-icon size="25" class="mr-2">fa-angle-double-up</v-icon>접기
         </v-btn>
         <v-btn
-          id="hot"
+          id="writeBtn"
           to="/pfWriter"
           v-if="
             this.$store.state.userauth == '팀원' ||
               this.$store.state.userauth == '관리자'
           "
         >
-          <img
-            src="https://image.flaticon.com/icons/svg/1865/1865689.svg"
-            width="30px"
-          />
-          <span id="padding"><b>글쓰기</b></span>
+          <v-icon>border_color</v-icon>글쓰기
         </v-btn>
       </v-flex>
     </v-layout>
@@ -60,6 +56,7 @@
 <script src="https://unpkg.com/vue"></script>
 <script src="https://unpkg.com/vueperslides"></script>
 <script>
+import "../../CSS/btn.css";
 import Portfolio from "@/components/Portfolio/Portfolio";
 import FirebaseService from "@/services/FirebaseService";
 import { VueperSlides, VueperSlide } from "vueperslides";

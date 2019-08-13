@@ -105,7 +105,7 @@
       <v-container>
         <!-- Portfolio -->
         <v-layout my-5 id="Portfolio">
-          <v-flex xs12>
+          <v-flex>
             <router-link to="/Portfolio">
               <h2
                 v-resize-text="{
@@ -119,7 +119,7 @@
                 Portfolio
               </h2>
             </router-link>
-            <PortfolioList></PortfolioList>
+            <PortfolioMain></PortfolioMain>
           </v-flex>
         </v-layout>
       </v-container>
@@ -175,10 +175,11 @@
 
 <script>
 import ImgBanner from "../components/Function/ImgBanner";
-import PortfolioList from "../components/Portfolio/PortfolioList";
+// import PortfolioList from "../components/Portfolio/PortfolioList";
 import PostList from "../components/Post/PostList";
 import RepositoryList from "../components/Repository/RepositoryList";
 import Translate from "@/services/Translate";
+import PortfolioMain from "../components/Portfolio/PortfolioMain";
 import EventBus from "../eventBus.js";
 import "../CSS/aTag.css";
 
@@ -186,9 +187,9 @@ export default {
   name: "HomePage",
   components: {
     ImgBanner,
-    PortfolioList,
     PostList,
-    RepositoryList
+    RepositoryList,
+    PortfolioMain
   },
   data: () => ({
     output: {

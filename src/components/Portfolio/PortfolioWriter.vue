@@ -257,7 +257,7 @@ export default {
       this.$store.state.userauth != "관리자" &&
       this.$store.state.userauth != "팀원"
     ) {
-      alert("글을 작성할 권한이 없습니다.");
+      swal ( "Authorization" , "글을 작성할 권한이 없습니다." ,  "info" )
       this.$router.push("/Portfolio");
     }
   },

@@ -88,7 +88,8 @@ export default {
     portid: "",
     fk: "",
     text: "",
-    writer: ""
+    writer: "",
+    valid: false
   }),
   mounted() {
     this.getPortfoliosByIndex();
@@ -107,7 +108,7 @@ export default {
       FirebaseService.deletePortfolio(this.portfolios.id);
       this.posts = FirebaseService.getPosts();
       location.href = "/Portfolio";
-    },
+    }
   }
 };
 </script>

@@ -25,6 +25,7 @@
     "sweetalert": "^2.1.2",
     "v-markdown-editor": "^1.0.8",
     "vue": "^2.6.10",
+    "vue-carousel-3d": "^0.2.0",
     "vue-chartjs": "^3.4.2",
     "vue-chartkick": "^0.5.2",
     "vue-gitlab-api": "^0.1.8",
