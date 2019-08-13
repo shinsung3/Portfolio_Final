@@ -119,7 +119,6 @@
                 Portfolio
               </h2>
             </router-link>
-            <!-- <PortfolioList></PortfolioList> -->
             <PortfolioMain></PortfolioMain>
           </v-flex>
         </v-layout>
