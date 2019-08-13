@@ -1,5 +1,5 @@
 <template>
-  <div style="background-color:cornsilk;">
+  <div>
     <v-container>
       <!-- Gitlab 연동 -->
       <center>
