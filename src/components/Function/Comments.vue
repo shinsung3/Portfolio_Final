@@ -27,6 +27,22 @@
                 {{ idcomments[i - 1].text }}
               </div>
               <span>
+                <!-- 좋아요 싫어요 -->
+                <div>
+                  <v-btn flat icon color="blue" @click="likegood(idcomments[i - 1].id, idcomments[i - 1].good)" >
+                    <v-icon>thumb_up</v-icon>
+                    {{
+                      idcomments[i - 1].good
+                    }}
+                  </v-btn>
+
+                  <v-btn flat icon color="red" @click="likebad(idcomments[i - 1].id, idcomments[i - 1].bad)">
+                    <v-icon>thumb_down</v-icon>
+                    {{
+                      idcomments[i - 1].bad
+                    }}
+                  </v-btn>
+                </div>
                 <v-card-actions v-if="idcomments[i - 1].writer == thislogin">
                   <v-btn v-if="check == ''" flat icon @click="check = idcomments[i - 1].id">
                     <v-icon>comment</v-icon>&nbsp
@@ -44,19 +60,7 @@
                       }}
                   </v-btn>
                   <!-- 여기에 수정버튼,모달창 -->
-                  <v-btn flat icon color="blue" @click="likegood(idcomments[i - 1].id, idcomments[i - 1].good)" >
-                    <v-icon>thumb_up</v-icon>
-                    {{
-                      idcomments[i - 1].good
-                    }}
-                  </v-btn>
 
-                  <v-btn flat icon color="red" @click="likebad(idcomments[i - 1].id, idcomments[i - 1].bad)">
-                    <v-icon>thumb_down</v-icon>
-                    {{
-                      idcomments[i - 1].bad
-                    }}
-                  </v-btn>
 
                   <v-dialog v-model="dialog" width="500">
                     <template v-slot:activator="{ on }">
@@ -86,7 +90,10 @@
                   <v-btn flat icon @click="del(idcomments[i - 1].id)">
                     <v-icon>close</v-icon>
                   </v-btn>
+
+
                 </v-card-actions>
+
                 <v-card-actions v-else>
                   <v-btn v-if="check == ''" flat icon @click="check = idcomments[i - 1].id">
                     <v-icon>comment</v-icon>&nbsp
@@ -138,6 +145,22 @@
                       <div class="ma-3">{{
                           idcomments[i - 1].text
                         }}</div>
+                        <!-- 좋아요 싫어요 -->
+                        <div>
+                          <v-btn flat icon color="blue" @click="likegood(idcomments[i - 1].id, idcomments[i - 1].good)" >
+                            <v-icon>thumb_up</v-icon>
+                            {{
+                              idcomments[i - 1].good
+                            }}
+                          </v-btn>
+
+                          <v-btn flat icon color="red" @click="likebad(idcomments[i - 1].id, idcomments[i - 1].bad)">
+                            <v-icon>thumb_down</v-icon>
+                            {{
+                              idcomments[i - 1].bad
+                            }}
+                          </v-btn>
+                        </div>
                       <v-card-actions v-if="idcomments[i - 1].writer == thislogin">
                         <v-dialog v-model="dialog" width="500">
                           <template v-slot:activator="{ on }">
