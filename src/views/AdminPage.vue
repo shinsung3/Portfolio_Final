@@ -36,7 +36,7 @@ export default {
   },
   created() {
     if (this.$store.state.userauth != "관리자") {
-      alert("관리자만 접근할 수 있습니다.");
+      swal ( "Only Administrator" , "관리자만 접근할 수 있습니다." ,  "info" )
       this.$router.push("/home");
     }
   }
