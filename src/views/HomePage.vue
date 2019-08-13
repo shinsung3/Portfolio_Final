@@ -187,7 +187,6 @@ export default {
   name: "HomePage",
   components: {
     ImgBanner,
-    // PortfolioList,
     PostList,
     RepositoryList,
     PortfolioMain
