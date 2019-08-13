@@ -7,6 +7,7 @@
             <slot name="text" />
           </span>
           <div id="example-3">
+            <div class="info4">Click Me!</div>
             <a v-on:click="add">
               <img
                 src="https://image.flaticon.com/icons/svg/1140/1140184.svg"
@@ -29,13 +30,13 @@
               </span>
             </transition-group>
             <transition-group
-              v-else-if="items.length == 4"
+              v-else-if="items.length >= 4"
               show="false"
               name="list custom-classes-transition"
               enter-active-class="animated tada"
               items.length="1"
             >
-            <br />
+              <br />
               <span v-for="item in items" v-bind:key="item" class="list-item">
                 <v-btn depressed large href="/home">GO! HOME!</v-btn>
               </span>
@@ -71,6 +72,8 @@
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/velocity/1.2.3/velocity.min.js"></script>
 <script>
+import "../../CSS/DokdoFont.css";
+
 export default {
   name: "ImgBanner",
   props: {
@@ -141,7 +144,8 @@ export default {
   display: inline-block;
   margin-right: 10px;
 }
-.list-enter-active, .list-leave-active {
+.list-enter-active,
+.list-leave-active {
   transition: all 1s;
 }
 .list-enter, .list-leave-to /* .list-leave-active below version 2.1.8 */ {
