@@ -28,15 +28,20 @@
               </div>
               <span>
                 <!-- 좋아요 싫어요 -->
+                <div v-for="k in idlike.length">
+                  <div v-if="idcomments[i - 1].id == idlike[k-1].comment ? setting(idlike[i-1].good): ">
+                      {{idlike[i-1].good}}
+                  </div>
+                </div>
                 <div>
-                  <v-btn flat icon color="blue" @click="likegood(idcomments[i - 1].id, idcomments[i - 1].good)" >
+                  <v-btn flat icon color="blue" @click="likeG(idcomments[i - 1].id)" >
                     <v-icon>thumb_up</v-icon>
                     {{
-                      idcomments[i - 1].good
+                      idcomments[i - 1].good,
                     }}
                   </v-btn>
 
-                  <v-btn flat icon color="red" @click="likebad(idcomments[i - 1].id, idcomments[i - 1].bad)">
+                  <v-btn flat icon color="red" @click="likeB(idcomments[i - 1].id)">
                     <v-icon>thumb_down</v-icon>
                     {{
                       idcomments[i - 1].bad
@@ -216,6 +221,7 @@ export default {
   name: "comments",
   data: () => ({
     idcomments: [],
+    idlike: [],
     portid: "",
     fk: "",
     text: "",
@@ -229,10 +235,10 @@ export default {
     replynum: 0,
     good:0 ,
     bad:0 ,
-
   }),
   mounted() {
     this.getcommentsByIndex();
+    this.getlike();
 
   },
   methods: {
@@ -243,7 +249,13 @@ export default {
       this.thisid = this.$route.query.id;
       this.thislogin = this.$store.state.user.displayName;
     },
-
+    async getlike() {
+      this.idlike = await FirebaseService.getlike(
+      );
+    },
+    setting(good){
+      console.log(good)
+    },
     insert(portid) {
       if (this.idcomments.length == 0) {
         this.thisurl = document.location.href;
@@ -310,18 +322,22 @@ export default {
       this.portid = FirebaseService.setcomment(id, retext);
       location.href = this.thisurl;
     },
-    likegood(id, good) {
-      this.thisurl = document.location.href;
-      this.portid = FirebaseService.commentgood(id, good+1);
-      location.href = this.thisurl;
+    async likeG(id) {
+      var ok =  await FirebaseService.likecheck(id, this.$store.state.user.displayName, 1, 0)
+      console.log(ok)
+      if(ok!=1){
+        FirebaseService.likegood(id, this.$store.state.user.displayName);
+      }
     },
-    likebad(id, bad) {
-      this.thisurl = document.location.href;
-      this.portid = FirebaseService.commentbad(id, bad+1);
-      location.href = this.thisurl;
-    }
+    async likeB(id) {
+    var ok =  await FirebaseService.likecheck(id, this.$store.state.user.displayName, 0, 1)
+    console.log(ok)
+      if(ok!=1){
+        FirebaseService.likegood(id, this.$store.state.user.displayName);
+      }
+     }
   }
-};
+}
 </script>
 
 <style media="screen">

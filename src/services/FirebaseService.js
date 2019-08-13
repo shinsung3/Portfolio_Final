@@ -10,6 +10,7 @@ const PORTFOLIOS = "portfolios";
 const USERAUTH = "userauth";
 const BACKGROUNDIMG = "background";
 const COMMENTS = "comments";
+const LIKE = "like";
 
 // Setup Firebase
 const config = {
@@ -259,55 +260,89 @@ export default {
   getcommentsByIndex() {
     const commentsCollection = firestore.collection(COMMENTS);
     return commentsCollection
-    .orderBy('created_at', 'desc')
+      .orderBy("created_at", "desc")
+      .get()
+      .then(docSnapshots => {
+        return docSnapshots.docs.map(doc => {
+          let data = doc.data();
+          data.id = doc.id;
+          data.created_at = new Date(data.created_at.toDate());
+          return data;
+        });
+      });
+  },
+  delcomment(id){
+    firestore
+      .collection(COMMENTS)
+      .doc(id)
+      .delete();
+  },
+  setcomment(id, retext){
+    firestore
+      .collection(COMMENTS)
+      .doc(id)
+      .update({
+        text: retext,
+        created_at: firebase.firestore.FieldValue.serverTimestamp()
+      });
+  },
+  setcount(portid, num){
+    firestore
+      .collection(COMMENTS)
+      .doc(portid)
+      .update({
+        replynum: num
+      });
+  },
+  likegood(comment, userid){
+    firestore
+      .collection(LIKE)
+      .doc(comment + userid)
+      .set({
+        comment,
+        userid,
+        good: 1,
+        bad: 0
+      });
+  },
+  likebad(comment, userid){
+    firestore
+      .collection(LIKE)
+      .doc(comment)
+      .set({
+        comment,
+        userid,
+        good: 0,
+        bad: 1
+      });
+  },
+  likecheck(comment, userid, good, bad){
+    return firestore
+      .collection(LIKE)
+      .doc(comment + userid)
+      .update({
+        good: good,
+        bad: bad
+      })
+      .then(() => {
+        return 1;
+      })
+      .catch(()=> {
+        return 0;
+      });
+
+  },
+  getlike() {
+    const likeCollection = firestore.collection(LIKE);
+    return likeCollection
     .get()
     .then(docSnapshots => {
       return docSnapshots.docs.map(doc => {
         let data = doc.data();
         data.id = doc.id;
-        data.created_at = new Date(data.created_at.toDate());
         return data;
       });
     });
-  },
-  delcomment(id){
-    firestore
-    .collection(COMMENTS)
-    .doc(id)
-    .delete();
-  },
-  setcomment(id,retext){
-    firestore
-    .collection(COMMENTS)
-    .doc(id)
-    .update({
-      text: retext,
-      created_at: firebase.firestore.FieldValue.serverTimestamp()
-    });
-  },
-  setcount(portid, num){
-    firestore
-    .collection(COMMENTS)
-    .doc(portid)
-    .update({
-      replynum:num
-    })
-  },
-  commentgood(portid, num){
-    firestore
-    .collection(COMMENTS)
-    .doc(portid)
-    .update({
-      good: num
-    })
-  },
-  commentbad(portid, num){
-    firestore
-    .collection(COMMENTS)
-    .doc(portid)
-    .update({
-      bad: num
-    })
   },
 	getAuthorization() {
 		const userauthCollection = firestore.collection(USERAUTH)
