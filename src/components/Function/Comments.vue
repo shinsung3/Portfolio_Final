@@ -320,14 +320,17 @@ export default {
     },
     async likeG(id, good, bad) {
       this.thisurl = document.location.href;
-      var ok =  await FirebaseService.likecheck(id, this.$store.state.user.displayName, 1, 0)
-      console.log(id, good, bad)
+      var ok =  await FirebaseService.check(id, this.$store.state.user.displayName)
       if(ok==1){
-        await FirebaseService.setlike(id, good+1, bad-1,"g-old")
+      var num = await FirebaseService.goodcheck(id, this.$store.state.user.displayName)
+      console.log(this.ok)
+        if(num!=1){
+          await FirebaseService.setlike(id, good+1, bad-1,"g-old")
+          await FirebaseService.likecheck(id, this.$store.state.user.displayName, 1, 0)
+          }
       }
 
-      if(ok!=1){
-        console.log(id, good, bad,"g-new")
+      if(ok==0){
         await FirebaseService.likegood(id, this.$store.state.user.displayName);
         await FirebaseService.setlike(id, good+1, bad)
       }
@@ -336,18 +339,17 @@ export default {
       );
     },
     async likeB(id, good, bad) {
-      this.thisurl = document.location.href;
-    var ok =  await FirebaseService.likecheck(id, this.$store.state.user.displayName, 0, 1)
-      console.log(id, good, bad,"b-old")
-      if(ok==1){
+    var ok =  await FirebaseService.check(id, this.$store.state.user.displayName)
+    if(ok==1){
+      var num = await FirebaseService.badcheck(id, this.$store.state.user.displayName)
+      if(num!=1){
         await FirebaseService.setlike(id, good-1, bad+1)
+        await FirebaseService.likecheck(id, this.$store.state.user.displayName, 0, 1)
       }
-
-      if(ok!=1){
-        console.log(id, good, bad,"b-new")
+    }
+      if(ok==0){
         await FirebaseService.likebad(id, this.$store.state.user.displayName);
         await FirebaseService.setlike(id, good, bad+1)
-
       }
       this.idcomments = await FirebaseService.getcommentsByIndex(
         this.$route.query.id

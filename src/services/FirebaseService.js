@@ -338,6 +338,20 @@ export default {
         return 0;
       });
   },
+  check(comment, userid){
+    return firestore
+      .collection(LIKE)
+      .doc(comment + userid)
+      .update({
+        comment: comment
+      })
+      .then(() => {
+        return 1;
+      })
+      .catch(()=> {
+        return 0;
+      });
+  },
   getlike() {
     const likeCollection = firestore.collection(LIKE);
     return likeCollection
@@ -350,6 +364,24 @@ export default {
       });
     });
   },
+  goodcheck(comment, userid){
+    return firestore
+      .collection(LIKE)
+      .doc(comment + userid)
+      .get()
+      .then(r=> {
+        return r.data().good;
+      });
+  },
+  badcheck(comment, userid){
+    return firestore
+      .collection(LIKE)
+      .doc(comment + userid)
+      .get()
+      .then(r=> {
+        return r.data().bad;
+      });
+  },
   setlike(id, good, bad){
     firestore
       .collection(COMMENTS)
@@ -358,13 +390,7 @@ export default {
         good: good,
         bad: bad
       });
-
-
   },
-
-
-
-
 	getAuthorization() {
 		const userauthCollection = firestore.collection(USERAUTH)
 		return userauthCollection
