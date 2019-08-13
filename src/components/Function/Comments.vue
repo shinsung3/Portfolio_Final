@@ -20,43 +20,16 @@
                 {{
                     idcomments[i - 1].created_at | moment("YYYY년 MM월 DD일")
                   }}
-                  <v-dialog v-model="dialog" width="500">
-                    <template v-slot:activator="{ on }">
-                      <v-btn flat icon v-on="on" class="ma-0">
-                        <v-icon>edit</v-icon>
-                      </v-btn>
-                    </template>
 
-                    <v-card>
-                      <v-card-title class="headline grey lighten-2" primary-title>
-                        수정하실 댓글을 적어주세요</v-card-title>
 
-                        <v-card-text>
-                          <v-text-field v-model="idcomments[i - 1].text" required>
-                          </v-text-field>
-                        </v-card-text>
-                        <v-card-actions>
-                          <v-spacer></v-spacer>
-                          <v-btn color="primary" @click="
-                          set(idcomments[i - 1].id, idcomments[i - 1].text)
-                          ">
-                          I accept
-                        </v-btn>
-                      </v-card-actions>
-                    </v-card>
-                  </v-dialog>
-                  <v-btn flat icon @click="del(idcomments[i - 1].id)" class="ma-0">
-                    <v-icon>close</v-icon>
-                  </v-btn>
               </div>
-
               <div class="ma-3">
                 {{ idcomments[i - 1].text }}
               </div>
               <span>
                 <!-- 좋아요 싫어요 -->
                 <div v-for="k in idlike.length">
-                  <div v-if="idcomments[i - 1].id == idlike[k-1].comment ? setting(idlike[i-1].good): ">
+                  <div v-if="idcomments[i - 1].id == idlike[k-1].comment">
                       {{idlike[i-1].good}}
                   </div>
                 </div>
@@ -172,13 +145,6 @@
                             idcomments[i - 1].created_at
                               | moment("YYYY년 MM월 DD일")
                           }}
-                          <v-card-actions v-if="idcomments[i - 1].writer == thislogin">
-                            <v-dialog v-model="dialog" width="500">
-                              <template v-slot:activator="{ on }">
-                                <v-btn flat icon v-on="on">
-                                  <v-icon>edit</v-icon>
-                                </v-btn>
-                              </template>
 
                       </div>
                       <div class="ma-3">{{
@@ -213,32 +179,27 @@
                               수정하실 댓글을 적어주세요
                             </v-card-title>
 
-                                <v-card-text>
-                                  <v-text-field v-model="idcomments[i - 1].text" required>
-                                  </v-text-field>
-                                </v-card-text>
-                                <v-card-actions>
-                                  <v-spacer></v-spacer>
-                                  <v-btn color="primary" @click="
-                                  set(
-                                    idcomments[i - 1].id,
-                                    idcomments[i - 1].text
+                            <v-card-text>
+                              <v-text-field v-model="idcomments[i - 1].text" required>
+                              </v-text-field>
+                            </v-card-text>
+                            <v-card-actions>
+                              <v-spacer></v-spacer>
+                              <v-btn color="primary" @click="
+                                    set(
+                                      idcomments[i - 1].id,
+                                      idcomments[i - 1].text
                                     )
-                                    ">
-                                    I accept
-                                  </v-btn>
-                                </v-card-actions>
-                              </v-card>
-                            </v-dialog>
-                            <v-btn flat icon @click="del(idcomments[i - 1].id)">
-                              <v-icon>close</v-icon>
-                            </v-btn>
-                          </v-card-actions>
-                        </div>
-
-                        <div class="ma-3">{{
-                            idcomments[i - 1].text
-                          }}</div>
+                                  ">
+                                I accept
+                              </v-btn>
+                            </v-card-actions>
+                          </v-card>
+                        </v-dialog>
+                        <v-btn flat icon @click="del(idcomments[i - 1].id)">
+                          <v-icon>close</v-icon>
+                        </v-btn>
+                      </v-card-actions>
                       <hr class="bottomline" style="margin:10px 0px" />
                     </div>
                   </div>
